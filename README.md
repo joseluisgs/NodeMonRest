@@ -9,7 +9,8 @@ A Lo largo de este proyecto se incorporarán distintas técnicas para construir 
 
 ## Requisitos
 * [NodeJS](https://nodejs.org/es/) en su [última version](https://nodejs.org/es/download/)
-* [NPM] (https://www.npmjs.com/)
+* [NPM](https://www.npmjs.com/)
+* [Mongo DB](https://www.mongodb.com/es)
 
 | Dependencias | Version   |
 |:-------------|:----------| 
@@ -25,21 +26,37 @@ Tareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el
 
 ### El fichero .ENV
 Elservidor toma las constantes del fichero .EV, te dejo un ejemplo de configuración
+
 ENV=development
+
 DEBUG=true
+
 HOST=localhost
+
 PORT=8000
+
 TIMEZONE=Europe/Madrid
+
 TOKEN_SECRET=Este_Caballo_Viene_de_Boanzarrrrr_/_Lorem_Fistrum_Pecador_Te_Va_A_Haser_Pupitaa_Diodenaaalll_2020
+
 TOKEN_LIFE=20
+
 BC_SALT=10
+
 DB_DEBUG=true
+
 DB_POOLSIZE=200
+
 DB_PROTOCOL=mongodb+srv
+
 DB_USER=mongolito
+
 DB_PASS=mongolito_pass
+
 DB_URL=mongoserlver
+
 DB_PORT=27017
+
 DB_NAME=recipes
  
 ## Tecnologías
