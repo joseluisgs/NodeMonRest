@@ -7,6 +7,8 @@ A Lo largo de este proyecto se incorporarán distintas técnicas para construir 
 * Autenticación usando JWT
 * Autorización basada en permisos de usuario
 
+Iré comentando los apsctos más releantes y las librerías usadas en cada parte.
+
 ## Requisitos
 * [NodeJS](https://nodejs.org/es/) en su [última version](https://nodejs.org/es/download/)
 * [NPM](https://www.npmjs.com/)
@@ -25,10 +27,11 @@ Tareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el
 * npm run watch - ejecuta nodemon para ver los cambios del codigo sobre la marcha
 
 ### El fichero .ENV
-El servidor toma las constantes del fichero .env, te dejo un ejemplo de configuración en .env_example. Cámbailo y configuralo a tu gusto y luego lo renomnbras.
+El servidor toma las constantes del fichero .env, te dejo un ejemplo de configuración en .env_example. Cámbialo y lo configuras a tu gusto y luego lo renomnbras.
  
-## Tecnologías
-* [NodeJS](https://nodejs.org/es/) - JS en Servidor
+## Tecnologías y librerías usadas
+* [NodeJS](https://nodejs.org/es/). JS en Servidor.
+* [Mongo DB](https://www.mongodb.com/es). He usado su versión en la nube [Atlas](https://www.mongodb.com/cloud/atlas)
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
