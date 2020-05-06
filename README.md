@@ -25,39 +25,7 @@ Tareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el
 * npm run watch - ejecuta nodemon para ver los cambios del codigo sobre la marcha
 
 ### El fichero .ENV
-Elservidor toma las constantes del fichero .EV, te dejo un ejemplo de configuración
-
-ENV=development
-
-DEBUG=true
-
-HOST=localhost
-
-PORT=8000
-
-TIMEZONE=Europe/Madrid
-
-TOKEN_SECRET=Este_Caballo_Viene_de_Boanzarrrrr_/_Lorem_Fistrum_Pecador_Te_Va_A_Haser_Pupitaa_Diodenaaalll_2020
-
-TOKEN_LIFE=20
-
-BC_SALT=10
-
-DB_DEBUG=true
-
-DB_POOLSIZE=200
-
-DB_PROTOCOL=mongodb+srv
-
-DB_USER=mongolito
-
-DB_PASS=mongolito_pass
-
-DB_URL=mongoserlver
-
-DB_PORT=27017
-
-DB_NAME=recipes
+El servidor toma las constantes del fichero .env, te dejo un ejemplo de configuración en .env_example. Cámbailo y configuralo a tu gusto y luego lo renomnbras.
  
 ## Tecnologías
 * [NodeJS](https://nodejs.org/es/) - JS en Servidor
