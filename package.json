@@ -1,0 +1,64 @@
+{
+  "name": "express-vue",
+  "version": "1.0.0",
+  "description": "Proyecto en Node JS y Express",
+  "main": "src/index.js",
+  "keywords": [
+    "Proyecto",
+    "en",
+    "Node.JS",
+    "Vue"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:joseluisgs"
+  },
+  "homepage": "",
+  "author": {
+    "name": "José Luis González Sánchez",
+    "twitter": "@joseluisgonsan"
+  },
+  "bugs": {
+    "url": "https://github.com/joseluisgs/proyecto/issues",
+    "twitter": "@joseluisgonsan"
+  },
+  "engines": {
+    "node": ">= 10.0.0",
+    "npm": ">= 6.4.0",
+    "yarn": ">=1.22.2"
+  },
+  "scripts": {
+    "start": "node --require @babel/register src/index.js",
+    "watch": "nodemon",
+    "lint": "eslint 'src/**/*.js'",
+    "fix": "eslint 'src/**/*.js'",
+    "clean": "rm -rf node_modules && npm run undist",
+    "reinstall": "npm run clean && npm run undist && npm install",
+    "build": "npm run undist && babel src -d dist",
+    "rebuild": "npm run clean && npm install && npm run undist && npm run build --prod",
+    "undist": "rm -rf dist",
+    "prune": "npm prune --production",
+    "test": "NODE_ENV=test mocha --require @babel/register --timeout 10000 tests/"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
+    "eslint": "^6.8.0",
+    "babel-eslint": "^10.1.0",
+    "nodemon": "^2.0.3"
+  },
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-simple": "^0.5.6",
+    "mongoose": "^5.9.11",
+    "morgan": "^1.10.0"
+  }
+}

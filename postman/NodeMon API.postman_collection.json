@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "6cd78a11-836b-4a28-96d6-cfbfa998209c",
+		"name": "NodeMon API",
+		"description": "Proyecto de Node.JS, Express y Vue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Recetas",
+			"item": [
+				{
+					"name": "Listar Recetas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/recipes",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"recipes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Receta por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/recipes/5a4e6f7b023d63160b44bca3",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"recipes",
+								"5a4e6f7b023d63160b44bca3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Añadir Receta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ingredients\": [\n        \"600 g de lomo de cerdo cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"title\": \"Patatas Bravas\",\n    \"description\": \"Paatatas Bravas\",\n    \"difficulty\": \"medium\",\n    \"persons\": 99,\n    \"time\": 55\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/recipes/",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"recipes",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Receta por ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ingredients\": [\n        \"600 g de Patatas cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"title\": \"Patatas Bravas\",\n    \"description\": \"Paatatas Bravas\",\n    \"difficulty\": \"medium\",\n    \"persons\": 99,\n    \"time\": 55\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/recipes/5eb1b72a674b7c26912697a8",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"recipes",
+								"5eb1b72a674b7c26912697a8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Receta por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/recipes/5eb1b72a674b7c26912697a8",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"recipes",
+								"5eb1b72a674b7c26912697a8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Recetas Busqueda y/o paginado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/recipes?page=0&limit=10&search_field=description&search_content=durante&search_order=desc",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"recipes"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "search_field",
+									"value": "description"
+								},
+								{
+									"key": "search_content",
+									"value": "durante"
+								},
+								{
+									"key": "search_order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Autenticacion",
+			"item": [
+				{
+					"name": "Autenticar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"email\": \"admin@admin.com\",\n\t\"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "corre@correo.com",
+									"description": "Correo del usuario",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "{\"_id\":{\"$oid\":\"5eb2c655ccdfc8286c2bfd22\"},\"username\":\"admin\",\"email\":\"admin@admin.com\",\"password\":\"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\"roles\":[\"admin\",\"member\"],\"avatar\":\"https://api.adorable.io/avatars/200/admin@admin.com.png\"}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
