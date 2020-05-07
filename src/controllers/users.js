@@ -120,14 +120,29 @@ class UsersController {
         }
     }
 
-
+    /**
+     * Elimina un elemento en base a su ID. 
+     * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
     async deleteUserById (req, res, next) {
-    
+        try {
+            const data = await User().findByIdAndDelete({ _id: req.params.id });
+            if (data) {
+                res.status(200).json(data);
+            } else { 
+                res.status(404).json({
+                    'error':404,
+                    'mensaje': `No se ha encontrado un item con ese ID: ${req.params.id}`
+                });
+            }
+        } catch (err) {
+            res.status(500).send(err);
+        }
     }
-
-
-    
-
 }
 
 // Exportamos el módulo
