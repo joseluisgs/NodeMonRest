@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "5eb2c6f3ccdfc8286c2bfd23"
+  },
+  "username": "ana",
+  "email": "ana@correo.com",
+  "password": "$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO",
+  "roles": [
+    "normal"
+  ],
+  "avatar": "https://api.adorable.io/avatars/200/ana@correo.com.png"
+},{
+  "_id": {
+    "$oid": "5eb2c655ccdfc8286c2bfd22"
+  },
+  "username": "admin",
+  "email": "admin@prueba.com",
+  "password": "$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO",
+  "roles": [
+    "admin",
+    "normal"
+  ],
+  "avatar": "https://api.adorable.io/avatars/200/prueba@prueba.com.png"
+}]

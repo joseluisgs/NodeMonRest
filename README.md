@@ -32,6 +32,9 @@ Tareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el
 
 ### El fichero .ENV
 El servidor toma las constantes del fichero .env, te dejo un ejemplo de configuración en .env_example. Cámbialo y lo configuras a tu gusto y luego lo renomnbras.
+
+### Carpeta Mongo
+En la carpeta mongo tienes un volcado de la base de datos y de cada una de las colecciones con datos de ejemplo. el resto de tablas se crea sobre la marcha. Te recomiendo usar Mongo Atlas y en ella crear la base de datos recipes, co como tu quieras que se llame, recuerda que debes cambiarlo en .env. Posteriormente crea las colecciones si quieres tener estos datos que se llamen igual, si no se irán creando sobre la marca vacías.
  
 ## Tecnologías y librerías usadas: Un poquito de su desarrollo
 * [NodeJS](https://nodejs.org/es/). JS en Servidor.

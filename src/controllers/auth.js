@@ -166,6 +166,84 @@ class AuthController {
         }
     }
 
+    /**
+     * POST. Añade un elemento al repositorio
+     * Códigos de estado: 201, añadido el recurso. 400 Bad request. 500 no permitido
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
+    async registerMe (req, res, next) {
+        // Creamos el usuario
+        const newUser= User()({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            roles: req.body.roles,
+            avatar: req.body.avatar
+        });
+        try {
+            const data = await newUser.save();
+            res.status(201).json(data);
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }
+
+    /**
+     * PUT Modifica el elemento actual
+     * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
+    async updateMe (req, res, next) {
+        const newUser = {
+            email: req.body.email,
+            password: req.body.password,
+            avatar: req.body.avatar
+        };
+        try {
+            const data = await User().findOneAndUpdate({ username: req.user.username }, newUser);
+            if (data) {
+                res.status(200).json(data);
+            } else { 
+                res.status(404).json({
+                    'error':404,
+                    'mensaje': `No se ha encontrado un item con ese nombre de usuario: ${req.user.username }`
+                });
+            }
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }
+
+    /**
+     * Elimina un elemento en base a su ID. 
+     * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
+    async deleteMe (req, res, next) {
+        try {
+            const data = await User().findOneAndDelete({ username: req.user.username });
+            if (data) {
+                res.status(200).json(data);
+            } else { 
+                res.status(404).json({
+                    'error':404,
+                    'mensaje': `No se ha encontrado un item con ese npmbre de usuario: ${req.user.username }`
+                });
+            }
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }
+
 }
 
 // Exportamos el módulo
