@@ -39,4 +39,8 @@ module.exports.setConfig= (app) => {
     // Indicamos los cors. Por si nos llega una peticion de una URL distintas
     // Nos permite configurar cabeceras y peticiones los que nos llegue
     app.use(cors());
+
+    // Lista de tokens. Lo ideal sería hacerlo en una BD. 
+    app.locals.refreshTokens = {};
+
 };

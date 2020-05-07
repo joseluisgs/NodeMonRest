@@ -12,8 +12,14 @@ const authController = require('../controllers/auth');
 // Cargamos el enrutador
 const router = express.Router();
 
-// Ruta POST
-router.post('/login', authController.getToken);
+// Ruta POST Login
+router.post('/login', authController.login);
+
+// Ruta POST. Genera nuevos tokens de acceso basado en el sistema de refreso
+router.post('/token', authController.token);
+
+// Ruta POST. Logout
+router.post('/logout', authController.logout);
 
 
 // Exprotamos el módulo

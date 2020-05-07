@@ -10,7 +10,6 @@ const express = require('express');
 const config = require('./config');
 const router = require('./router');
 const db = require ('./database');
-const bcrypt = require('bcrypt');
 
 let _server; // instancia del servidor
 
@@ -22,6 +21,7 @@ let _server; // instancia del servidor
  */
 // Configuramos el objeto servidor
 const server = {
+
 
     //iniciamos el servidor
     start () {
