@@ -8,6 +8,7 @@ Este proyecto tiene nombre de Pokemo :). El objetivo prinicpal docente es aplica
 * Acceso a bases de datos NoSQL.
 * Autenticación usando [JWT](https://jwt.io/introduction/).
 * Autorización basada en permisos de usuario.
+* Maneo de [CORS](https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS)
 * Algunos [patrones de diseño](https://sourcemaking.com/design_patterns) conocidos.
 
 Iré comentando los apsctos más releantes y las librerías usadas en cada parte.
@@ -35,9 +36,15 @@ El servidor toma las constantes del fichero .env, te dejo un ejemplo de configur
 ## Tecnologías y librerías usadas: Un poquito de su desarrollo
 * [NodeJS](https://nodejs.org/es/). JS en Servidor.
 * [Mongo DB](https://www.mongodb.com/es). He usado su versión en la nube [Atlas](https://www.mongodb.com/cloud/atlas)
-* [Express](https://expressjs.com/es/). Framework de apliaciones web para la API. Con ellos creo y gestiono las rutas. Además nos permite fácilemnte crear moddlewares, con lo cual podremos aplicar logs espécificos, filtrar para autorizaciones y atenticaciones y otros menesteres. Es lo que más me gusta de esta librería.
+* [Express](https://expressjs.com/es/). Framework de apliaciones web para la API. Con ellos creo y gestiono las rutas. Además nos permite fácilemnte crear moddlewares, con lo cual podremos aplicar logs espécificos, filtrar para autorizaciones y atenticaciones y ampliar ediante middleware. Es lo que más me gusta de esta librería.
 * [Mongoose](https://mongoosejs.com/). Conjunto de librerías para operar con bases de dato MongoDB.
-* [JWT-Simple](https://www.npmjs.com/package/jwt-simple). Para implementar la atenticación basada en JWT. Esta libería actua en base a middleware con Express. Por otro lado hemos utilizado los propios tokens que caducan para la parte de autorización porque usaremos con ellos los permisos de usuario que tengan. También hemos usado el refresco de toekens.
+* [JWT-Simple](https://www.npmjs.com/package/jwt-simple). Para implementar la atenticación basada en JWT. Esta libería actua en base a middleware con Express. Por otro lado hemos utilizado los propios tokens que caducan para la parte de autorización porque usaremos con ellos los permisos de usuario que tengan. También hemos usado el refresco de toekens en base a UUID.
+* [BCrypt](https://www.npmjs.com/package/bcrypt). Librería de cryptografía para manejar las contraseñas de los usuarios.
+* [Body Parser](https://www.npmjs.com/package/body-parser). Middleware que parsea los body como objetos.
+* [Cors](https://www.npmjs.com/package/cors). Middleware para manejo de CORS.
+* [Dotenv](https://www.npmjs.com/package/dotenv). Para leer las variables de entorno del fichero .env
+* [Morgan](https://www.npmjs.com/package/morgan). Middleware Request logger el cual nos permitirá sacar logs de nuestras peticions HTTP.
+* [UUID](https://www.npmjs.com/package/uuid). Implementa el RFC4122 UUIDs para los tokens de refresco
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
