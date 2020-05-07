@@ -9,8 +9,7 @@
 const jwt = require ('jwt-simple');
 const { v4: uuidv4 } = require('uuid');
 const User  = require ('../models/users').UserModel;
-
-
+const tokenRefreshController = require('../controllers/tokenRefresh');
 
 // Tenemos dos formas si usa Query Params: localhost:8000/auth/login?email=corre@correo.com
 // Debemos usar req.query.email
@@ -22,7 +21,7 @@ const User  = require ('../models/users').UserModel;
 class AuthController {
 
     /**
-     * Devuelve un token al usuario si se autentica correctamente
+     * Devuelve un token al usuario si se autentica correctamente. Genera el token de refresco
      * @param {*} req Request
      * @param {*} res Response
      * @param {*} next Next function
@@ -33,9 +32,7 @@ class AuthController {
         const {username, email, password} = req.body; // Los tomo ambos del tiron
         
         // Aquí deberíamos hacer las comprobaciones de que existe ese usuario en la BD o que las contraseñas son correctas, etc.
-
         const user = await User().getByEmail(email);
-        console.log(user);
           
         // Si no existe o no se encuetra, o no copiciden las contraseñas
         if (!user || (password != user.password)) {
@@ -59,14 +56,12 @@ class AuthController {
         const token = jwt.encode(payload, req.app.locals.config.TOKEN_SECRET);
 
         // Creamos el token de refreso
-        const refreshToken = uuidv4(); // Numero de refresco de token ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
-        // En nuestra lista de tokesn de refresco en la pisución de uuid metemos el usuario. Lo ideal sería hacerlo en la BD 
-        req.app.locals.refreshTokens[refreshToken] = username;
-        console.log('Tokens de refreso: ' + req.app.locals.refreshTokens[refreshToken]);
-
+        const uuid = uuidv4(); // Numero de refresco de token ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
+        // Almaceno en la BD el Tocken
+        await tokenRefreshController.save(username, uuid);  
         return res
             .status(200)
-            .send({ token: token, refreshToken: refreshToken }); // Le mandamos el token y el token de refreso
+            .send({ token: token, refreshToken: uuid }); // Le mandamos el token y el token de refreso
     }
 
     /**
@@ -76,16 +71,18 @@ class AuthController {
      * @param {*} res Response
      * @param {*} next Next function
      */
-    token(req, res, next) {
+    async token(req, res, next) {
         // Estos son los parámetros que nos pasa en su body
         const username = req.body.username;
         const refreshToken = req.body.refreshToken;
         const email = req.body.email;
         const roles = req.body.roles;
         
-        // Si no hay token de refresco y ese token es de nuestro usuario, genero un nuevo token. si no error de autenticación
-        console.log(req.app.locals.refreshTokens[refreshToken]);
-        if((refreshToken in req.app.locals.refreshTokens) && (req.app.locals.refreshTokens[refreshToken] == username)) {
+        // Buscamos el token refresh
+        const tokenRefresh = await tokenRefreshController.findByUUID(refreshToken);
+        
+        // Si hay token de refresco y ese token es de nuestro usuario, genero un nuevo token. si no error de autenticación
+        if((tokenRefresh) && (tokenRefresh.username == username)) {
             //  Costruimos el token de acceso
             const payload = {
                 username: username,
@@ -110,13 +107,23 @@ class AuthController {
                 });
     }
 
-    logout(req, res, next) {
+    /**
+     * Realiza el logout y elimina el token de refresco
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
+    async logout(req, res, next) {
         // Le pasamos el refress por body y el usuario
         const username = req.body.username;
         const refreshToken = req.body.refreshToken;
-        if((refreshToken in req.app.locals.refreshTokens) && (req.app.locals.refreshTokens[refreshToken] == username)) {
+
+        // Buscamos el token refresh
+        const tokenRefresh = await tokenRefreshController.findByUUID(refreshToken);
+
+        if((tokenRefresh) && (tokenRefresh.username == username)) {
             // Lo borramos, podríamos hacerlo de la base de datos
-            delete req.app.locals.refreshTokens[refreshToken];
+            await tokenRefreshController.deleteByUUID(refreshToken);
             return res
                 .status(204)
                 .send(

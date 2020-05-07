@@ -39,10 +39,11 @@ class Database {
         const host = `${SETTINGS.parsed.DB_PROTOCOL}://${SETTINGS.parsed.DB_USER}:${SETTINGS.parsed.DB_PASS}@${SETTINGS.parsed.DB_URL}/${SETTINGS.parsed.DB_NAME}?retryWrites=true&w=majority`;
         // Definimos una promesa que se resollverá si nos conecatmos correctamente
         return new Promise(resolve => {
-            // Configuramos el lciente de mongo
+            // Configuramos el la conexión del cliente Mongo
             mongoose.set('debug', SETTINGS.parsed.DB_DEBUG);    // activamos  el modo depurador si así lo tenemos en nuestro fichero
             mongoose.set('useNewUrlParser', true);
             mongoose.set('useUnifiedTopology', true);
+            mongoose.set('useCreateIndex', true);
             mongoose.Promise = global.Promise;
 
             // Creamos la cenexión
