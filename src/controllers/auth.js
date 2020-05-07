@@ -65,7 +65,7 @@ class AuthController {
     }
 
     /**
-     * Devuleve el token de refreso. El token se le pasa en el body.
+     * Devuleve el token nuevo. El token se le pasa en el body.
      * Para elo necesitamos vía body, el usuario y su refreshToken
      * @param {*} req Request
      * @param {*} res Response
