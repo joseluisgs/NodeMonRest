@@ -73,7 +73,7 @@ class UsersController {
      * @param {*} next Next function
      */
     async addUser (req, res, next) {
-        // Creamos la receta
+        // Creamos el usuario
         const newUser= User()({
             username: req.body.username,
             email: req.body.email,
@@ -89,14 +89,35 @@ class UsersController {
         }
     }
 
-
-    async register (req, res, next) {
-    
-    }
-
-
+    /**
+     * PUT por id. Modifica un elemento en base a su id
+     * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
     async editUserById (req, res, next) {
-    
+        const newUser = {
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            roles: req.body.roles,
+            avatar: req.body.avatar
+        };
+        try {
+            const data = await User().findOneAndUpdate({ _id: req.params.id },newUser);
+            if (data) {
+                res.status(200).json(data);
+            } else { 
+                res.status(404).json({
+                    'error':404,
+                    'mensaje': `No se ha encontrado un item con ese ID: ${req.params.id}`
+                });
+            }
+        } catch (err) {
+            res.status(500).send(err);
+        }
     }
 
 
