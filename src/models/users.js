@@ -30,14 +30,14 @@ const UserSchema = new mongoose.Schema(
 
 // Métodos estaticos que nos servirán para métodos rápidos
 
-// Devuelve el Iusuario por ID
+// Devuelve el usuario por ID
 UserSchema.statics.getById = function (id) {
     return this.findOne({ _id: id })
         .lean()                             // Con Lean le estamos diciendo que aprenda y la memorice porque la usaremos mucho
         .exec();                            // Que lo ejecute
 };
 
-// Devuelve el Iusuario por Username
+// Devuelve el usuario por Username
 UserSchema.statics.getByUserName = function (username) {
     return this.findOne({ username: username })
         .lean()                             
@@ -50,6 +50,18 @@ UserSchema.statics.getByEmail = function (email) {
         .lean()                            
         .exec();                            
 };
+
+// Devuelve una lista de todos
+UserSchema.statics.getAll = function (pageOptions, searchOptions) {   
+    // Si no quieres buscar por nada, deja la función fin vacía, sin where ni equals
+    return this.find()
+        .where(searchOptions.search_field)
+        .equals({$regex: searchOptions.search_content, $options: 'i'})
+        .skip(pageOptions.page * pageOptions.limit) // si no quieres filtrar o paginar no pongas skip o limit
+        .limit(pageOptions.limit)
+        .sort({ title: searchOptions.search_order })
+        .exec();
+}; 
 
 
 // Sobre escribimos el método JSON, esto es porque si hacemos una vista necesitamos id y no _id que es como lo guarda Mongo

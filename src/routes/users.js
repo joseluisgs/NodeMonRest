@@ -30,7 +30,10 @@ router.get('/:id', auth, permit(['admin']), usersController.userById);
 router.get('/me', auth, usersController.userMe); 
 
 // POST Añadir Elemento. Solo el usuario administrador
-router.post('/', auth, permit(['admin']), usersController.addUser);             
+router.post('/', auth, permit(['admin']), usersController.addUser);
+
+// POST Registrarse como nuevo usuario. Acceso libre
+router.post('/', usersController.register);    
 
 // Modifica un elemento por ID. Solo lo podrán hacer los usuarios normales y administraores. En este caso sería equivalente no ponerlo. Para eso necesito saber antes mi ID, debo preguntar /me en el cliente
 router.put('/:id', auth, permit(['admin', 'normal']), usersController.editUserById); 
