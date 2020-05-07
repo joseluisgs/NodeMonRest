@@ -2,12 +2,13 @@
 Ejemplo de API REST en NodeJS, usando Mongo.
 
 ### Acerca de
-A Lo largo de este proyecto se incorporarán distintas técnicas para construir un esqueleto de API REST usable en distntos proyectos. La idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el mámbito docente como poder realizarlo. Es una apliación púramente docente. Entre las distintas técnicas usadas:
+Este proyecto tiene nombre de Pokemo :). El objetivo prinicpal docente es aplicar distintas técnicas para construir un esqueleto de API REST usable en distntos proyectos. La idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el mámbito docente como poder realizarlo. Es una apliación púramente docente. Entre las distintas técnicas usadas:
 * Patrón [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador). La vista será cuaquier cliente que consuma nuestra API.
 * [Asíncronía](https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono) y respuesta a Eventos. Uso de promesas e interacción basada en eventos que es uno de los pastectos más fuetes de NodeJS. 
 * Acceso a bases de datos NoSQL.
 * Autenticación usando [JWT](https://jwt.io/introduction/).
 * Autorización basada en permisos de usuario.
+* Algunos [patrones de diseño](https://sourcemaking.com/design_patterns) conocidos.
 
 Iré comentando los apsctos más releantes y las librerías usadas en cada parte.
 
@@ -34,7 +35,9 @@ El servidor toma las constantes del fichero .env, te dejo un ejemplo de configur
 ## Tecnologías y librerías usadas: Un poquito de su desarrollo
 * [NodeJS](https://nodejs.org/es/). JS en Servidor.
 * [Mongo DB](https://www.mongodb.com/es). He usado su versión en la nube [Atlas](https://www.mongodb.com/cloud/atlas)
-* [Express](https://expressjs.com/es/). Framework de apliaciones web para la API. Con ellos creo y gestiono las rutas. Por ejemplo
+* [Express](https://expressjs.com/es/). Framework de apliaciones web para la API. Con ellos creo y gestiono las rutas. Además nos permite fácilemnte crear moddlewares, con lo cual podremos aplicar logs espécificos, filtrar para autorizaciones y atenticaciones y otros menesteres. Es lo que más me gusta de esta librería.
+* [Mongoose](https://mongoosejs.com/). Conjunto de librerías para operar con bases de dato MongoDB.
+* [JWT-Simple](https://www.npmjs.com/package/jwt-simple). Para implementar la atenticación basada en JWT. Esta libería actua en base a middleware con Express. Por otro lado hemos utilizado los propios tokens para la parte de autorización porque usaremos con ellos los permisos de usuario que tengan.
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
