@@ -2,14 +2,16 @@
 Ejemplo de API REST en NodeJS, usando Mongo.
 
 ### Acerca de
-A Lo largo de este proyecto se incorporarán distintas técnicas para construir un esqueleto de API REST usable en distntos proyectos. Entre ellas:
-* Acceso a bases de datos NoSQL
-* Autenticación usando JWT
-* Autorización basada en permisos de usuario
+A Lo largo de este proyecto se incorporarán distintas técnicas para construir un esqueleto de API REST usable en distntos proyectos. La idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el mámbito docente como poder realizarlo. Es una apliación púramente docente. Entre las distintas técnicas usadas:
+* Patrón [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador). La vista será cuaquier cliente que consuma nuestra API.
+* [Asíncronía](https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono) y respuesta a Eventos. Uso de promesas e interacción basada en eventos que es uno de los pastectos más fuetes de NodeJS. 
+* Acceso a bases de datos NoSQL.
+* Autenticación usando [JWT](https://jwt.io/introduction/).
+* Autorización basada en permisos de usuario.
 
 Iré comentando los apsctos más releantes y las librerías usadas en cada parte.
 
-## Requisitos
+## Requisitos deñ sistema
 * [NodeJS](https://nodejs.org/es/) en su [última version](https://nodejs.org/es/download/)
 * [NPM](https://www.npmjs.com/)
 * [Mongo DB](https://www.mongodb.com/es)
@@ -29,7 +31,7 @@ Tareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el
 ### El fichero .ENV
 El servidor toma las constantes del fichero .env, te dejo un ejemplo de configuración en .env_example. Cámbialo y lo configuras a tu gusto y luego lo renomnbras.
  
-## Tecnologías y librerías usadas
+## Tecnologías y librerías usadas: Un poquito de su desarrollo
 * [NodeJS](https://nodejs.org/es/). JS en Servidor.
 * [Mongo DB](https://www.mongodb.com/es). He usado su versión en la nube [Atlas](https://www.mongodb.com/cloud/atlas)
 * [Express](https://expressjs.com/es/). Framework de apliaciones web para la API. Con ellos creo y gestiono las rutas. Por ejemplo
@@ -39,4 +41,4 @@ El servidor toma las constantes del fichero .env, te dejo un ejemplo de configur
 * [GitHub](https://github.com/joseluisgs)
 
 ## License
-Este proyecto esta licenciado bajo licencia __MIT__, si desea saber más, visite el fichero LICENSE
+Este proyecto esta licenciado bajo licencia __MIT__, si desea saber más, visite el fichero [LICENSE](https://github.com/joseluisgs/NodeMonRest/blob/master/LICENSE)
