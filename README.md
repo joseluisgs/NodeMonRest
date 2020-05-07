@@ -37,7 +37,7 @@ El servidor toma las constantes del fichero .env, te dejo un ejemplo de configur
 * [Mongo DB](https://www.mongodb.com/es). He usado su versión en la nube [Atlas](https://www.mongodb.com/cloud/atlas)
 * [Express](https://expressjs.com/es/). Framework de apliaciones web para la API. Con ellos creo y gestiono las rutas. Además nos permite fácilemnte crear moddlewares, con lo cual podremos aplicar logs espécificos, filtrar para autorizaciones y atenticaciones y otros menesteres. Es lo que más me gusta de esta librería.
 * [Mongoose](https://mongoosejs.com/). Conjunto de librerías para operar con bases de dato MongoDB.
-* [JWT-Simple](https://www.npmjs.com/package/jwt-simple). Para implementar la atenticación basada en JWT. Esta libería actua en base a middleware con Express. Por otro lado hemos utilizado los propios tokens para la parte de autorización porque usaremos con ellos los permisos de usuario que tengan.
+* [JWT-Simple](https://www.npmjs.com/package/jwt-simple). Para implementar la atenticación basada en JWT. Esta libería actua en base a middleware con Express. Por otro lado hemos utilizado los propios tokens que caducan para la parte de autorización porque usaremos con ellos los permisos de usuario que tengan. También hemos usado el refresco de toekens.
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
