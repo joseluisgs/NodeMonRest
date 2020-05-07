@@ -8,6 +8,7 @@
 // Librerias
 const jwt = require ('jwt-simple');
 const { v4: uuidv4 } = require('uuid');
+const User  = require ('../models/users').UserModel;
 
 
 
@@ -26,16 +27,18 @@ class AuthController {
      * @param {*} res Response
      * @param {*} next Next function
      */
-    login (req, res, next) {
+    async login (req, res, next) {
         // Tenemos dos formas depasar los datos. si usa Query Params: localhost:8000/auth/login?email=corre@correo.com. Debemos usar req.query.email
         // Si usa el body con un JSON: localhost:8000/auth/login. Debemos usar req.body.email
         const {username, email, password} = req.body; // Los tomo ambos del tiron
         
         // Aquí deberíamos hacer las comprobaciones de que existe ese usuario en la BD o que las contraseñas son correctas, etc.
-        const role = ['admin', 'normal'];
-        
-        // Si no existe o no se encuetra
-        if (!username) {
+
+        const user = await User().getByEmail(email);
+        console.log(user);
+          
+        // Si no existe o no se encuetra, o no copiciden las contraseñas
+        if (!user || (password != user.password)) {
             return res
                 .status(401)
                 .send(
@@ -49,7 +52,7 @@ class AuthController {
         const payload = {
             username: username,
             email: email,
-            role: role,
+            roles: user.roles,
             iat: Math.floor(Date.now() / 1000),
             exp: Math.floor(Date.now() / 1000) + (60 * req.app.locals.config.TOKEN_LIFE),
         };
@@ -78,7 +81,7 @@ class AuthController {
         const username = req.body.username;
         const refreshToken = req.body.refreshToken;
         const email = req.body.email;
-        const role = req.body.role;
+        const roles = req.body.roles;
         
         // Si no hay token de refresco y ese token es de nuestro usuario, genero un nuevo token. si no error de autenticación
         console.log(req.app.locals.refreshTokens[refreshToken]);
@@ -87,7 +90,7 @@ class AuthController {
             const payload = {
                 username: username,
                 email: email,
-                role: role,
+                roles: roles,
                 iat: Math.floor(Date.now() / 1000),
                 exp: Math.floor(Date.now() / 1000) + (60 * req.app.locals.config.TOKEN_LIFE),
             };
