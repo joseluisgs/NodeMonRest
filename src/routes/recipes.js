@@ -27,20 +27,20 @@ const permit = require('../middlewares/auth').permit;
 // Esta claro que si uno es asmin es normal, o no? dependerá del problema y si quremoes que puedan haber rutas de normal que no acceda admin
 // o viceversa. Si no se pone es normal
 
-// Listar todos los elementos
-router.get('/', auth, permit(['admin', 'normal']), recipesController.recipes); 
+// GET Listar todos los elementos, podemos hacerlo todos. Si no se pone permit es que esta implícito permit(['normal])
+router.get('/', recipesController.recipes); 
 
-// Obtiene un elemento por por ID
+// GET Obtiene un elemento por por ID, podemos hacerlo todos
 router.get('/:id', recipesController.recipeById); 
 
-// Añadir Elemento
-router.post('/', recipesController.addRecipe);             
+// POST Añadir Elemento. Solo autenticados y del nivel admin, por eso no se pone nada (es por defecto)
+router.post('/', auth, permit(['admin']), recipesController.addRecipe);             
 
-// Modifica un elemento por ID
-router.put('/:id', recipesController.editRecipeById); 
+// PUT Modifica un elemento por ID. Solo autenticados y del nivel admin, por eso no se pone nada (es por defecto)
+router.put('/:id', auth, permit(['admin']), recipesController.editRecipeById); 
 
-// Elimina un elemento por ID
-router.delete('/:id', recipesController.deleteRecipeById); 
+// DELETE Elimina un elemento por ID. Solo autenticados y del nivel admin podrán, por eso no se pone nada (es por defecto)
+router.delete('/:id', auth, permit(['admin']), recipesController.deleteRecipeById); 
 
 // Exprotamos el módulo
 module.exports = router;

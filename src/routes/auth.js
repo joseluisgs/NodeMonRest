@@ -8,6 +8,7 @@
 // Cargamos librerías, podemos usar la sitaxis EM6: import { Router } from 'express';
 const express = require('express');
 const authController = require('../controllers/auth');
+const auth = require('../middlewares/auth').auth; // es equivalente a poner const auth = requiere ('...').auth;
 
 // Cargamos el enrutador
 const router = express.Router();
@@ -15,11 +16,11 @@ const router = express.Router();
 // Ruta POST Login
 router.post('/login', authController.login);
 
-// Ruta POST. Genera nuevos tokens de acceso basado en el sistema de refreso
-router.post('/token', authController.token);
+// Ruta POST. Genera nuevos tokens de acceso basado en el sistema de refreso. Solo autenticados
+router.post('/token', auth, authController.token);
 
-// Ruta POST. Logout
-router.post('/logout', authController.logout);
+// Ruta POST. Logout. solo autenticados
+router.post('/logout', auth, authController.logout);
 
 
 // Exprotamos el módulo
