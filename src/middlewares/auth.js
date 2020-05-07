@@ -52,13 +52,8 @@ const auth = (req, res, next) => {
 const permit = (roles = ['normal']) => {
     // Devolvemos el middleware
     return (req, res, next) => {
-        // Comprobamos que el rol del usuario existe en la lista de roles permitidos
-        let valid = false;
-        req.user.role.forEach(role => {
-            if(roles.includes(role))
-                valid = true;
-        });
-
+        // Comprobamos que el rol del usuario existe en la lista de roles permitidos de una manera elegante :)
+        let valid = req.user.role.some( role => roles.includes(role));
         if (valid) {
             next(); // role is allowed, so continue on the next middleware
         } else {
