@@ -26,17 +26,11 @@ router.get('/', auth, permit(['admin']), usersController.users);
 // GET Obtiene un elemento por por ID
 router.get('/:id', auth, permit(['admin']), usersController.userById); 
 
-// GET Devuleve los datos del usuario conectado
-router.get('/me', auth, usersController.userMe); 
-
 // POST Añadir Elemento. Solo el usuario administrador
 router.post('/', auth, permit(['admin']), usersController.addUser);
 
-// POST Registrarse como nuevo usuario. Acceso libre
-router.post('/', usersController.register);    
-
-// Modifica un elemento por ID. Solo lo podrán hacer los usuarios normales y administraores. En este caso sería equivalente no ponerlo. Para eso necesito saber antes mi ID, debo preguntar /me en el cliente
-router.put('/:id', auth, permit(['admin', 'normal']), usersController.editUserById); 
+// Modifica un elemento por ID. Solo admin
+router.put('/:id', auth, permit(['admin']), usersController.editUserById); 
 
 // Elimina un elemento por ID. Solo Admin puede borrarlos.
 router.delete('/:id', auth, permit(['admin']), usersController.deleteUserById); 

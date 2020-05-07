@@ -7,7 +7,7 @@
 
 const recipes = require('./routes/recipes');
 const auth = require('./routes/auth');
-const user = require('./routes/users');
+const users = require('./routes/users');
 
 // exportamos los módulos
 module.exports.setRouter = (app) => {

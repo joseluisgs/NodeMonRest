@@ -141,6 +141,31 @@ class AuthController {
                 });
         
     }
+
+    /**
+     * GET Devuelve los datos del elemento activo
+     * Códigos de Estado: 200 (OK), 404 No encotrado, 500 no permitido.
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
+    async aboutMe (req, res, next) {
+        try {
+            const data = await User().getByUserName(req.user.username);
+            if (data) {
+                res.status(200).json(data);
+            } else { 
+                res.status(404).json({
+                    'error':404,
+                    'mensaje': `No se ha encontrado usuario: ${req.user.username}`
+                });
+            }
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }
+
 }
 
 // Exportamos el módulo

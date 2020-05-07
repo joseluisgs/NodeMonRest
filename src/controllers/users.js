@@ -8,6 +8,7 @@
 // Librerias
 const User  = require ('../models/users').UserModel;
 
+
 class UsersController {
 
     /**
@@ -39,18 +40,53 @@ class UsersController {
     }
 
 
+    /**
+     * GET por id. Devuelve uneun elemento en base a su ID
+     * Códigos de Estado: 200 (OK), 404 No encotrado, 500 no permitido.
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
     async userById (req, res, next) {
-    
+        try {
+            const data = await User().getById(req.params.id);
+            if (data) {
+                res.status(200).json(data);
+            } else { 
+                res.status(404).json({
+                    'error':404,
+                    'mensaje': `No se ha encontrado un item con ese ID: ${req.params.id}`
+                });
+            }
+        } catch (err) {
+            res.status(500).send(err);
+        }
     }
 
-    
-    async userMe (req, res, next) {
-    
-    }
-
-
+    /**
+     * POST. Añade un elemento al repositorio
+     * Códigos de estado: 201, añadido el recurso. 400 Bad request. 500 no permitido
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
     async addUser (req, res, next) {
-    
+        // Creamos la receta
+        const newUser= User()({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            roles: req.body.roles,
+            avatar: req.body.avatar
+        });
+        try {
+            const data = await newUser.save();
+            res.status(201).json(data);
+        } catch (err) {
+            res.status(500).send(err);
+        }
     }
 
 

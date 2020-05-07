@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema(
         email: { type: String, required: true },
         password: { type: String, required: true },
         roles: { type: Array, trim: true, required: true },
-        avatar: { type: String, required: true },
+        avatar: { type: String, required: true, default: `https://api.adorable.io/avatars/200/user@user.com.png`},
     },
     // El método estriccto nos dice si aceptamos o no un documento incpleto. Lo ponemos así porque no vamos a meter el id y da un poco de flexibilidad
     {strict: false},

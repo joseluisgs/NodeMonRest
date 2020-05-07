@@ -22,6 +22,20 @@ router.post('/token', auth, authController.token);
 // Ruta POST. Logout. solo autenticados
 router.post('/logout', auth, authController.logout);
 
+// GET Devuleve los datos del usuario conectado. Autenticado
+router.get('/me', auth, authController.aboutMe); 
+/* 
+// POST Registrarse como nuevo usuario. Acceso libre
+router.post('/register', authController.registerMe);    
+
+// UPDATE cambia mis datos. Autenticado
+router.punt('/update', auth, authController.updateMe); 
+
+// DELETE me elimina. Autenticado
+router.delete('/update', auth, authController.updateMe);    
+
+
+ */
 
 // Exprotamos el módulo
 module.exports = router;
