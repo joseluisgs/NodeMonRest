@@ -32,7 +32,7 @@ El servidor toma las constantes del fichero .env, te dejo un ejemplo de configur
 ## Tecnologías y librerías usadas
 * [NodeJS](https://nodejs.org/es/). JS en Servidor.
 * [Mongo DB](https://www.mongodb.com/es). He usado su versión en la nube [Atlas](https://www.mongodb.com/cloud/atlas)
-* [Express](https://expressjs.com/es/). Framework de apliaciones web para la API. Con ellos creo y gestiono las rutas
+* [Express](https://expressjs.com/es/). Framework de apliaciones web para la API. Con ellos creo y gestiono las rutas. Por ejemplo
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
