@@ -24,7 +24,7 @@ const TokenRefreshSchema = new mongoose.Schema(
         expireAt: {
             type: Date,
             default: Date.now,
-            index: { expires: (SETTINGS.parsed.TOKEN_REFRESH*1000) }  
+            index: { expires: (SETTINGS.parsed.TOKEN_REFRESH*1000*60) }  
         },
         username: { type: String, required: true },
         uuid: { type: String, required: true }
