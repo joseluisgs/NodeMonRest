@@ -45,7 +45,7 @@ module.exports.setConfig= (app) => {
     app.use(cors());
 
     // Indicamos las ruta estática para servidor elemntos estaticos o almacenar cosas
-    // Así podemos redireccionar rutas internas
+    // Así podemos redireccionar rutas internas y no las muestran. si no queremos hacer eso lo quitamos
     // Cada vez que pongamos /files, nos llevara al directorio public/files
     app.use(
         '/files',
@@ -60,19 +60,17 @@ module.exports.setConfig= (app) => {
     app.use(fileUpload(
         {
             createParentPath: true,
-            limits: { fileSize: 2 * 1024 * 1024 * 1024 }, //2MB max de tamaño máximo
+            limits: { fileSize: SETTINGS.parsed.FILE_SIZE * 1024 * 1024 * 1024 }, //2MB max de tamaño máximo (puesto en env)
             useTempFiles : true,            // Uso de ficheros temporales
             tempFileDir : '/tmp/',          // Usamos un directorio y ficheros temporal y no memoria para el proceso de subida. Ideal para ficheros grandes o muchas subidas
             preserveExtension: true,        // dejamos la extensión por defecto
-            debug: SETTINGS.parsed.DEBUG    // Modo de depuración   
-            
+            debug: SETTINGS.parsed.DEBUG    // Modo de depuración           
         }
     ));
 
 };
 
 // exportamos los directorios de lamcenaminero
-// Variables globales a usar
 const FILES_STORAGE = path.join(__dirname, 'public/files/');
 const IMAGES_STORAGE = path.join(__dirname, 'public/images/');
 

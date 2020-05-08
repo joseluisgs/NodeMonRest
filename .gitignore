@@ -1,7 +1,8 @@
 # Project Directories
 .env
 dist
-
+src/public/files/
+src/public/images/
 
 # Logs
 logs

@@ -7,11 +7,11 @@
 
 // Librerias
 const config = require ('../config');
-const path = require('path');
+const conf = require('dotenv');
+// Cargamos la configuración del fichero .env
+const SETTINGS = conf.config();
 
 class FilesController {
-
-    
 
     /**
      * POST. Añade una imagen al directorio file
@@ -30,24 +30,30 @@ class FilesController {
                 });
             } else {
                 //debemos usar el mismo nombre que lleva en el formulario
-                const file = req.files.file;                    // Obtenems el fichero
-                const fileName = file.name.replace(/\s/g,'');   // Si tienes espacios en blanco se los quitamos
-                const fileExt =  fileName.split('.').pop();     // Nos quedamos con su extension
-                const fileDest = file.md5+'.'+fileExt;          //this.getStorageName(file);
-                
-                // usamos filename para moverla
-                file.mv(config.storage.FILES + fileDest);
-    
-                //send response
+                let data = []; 
+                const files = req.files.files;
+       
+                files.forEach(file => {
+                    const fileName = file.name.replace(/\s/g,'');   // Si tienes espacios en blanco se los quitamos
+                    const fileExt =  fileName.split('.').pop();     // Nos quedamos con su extension
+                    const fileDest = file.md5+'.'+fileExt;          //this.getStorageName(file);
+
+                    // usamos filename para moverla
+                    file.mv(config.storage.FILES + fileDest);
+                    //Almacenamos los datos
+                    data.push({
+                        name: fileDest,
+                        mimetype: file.mimetype,
+                        size: file.size,
+                        filePath: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/files/${fileDest}`
+                    });
+                });
+
+                //Mandamos la respuesta
                 res.send({
                     status: true,
-                    message: 'File is uploaded',
-                    data: {
-                        filePath: req.protocol + "://" + req.hostname + '/' + file.name,
-                        name: file.name,
-                        mimetype: file.mimetype,
-                        size: file.size
-                    }
+                    message: 'Fichero(s) subido(s) con éxito',
+                    data: data
                 });
             }
         } catch (err) {

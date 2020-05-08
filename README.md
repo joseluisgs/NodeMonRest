@@ -47,7 +47,8 @@ En la carpeta mongo tienes un volcado de la base de datos y de cada una de las c
 * [Cors](https://www.npmjs.com/package/cors). Middleware para manejo de CORS.
 * [Dotenv](https://www.npmjs.com/package/dotenv). Para leer las variables de entorno del fichero .env
 * [Morgan](https://www.npmjs.com/package/morgan). Middleware Request logger el cual nos permitirá sacar logs de nuestras peticions HTTP.
-* [UUID](https://www.npmjs.com/package/uuid). Implementa el RFC4122 UUIDs para los tokens de refresco
+* [UUID](https://www.npmjs.com/package/uuid). Implementa el RFC4122 UUIDs para los tokens de refresco.
+* [Express-fileupload](https://www.npmjs.com/package/express-fileupload). Es un middleware para Express el cual nos ayuda a procesar peticiones multipart o subida de imagenes. Se ha puesto que el tamaño máximo por umagen sea 2MB aunque se puede cambiar el el fichero .env
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
