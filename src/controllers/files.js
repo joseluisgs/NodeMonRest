@@ -42,13 +42,13 @@ class FilesController {
                     const fileDest = file.md5+'.'+fileExt;          //this.getStorageName(file);
 
                     // usamos filename para moverla
-                    file.mv(config.storage.FILES + fileDest);
+                    file.mv(config.storage + fileDest);
                     //Almacenamos los datos
                     data.push({
                         name: fileDest,
                         mimetype: file.mimetype,
                         size: file.size,
-                        filePath: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_UP_PATH}/${fileDest}`
+                        filePath: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`
                     });
                 });
 
@@ -71,7 +71,7 @@ class FilesController {
                 console.log("Error getting directory information.");
             } else {
                 files.forEach(function(file) {
-                    console.log(file);
+                    console.log(file);   
                 });
             }
         });
