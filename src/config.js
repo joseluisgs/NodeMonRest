@@ -17,6 +17,7 @@ const fileUpload = require('express-fileupload');
 // Cargamos la configuración del fichero .env
 const SETTINGS = conf.config();
 
+
 // Creamos el módulo de configurar. Es una función que recibe Up
 module.exports.setConfig= (app) => {
      
@@ -45,26 +46,37 @@ module.exports.setConfig= (app) => {
 
     // Indicamos las ruta estática para servidor elemntos estaticos o almacenar cosas
     // Así podemos redireccionar rutas internas
-    // Cada vez que pongamos /files, nos llevarña al directorio public/files
+    // Cada vez que pongamos /files, nos llevara al directorio public/files
     app.use(
         '/files',
         express.static(path.join(__dirname, 'public/files'))
     );
+    
     app.use(
         '/images',
-        express.static(path.join(__dirname, 'public/images'))
+        express.static(path.join(__dirname, 'public/images'))   // Esta constante será el path para alamcenar imagenes (si quiero)
     );
     // Configuramos el sistema de ficheros de subida
     app.use(fileUpload(
         {
             createParentPath: true,
             limits: { fileSize: 2 * 1024 * 1024 * 1024 }, //2MB max de tamaño máximo
-            useTempFiles : true,
-            tempFileDir : '/tmp/',   // Usamos un directorio y ficheros temporal y no memoria para el proceso de subida. Ideal para ficheros grandes o muchas subidas
-            preserveExtension: true, // dejamos la extensión por defecto
-            debug: true              // Modo de depuración   
+            useTempFiles : true,            // Uso de ficheros temporales
+            tempFileDir : '/tmp/',          // Usamos un directorio y ficheros temporal y no memoria para el proceso de subida. Ideal para ficheros grandes o muchas subidas
+            preserveExtension: true,        // dejamos la extensión por defecto
+            debug: SETTINGS.parsed.DEBUG    // Modo de depuración   
             
         }
     ));
 
+};
+
+// exportamos los directorios de lamcenaminero
+// Variables globales a usar
+const FILES_STORAGE = path.join(__dirname, 'public/files/');
+const IMAGES_STORAGE = path.join(__dirname, 'public/images/');
+
+module.exports.storage = {
+    FILES: FILES_STORAGE,
+    IMAGES: IMAGES_STORAGE
 };
