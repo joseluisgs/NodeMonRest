@@ -9,7 +9,6 @@
 const config = require ('../config');
 const conf = require('dotenv');
 const File  = require ('../models/files').FileModel;
-
 const fs = require('fs');
 
 // Cargamos la configuración del fichero .env
@@ -47,7 +46,8 @@ class FilesController {
                         mimetype: file.mimetype,
                         size: file.size,
                         url: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`,
-                        username: req.user.username
+                        username: req.user.username,
+                        type: 'document'
                     });
 
                     // usamos filename para moverla al sistema de almacenamiento

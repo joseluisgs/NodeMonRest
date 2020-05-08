@@ -19,7 +19,8 @@ const FileSchema = new mongoose.Schema(
         mimetype: { type: String, required: true },
         size: { type: Number, required: true },
         url: { type: String, required: true },
-        username: { type: String, required: true }
+        username: { type: String, required: true },
+        type: { type: String, required: true, Defaul: 'document'}
     },
     // El método estriccto nos dice si aceptamos o no un documento incpleto. Lo ponemos así porque no vamos a meter el id y da un poco de flexibilidad
     {strict: false},
@@ -48,11 +49,18 @@ FileSchema.statics.getAll = function (pageOptions, searchOptions) {
         .exec();
 }; 
 
-// Devuelve el usuario por Username
+// Devuelve el fichero por fichero
 FileSchema.statics.getByFileName = function (file) {
     return this.findOne({ file: file })
         .lean()                             
         .exec();                            
+};
+
+// Devuelve el fichero de tipo avatar del usuario en cuestión
+FileSchema.statics.getUserAvatar = function (username) {
+    return this.findOne({ username: username, type: 'avatar' })
+        .lean()                             
+        .exec(); 
 };
 
 // Sobre escribimos el método JSON, esto es porque si hacemos una vista necesitamos id y no _id que es como lo guarda Mongo

@@ -7,7 +7,12 @@
 
 // Librerias
 const User  = require ('../models/users').UserModel;
+const File  = require ('../models/files').FileModel;
+const fs = require('fs');
+const conf = require('dotenv');
+const config = require ('../config');
 
+const SETTINGS = conf.config();
 
 class UsersController {
 
@@ -141,6 +146,71 @@ class UsersController {
             }
         } catch (err) {
             res.status(500).send(err);
+        }
+    }
+
+
+    /**
+     * PATCH por username. Modifica la imagen del usuario. Si no tiene la inserta, si tiene la borra y pone la nueva. Deveuleve el usuario actualizado
+     * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
+    async avatarToUser (req, res, next) {
+        if(!req.files || Object.keys(req.files).length === 0) {
+            res.send({
+                status: 400,
+                message: 'No hay fichero para subir'
+            });
+        } else {
+            // Obtengo el fichero del avatar del usuario
+            const avatarOld= await File().getUserAvatar(req.params.username);
+            
+            // Proceso el fichero el archivo nuevo
+            const file= req.files.avatar;
+            const fileName = file.name.replace(/\s/g,'');   // Si tienes espacios en blanco se los quitamos
+            const fileExt =  fileName.split('.').pop();     // Nos quedamos con su extension
+            const fileDest = file.md5+'.'+fileExt;          //this.getStorageName(file);
+            const newFile= File()({
+                file: fileDest,
+                mimetype: file.mimetype,
+                size: file.size,
+                url: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`,
+                username: req.params.username,
+                type: 'avatar'
+            });
+
+            try {
+            
+                // Actualizo la foto en el usuario
+                const newUser = {
+                    avatar: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`
+                };
+                const newData = await User().findOneAndUpdate({ username: req.params.username },newUser);
+
+                // Copio la nueva imagen en disco y BD
+                file.mv(config.storage + fileDest);
+                await newFile.save();
+
+                // Elimino la antigua de la BD y la borro
+                fs.unlink(config.storage + avatarOld.file, async function (err) {
+                    if (err) throw err;
+                    console.log('Fichero borrado');
+                    const data = await File().findByIdAndDelete({  _id : avatarOld._id });
+                    if (data) {
+                        res.status(200).json(newData);
+                    } else { 
+                        res.status(404).json({
+                            'error':404,
+                            'mensaje': `No se ha encontrado un item con ese ID: ${avatarOld.file}`
+                        });
+                    }
+                });
+            } catch (err) {
+                res.status(500).send(err);
+            }  
         }
     }
 }
