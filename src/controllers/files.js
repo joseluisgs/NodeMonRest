@@ -45,10 +45,11 @@ class FilesController {
                     file.mv(config.storage + fileDest);
                     //Almacenamos los datos
                     data.push({
-                        name: fileDest,
+                        file: fileDest,
                         mimetype: file.mimetype,
                         size: file.size,
-                        filePath: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`
+                        url: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`,
+                        username: req.user.username
                     });
                 });
 
