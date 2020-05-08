@@ -8,6 +8,9 @@
 // Librerias
 const config = require ('../config');
 const conf = require('dotenv');
+const path = require('path');
+const fs = require('fs');
+
 // Cargamos la configuración del fichero .env
 const SETTINGS = conf.config();
 
@@ -30,7 +33,7 @@ class FilesController {
                 });
             } else {
                 //debemos usar el mismo nombre que lleva en el formulario
-                let data = []; 
+                const data = []; 
                 const files = req.files.files;
        
                 files.forEach(file => {
@@ -60,7 +63,19 @@ class FilesController {
             res.status(500).send(err);
         }
     }
-    
+
+    files(req, res, next) {
+        console.log('estoy aquí');
+        fs.readdir(config.storage.FILES, function(err, files) {
+            if (err) {
+                console.log("Error getting directory information.");
+            } else {
+                files.forEach(function(file) {
+                    console.log(file);
+                });
+            }
+        });
+    }
 }
 
 // Exportamos el módulo
