@@ -581,6 +581,173 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ficheros",
+			"item": [
+				{
+					"name": "Ficheros Subida",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTA1NDUsImV4cCI6MTU4ODk1MTc0NX0.DWdf2P77SeKyrURCnbCV8rKgwaBWRpFu_YNWmvt6L4M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": [
+										"/Users/link/Dropbox/Documentos/Fotos/Fofucho.jpg",
+										"/Users/link/Dropbox/Documentos/Fotos/FotoTwitter.JPG",
+										"/Users/link/Dropbox/Documentos/Fotos/foto-mini.jpg"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8000/files/upload",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"files",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Ficheros",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTIxMTIsImV4cCI6MTU4ODk1MzMxMn0.ZxQRD65NmpmprFs-i3ZRQUSrWpc6yRaO6Tozrk6eWgo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/files/all",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"files",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Fichero por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTA1NDUsImV4cCI6MTU4ODk1MTc0NX0.DWdf2P77SeKyrURCnbCV8rKgwaBWRpFu_YNWmvt6L4M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/files/file/5eb575780d98f14a46107e80",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"files",
+								"file",
+								"5eb575780d98f14a46107e80"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Llistar mis Ficheros",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTE3ODYsImV4cCI6MTU4ODk1Mjk4Nn0.5d-_ZDD7LEwAXSbkiT_xdrIG-aKVnVTI3amKxNGj04s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/files/me",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"files",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Fichero por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTMzMjksImV4cCI6MTU4ODk1NDUyOX0.IUl6EZSZ1BurTsWMCiczMsDgp4vpnricRH7FB31gMpQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/files/delete/5eb575780d98f14a46107e7f",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"files",
+								"delete",
+								"5eb575780d98f14a46107e7f"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}

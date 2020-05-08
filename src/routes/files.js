@@ -27,6 +27,7 @@ router.get('/file/:id', auth, permit(['admin']), filesController.fileById);
 router.get('/me', auth, permit(['admin']), filesController.myFiles); 
 
 // DELETE Elimina el fichero
+router.post('/delete/:id', auth, permit(['admin']), filesController.deleteFileById); 
 
 // De la misma manera podríamos hacer un CRUD completo, pero no es el caso
 

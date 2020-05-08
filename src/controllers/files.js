@@ -148,6 +148,38 @@ class FilesController {
             res.status(500).send(err);
         }
     }
+
+    /**
+     * Elimina un elemento en base a su ID. 
+     * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
+    async deleteFileById (req, res, next) {
+        try {
+            // Busco el fichero
+            const file= await File().getById(req.params.id);
+
+            fs.unlink(config.storage + file.file, async function (err) {
+                if (err) throw err;
+                console.log('Fichero borrado');
+                const data = await File().findByIdAndDelete({ _id: req.params.id });
+                if (data) {
+                    res.status(200).json(data);
+                } else { 
+                    res.status(404).json({
+                        'error':404,
+                        'mensaje': `No se ha encontrado un item con ese ID: ${req.params.id}`
+                    });
+                }
+            });
+            
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }
 }
 
 // Exportamos el módulo
