@@ -170,6 +170,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Listar Recetas del Usuario Registrado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTQyMjgsImV4cCI6MTU4ODk1NTQyOH0.EMR3HES4LI9aeXiYfdpnpuRrhIS2OkYnbplC-4Ue7bU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/recipes/me/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"recipes",
+								"me",
+								"list"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -688,7 +718,7 @@
 					"response": []
 				},
 				{
-					"name": "Llistar mis Ficheros",
+					"name": "Llistar Ficheros del Usuario Registrado",
 					"request": {
 						"auth": {
 							"type": "bearer",
