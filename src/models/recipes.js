@@ -21,7 +21,8 @@ const RecipeSchema = new mongoose.Schema(
         description: { type: String, required: true },
         difficulty: { type: String, required: true },
         persons: { type: Number, required: true },
-        time: { type: Number, required: true }
+        time: { type: Number, required: true }, 
+        username: { type: String, required: true,  default: 'recipe' },
     },
     // El método estriccto nos dice si aceptamos o no un documento incpleto. Lo ponemos así porque no vamos a meter el id y da un poco de flexibilidad
     {strict: false},
