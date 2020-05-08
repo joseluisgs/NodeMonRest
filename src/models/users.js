@@ -16,8 +16,8 @@ const mongoose = require('mongoose');
 // Creación del esquema
 const UserSchema = new mongoose.Schema(
     {
-        username: { type: String, required: true },
-        email: { type: String, required: true },
+        username: { type: String, required: true,  unique: true,  index: true},
+        email: { type: String, required: true, nique: true,  index: true},
         password: { type: String, required: true },
         roles: { type: Array, trim: true, required: true, default: ['normal'] },
         avatar: { type: String, required: true, default: `https://api.adorable.io/avatars/200/user@user.com.png`},
