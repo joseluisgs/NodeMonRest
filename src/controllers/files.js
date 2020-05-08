@@ -45,7 +45,7 @@ class FilesController {
                         name: fileDest,
                         mimetype: file.mimetype,
                         size: file.size,
-                        filePath: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/files/${fileDest}`
+                        filePath: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_UP_PATH}/${fileDest}`
                     });
                 });
 

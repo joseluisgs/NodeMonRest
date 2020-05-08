@@ -48,13 +48,13 @@ module.exports.setConfig= (app) => {
     // Así podemos redireccionar rutas internas y no las muestran. si no queremos hacer eso lo quitamos
     // Cada vez que pongamos /files, nos llevara al directorio public/files
     app.use(
-        '/files',
-        express.static(path.join(__dirname, 'public/files'))
+        `/${SETTINGS.parsed.FILES_UP_PATH}`,
+        express.static(path.join(__dirname, 'public/upload/files/'))
     );
     
     app.use(
-        '/images',
-        express.static(path.join(__dirname, 'public/images'))   // Esta constante será el path para alamcenar imagenes (si quiero)
+        `/${SETTINGS.parsed.IMAGES_UP_PATH}`,
+        express.static(path.join(__dirname, 'public/upload/images/'))   // Esta constante será el path para alamcenar imagenes (si quiero)
     );
     // Configuramos el sistema de ficheros de subida
     app.use(fileUpload(
@@ -71,8 +71,8 @@ module.exports.setConfig= (app) => {
 };
 
 // exportamos los directorios de lamcenaminero
-const FILES_STORAGE = path.join(__dirname, 'public/files/');
-const IMAGES_STORAGE = path.join(__dirname, 'public/images/');
+const FILES_STORAGE = path.join(__dirname, 'public/upload/files/');
+const IMAGES_STORAGE = path.join(__dirname, 'public/upload/images/');
 
 module.exports.storage = {
     FILES: FILES_STORAGE,

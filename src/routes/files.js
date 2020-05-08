@@ -14,7 +14,7 @@ const auth = require('../middlewares/auth').auth; // es equivalente a poner cons
 const router = express.Router();
 
 // Ruta POST File, sube un fichero, si estás identificado
-router.post('/', filesController.uploadFiles);
+router.post('/', auth, filesController.uploadFiles);
 
 
 // Exprotamos el módulo

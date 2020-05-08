@@ -48,7 +48,7 @@ En la carpeta mongo tienes un volcado de la base de datos y de cada una de las c
 * [Dotenv](https://www.npmjs.com/package/dotenv). Para leer las variables de entorno del fichero .env
 * [Morgan](https://www.npmjs.com/package/morgan). Middleware Request logger el cual nos permitirá sacar logs de nuestras peticions HTTP.
 * [UUID](https://www.npmjs.com/package/uuid). Implementa el RFC4122 UUIDs para los tokens de refresco.
-* [Express-fileupload](https://www.npmjs.com/package/express-fileupload). Es un middleware para Express el cual nos ayuda a procesar peticiones multipart o subida de imagenes. Se ha puesto que el tamaño máximo por umagen sea 2MB aunque se puede cambiar el el fichero .env
+* [Express-fileupload](https://www.npmjs.com/package/express-fileupload). Es un middleware para Express el cual nos ayuda a procesar peticiones multipart o subida de imagenes. Se ha puesto que el tamaño máximo por umagen sea 2MB aunque se puede cambiar el el fichero .env. Los directorios para lamacenar imagenes o ficheros están en .env, puedes poner el mismo o lo que quieras, pues se crean dinamicamente dentro de public y accesible directamente por la ruta /up_files  o /up_images.
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
