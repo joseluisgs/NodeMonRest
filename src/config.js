@@ -10,6 +10,9 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const conf = require('dotenv');    // Cogemos el objeto que necesitamos
+const path = require('path');
+const express = require('express');
+const fileUpload = require('express-fileupload');
 
 // Cargamos la configuración del fichero .env
 const SETTINGS = conf.config();
@@ -39,5 +42,29 @@ module.exports.setConfig= (app) => {
     // Indicamos los cors. Por si nos llega una peticion de una URL distintas
     // Nos permite configurar cabeceras y peticiones los que nos llegue
     app.use(cors());
+
+    // Indicamos las ruta estática para servidor elemntos estaticos o almacenar cosas
+    // Así podemos redireccionar rutas internas
+    // Cada vez que pongamos /files, nos llevarña al directorio public/files
+    app.use(
+        '/files',
+        express.static(path.join(__dirname, 'public/files'))
+    );
+    app.use(
+        '/images',
+        express.static(path.join(__dirname, 'public/images'))
+    );
+    // Configuramos el sistema de ficheros de subida
+    app.use(fileUpload(
+        {
+            createParentPath: true,
+            limits: { fileSize: 2 * 1024 * 1024 * 1024 }, //2MB max de tamaño máximo
+            useTempFiles : true,
+            tempFileDir : '/tmp/',   // Usamos un directorio y ficheros temporal y no memoria para el proceso de subida. Ideal para ficheros grandes o muchas subidas
+            preserveExtension: true, // dejamos la extensión por defecto
+            debug: true              // Modo de depuración   
+            
+        }
+    ));
 
 };

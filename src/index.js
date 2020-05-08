@@ -80,7 +80,7 @@ const server = {
 // Exportamos la variable
 module.exports.server = server; 
 
-// Si ningun fichero está haciendo un import, lo lanzamos nosotros
+// Si ningun fichero está haciendo un import y ejecutando ya el servidor, lo lanzamos nosotros
 if (!module.parent) {
     server.start();
 }
