@@ -21,7 +21,12 @@ router.post('/upload', auth, filesController.addFiles);
 router.get('/all', auth, permit(['admin']), filesController.files); 
 
 // GET Obtiene un elemento por por ID
-router.get('/:id', auth, permit(['admin']), filesController.fileById); 
+router.get('/file/:id', auth, permit(['admin']), filesController.fileById); 
+
+// GET Obtiene los ficheros del usuario actual
+router.get('/me', auth, permit(['admin']), filesController.myFiles); 
+
+// DELETE Elimina el fichero
 
 // De la misma manera podríamos hacer un CRUD completo, pero no es el caso
 
