@@ -8,7 +8,8 @@
 // Librerias
 const config = require ('../config');
 const conf = require('dotenv');
-const path = require('path');
+const File  = require ('../models/files').FileModel;
+
 const fs = require('fs');
 
 // Cargamos la configuración del fichero .env
@@ -36,21 +37,24 @@ class FilesController {
                 const data = []; 
                 const files = req.files.files;
        
-                files.forEach(file => {
+                files.forEach(async file => {
                     const fileName = file.name.replace(/\s/g,'');   // Si tienes espacios en blanco se los quitamos
                     const fileExt =  fileName.split('.').pop();     // Nos quedamos con su extension
                     const fileDest = file.md5+'.'+fileExt;          //this.getStorageName(file);
 
-                    // usamos filename para moverla
-                    file.mv(config.storage + fileDest);
-                    //Almacenamos los datos
-                    data.push({
+                    const newFile= File()({
                         file: fileDest,
                         mimetype: file.mimetype,
                         size: file.size,
                         url: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`,
                         username: req.user.username
                     });
+
+                    // usamos filename para moverla al sistema de almacenamiento
+                    file.mv(config.storage + fileDest);
+                    //Almacenamos los datos en la base de datos y los metemos en el array de salida 
+                    data.push({newFile});
+                    await newFile.save();
                 });
 
                 //Mandamos la respuesta

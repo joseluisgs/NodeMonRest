@@ -18,7 +18,7 @@ const router = express.Router();
 router.post('/upload', auth, filesController.uploadFiles);
 
 //ruta GET File, lista todos los ficheors. Solo admin
-router.get('/all', auth, permit(['admin']), filesController.files); 
+//router.get('/all', auth, permit(['admin']), filesController.allFiles); 
 
 // De la misma manera podríamos hacer un CRUD completo, pero no es el caso
 
