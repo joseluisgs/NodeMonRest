@@ -15,10 +15,13 @@ const permit = require('../middlewares/auth').permit;
 const router = express.Router();
 
 // Ruta POST File, sube un fichero, si estás identificado
-router.post('/upload', auth, filesController.uploadFiles);
+router.post('/upload', auth, filesController.addFiles);
 
 //ruta GET File, lista todos los ficheors. Solo admin
-//router.get('/all', auth, permit(['admin']), filesController.allFiles); 
+router.get('/all', auth, permit(['admin']), filesController.files); 
+
+// GET Obtiene un elemento por por ID
+router.get('/:id', auth, permit(['admin']), filesController.fileById); 
 
 // De la misma manera podríamos hacer un CRUD completo, pero no es el caso
 

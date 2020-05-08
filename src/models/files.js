@@ -49,8 +49,8 @@ FileSchema.statics.getAll = function (pageOptions, searchOptions) {
 }; 
 
 // Devuelve el usuario por Username
-FileSchema.statics.getByUserName = function (username) {
-    return this.findOne({ username: username })
+FileSchema.statics.getByFileName = function (file) {
+    return this.findOne({ file: file })
         .lean()                             
         .exec();                            
 };
