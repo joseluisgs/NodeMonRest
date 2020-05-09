@@ -9,10 +9,7 @@
 const User  = require ('../models/users').UserModel;
 const File  = require ('../models/files').FileModel;
 const fs = require('fs');
-const conf = require('dotenv');
 const config = require ('../config');
-
-const SETTINGS = conf.config();
 
 class UsersController {
 
@@ -164,28 +161,23 @@ class UsersController {
             // Me traigo los datos de mi usuario
             const user = await User().getByUserName(req.params.username);
             // Me traigo los datos del antiguo avatar
-            console.log(user);
             const oldAvatar = await File().getById(user.avatar._id);
-            console.log(oldAvatar);
             // Me traigo el nuevo fichero si lo he suubido
             const newAvatar = await File().getById(req.body.avatarID);
-            console.log(newAvatar);
             if(user && newAvatar){
                 // Actualizo los metadatos del fichero y le digo que es un avatar
-                let newData = {
+                /* let newData = {
                     type: 'avatar'
-                };
-                let data = await File().findOneAndUpdate({ _id: req.body.avatarID },newData);
+                }; */
+                newAvatar.type = 'avatar';
+                let data = await File().findOneAndUpdate({ _id: req.body.avatarID },newAvatar);
                 //Le asignamos este nuevo avatar al usuario
-                newData = {
+                /* newData = {
                     avatar: newAvatar
-                };
-                data = await User().findOneAndUpdate({ _id: user._id },newData);
+                }; */
+                user.avatar = newAvatar;
+                data = await User().findOneAndUpdate({ _id: user._id },user);
                 // Borro la imagen antigua del fichero y de la Bd solo si existe y no son la misma
-
-                console.log(oldAvatar._id);
-                console.log(newAvatar._id);
-
                 if(oldAvatar && (oldAvatar._id.toString() !== newAvatar._id.toString())){
                     return fs.unlink(config.storage + oldAvatar.file, async function (err) {
                         if (err) throw err;
@@ -193,7 +185,7 @@ class UsersController {
                         data = await File().findByIdAndDelete({  _id : oldAvatar._id });
                         if (data) {
                             res.
-                                status(200).json(newData);
+                                status(200).json(newAvatar);
                         } else { 
                             res.status(404).json({
                                 'error':404,

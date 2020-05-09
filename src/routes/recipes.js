@@ -45,5 +45,11 @@ router.delete('/:id', auth, permit(['admin']), recipesController.deleteRecipeByI
 // GET Obtiene las recetas del usuario actual. autenticados, por eso nos e puede poner nada en permit, es otra forma a parte de la otra
 router.get('/me/list', auth, recipesController.myRecipes); 
 
+// PATCH Inserta la imagen en la receta
+router.patch('/images/:id/insert', auth, recipesController.imageAddToRecipe); 
+
+// PATCH Elimina una imagen de las recetas una imagen en las recetas
+//router.patch('images/:id/insert', auth, recipesController.imagesRemoveToRecipe); 
+
 // Exprotamos el módulo
 module.exports = router;

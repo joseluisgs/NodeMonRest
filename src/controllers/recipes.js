@@ -7,6 +7,7 @@
 
 // Librerias
 const Recipe  = require ('../models/recipes').RecipeModel;
+const File  = require ('../models/files').FileModel;
 
 class RecipesController {
     /**
@@ -82,7 +83,8 @@ class RecipesController {
             persons: req.body.persons,
             time: req.body.time,
             ingredients: req.body.ingredients,
-            difficulty: req.body.difficulty
+            difficulty: req.body.difficulty,
+            username: req.user.username
         });
         try {
             const data = await newRecipe.save();
@@ -107,7 +109,8 @@ class RecipesController {
             persons: req.body.persons,
             time: req.body.time,
             ingredients: req.body.ingredients,
-            difficulty: req.body.difficulty
+            difficulty: req.body.difficulty,
+            username: req.user.username,
         };
         try {
             const data = await Recipe().findOneAndUpdate({ _id: req.params.id },newRecipe);
@@ -171,6 +174,49 @@ class RecipesController {
         try {
             const data = await Recipe().getAll(pageOptions, searchOptions);
             res.status(200).json(data);
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }
+
+    /**
+     * PATCH por username. Modifica la imagen del usuario. Si no tiene la inserta, si tiene la borra y pone la nueva. Deveuleve el usuario actualizado
+     * La imagen recoge su ide del body, antes la hemos tenido que subir al servidor o elegir una que exista
+     * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
+    async imageAddToRecipe (req, res, next) {
+        try {
+            // Me traigo de la receta
+            const recipe = await Recipe().getById(req.params.id);
+            // Me traigo el nuevo fichero si lo he suubido
+            const newImage = await File().getById(req.body.imageID);
+            if(recipe && newImage) {
+                // Actualizo los metadatos del fichero
+                newImage.type = 'recipe';
+                let data = await File().findOneAndUpdate({ _id: req.body.imageID },newImage);
+                // Si no está en el vector
+                const exists = recipe.images.find(element => element._id.toString() === newImage._id.toString());
+                if(!exists){
+                    //Le asignamos este nuevo avatar al usuario
+                    recipe.images.push(newImage);
+                    data = await Recipe().findOneAndUpdate({ _id: recipe._id },recipe);
+                    res.status(200).json(recipe);
+                }else{
+                    res.status(404).json({
+                        'error':404,
+                        'mensaje': `Ya existe la imagen en la receta`
+                    });
+                }
+            }else{
+                return res.status(404).json({
+                    'error':404,
+                    'mensaje': `No existe la receta o la imagen indicada`
+                });
+            }
         } catch (err) {
             res.status(500).send(err);
         }
