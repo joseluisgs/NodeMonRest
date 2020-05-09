@@ -13,6 +13,7 @@ const conf = require('dotenv');    // Cogemos el objeto que necesitamos
 const path = require('path');
 const express = require('express');
 const fileUpload = require('express-fileupload');
+const handlebars = require('express-handlebars');
 
 // Cargamos la configuración del fichero .env
 const SETTINGS = conf.config();
@@ -64,6 +65,17 @@ module.exports.setConfig= (app) => {
             debug: SETTINGS.parsed.DEBUG    // Modo de depuración           
         }
     ));
+
+    // Configuramos handlebars como mtor de plantillas
+    app.set('view engine', 'hbs');
+    app.engine('hbs', handlebars({
+        layoutsDir: __dirname + '/views/layouts',
+        extname: 'hbs',
+        defaultLayout: 'planB',
+        partialsDir: __dirname + '/views/partials/'
+    }));
+
+    app.use(express.static('public'));
 
 };
 

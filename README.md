@@ -49,6 +49,7 @@ En la carpeta mongo tienes un volcado de la base de datos y de cada una de las c
 * [Morgan](https://www.npmjs.com/package/morgan). Middleware Request logger el cual nos permitirá sacar logs de nuestras peticions HTTP.
 * [UUID](https://www.npmjs.com/package/uuid). Implementa el RFC4122 UUIDs para los tokens de refresco.
 * [Express-fileupload](https://www.npmjs.com/package/express-fileupload). Es un middleware para Express el cual nos ayuda a procesar peticiones multipart o subida de imagenes. Se ha puesto que el tamaño máximo por umagen sea 2MB aunque se puede cambiar el el fichero .env. Los directorios para almacenar imagenes o ficheros están en .env, puedes poner el mismo o lo que quieras, pues se crean dinamicamente dentro de public/uploads (FILES_PATH) y accesible directamente por la ruta url/files (FILES_URL). Puedes ponerle el mismo si quieres.
+* [Joi](https://www.npmjs.com/package/@hapi/joi). Nos sirve para validar los datos en base a un esquema, por si no lo usamos en los propios esquemas de mongo la validación.
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
