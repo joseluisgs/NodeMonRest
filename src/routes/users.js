@@ -35,8 +35,8 @@ router.put('/:id', auth, permit(['admin']), usersController.editUserById);
 // Elimina un elemento por ID. Solo Admin puede borrarlos.
 router.delete('/:id', auth, permit(['admin']), usersController.deleteUserById); 
 
-//Inserta o actualiza la imagen del un usuario obtenida por un formulario. Antes la hemos tenido que subir con subir con files.upload
-router.patch('/:username/:avatarid', auth, usersController.avatarToUser); 
+//Inserta o actualiza la imagen del un usuario obtenida por un formulario. Antes la hemos tenido que subir con subir con files.upload. Se la pasamos en el body
+router.patch('/:username/avatar', auth, usersController.avatarToUser); 
 
 // Exprotamos el módulo
 module.exports = router;

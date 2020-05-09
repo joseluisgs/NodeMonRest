@@ -152,6 +152,7 @@ class UsersController {
 
     /**
      * PATCH por username. Modifica la imagen del usuario. Si no tiene la inserta, si tiene la borra y pone la nueva. Deveuleve el usuario actualizado
+     * La imagen recoge su ide del body, antes la hemos tenido que subir al servidor o elegir una que exista
      * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
      * Asincrono para no usar promesas asyn/await
      * @param {*} req Request
@@ -167,14 +168,14 @@ class UsersController {
             const oldAvatar = await File().getById(user.avatar._id);
             console.log(oldAvatar);
             // Me traigo el nuevo fichero si lo he suubido
-            const newAvatar = await File().getById(req.params.avatarid);
+            const newAvatar = await File().getById(req.body.avatarID);
             console.log(newAvatar);
             if(user && newAvatar){
                 // Actualizo los metadatos del fichero y le digo que es un avatar
                 let newData = {
                     type: 'avatar'
                 };
-                let data = await File().findOneAndUpdate({ _id: req.params.avatarid },newData);
+                let data = await File().findOneAndUpdate({ _id: req.body.avatarID },newData);
                 //Le asignamos este nuevo avatar al usuario
                 newData = {
                     avatar: newAvatar
