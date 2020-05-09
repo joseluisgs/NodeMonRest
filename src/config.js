@@ -76,7 +76,7 @@ module.exports.setConfig= (app) => {
         defaultLayout: 'index',                                     // layout por defecto
     }));
 
-    // Bootstrap 4 y JS
+    // Carpetas para CSS y JS, boostrapt y jQuery los cargo por web
     app.use('/css', express.static(__dirname + '/public/css'));
     app.use('/js', express.static(__dirname + '/public/js'));
     app.use('/res', express.static(__dirname + '/public/res'));
