@@ -44,6 +44,7 @@ class Database {
             mongoose.set('useNewUrlParser', true);
             mongoose.set('useUnifiedTopology', true);
             mongoose.set('useCreateIndex', true);
+            mongoose.set('useFindAndModify', true);
             mongoose.Promise = global.Promise;
 
             // Creamos la cenexión

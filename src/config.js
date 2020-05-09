@@ -10,9 +10,13 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const conf = require('dotenv');    // Cogemos el objeto que necesitamos
+const path = require('path');
+const express = require('express');
+const fileUpload = require('express-fileupload');
 
 // Cargamos la configuración del fichero .env
 const SETTINGS = conf.config();
+
 
 // Creamos el módulo de configurar. Es una función que recibe Up
 module.exports.setConfig= (app) => {
@@ -40,4 +44,29 @@ module.exports.setConfig= (app) => {
     // Nos permite configurar cabeceras y peticiones los que nos llegue
     app.use(cors());
 
+    // Indicamos las ruta estática para servidor elemntos estaticos o almacenar cosas
+    // Así podemos redireccionar rutas internas y no las muestran. si no queremos hacer eso lo quitamos
+    // Cada vez que pongamos /files, nos llevara al directorio public/files. 
+    //Es decir cda vez que ponga http://..../files/lo que sea, leera el fichero lo que sea que este en public/uploads
+    app.use(
+        `/${SETTINGS.parsed.FILES_URL}`,
+        express.static(path.join(__dirname, `public/${SETTINGS.parsed.FILES_URL}`))
+    );
+    
+    // Configuramos el sistema de ficheros de subida
+    app.use(fileUpload(
+        {
+            createParentPath: true,
+            limits: { fileSize: SETTINGS.parsed.FILE_SIZE * 1024 * 1024 * 1024 }, //2MB max de tamaño máximo (puesto en env)
+            useTempFiles : true,            // Uso de ficheros temporales
+            tempFileDir : '/tmp/',          // Usamos un directorio y ficheros temporal y no memoria para el proceso de subida. Ideal para ficheros grandes o muchas subidas
+            preserveExtension: true,        // dejamos la extensión por defecto
+            debug: SETTINGS.parsed.DEBUG    // Modo de depuración           
+        }
+    ));
+
 };
+
+// exportamos los directorios de lamcenaminero
+module.exports.storage = path.join(__dirname, `public/${SETTINGS.parsed.FILES_PATH}/`);
+

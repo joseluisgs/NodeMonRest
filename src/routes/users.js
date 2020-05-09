@@ -29,11 +29,14 @@ router.get('/:id', auth, permit(['admin']), usersController.userById);
 // POST Añadir Elemento. Solo el usuario administrador
 router.post('/', auth, permit(['admin']), usersController.addUser);
 
-// Modifica un elemento por ID. Solo admin
+// PUT Modifica un elemento por ID. Solo admin
 router.put('/:id', auth, permit(['admin']), usersController.editUserById); 
 
-// Elimina un elemento por ID. Solo Admin puede borrarlos.
+// DELETE Elimina un elemento por ID. Solo Admin puede borrarlos.
 router.delete('/:id', auth, permit(['admin']), usersController.deleteUserById); 
+
+// PATCH Inserta o actualiza la imagen del un usuario obtenida por un formulario. Antes la hemos tenido que subir con subir con files.upload. Se la pasamos en el body
+router.patch('/:username/avatar', auth, usersController.avatarToUser); 
 
 // Exprotamos el módulo
 module.exports = router;

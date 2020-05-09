@@ -1,6 +1,6 @@
 /**
- * MODELO EN BASE AL ESQUEMA DE RECETAS
- * Modelo en base al esquema de recetas siguiendo la sitáxis de mongose
+ * MODELO EN BASE AL ESQUEMA DE FICHEROS
+ * Modelo en base al esquema de ficheros siguiendo la sitáxis de mongose
  * https://mongoosejs.com/
  */
 
@@ -14,16 +14,14 @@ const mongoose = require('mongoose');
 
 
 // Creación del esquema
-const RecipeSchema = new mongoose.Schema(
+const FileSchema = new mongoose.Schema(
     {
-        title: { type: String, required: true },
-        ingredients: { type: Array, trim: true, required: true },
-        description: { type: String, required: true },
-        difficulty: { type: String, required: true },
-        persons: { type: Number, required: true },
-        time: { type: Number, required: true }, 
-        images: { type: Array, default: []}, 
-        username: { type: String, required: true,  default: 'recipe' },
+        file: { type: String, required: true, unique: true,  index: true },
+        mimetype: { type: String, required: true },
+        size: { type: Number, required: true },
+        url: { type: String, required: true, Default: 'https://picsum.photos/300/300'},
+        username: { type: String, required: true },
+        type: { type: String, required: true, Defaul: 'document'}
     },
     // El método estriccto nos dice si aceptamos o no un documento incpleto. Lo ponemos así porque no vamos a meter el id y da un poco de flexibilidad
     {strict: false},
@@ -34,14 +32,14 @@ const RecipeSchema = new mongoose.Schema(
 // Métodos estaticos que nos servirán para métodos rápidos
 
 // Devuelve el ID
-RecipeSchema.statics.getById = function (id) {
+FileSchema.statics.getById = function (id) {
     return this.findOne({ _id: id })
         .lean()                             // Con Lean le estamos diciendo que aprenda y la memorice porque la usaremos mucho
         .exec();                            // Que lo ejecute
 };
 
-// Devuelve una lista de todos
-RecipeSchema.statics.getAll = function (pageOptions, searchOptions) {   
+// Devuelve una lista de todos con opciones de paginación
+FileSchema.statics.getAll = function (pageOptions, searchOptions) {   
     // Si no quieres buscar por nada, deja la función fin vacía, sin where ni equals
     return this.find()
         .where(searchOptions.search_field)
@@ -52,14 +50,28 @@ RecipeSchema.statics.getAll = function (pageOptions, searchOptions) {
         .exec();
 }; 
 
+// Devuelve el fichero por fichero
+FileSchema.statics.getByFileName = function (file) {
+    return this.findOne({ file: file })
+        .lean()                             
+        .exec();                            
+};
+
+// Devuelve el fichero de tipo avatar del usuario en cuestión
+FileSchema.statics.getUserAvatar = function (username) {
+    return this.findOne({ username: username, type: 'avatar' })
+        .lean()                             
+        .exec(); 
+};
+
 // Sobre escribimos el método JSON, esto es porque si hacemos una vista necesitamos id y no _id que es como lo guarda Mongo
-RecipeSchema.method('toJSON', function() {
+FileSchema.method('toJSON', function() {
     const { __v, _id, ...object } = this.toObject();
     object.id = _id;
     return object;
 });
 
 // Creamos un modelo del esquema
-RecipeSchema.RecipeModel = () => db.connection().model('Recipe', RecipeSchema);
+FileSchema.FileModel = () => db.connection().model('File', FileSchema);
 
-module.exports = RecipeSchema;
+module.exports = FileSchema;

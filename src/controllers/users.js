@@ -7,7 +7,9 @@
 
 // Librerias
 const User  = require ('../models/users').UserModel;
-
+const File  = require ('../models/files').FileModel;
+const fs = require('fs');
+const config = require ('../config');
 
 class UsersController {
 
@@ -142,6 +144,66 @@ class UsersController {
         } catch (err) {
             res.status(500).send(err);
         }
+    }
+
+
+    /**
+     * PATCH por username. Modifica la imagen del usuario. Si no tiene la inserta, si tiene la borra y pone la nueva. Deveuleve el usuario actualizado
+     * La imagen recoge su ide del body, antes la hemos tenido que subir al servidor o elegir una que exista
+     * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
+     * Asincrono para no usar promesas asyn/await
+     * @param {*} req Request
+     * @param {*} res Response
+     * @param {*} next Next function
+     */
+    async avatarToUser (req, res, next) {
+        try {
+            // Me traigo los datos de mi usuario
+            const user = await User().getByUserName(req.params.username);
+            // Me traigo los datos del antiguo avatar
+            const oldAvatar = await File().getById(user.avatar._id);
+            // Me traigo el nuevo fichero si lo he suubido
+            const newAvatar = await File().getById(req.body.avatarID);
+            if(user && newAvatar){
+                // Actualizo los metadatos del fichero y le digo que es un avatar
+                /* let newData = {
+                    type: 'avatar'
+                }; */
+                newAvatar.type = 'avatar';
+                let data = await File().findOneAndUpdate({ _id: req.body.avatarID },newAvatar);
+                //Le asignamos este nuevo avatar al usuario
+                /* newData = {
+                    avatar: newAvatar
+                }; */
+                user.avatar = newAvatar;
+                data = await User().findOneAndUpdate({ _id: user._id },user);
+                // Borro la imagen antigua del fichero y de la Bd solo si existe y no son la misma
+                if(oldAvatar && (oldAvatar._id.toString() !== newAvatar._id.toString())){
+                    return fs.unlink(config.storage + oldAvatar.file, async function (err) {
+                        if (err) throw err;
+                        console.log('Fichero borrado');
+                        data = await File().findByIdAndDelete({  _id : oldAvatar._id });
+                        if (data) {
+                            res.
+                                status(200).json(newAvatar);
+                        } else { 
+                            res.status(404).json({
+                                'error':404,
+                                'mensaje': `No se ha encontrado un item con ese ID: ${oldAvatar.file}`
+                            });
+                        }
+                    }); 
+                }
+            }else{
+                return res.status(404).json({
+                    'error':404,
+                    'mensaje': `No existe el usuario o el avatar nuevo`
+                });
+            }
+        } catch (err) {
+            res.status(500).send(err);
+        }
+        return res.status(200).json({mensaje: `Imagen actualizada con éxito al usuario: ${req.params.username}`});  
     }
 }
 

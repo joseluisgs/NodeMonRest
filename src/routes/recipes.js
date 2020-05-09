@@ -34,13 +34,22 @@ router.get('/', recipesController.recipes);
 router.get('/:id', recipesController.recipeById); 
 
 // POST Añadir Elemento. Solo autenticados y del nivel admin, por eso no se pone nada (es por defecto)
-router.post('/', auth, permit(['admin']), recipesController.addRecipe);             
+router.post('/', auth, permit(['normal']), recipesController.addRecipe);             
 
 // PUT Modifica un elemento por ID. Solo autenticados y del nivel admin, por eso no se pone nada (es por defecto)
-router.put('/:id', auth, permit(['admin']), recipesController.editRecipeById); 
+router.put('/:id', auth, permit(['normal']), recipesController.editRecipeById); 
 
 // DELETE Elimina un elemento por ID. Solo autenticados y del nivel admin podrán, por eso no se pone nada (es por defecto)
 router.delete('/:id', auth, permit(['admin']), recipesController.deleteRecipeById); 
+
+// GET Obtiene las recetas del usuario actual. autenticados, por eso nos e puede poner nada en permit, es otra forma a parte de la otra
+router.get('/me/list', auth, recipesController.myRecipes); 
+
+// PATCH Inserta la imagen en la receta
+router.patch('/images/:id/insert', auth, recipesController.imageAddToRecipe); 
+
+// PATCH Elimina una imagen de las recetas una imagen en las recetas
+router.patch('/images/:id/delete', auth, recipesController.imageDeleteToRecipe); 
 
 // Exprotamos el módulo
 module.exports = router;
