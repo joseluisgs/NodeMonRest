@@ -14,9 +14,9 @@ const fs = require('fs');
 // Cargamos la configuración del fichero .env
 const SETTINGS = conf.config();
 
-class FilesController {
+class FilesController { 
 
-    /**
+        /**
      * POST. Añade una imagen al directorio file
      * Códigos de estado: 201, añadido el recurso. 400 Bad request. 500 no permitido
      * Asincrono para no usar promesas asyn/await
@@ -35,27 +35,49 @@ class FilesController {
                 //debemos usar el mismo nombre que lleva en el formulario
                 const data = []; 
                 const files = req.files.files;
-       
-                files.forEach(async file => {
-                    const fileName = file.name.replace(/\s/g,'');   // Si tienes espacios en blanco se los quitamos
-                    const fileExt =  fileName.split('.').pop();     // Nos quedamos con su extension
-                    const fileDest = file.md5+'.'+fileExt;          //this.getStorageName(file);
 
-                    const newFile= File()({
-                        file: fileDest,
+                // Miramos si son varios ficheros
+                const isFiles = Array.isArray(req.files.files);
+                console.log(isFiles);
+
+                if(isFiles){
+                    files.forEach(async file => {
+                        const fileName = file.name.replace(/\s/g, ''); // Si tienes espacios en blanco se los quitamos
+                        const fileExt = fileName.split('.').pop(); // Nos quedamos con su extension
+                        const fileDest = file.md5 + '.' + fileExt; //this.getStorageName(file);
+                        const newFile = File()({
+                            file: fileDest,       
+                            mimetype: file.mimetype,
+                            size: file.size,
+                            url: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`,
+                            username: req.user.username,
+                            type: 'document'
+                        });
+                        // usamos filename para moverla al sistema de almacenamiento
+                        file.mv(config.storage + fileDest);
+                        //Almacenamos los datos en la base de datos y los metemos en el array de salida 
+                        data.push({ newFile });
+                        await newFile.save();
+                    });
+                }else{
+                    const file = req.files.files;
+                    const fileName = file.name.replace(/\s/g, ''); // Si tienes espacios en blanco se los quitamos
+                    const fileExt = fileName.split('.').pop(); // Nos quedamos con su extension
+                    const fileDest = file.md5 + '.' + fileExt; //this.getStorageName(file);
+                    const newFile = File()({    
+                        file: fileDest,    
                         mimetype: file.mimetype,
                         size: file.size,
                         url: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`,
                         username: req.user.username,
                         type: 'document'
                     });
-
                     // usamos filename para moverla al sistema de almacenamiento
                     file.mv(config.storage + fileDest);
                     //Almacenamos los datos en la base de datos y los metemos en el array de salida 
-                    data.push({newFile});
+                    data.push({ newFile });
                     await newFile.save();
-                });
+                }
 
                 //Mandamos la respuesta
                 res.send({
@@ -65,9 +87,12 @@ class FilesController {
                 });
             }
         } catch (err) {
+            console.error(err);
             res.status(500).send(err);
         }
     }
+
+   
 
     /**
      * GET all. Devueleve una lista con todas los elementos del repositorio

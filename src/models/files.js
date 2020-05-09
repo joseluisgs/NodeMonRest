@@ -12,13 +12,14 @@
 const db = require ('../database');
 const mongoose = require('mongoose');
 
+
 // Creación del esquema
 const FileSchema = new mongoose.Schema(
     {
         file: { type: String, required: true, unique: true,  index: true },
         mimetype: { type: String, required: true },
         size: { type: Number, required: true },
-        url: { type: String, required: true },
+        url: { type: String, required: true, Default: 'https://picsum.photos/300/300'},
         username: { type: String, required: true },
         type: { type: String, required: true, Defaul: 'document'}
     },

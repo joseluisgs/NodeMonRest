@@ -17,17 +17,17 @@ const router = express.Router();
 // Ruta POST File, sube un fichero, si estás identificado
 router.post('/upload', auth, filesController.addFiles);
 
-//ruta GET File, lista todos los ficheors. Solo admin
+//ruta GET File, lista todos los ficheros. Solo admin
 router.get('/all', auth, permit(['admin']), filesController.files); 
 
 // GET Obtiene un elemento por por ID
-router.get('/file/:id', auth, permit(['admin']), filesController.fileById); 
+router.get('/file/:id', auth, filesController.fileById); 
 
 // GET Obtiene los ficheros del usuario actual
-router.get('/me', auth, permit(['admin']), filesController.myFiles); 
+router.get('/me', auth, filesController.myFiles); 
 
 // DELETE Elimina el fichero
-router.post('/delete/:id', auth, permit(['admin']), filesController.deleteFileById); 
+router.post('/delete/:id', auth, filesController.deleteFileById); 
 
 // De la misma manera podríamos hacer un CRUD completo, pero no es el caso
 
