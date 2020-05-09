@@ -66,15 +66,23 @@ module.exports.setConfig= (app) => {
         }
     ));
 
-    // Configuramos handlebars como mtor de plantillas
+    // Configuramos handlebars como motor de plantillas
+    handlebars.registerPartials = __dirname + '/views/partials';    // Registro de fragmentos parciales.
+    handlebars.layoutsDir= __dirname + '/views/layouts';            // Directorio de Layouts
+    app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'hbs');
     app.engine('hbs', handlebars({
-        layoutsDir: __dirname + '/views/layouts',
-        extname: 'hbs',
-        defaultLayout: 'planB',
-        partialsDir: __dirname + '/views/partials/'
+        extname: 'hbs',                                             // extensión
+        defaultLayout: 'index',                                     // layout por defecto
     }));
 
+    // Bootstrap 4 y JS
+    app.use('/css', express.static(__dirname + '/public/css'));
+    app.use('/js', express.static(__dirname + '/public/js'));
+    app.use('/res', express.static(__dirname + '/public/res'));
+
+
+    // Ruta publica por defecto
     app.use(express.static('public'));
 
 };

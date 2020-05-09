@@ -35,16 +35,12 @@ const server = {
             config.setConfig(app);
             
             // Una ruta por defecto de presentación
-            app.get('/', (req, res, next) => {
-                res
-                    .status(200)
-                    .json({ 
-                        data: 'Aplicacion NodeJS, Expres y Vue',
-                        tec: ['REST: Usa PostMan', 'JWT: Usa Postam'],    
-                        autor: 'José Luis González Sánchez' 
-                    });
-            });
+            app.get('/', (req, res) => {
+                //Inyecta el fichero main.hbl" dentro de layout index, en su etiqueta Body
+                res.render('main', {layout: 'index', titulo: 'NodeMonRest API'});
 
+            });
+            
             // Enrutamiento que hemos creado
             router.setRouter(app);
 
