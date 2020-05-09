@@ -159,59 +159,58 @@ class UsersController {
      * @param {*} next Next function
      */
     async avatarToUser (req, res, next) {
-        if(!req.files || Object.keys(req.files).length === 0) {
-            res.send({
-                status: 400,
-                message: 'No hay fichero para subir'
-            });
-        } else {
-            // Obtengo el fichero del avatar del usuario
-            const avatarOld= await File().getUserAvatar(req.params.username);
-            
-            // Proceso el fichero el archivo nuevo
-            const file= req.files.avatar;
-            const fileName = file.name.replace(/\s/g,'');   // Si tienes espacios en blanco se los quitamos
-            const fileExt =  fileName.split('.').pop();     // Nos quedamos con su extension
-            const fileDest = file.md5+'.'+fileExt;          //this.getStorageName(file);
-            const newFile= File()({
-                file: fileDest,
-                mimetype: file.mimetype,
-                size: file.size,
-                url: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`,
-                username: req.params.username,
-                type: 'avatar'
-            });
-
-            try {
-            
-                // Actualizo la foto en el usuario
-                const newUser = {
-                    avatar: `${req.protocol}://${req.hostname}:${SETTINGS.parsed.PORT}/${SETTINGS.parsed.FILES_URL}/${fileDest}`
+        try {
+            // Me traigo los datos de mi usuario
+            const user = await User().getByUserName(req.params.username);
+            // Me traigo los datos del antiguo avatar
+            console.log(user);
+            const oldAvatar = await File().getById(user.avatar._id);
+            console.log(oldAvatar);
+            // Me traigo el nuevo fichero si lo he suubido
+            const newAvatar = await File().getById(req.params.avatarid);
+            console.log(newAvatar);
+            if(user && newAvatar){
+                // Actualizo los metadatos del fichero y le digo que es un avatar
+                let newData = {
+                    type: 'avatar'
                 };
-                const newData = await User().findOneAndUpdate({ username: req.params.username },newUser);
+                let data = await File().findOneAndUpdate({ _id: req.params.avatarid },newData);
+                //Le asignamos este nuevo avatar al usuario
+                newData = {
+                    avatar: newAvatar
+                };
+                data = await User().findOneAndUpdate({ _id: user._id },newData);
+                // Borro la imagen antigua del fichero y de la Bd solo si existe y no son la misma
 
-                // Copio la nueva imagen en disco y BD
-                file.mv(config.storage + fileDest);
-                await newFile.save();
+                console.log(oldAvatar._id);
+                console.log(newAvatar._id);
 
-                // Elimino la antigua de la BD y la borro
-                fs.unlink(config.storage + avatarOld.file, async function (err) {
-                    if (err) throw err;
-                    console.log('Fichero borrado');
-                    const data = await File().findByIdAndDelete({  _id : avatarOld._id });
-                    if (data) {
-                        res.status(200).json(newData);
-                    } else { 
-                        res.status(404).json({
-                            'error':404,
-                            'mensaje': `No se ha encontrado un item con ese ID: ${avatarOld.file}`
-                        });
-                    }
+                if(oldAvatar && (oldAvatar._id.toString() !== newAvatar._id.toString())){
+                    return fs.unlink(config.storage + oldAvatar.file, async function (err) {
+                        if (err) throw err;
+                        console.log('Fichero borrado');
+                        data = await File().findByIdAndDelete({  _id : oldAvatar._id });
+                        if (data) {
+                            res.
+                                status(200).json(newData);
+                        } else { 
+                            res.status(404).json({
+                                'error':404,
+                                'mensaje': `No se ha encontrado un item con ese ID: ${oldAvatar.file}`
+                            });
+                        }
+                    }); 
+                }
+            }else{
+                return res.status(404).json({
+                    'error':404,
+                    'mensaje': `No existe el usuario o el avatar nuevo`
                 });
-            } catch (err) {
-                res.status(500).send(err);
-            }  
+            }
+        } catch (err) {
+            res.status(500).send(err);
         }
+        return res.status(200).json({mensaje: `Imagen actualizada con éxito al usuario: ${req.params.username}`});  
     }
 }
 

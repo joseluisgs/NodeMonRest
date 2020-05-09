@@ -16,7 +16,7 @@ const SETTINGS = conf.config();
 
 class FilesController { 
 
-        /**
+    /**
      * POST. Añade una imagen al directorio file
      * Códigos de estado: 201, añadido el recurso. 400 Bad request. 500 no permitido
      * Asincrono para no usar promesas asyn/await
