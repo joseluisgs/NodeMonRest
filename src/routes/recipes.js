@@ -49,7 +49,7 @@ router.get('/me/list', auth, recipesController.myRecipes);
 router.patch('/images/:id/insert', auth, recipesController.imageAddToRecipe); 
 
 // PATCH Elimina una imagen de las recetas una imagen en las recetas
-//router.patch('images/:id/insert', auth, recipesController.imagesRemoveToRecipe); 
+router.patch('/images/:id/delete', auth, recipesController.imageDeleteToRecipe); 
 
 // Exprotamos el módulo
 module.exports = router;
