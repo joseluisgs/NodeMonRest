@@ -55,7 +55,7 @@ const server = {
                 }
             });
 
-            //console.log('Password: '+ bcrypt.hashSync('ana123', 10));
+            //console.log('Password: '+ bcrypt.hashSync('admin123', 10));
 
             return _server;
 
