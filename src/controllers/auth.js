@@ -47,7 +47,7 @@ class AuthController {
 
         //  Costruimos el token de acceso
         const payload = {
-            username: username,
+            username: user.username,
             email: email,
             roles: user.roles,
             iat: Math.floor(Date.now() / 1000),
