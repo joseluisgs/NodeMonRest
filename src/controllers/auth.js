@@ -44,7 +44,7 @@ class AuthController {
                         message: 'Usuario o password incorrectos' 
                     });
         }
-
+        console.log(user.username);
         //  Costruimos el token de acceso
         const payload = {
             username: user.username,
@@ -58,7 +58,7 @@ class AuthController {
         // Creamos el token de refreso
         const uuid = uuidv4(); // Numero de refresco de token ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
         // Almaceno en la BD el Tocken
-        await tokenRefreshController.save(username, uuid);  
+        await tokenRefreshController.save(user.username, uuid);  
         return res
             .status(200)
             .send({ token: token, refreshToken: uuid }); // Le mandamos el token y el token de refreso
