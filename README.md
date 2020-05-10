@@ -49,7 +49,10 @@ En la carpeta mongo tienes un volcado de la base de datos y de cada una de las c
 * [Morgan](https://www.npmjs.com/package/morgan). Middleware Request logger el cual nos permitirá sacar logs de nuestras peticions HTTP.
 * [UUID](https://www.npmjs.com/package/uuid). Implementa el RFC4122 UUIDs para los tokens de refresco.
 * [Express-fileupload](https://www.npmjs.com/package/express-fileupload). Es un middleware para Express el cual nos ayuda a procesar peticiones multipart o subida de imagenes. Se ha puesto que el tamaño máximo por umagen sea 2MB aunque se puede cambiar el el fichero .env. Los directorios para almacenar imagenes o ficheros están en .env, puedes poner el mismo o lo que quieras, pues se crean dinamicamente dentro de public/uploads (FILES_PATH) y accesible directamente por la ruta url/files (FILES_URL). Puedes ponerle el mismo si quieres.
-* [Joi](https://www.npmjs.com/package/@hapi/joi). Nos sirve para validar los datos en base a un esquema, por si no lo usamos en los propios esquemas de mongo la validación.
+* [Joi](https://www.npmjs.com/package/@hapi/joi). Nos sirve para validar los datos de entrada en base a un esquema de validación, por si no lo usamos en los propios esquemas de mongo la validación. Es importante que el back valide todos los datos por si se ha escapado algo del Front. No podemos dejar nada a la surte. ¡Like, somos laúltima esperanza!
+* [Mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Nos sirve para validadr los campos unique. Actua como middleware.
+* [Underscore](https://www.npmjs.com/package/underscore). Nos permite extender las posibilidades de la programación funcional para algunos métodos. 
+* [express-handlebars](https://www.npmjs.com/package/express-handlebars). Personalmente uno de los mejores motores de plantillas para NodeJS, basado en [Handlebars](https://handlebarsjs.com/). Lo he usado de ejemplo para hacer algunas páginas estáticas de presentación de la API
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
