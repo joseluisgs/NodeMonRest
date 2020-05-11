@@ -1,15 +1,9 @@
 {
   "presets": [
       [
-        "@babel/preset-env",
-        {
-          "modules": "commonjs",
-          "targets": {
-            "node": "current"
-          }
-        },
         "airbnb",
         {
+          "modules": "auto",
           "targets": {
             "node": "current"
           }
