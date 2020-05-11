@@ -6,7 +6,10 @@
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "airbnb-base"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -16,20 +19,6 @@
     },
     "rules": {
         "consistent-return": 1,
-        "indent"           : [1, 4],
-        "no-else-return"   : 1,
-        "semi"             : [1, "always"],
-        "space-unary-ops"  : 2,
-        "max-params":"warn",
-        "no-debugger":0,
-        "no-unused-vars" : [2,{
-            "ignoreSiblings": true,
-            "argsIgnorePattern": "res|next|^err"}
-        ],
-        "prefer-const":"warn",
-        "quotes": [1,"single",{
-            "avoidEscape": true,
-            "allowTemplateLiterals": true}
-        ]
-    }
+        "no-else-return"   : 1
+      }
 }

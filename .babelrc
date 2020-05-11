@@ -7,6 +7,12 @@
           "targets": {
             "node": "current"
           }
+        },
+        "airbnb",
+        {
+          "targets": {
+            "node": "current"
+          }
         }
       ]
     ]
