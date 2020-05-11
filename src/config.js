@@ -61,7 +61,7 @@ module.exports.setConfig = (app) => {
       createParentPath: true,
       limits: { fileSize: SETTINGS.parsed.FILE_SIZE * 1024 * 1024 * 1024 }, // 2MB max en env
       useTempFiles: true, // Uso de ficheros temporales
-      tempFileDir: '/tmp/', // Usamos un directorio y ficheros temporal y no memoria para el proceso de subida. Ideal para ficheros grandes o muchas subidas
+      tempFileDir: '/tmp/', // Usamos un directorio y ficheros temporal y no memoria para el proceso de subida.
       preserveExtension: true, // dejamos la extensión por defecto
       debug: SETTINGS.parsed.DEBUG, // Modo de depuración
     },
