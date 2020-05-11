@@ -1,14 +1,13 @@
 /**
- * ENRUTADOR DE AUTORIZACION 
+ * ENRUTADOR DE AUTORIZACION
  * Enruta las peticiones para autorización basadas en JWT
  */
 
-'use strict';
 
 // Cargamos librerías, podemos usar la sitaxis EM6: import { Router } from 'express';
 const express = require('express');
 const authController = require('../controllers/auth');
-const auth = require('../middlewares/auth').auth; // es equivalente a poner const auth = requiere ('...').auth;
+const { auth } = require('../middlewares/auth'); // es equivalente a poner const auth = requiere ('...').auth;
 
 // Cargamos el enrutador
 const router = express.Router();
@@ -23,16 +22,16 @@ router.post('/token', auth, authController.token);
 router.post('/logout', auth, authController.logout);
 
 // GET Devuleve los datos del usuario conectado. Autenticado
-router.get('/me', auth, authController.aboutMe); 
- 
+router.get('/me', auth, authController.aboutMe);
+
 // POST Registrarse como nuevo usuario. Acceso libre
-router.post('/register', authController.registerMe);    
+router.post('/register', authController.registerMe);
 
 // UPDATE cambia mis datos. Autenticado
-router.put('/update', auth, authController.updateMe); 
+router.put('/update', auth, authController.updateMe);
 
 // DELETE me elimina. Autenticado
-router.delete('/delete', auth, authController.deleteMe);    
+router.delete('/delete', auth, authController.deleteMe);
 
 // Exprotamos el módulo
 module.exports = router;
