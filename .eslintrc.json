@@ -19,6 +19,11 @@
     },
     "rules": {
         "consistent-return": 1,
-        "no-else-return"   : 1
+        "no-else-return"   : 1,
+        "max-len": ["error", {
+          "code": 150,
+          "comments": 150
+          }
+        ]
       }
 }
