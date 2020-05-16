@@ -23,8 +23,8 @@ class Database {
   }
 
   /**
-     * Devuelve el objeto de conexi`ó actual
-     */
+   * Devuelve el objeto de conexi`ó actual
+  */
   connection() {
     return this.conn;
   }
