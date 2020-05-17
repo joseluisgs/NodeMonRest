@@ -173,7 +173,7 @@ describe('Batería de tests de Recetas', () => {
    * TEST DELETE Eliminar Receta
    */
   // eslint-disable-next-line no-undef
-  describe('DELETE: Modificar Receta: ', () => {
+  describe('DELETE: Eliminar una receta: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería eliminar una receta', (done) => {
       chai.request(url)
@@ -193,6 +193,5 @@ describe('Batería de tests de Recetas', () => {
         });
     });
   });
-
 // Recetas
 });
