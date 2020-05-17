@@ -42,7 +42,7 @@ router.post('/', auth, permit(['normal']), recipesController.addRecipe);
 router.put('/:id', auth, permit(['normal']), recipesController.editRecipeById);
 
 // DELETE Elimina un elemento por ID. Solo autenticados y del nivel admin podrán, por eso no se pone nada (es por defecto)
-router.delete('/:id', auth, permit(['admin']), recipesController.deleteRecipeById);
+router.delete('/:id', auth, permit(['normal']), recipesController.deleteRecipeById);
 
 // GET Obtiene las recetas del usuario actual. autenticados, por eso nos e puede poner nada en permit, es otra forma a parte de la otra
 router.get('/me/list', auth, recipesController.myRecipes);

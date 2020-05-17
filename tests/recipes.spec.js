@@ -11,8 +11,14 @@ const should = chai.should();
 chai.use(chaiHttp);
 const url = 'http://localhost:8000';
 
+// Token de prueba
+let token; // = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MTQyNzUsImV4cCI6MTU4OTcxNzg3NX0.JDN8ewnP0lZWiuJ6XIb5yNezM4CkOOU-tmTOXQMTxb';
+let refresh; // = '51100f2c-3cef-4161-b883-c87da9891db';
+let idReceta;
+
+
 /**
- * Test de Recipes
+ * TEST: RECIPES
  */
 // eslint-disable-next-line no-undef
 describe('Batería de tests de Recetas', () => {
@@ -20,7 +26,7 @@ describe('Batería de tests de Recetas', () => {
    * TEST: GET ALL
    */
   // eslint-disable-next-line no-undef
-  describe('/GET/ Obtener todas las recetas: ', () => {
+  describe('GET: Obtener todas las recetas: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener todas las recetas', (done) => {
       chai.request(url)
@@ -37,7 +43,7 @@ describe('Batería de tests de Recetas', () => {
   * TEST: GET BY ID
   */
   // eslint-disable-next-line no-undef
-  describe('/GET/:id Obtener receta por id', () => {
+  describe('GET: Obtiener recetas por id', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener una receta dado su id', (done) => {
       const id = '5eb5823faf05681681978e2d';
@@ -56,6 +62,133 @@ describe('Batería de tests de Recetas', () => {
           res.body.should.have.property('username');
           res.body.should.have.property('ingredients');
           res.body.should.have.property('_id').eql(id);
+          done();
+        });
+    });
+  });
+
+  /**
+   * TEST POST Login usuario Ana
+   */
+  // eslint-disable-next-line no-undef
+  describe('POST: Identificar un usuario para receta: ', () => {
+    // eslint-disable-next-line no-undef
+    it('Debería autenticar al usuario', (done) => {
+      const user = {
+        username: 'ana',
+        email: 'ana@correo.com',
+        password: '$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO',
+      };
+      chai.request(url)
+        .post('/auth/login')
+        .send(user)
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res).to.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('token');
+          res.body.should.have.property('refreshToken');
+          token = res.body.token;
+          refresh = res.body.refreshToken;
+          done();
+        });
+    });
+  });
+
+  /**
+   * TEST POST Añadir Receta
+   */
+  // eslint-disable-next-line no-undef
+  describe('POST: Añadir una receta: ', () => {
+    // eslint-disable-next-line no-undef
+    it('Debería añadir una receta', (done) => {
+      const recipe = {
+        ingredients: [
+          'ingrediente 1',
+          'ingrediente 2',
+        ],
+        title: 'Receta Prueba',
+        description: 'Receta de Prueba',
+        difficulty: 'medium',
+        persons: 3,
+        time: 33,
+      };
+      chai.request(url)
+        .post('/recipes')
+        .set({ Authorization: `Bearer ${token}` })
+        .send(recipe)
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res).to.have.status(201);
+          res.body.should.be.a('object');
+          res.body.should.have.property('ingredients');
+          res.body.should.have.property('username');
+          res.body.should.have.property('title');
+          res.body.should.have.property('description');
+          res.body.should.have.property('difficulty');
+          idReceta = res.body.id;
+          done();
+        });
+    });
+  });
+
+  /**
+   * TEST PUT Modificar receta
+   */
+  // eslint-disable-next-line no-undef
+  describe('PUT: Modificar Receta: ', () => {
+    // eslint-disable-next-line no-undef
+    it('Debería modificar una receta', (done) => {
+      const recipe = {
+        ingredients: [
+          'ingrediente Mod',
+          'ingrediente Mod',
+        ],
+        title: 'Receta Prueba Mod',
+        description: 'Receta de Prueba Mod',
+        difficulty: 'medium',
+        persons: 3,
+        time: 33,
+      };
+      chai.request(url)
+        .put(`/recipes/${idReceta}`)
+        .set({ Authorization: `Bearer ${token}` })
+        .send(recipe)
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res).to.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('ingredients');
+          res.body.should.have.property('username');
+          res.body.should.have.property('title');
+          res.body.should.have.property('description');
+          res.body.should.have.property('difficulty');
+          res.body.should.have.property('id').eql(idReceta);
+          done();
+        });
+    });
+  });
+
+  /**
+   * TEST DELETE Eliminar Receta
+   */
+  // eslint-disable-next-line no-undef
+  describe('DELETE: Modificar Receta: ', () => {
+    // eslint-disable-next-line no-undef
+    it('Debería eliminar una receta', (done) => {
+      chai.request(url)
+        .delete(`/recipes/${idReceta}`)
+        .set({ Authorization: `Bearer ${token}` })
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res).to.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('ingredients');
+          res.body.should.have.property('username');
+          res.body.should.have.property('title');
+          res.body.should.have.property('description');
+          res.body.should.have.property('difficulty');
+          res.body.should.have.property('id').eql(idReceta);
           done();
         });
     });

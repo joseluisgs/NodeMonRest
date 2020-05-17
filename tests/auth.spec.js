@@ -182,7 +182,7 @@ describe('Batería de tests de Auth', () => {
    * TEST POST Login usuario Ana
    */
   // eslint-disable-next-line no-undef
-  describe('POST: Identificar un usuario correcto: ', () => {
+  describe('POST: Identificar un usuario ana: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería autenticar al usuario', (done) => {
       const user = {
