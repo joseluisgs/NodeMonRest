@@ -43,6 +43,7 @@ const auth = (req, res, next) => {
  * Autorizacion. Permitimos que pueda acceder
  * @param {*} role. Es una rray con los permisos, por si queremos tener varios y no mirar el menor de ellos
  */
+// eslint-disable-next-line consistent-return
 const permit = (roles = ['normal']) => (req, res, next) => {
   // Devolvemos el middleware
   // Comprobamos que el rol del usuario existe en la lista de roles permitidos de una manera elegante :)

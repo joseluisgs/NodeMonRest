@@ -25,16 +25,16 @@ class AuthController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async login(req, res, next) {
+  async login(req, res) {
     // Tenemos dos formas depasar los datos. si usa Query Params: localhost:8000/auth/login?email=corre@correo.com. Debemos usar req.query.email
     // Si usa el body con un JSON: localhost:8000/auth/login. Debemos usar req.body.email
-    const { username, email, password } = req.body; // Los tomo ambos del tiron
+    const { email, password } = req.body; // Los tomo ambos del tiron
 
     // Aquí deberíamos hacer las comprobaciones de que existe ese usuario en la BD o que las contraseñas son correctas, etc.
     const user = await User().getByEmail(email);
 
     // Si no existe o no se encuetra, o no copiciden las contraseñas
-    if (!user || (password != user.password)) {
+    if (!user || (password !== user.password)) {
       return res
         .status(401)
         .send(
@@ -48,7 +48,7 @@ class AuthController {
     //  Costruimos el token de acceso
     const payload = {
       username: user.username,
-      email: email,
+      email,
       roles: user.roles,
       iat: Math.floor(Date.now() / 1000),
       exp: Math.floor(Date.now() / 1000) + (60 * req.app.locals.config.TOKEN_LIFE),
@@ -61,7 +61,7 @@ class AuthController {
     await tokenRefreshController.save(user.username, uuid);
     return res
       .status(200)
-      .send({ token: token, refreshToken: uuid }); // Le mandamos el token y el token de refreso
+      .send({ token, refreshToken: uuid }); // Le mandamos el token y el token de refreso
   }
 
   /**
@@ -71,23 +71,23 @@ class AuthController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async token(req, res, next) {
+  async token(req, res) {
     // Estos son los parámetros que nos pasa en su body
-    const username = req.body.username;
-    const refreshToken = req.body.refreshToken;
-    const email = req.body.email;
-    const roles = req.body.roles;
+    const { username } = req.body;
+    const { refreshToken } = req.body;
+    const { email } = req.body;
+    const { roles } = req.body;
 
     // Buscamos el token refresh
     const tokenRefresh = await tokenRefreshController.findByUUID(refreshToken);
 
     // Si hay token de refresco y ese token es de nuestro usuario, genero un nuevo token. si no error de autenticación
-    if ((tokenRefresh) && (tokenRefresh.username == username)) {
+    if ((tokenRefresh) && (tokenRefresh.username === username)) {
       //  Costruimos el token de acceso
       const payload = {
-        username: username,
-        email: email,
-        roles: roles,
+        username,
+        email,
+        roles,
         iat: Math.floor(Date.now() / 1000),
         exp: Math.floor(Date.now() / 1000) + (60 * req.app.locals.config.TOKEN_LIFE),
       };
@@ -96,7 +96,7 @@ class AuthController {
       // Le mandamos el nuevo token
       return res
         .status(200)
-        .send({ token: token, refreshToken: refreshToken }); // Le mandamos el token y el token de refreso
+        .send({ token, refreshToken }); // Le mandamos el token y el token de refreso
     }
     return res
       .status(401)
@@ -114,11 +114,11 @@ class AuthController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async logout(req, res, next) {
+  async logout(req, res) {
     // Le pasamos el refress por body y el usuario
-    const {username} = req.body;
-    const {refreshToken} = req.body;
-  
+    const { username } = req.body;
+    const { refreshToken } = req.body;
+
     // Buscamos el token refresh
     const tokenRefresh = await tokenRefreshController.findByUUID(refreshToken);
 
@@ -142,7 +142,6 @@ class AuthController {
           message: 'Usuario no identificado o sesión terminada',
         },
       );
-
   }
 
   /**
@@ -153,15 +152,15 @@ class AuthController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async aboutMe(req, res, next) {
+  async aboutMe(req, res) {
     try {
       const data = await User().getByUserName(req.user.username);
       if (data) {
         res.status(200).json(data);
       } else {
         res.status(404).json({
-          'error': 404,
-          'mensaje': `No se ha encontrado usuario: ${req.user.username}`,
+          error: 404,
+          mensaje: `No se ha encontrado usuario: ${req.user.username}`,
         });
       }
     } catch (err) {
@@ -177,7 +176,7 @@ class AuthController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async registerMe(req, res, next) {
+  async registerMe(req, res) {
     // Creamos el usuario
     const newUser = User()({
       username: req.body.username,
@@ -202,7 +201,7 @@ class AuthController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async updateMe(req, res, next) {
+  async updateMe(req, res) {
     const newUser = {
       email: req.body.email,
       password: req.body.password,
@@ -214,8 +213,8 @@ class AuthController {
         res.status(200).json(data);
       } else {
         res.status(404).json({
-          'error': 404,
-          'mensaje': `No se ha encontrado un item con ese nombre de usuario: ${req.user.username}`,
+          error: 404,
+          mensaje: `No se ha encontrado un item con ese nombre de usuario: ${req.user.username}`,
         });
       }
     } catch (err) {
@@ -231,22 +230,21 @@ class AuthController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async deleteMe(req, res, next) {
+  async deleteMe(req, res) {
     try {
       const data = await User().findOneAndDelete({ username: req.user.username });
       if (data) {
         res.status(200).json(data);
       } else {
         res.status(404).json({
-          'error': 404,
-          'mensaje': `No se ha encontrado un item con ese npmbre de usuario: ${req.user.username}`,
+          error: 404,
+          mensaje: `No se ha encontrado un item con ese npmbre de usuario: ${req.user.username}`,
         });
       }
     } catch (err) {
       res.status(500).send(err);
     }
   }
-
 }
 
 // Exportamos el módulo
