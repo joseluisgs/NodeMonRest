@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable class-methods-use-this */
 /**
  * CONTROLADOR DE USUARIOS
  * Controlador de usuarios para realizar los métodos que le indiquemos a través del enrutador.
@@ -19,7 +21,7 @@ class UsersController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async users(req, res, next) {
+  async users(req, res) {
     const pageOptions = {
       page: parseInt(req.query.page, 10) || 0,
       limit: parseInt(req.query.limit, 10) || 10,
@@ -47,7 +49,7 @@ class UsersController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async userById(req, res, next) {
+  async userById(req, res) {
     try {
       const data = await User().getById(req.params.id);
       if (data) {
@@ -71,7 +73,7 @@ class UsersController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async addUser(req, res, next) {
+  async addUser(req, res) {
     // Creamos el usuario
     const newUser = User()({
       username: req.body.username,
@@ -96,7 +98,7 @@ class UsersController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async editUserById(req, res, next) {
+  async editUserById(req, res) {
     const newUser = {
       username: req.body.username,
       email: req.body.email,
@@ -107,7 +109,7 @@ class UsersController {
     try {
       const data = await User().findOneAndUpdate(
         { _id: req.params.id },
-        newUser
+        newUser,
       );
       if (data) {
         res.status(200).json(data);
@@ -130,7 +132,7 @@ class UsersController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async deleteUserById(req, res, next) {
+  async deleteUserById(req, res) {
     try {
       const data = await User().findByIdAndDelete({ _id: req.params.id });
       if (data) {
@@ -155,7 +157,7 @@ class UsersController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async avatarToUser(req, res, next) {
+  async avatarToUser(req, res) {
     try {
       // Me traigo los datos de mi usuario
       const user = await User().getByUserName(req.params.username);
@@ -171,9 +173,9 @@ class UsersController {
         newAvatar.type = 'avatar';
         let data = await File().findOneAndUpdate(
           { _id: req.body.avatarID },
-          newAvatar
+          newAvatar,
         );
-        //Le asignamos este nuevo avatar al usuario
+        // Le asignamos este nuevo avatar al usuario
         /* newData = {
                     avatar: newAvatar
                 }; */
@@ -181,12 +183,11 @@ class UsersController {
         data = await User().findOneAndUpdate({ _id: user._id }, user);
         // Borro la imagen antigua del fichero y de la Bd solo si existe y no son la misma
         if (
-          oldAvatar &&
-          oldAvatar._id.toString() !== newAvatar._id.toString()
+          oldAvatar && oldAvatar._id.toString() !== newAvatar._id.toString()
         ) {
-          return fs.unlink(config.storage + oldAvatar.file, async function (
-            err
-          ) {
+          return fs.unlink(config.storage + oldAvatar.file, async (
+            err,
+          ) => {
             if (err) throw err;
             console.log('Fichero borrado');
             data = await File().findByIdAndDelete({ _id: oldAvatar._id });
