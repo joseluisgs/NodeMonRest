@@ -47,16 +47,18 @@ const server = {
         const address = instanceServer.address(); // obtenemos la dirección
         const host = address.address === '::' ? 'localhost' : address; // dependiendo de la dirección asi configuramos
         const port = app.locals.config.PORT; // el puerto
+        const url = `http://${host}:${port}`;
+        instanceServer.url = url;
 
         if (process.env.NODE_ENV !== 'test') {
-          console.log(`⚑ Servidor API REST escuchando ✓ -> http://${host}:${port}`);
+          console.log(`⚑ Servidor API REST escuchando ✓ -> ${url}`);
         }
       });
 
       // console.log('Password: '+ bcrypt.hashSync('admin123', 10));
-
       return instanceServer;
     });// Fin de la promesa
+    // return instanceServer;
   },
 
   // Cierra el servidor

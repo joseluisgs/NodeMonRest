@@ -25,7 +25,7 @@ const RecipeSchema = new mongoose.Schema(
   // El método estriccto nos dice si aceptamos o no un documento incpleto. Lo ponemos así porque no vamos a meter el id y da un poco de flexibilidad
   { strict: false },
   // Le añadimos una huella de tiempo
-  { timestamps: true }
+  { timestamps: true },
 );
 
 // Métodos estaticos que nos servirán para métodos rápidos

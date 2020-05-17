@@ -16,7 +16,6 @@ module.exports.setRouter = (app) => {
 
   // rutas de autenticación y autorización.
   app.use('/auth', auth);
-
   // Recursos Recetas
   app.use('/recipes', recipes);
 

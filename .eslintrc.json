@@ -9,6 +9,7 @@
     //"eslint:recommended",
     "airbnb-base"
   ],
+  // "plugins": ["prettier"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -17,6 +18,7 @@
     "ecmaVersion": 2019
   },
   "rules": {
+    // "prettier/prettier": "error",
     "consistent-return": 1,
     "no-else-return": 1,
     "semi": [

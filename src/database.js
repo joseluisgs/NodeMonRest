@@ -1,12 +1,11 @@
 /**
-* CONFIGURACIÓN DE ACESO AL SERVIDOR DE BASE DE DATOS
-* Configuración principal de nuestro servidor
-*/
+ * CONFIGURACIÓN DE ACESO AL SERVIDOR DE BASE DE DATOS
+ * Configuración principal de nuestro servidor
+ */
 
 // Librerías
 const mongoose = require('mongoose');
 const conf = require('dotenv');
-
 
 // Cargamos la configuración del fichero .env
 const SETTINGS = conf.config();
@@ -16,22 +15,22 @@ const SETTINGS = conf.config();
  */
 class Database {
   /**
-     * Constructor
-     */
+   * Constructor
+   */
   constructor() {
     this.conn = false;
   }
 
   /**
    * Devuelve el objeto de conexi`ó actual
-  */
+   */
   connection() {
     return this.conn;
   }
 
   /**
-     * Se conecta a la conexión indicada
-     */
+   * Se conecta a la conexión indicada
+   */
   connect() {
     // Creamos una cadena de conexión según los parámetros de .env. Ojo que esta partida la línea
     const host = `${SETTINGS.parsed.DB_PROTOCOL}://${SETTINGS.parsed.DB_USER}:${SETTINGS.parsed.DB_PASS}@${SETTINGS.parsed.DB_URL}/${SETTINGS.parsed.DB_NAME}?retryWrites=true&w=majority`;
@@ -46,10 +45,9 @@ class Database {
       mongoose.Promise = global.Promise;
 
       // Creamos la cenexión
-      this.conn = mongoose.createConnection(
-        host,
-        { poolSize: SETTINGS.parsed.DB_POOLSIZE },
-      );
+      this.conn = mongoose.createConnection(host, {
+        poolSize: SETTINGS.parsed.DB_POOLSIZE,
+      });
 
       // Si hay un error, salimos de la apliación
       this.conn.on('error', (err) => {
@@ -70,7 +68,6 @@ class Database {
  * Devuelve la instancia de conexión siempre la misma, singleton
  */
 const instance = new Database();
-
 
 // Devolvemos el módulo
 module.exports = instance;
