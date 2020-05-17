@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable class-methods-use-this */
 /**
  * CONTROLADOR DE RECETAS
  * Controlador de recetas para realizar los métodos que le indiquemos a través del enrutador.
@@ -19,21 +21,21 @@ class RecipesController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async recipes(req, res, next) {
+  async recipes(req, res) {
     // Por si queremos paginar, añadiendo valores por defecto
-    //console.log(req.user.username);
-    //console.log(req.user.email);
-    //console.log(req.user.role);
+    // console.log(req.user.username);
+    // console.log(req.user.email);
+    // console.log(req.user.role);
 
     const pageOptions = {
       page: parseInt(req.query.page, 10) || 0,
-      limit: parseInt(req.query.limit, 10) || 10
+      limit: parseInt(req.query.limit, 10) || 10,
     };
     // Por si queremos buscar por un campo
     const searchOptions = {
       search_field: req.query.search_field || 'title', // Campo por defecto para la búsqueda
       search_content: req.query.search_content || '',
-      search_order: req.query.search_order || 'asc'
+      search_order: req.query.search_order || 'asc',
     };
 
     try {
@@ -52,15 +54,15 @@ class RecipesController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async recipeById(req, res, next) {
+  async recipeById(req, res) {
     try {
       const data = await Recipe().getById(req.params.id);
       if (data) {
         res.status(200).json(data);
       } else {
         res.status(404).json({
-          'error': 404,
-          'mensaje': `No se ha encontrado un item con ese ID: ${req.params.id}`
+          error: 404,
+          mensaje: `No se ha encontrado un item con ese ID: ${req.params.id}`,
         });
       }
     } catch (err) {
@@ -76,7 +78,7 @@ class RecipesController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async addRecipe(req, res, next) {
+  async addRecipe(req, res) {
     // Creamos la receta
     const newRecipe = Recipe()({
       title: req.body.title,
@@ -85,7 +87,7 @@ class RecipesController {
       time: req.body.time,
       ingredients: req.body.ingredients,
       difficulty: req.body.difficulty,
-      username: req.user.username
+      username: req.user.username,
     });
     try {
       const data = await newRecipe.save();
@@ -103,7 +105,7 @@ class RecipesController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async editRecipeById(req, res, next) {
+  async editRecipeById(req, res) {
     const newRecipe = {
       title: req.body.title,
       description: req.body.description,
@@ -119,8 +121,8 @@ class RecipesController {
         res.status(200).json(data);
       } else {
         res.status(404).json({
-          'error': 404,
-          'mensaje': `No se ha encontrado un item con ese ID: ${req.params.id}`
+          error: 404,
+          mensaje: `No se ha encontrado un item con ese ID: ${req.params.id}`,
         });
       }
     } catch (err) {
@@ -136,15 +138,15 @@ class RecipesController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async deleteRecipeById(req, res, next) {
+  async deleteRecipeById(req, res) {
     try {
       const data = await Recipe().findByIdAndDelete({ _id: req.params.id });
       if (data) {
         res.status(200).json(data);
       } else {
         res.status(404).json({
-          'error': 404,
-          'mensaje': `No se ha encontrado un item con ese ID: ${req.params.id}`
+          error: 404,
+          mensaje: `No se ha encontrado un item con ese ID: ${req.params.id}`,
         });
       }
     } catch (err) {
@@ -160,16 +162,16 @@ class RecipesController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async myRecipes(req, res, next) {
+  async myRecipes(req, res) {
     const pageOptions = {
       page: parseInt(req.query.page, 10) || 0,
-      limit: parseInt(req.query.limit, 10) || 10
+      limit: parseInt(req.query.limit, 10) || 10,
     };
     // Por si queremos buscar por un campo
     const searchOptions = {
       search_field: 'username', // Campo por defecto para la búsqueda
       search_content: req.user.username,
-      search_order: req.query.search_order || 'asc'
+      search_order: req.query.search_order || 'asc',
     };
 
     try {
@@ -181,7 +183,8 @@ class RecipesController {
   }
 
   /**
-   * PATCH por in de receta. Inserta un aimagen en una receta. Si no tiene la inserta, si tiene la borra y pone la nueva. Deveuleve la receta actualizada
+   * PATCH por in de receta. Inserta un aimagen en una receta. Si no tiene la inserta, si tiene la borra y pone la nueva.
+   * Deveuleve la receta actualizada
    * La imagen recoge su ide del body, antes la hemos tenido que subir al servidor o elegir una que exista
    * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
    * Asincrono para no usar promesas asyn/await
@@ -189,7 +192,7 @@ class RecipesController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async imageAddToRecipe(req, res, next) {
+  async imageAddToRecipe(req, res) {
     try {
       // Me traigo de la receta
       const recipe = await Recipe().getById(req.params.id);
@@ -198,21 +201,19 @@ class RecipesController {
       if (recipe && newImage) {
         // Actualizo los metadatos del fichero
         newImage.type = 'recipe';
-        let data = await File().findOneAndUpdate({ _id: req.body.imageID }, newImage);
         // Si no está en el vector
-        const exists = recipe.images.find(element => element._id.toString() === newImage._id.toString());
+        const exists = recipe.images.find((element) => element._id.toString() === newImage._id.toString());
         if (!exists) {
-          //Le asignamos este nuevo avatar al usuario
+          // Le asignamos este nuevo avatar al usuario
           recipe.images.push(newImage);
-          data = await Recipe().findOneAndUpdate({ _id: recipe._id }, recipe);
           res.status(200).json(recipe);
         } else {
           res.status(200).json(recipe);
         }
       } else {
         return res.status(404).json({
-          'error': 404,
-          'mensaje': `No existe la receta o la imagen indicada`
+          error: 404,
+          mensaje: `No existe la receta o la imagen indicada`,
         });
       }
     } catch (err) {
@@ -229,7 +230,7 @@ class RecipesController {
    * @param {*} res Response
    * @param {*} next Next function
    */
-  async imageDeleteToRecipe(req, res, next) {
+  async imageDeleteToRecipe(req, res) {
     try {
       // Me traigo de la receta
       const recipe = await Recipe().getById(req.params.id);
@@ -237,34 +238,34 @@ class RecipesController {
       const image = await File().getById(req.body.imageID);
       if (recipe && image) {
         // Si esta en el vector
-        const index = recipe.images.findIndex(element => element._id.toString() === image._id.toString());
+        const index = recipe.images.findIndex((element) => element._id.toString() === image._id.toString());
         if (index >= 0) {
-          //Le asignamos este nuevo avatar al usuario
+          // Le asignamos este nuevo avatar al usuario
           recipe.images.splice(index, 1);
           let data = await Recipe().findOneAndUpdate({ _id: recipe._id }, recipe);
           // Ahora la eliminamos de la BD y del fichero
-          fs.unlink(config.storage + image.file, async function (err) {
+          fs.unlink(config.storage + image.file, async (err) => {
             if (err) throw err;
             console.log('Fichero borrado');
             data = await File().findByIdAndDelete({ _id: image._id });
             if (data) {
-              res.
-                status(200).json(recipe);
+              res
+                .status(200).json(recipe);
             } else {
               res.status(404).json({
-                'error': 404,
-                'mensaje': `No se ha encontrado un item con ese ID: ${req.body.imageID}`
+                error: 404,
+                mensaje: `No se ha encontrado un item con ese ID: ${req.body.imageID}`,
               });
             }
           });
-          //res.status(200).json(recipe);
+          // res.status(200).json(recipe);
         } else {
           res.status(404).json(recipe);
         }
       } else {
         return res.status(404).json({
-          'error': 404,
-          'mensaje': `No existe la receta o la imagen indicada`
+          error: 404,
+          mensaje: `No existe la receta o la imagen indicada`,
         });
       }
     } catch (err) {
