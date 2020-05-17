@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * CONTROLADOR DE TOKEN REFRESH
  * Controlador de token refresh.
@@ -15,13 +16,13 @@ class TokenRefreshController {
    */
   async save(username, uuid) {
     const newTokenRefresh = TokenRefresh()({
-      username: username,
-      uuid: uuid,
+      username,
+      uuid,
     });
 
     // Antes de insertar voy a borrar si ya este usuario esta en la BD
-    await TokenRefresh().deleteMany({ username: username });
-    return await newTokenRefresh.save();
+    await TokenRefresh().deleteMany({ username });
+    return newTokenRefresh.save();
   }
 
   /**
@@ -29,7 +30,7 @@ class TokenRefreshController {
    * @param {*} uuid
    */
   async findByUUID(uuid) {
-    return await TokenRefresh().getByUUID(uuid);
+    return TokenRefresh().getByUUID(uuid);
   }
 
   /**
@@ -37,7 +38,7 @@ class TokenRefreshController {
    * @param {*} uuid
    */
   async deleteByUUID(uuid) {
-    return await TokenRefresh().deleteMany({ uuid: uuid });
+    return TokenRefresh().deleteMany({ uuid });
   }
 }
 
