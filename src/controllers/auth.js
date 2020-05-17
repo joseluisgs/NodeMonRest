@@ -39,8 +39,9 @@ class AuthController {
         .send(
           {
             error: '401',
-            message: 'Usuario o password incorrectos'
-          });
+            message: 'Usuario o password incorrectos',
+          },
+        );
     }
     console.log(user.username);
     //  Costruimos el token de acceso
@@ -101,8 +102,9 @@ class AuthController {
       .send(
         {
           error: '401',
-          message: 'Usuario no identificado o sesión terminada'
-        });
+          message: 'Usuario no identificado o sesión terminada',
+        },
+      );
   }
 
   /**
@@ -127,16 +129,18 @@ class AuthController {
         .send(
           {
             error: '204',
-            message: 'Logout'
-          });
+            message: 'Logout',
+          },
+        );
     }
     return res
       .status(401)
       .send(
         {
           error: '401',
-          message: 'Usuario no identificado o sesión terminada'
-        });
+          message: 'Usuario no identificado o sesión terminada',
+        },
+      );
 
   }
 
@@ -156,7 +160,7 @@ class AuthController {
       } else {
         res.status(404).json({
           'error': 404,
-          'mensaje': `No se ha encontrado usuario: ${req.user.username}`
+          'mensaje': `No se ha encontrado usuario: ${req.user.username}`,
         });
       }
     } catch (err) {
@@ -179,7 +183,7 @@ class AuthController {
       email: req.body.email,
       password: req.body.password,
       roles: req.body.roles,
-      avatar: req.body.avatar
+      avatar: req.body.avatar,
     });
     try {
       const data = await newUser.save();
@@ -201,7 +205,7 @@ class AuthController {
     const newUser = {
       email: req.body.email,
       password: req.body.password,
-      avatar: req.body.avatar
+      avatar: req.body.avatar,
     };
     try {
       const data = await User().findOneAndUpdate({ username: req.user.username }, newUser);
@@ -210,7 +214,7 @@ class AuthController {
       } else {
         res.status(404).json({
           'error': 404,
-          'mensaje': `No se ha encontrado un item con ese nombre de usuario: ${req.user.username}`
+          'mensaje': `No se ha encontrado un item con ese nombre de usuario: ${req.user.username}`,
         });
       }
     } catch (err) {
@@ -234,7 +238,7 @@ class AuthController {
       } else {
         res.status(404).json({
           'error': 404,
-          'mensaje': `No se ha encontrado un item con ese npmbre de usuario: ${req.user.username}`
+          'mensaje': `No se ha encontrado un item con ese npmbre de usuario: ${req.user.username}`,
         });
       }
     } catch (err) {

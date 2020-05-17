@@ -5,24 +5,28 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { expect } = require('chai');
 
+// eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
 chai.use(chaiHttp);
 const url = 'http://localhost:8000';
 
 /**
- * TEST: GET ALL
+ * Test de Recipes
  */
 // eslint-disable-next-line no-undef
-describe('/GET/ recetas', () => {
-// eslint-disable-next-line no-undef
-  describe('Obtener todas las recetas: ', () => {
+describe('Batería de tests de Recetas', () => {
+  /**
+   * TEST: GET ALL
+   */
+  // eslint-disable-next-line no-undef
+  describe('/GET/ Obtener todas las recetas: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener todas las recetas', (done) => {
       chai.request(url)
         .get('/recipes')
         .end((err, res) => {
-          console.log(res.body);
+          // console.log(res.body);
           expect(res).to.have.status(200);
           done();
         });
@@ -33,7 +37,7 @@ describe('/GET/ recetas', () => {
   * TEST: GET BY ID
   */
   // eslint-disable-next-line no-undef
-  describe('/GET/:id receta', () => {
+  describe('/GET/:id Obtener receta por id', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener una receta dado su id', (done) => {
       const id = '5eb5823faf05681681978e2d';
@@ -41,7 +45,7 @@ describe('/GET/ recetas', () => {
         .get(`/recipes/${id}`)
         // .send(recipe)
         .end((err, res) => {
-          console.log(res.body);
+          // console.log(res.body);
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('title');
