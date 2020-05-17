@@ -11,8 +11,9 @@ const should = chai.should();
 chai.use(chaiHttp);
 const url = 'http://localhost:8000';
 
-// Variables globales a utilizar entre las distintas pruebas
+// Variables globales a reutilizar entre las distintas pruebas
 let token;
+let refresh
 let idUsuario;
 
 /**
@@ -42,6 +43,7 @@ describe('Batería de tests de Usuarios', () => {
           res.body.should.have.property('token');
           res.body.should.have.property('refreshToken');
           token = res.body.token;
+          refresh = res.body.refreshToken;
           done();
         });
     });

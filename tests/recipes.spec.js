@@ -11,9 +11,8 @@ const should = chai.should();
 chai.use(chaiHttp);
 const url = 'http://localhost:8000';
 
-// Token de prueba
-let token; // = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MTQyNzUsImV4cCI6MTU4OTcxNzg3NX0.JDN8ewnP0lZWiuJ6XIb5yNezM4CkOOU-tmTOXQMTxb';
-let refresh; // = '51100f2c-3cef-4161-b883-c87da9891db';
+// Variables globales para todas las pruebas
+let token;
 let idReceta;
 
 
@@ -89,7 +88,6 @@ describe('Batería de tests de Recetas', () => {
           res.body.should.have.property('token');
           res.body.should.have.property('refreshToken');
           token = res.body.token;
-          refresh = res.body.refreshToken;
           done();
         });
     });

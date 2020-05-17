@@ -11,7 +11,7 @@ const should = chai.should();
 chai.use(chaiHttp);
 const url = 'http://localhost:8000';
 
-// Variables globales para las pruebas
+// Token de prueba
 let token;
 let refresh;
 
