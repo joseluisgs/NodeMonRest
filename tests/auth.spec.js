@@ -13,7 +13,7 @@ const url = 'http://localhost:8000';
 
 // Token de prueba
 let token; // = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MTQyNzUsImV4cCI6MTU4OTcxNzg3NX0.JDN8ewnP0lZWiuJ6XIb5yNezM4CkOOU-tmTOXQMTxb';
-let refreshToken; // = '51100f2c-3cef-4161-b883-c87da9891db';
+let refresh; // = '51100f2c-3cef-4161-b883-c87da9891db';
 
 
 /**
@@ -43,7 +43,7 @@ describe('Batería de tests de Auth', () => {
           res.body.should.have.property('token');
           res.body.should.have.property('refreshToken');
           token = res.body.token;
-          refreshToken = res.body.refreshToken;
+          refresh = res.body.refreshToken;
           done();
         });
     });
@@ -78,17 +78,17 @@ describe('Batería de tests de Auth', () => {
    * TEST POST Refrescar Token
    */
   // eslint-disable-next-line no-undef
- /*  describe('Refrescar token: ', () => {
+  describe('Refrescar token: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería refrescar Token', (done) => {
       const user = {
         username: 'admin',
         email: 'admin@admin.com',
         role: '[\'admin\', \'normal\']',
-        refreshToken,
+        refreshToken: refresh,
       };
       chai.request(url)
-        .post('/auth/login')
+        .post('/auth/token')
         .set({ Authorization: `Bearer ${token}` })
         .send(user)
         .end((err, res) => {
@@ -97,11 +97,13 @@ describe('Batería de tests de Auth', () => {
           res.body.should.be.a('object');
           res.body.should.have.property('token');
           res.body.should.have.property('refreshToken');
+          token = res.body.token;
+          refresh = res.body.refreshToken;
           done();
         });
     });
   });
- */
+
   /**
    * TEST GET, Ver Datos de usuario
    */
@@ -124,5 +126,61 @@ describe('Batería de tests de Auth', () => {
     });
   });
 
+  /**
+   * TEST POST, Registrar usuario
+   */
+  // eslint-disable-next-line no-undef
+  describe('Registrar usuario: ', () => {
+    // eslint-disable-next-line no-undef
+    it('Debería registrar un usuario', (done) => {
+      const user = {
+        username: 'prueba',
+        email: 'prueba@prueba.com',
+        password: '$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO',
+        roles: ['normal'],
+        avatar: {
+          url: 'https://api.adorable.io/avatars/200/prueba@prueba.png',
+        },
+      };
+      chai.request(url)
+        .post('/auth/register')
+        .send(user)
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res).to.have.status(201);
+          res.body.should.be.a('object');
+          res.body.should.have.property('username');
+          res.body.should.have.property('email');
+          res.body.should.have.property('id');
+          done();
+        });
+    });
+  });
+
+  /**
+   * TEST POST, Cierra la sesión del usuario
+   * Debe ser el último test
+   */
+  // eslint-disable-next-line no-undef
+  describe('Salir de sesión usuario: ', () => {
+    // eslint-disable-next-line no-undef
+    it('Debería salir de la sesión', (done) => {
+      const user = {
+        username: 'admin',
+        refreshToken: refresh,
+      };
+      chai.request(url)
+        .post('/auth/logout')
+        .set({ Authorization: `Bearer ${token}` })
+        .send(user)
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res).to.have.status(204);
+          done();
+        });
+    });
+  });
+
 // Auth
 });
+

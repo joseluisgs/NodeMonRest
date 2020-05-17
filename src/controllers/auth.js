@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * CONTROLADOR DE AUTENTICACIÓN
  * Controlador de autenticación.
@@ -115,13 +116,13 @@ class AuthController {
    */
   async logout(req, res, next) {
     // Le pasamos el refress por body y el usuario
-    const username = req.body.username;
-    const refreshToken = req.body.refreshToken;
-
+    const {username} = req.body;
+    const {refreshToken} = req.body;
+  
     // Buscamos el token refresh
     const tokenRefresh = await tokenRefreshController.findByUUID(refreshToken);
 
-    if ((tokenRefresh) && (tokenRefresh.username == username)) {
+    if ((tokenRefresh) && (tokenRefresh.username === username)) {
       // Lo borramos, podríamos hacerlo de la base de datos
       await tokenRefreshController.deleteByUUID(refreshToken);
       return res
