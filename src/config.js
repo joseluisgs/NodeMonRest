@@ -85,7 +85,11 @@ module.exports.setConfig = (app) => {
 
   // Ruta publica por defecto
   app.use(express.static('public'));
+
+  const storage = `${__dirname}/public/${SETTINGS.parsed.FILES_PATH}/`;
 };
 
+const storage = `${__dirname}/public/${SETTINGS.parsed.FILES_PATH}/`;
+
 // exportamos los directorios de lamcenaminero
-module.exports.storage = `${__dirname}/public/${SETTINGS.parsed.FILES_PATH}/`;
+module.exports.storage = storage;
