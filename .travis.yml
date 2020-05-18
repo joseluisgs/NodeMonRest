@@ -8,10 +8,10 @@ install:
 
 script:
   - npm run lint
-  ## - npm run test
+  - npm run test
   - printenv >> .env
-  - echo .env
-  ## - npm run build --if-present
+  - npm test
+  - npm run build --if-present
 branches:
   only:
     - master
