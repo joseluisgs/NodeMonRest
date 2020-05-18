@@ -14,7 +14,8 @@ const url = 'http://localhost:8000';
 
 // Variables globales a utilizar entre las distintas pruebas
 let token;
-let idFichero;∏
+let idFichero;
+let nombreFichero;
 
 /**
  * TEST: FILES
@@ -100,7 +101,7 @@ describe('Batería de tests de Ficheros', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener la lista del usuario identificado', (done) => {
       chai.request(url)
-        .get(`/files/me`)
+        .get('/files/me')
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
           // console.log(res.body);
@@ -118,7 +119,7 @@ describe('Batería de tests de Ficheros', () => {
     // eslint-disable-next-line no-undef
     it('Debería subir un(unos) fichero(s) al servidor', (done) => {
       chai.request(url)
-        .post(`/files/upload`)
+        .post('/files/upload')
         .set({ Authorization: `Bearer ${token}` })
         .attach('files', fs.readFileSync(`${__dirname}/test.png`), 'test.png')
         .end((err, res) => {

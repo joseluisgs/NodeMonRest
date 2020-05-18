@@ -183,15 +183,15 @@ class FilesController {
   async deleteFileById(req, res) {
     try {
       // Busco el fichero
-      const file = await File().getById(req.params.id);
-
-      fs.unlink(config.storage + file.file, async (err) => {
+      const fichero = await File().getById(req.params.id);
+      fs.unlink(config.storage + fichero.file, async (err) => {
         if (err) throw err;
         console.log('Fichero borrado');
         const data = await File().findByIdAndDelete({ _id: req.params.id });
         if (data) {
           res.status(200).json(data);
         } else {
+          console.log('Hola');
           res.status(404).json({
             error: 404,
             mensaje: `No se ha encontrado un item con ese ID: ${req.params.id}`,
