@@ -10,6 +10,7 @@ const jwt = require('jwt-simple');
 const { v4: uuidv4 } = require('uuid');
 const User = require('../models/users').UserModel;
 const tokenRefreshController = require('./tokenRefresh');
+const { config } = require('../config'); // Cargamos la configuración del fichero .env
 
 // Tenemos dos formas si usa Query Params: localhost:8000/auth/login?email=corre@correo.com
 // Debemos usar req.query.email
@@ -51,9 +52,9 @@ class AuthController {
       email,
       roles: user.roles,
       iat: Math.floor(Date.now() / 1000),
-      exp: Math.floor(Date.now() / 1000) + (60 * req.app.locals.config.TOKEN_LIFE),
+      exp: Math.floor(Date.now() / 1000) + (60 * config.TOKEN_LIFE),
     };
-    const token = jwt.encode(payload, req.app.locals.config.TOKEN_SECRET);
+    const token = jwt.encode(payload, config.TOKEN_SECRET);
 
     // Creamos el token de refreso
     const uuid = uuidv4(); // Numero de refresco de token ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
@@ -89,9 +90,9 @@ class AuthController {
         email,
         roles,
         iat: Math.floor(Date.now() / 1000),
-        exp: Math.floor(Date.now() / 1000) + (60 * req.app.locals.config.TOKEN_LIFE),
+        exp: Math.floor(Date.now() / 1000) + (60 * config.TOKEN_LIFE),
       };
-      const token = jwt.encode(payload, req.app.locals.config.TOKEN_SECRET);
+      const token = jwt.encode(payload, config.TOKEN_SECRET);
 
       // Le mandamos el nuevo token
       return res

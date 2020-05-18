@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
 /**
@@ -10,7 +11,7 @@
 const fs = require('fs');
 const Recipe = require('../models/recipes').RecipeModel;
 const File = require('../models/files').FileModel;
-const config = require('../config');
+const { storage } = require('../config');
 
 class RecipesController {
   /**
@@ -244,7 +245,7 @@ class RecipesController {
           recipe.images.splice(index, 1);
           let data = await Recipe().findOneAndUpdate({ _id: recipe._id }, recipe);
           // Ahora la eliminamos de la BD y del fichero
-          fs.unlink(config.storage + image.file, async (err) => {
+          fs.unlink(storage + image.file, async (err) => {
             if (err) throw err;
             console.log('Fichero borrado');
             data = await File().findByIdAndDelete({ _id: image._id });

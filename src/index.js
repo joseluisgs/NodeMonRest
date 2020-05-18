@@ -9,7 +9,7 @@ const config = require('./config');
 const router = require('./router');
 const db = require('./database');
 
-let _server; // instancia del servidor
+let instancia; // instancia del servidor. Singleton
 
 /* const getHashedPassword = (password) => {
     const sha256 = crypto.createHash('sha256');
@@ -29,10 +29,7 @@ const server = {
 
     // Precedemos de la siguiente manera, no arrancamos el servidor si no tenemos conexión
     // a la base de datos, es decir, cuando se resuleva la promesa
-    mongoOK = db.connect().then(() => {
-      // Cuando se resuleve la promesa actuamos
-      return true;
-    });// Fin de la promesa
+    mongoOK = db.connect().then(() => true);// Fin de la promesa
 
     if (mongoOK) {
       config.setConfig(app);
@@ -47,12 +44,12 @@ const server = {
       router.setRouter(app);
 
       // Nos ponemos a escuchar a un puerto definido en la configuracion
-      _server = app.listen(app.locals.config.PORT, () => {
-        const address = _server.address(); // obtenemos la dirección
+      instancia = app.listen(app.locals.config.PORT, () => {
+        const address = instancia.address(); // obtenemos la dirección
         const host = address.address === '::' ? 'localhost' : address; // dependiendo de la dirección asi configuramos
         const port = app.locals.config.PORT; // el puerto
         const url = `http://${host}:${port}`;
-        _server.url = url;
+        instancia.url = url;
 
         if (process.env.NODE_ENV !== 'test') {
           console.log(`⚑ Servidor API REST escuchando ✓ -> ${url}`);
@@ -60,14 +57,15 @@ const server = {
       });
 
       // console.log('Password: '+ bcrypt.hashSync('admin123', 10));
-      return _server;
+      return instancia;
     }
+    return null;
   },
 
   // Cierra el servidor
   close() {
     // Desconectamos el socket server
-    _server.close();
+    instancia.close();
     if (process.env.NODE_ENV !== 'test') {
       console.log('▣  Servidor parado');
     }

@@ -15,17 +15,17 @@ const fileUpload = require('express-fileupload');
 const handlebars = require('express-handlebars');
 
 // Cargamos la configuración del fichero .env
-const SETTINGS = conf.config();
-
+const config = conf.config().parsed; // Toda la configuración parseada del fichero .env
+const storage = `${__dirname}/public/${config.FILES_PATH}/`; // Path de almacenamiento
 
 // Creamos el módulo de configurar. Es una función que recibe Up
-module.exports.setConfig = (app) => {
+const setConfig = (app) => {
   // Quitamos la cabecera que indica que esta hecho con express, por seguridad, así nod amos pistas
   app.disable('x-powered-by');
 
   // Cargamos la configuracion y se la asignamos al servidor.
-  app.set('env', SETTINGS.parsed.ENV); // lee la etiqueta ENV
-  app.set('config', SETTINGS.parsed); // le pasamos toda la configuracion
+  app.set('env', config.ENV); // lee la etiqueta ENV
+  app.set('config', config); // le pasamos toda la configuracion
   // eslint-disable-next-line no-param-reassign
   app.locals.env = app.get('env'); // Creamos variables locales en app àra usarlas en otros lugares del código
   // eslint-disable-next-line no-param-reassign
@@ -51,19 +51,19 @@ module.exports.setConfig = (app) => {
   Cada vez que pongamos /files, nos llevara al directorio public/files.
   Es decir cda vez que ponga http://..../files/lo que sea, leera el fichero lo que sea que este en public/uploads */
   app.use(
-    `/${SETTINGS.parsed.FILES_URL}`,
-    express.static(path.join(__dirname, `public/${SETTINGS.parsed.FILES_URL}`)),
+    `/${config.FILES_URL}`,
+    express.static(path.join(__dirname, `public/${config.FILES_URL}`)),
   );
 
   // Configuramos el sistema de ficheros de subida
   app.use(fileUpload(
     {
       createParentPath: true,
-      limits: { fileSize: SETTINGS.parsed.FILE_SIZE * 1024 * 1024 * 1024 }, // 2MB max en env
+      limits: { fileSize: config.FILE_SIZE * 1024 * 1024 * 1024 }, // 2MB max en env
       useTempFiles: true, // Uso de ficheros temporales
       tempFileDir: '/tmp/', // Usamos un directorio y ficheros temporal y no memoria para el proceso de subida.
       preserveExtension: true, // dejamos la extensión por defecto
-      debug: SETTINGS.parsed.DEBUG, // Modo de depuración
+      debug: config.DEBUG, // Modo de depuración
     },
   ));
 
@@ -85,11 +85,11 @@ module.exports.setConfig = (app) => {
 
   // Ruta publica por defecto
   app.use(express.static('public'));
-
-  const storage = `${__dirname}/public/${SETTINGS.parsed.FILES_PATH}/`;
 };
 
-const storage = `${__dirname}/public/${SETTINGS.parsed.FILES_PATH}/`;
-
-// exportamos los directorios de lamcenaminero
-module.exports.storage = storage;
+// Exportamos los módulos
+module.exports = {
+  setConfig,
+  config,
+  storage,
+};

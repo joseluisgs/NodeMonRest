@@ -39,7 +39,7 @@
     "rebuild": "npm run clean && npm install && npm run undist && npm run build --prod",
     "undist": "rm -rf dist",
     "prune": "npm prune --production",
-    "test": "NODE_ENV=test mocha --require @babel/register --timeout 10000 tests/"
+    "test": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
