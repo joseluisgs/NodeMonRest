@@ -4,7 +4,7 @@ process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { expect } = require('chai');
-const fs = require('fs');
+// const fs = require('fs');
 const { server } = require('../src');
 
 // eslint-disable-next-line no-unused-vars
@@ -15,7 +15,7 @@ chai.use(chaiHttp);
 
 // Variables globales a utilizar entre las distintas pruebas
 let token;
-let idFichero;
+// let idFichero;
 
 /**
  * TEST: FILES
