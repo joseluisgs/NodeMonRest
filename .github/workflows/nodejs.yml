@@ -23,29 +23,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-          ENV: development
-          DEBUG: true
-          PORT: 8000
-          TIMEZONE: Europe/Madrid
-          TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
-          TOKEN_LIFE: 40
-          TOKEN_REFRESH: 60
-          BC_SALT: 10
-          DB_POOLSIZE: 200
-          DB_PROTOCOL: ${{ secrets.DB_PROTOCOL }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASS: ${{ secrets.DB_PASS }}
-          DB_URL: ${{ secrets.DB_URL }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          FILE_SIZE: 2
-          FILES_PATH: files
-          FILES_URL: filles
 
       - run: npm ci
-      - run: npm run lint
-      - run: echo .env
-      - run: npm test
+      #- run: npm run lint
+      - run: printenv >> .env
+     # - run: npm test
         env:
           ENV: development
           DEBUG: true
@@ -65,6 +47,7 @@ jobs:
           FILE_SIZE: 2
           FILES_PATH: files
           FILES_URL: filles
+      - run: echo .env
       #
       #
       #
