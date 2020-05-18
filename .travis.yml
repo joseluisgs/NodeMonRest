@@ -8,6 +8,7 @@ install:
 
 script:
 # - npm run test
+  - run: npm run build --if-present
 branches:
   only:
     - master
