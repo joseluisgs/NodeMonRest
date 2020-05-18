@@ -6,6 +6,26 @@ services:
 install:
   - npm ci
 
+env:
+  - ENV=development
+  - DEBUG=true
+  - PORT=8000
+  - TIMEZONE=Europe/Madrid
+  - TOKEN_SECRET={$TOKEN_SECRET}
+  - TOKEN_LIFE=40
+  - TOKEN_REFRESH=60
+  - BC_SALT=10
+  - DB_POOLSIZE=200
+  - DB_PROTOCOL=
+  - DB_USER=${DB_USER}
+  - DB_PASS=${DB_PASS}
+  - DB_URL=${DB_URL}
+  - DB_PORT=${DB_PORT}
+  - DB_NAME=${DB_NAME}
+  - FILE_SIZE=2
+  - FILES_PATH=files
+  - FILES_URL=filles
+
 script:
   - npm run lint
   - npm run test
