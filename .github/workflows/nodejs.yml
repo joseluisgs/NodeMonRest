@@ -47,9 +47,6 @@ jobs:
           FILE_SIZE: 2
           FILES_PATH: files
           FILES_URL: filles
-          #FIRST_NAME: Mona
-          #middle_name: The
-          #Last_Name: Octocat
       #
       #
       #
