@@ -27,7 +27,7 @@ jobs:
       - run: npm ci
       - run: npm run lint
      # - run: echo Hello world $FIRST_NAME $middle_name $Last_Name $FILES_URL!
-     # - run: npm test
+      - run: npm test
         env:
           ENV: ${{ secrets.ENV }}
           DEBUG: ${{ secrets.DEBUG }}
