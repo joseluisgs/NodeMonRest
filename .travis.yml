@@ -4,12 +4,13 @@ node_js:
 services:
   – mongodb
 install:
-  - npm install
+  - npm ci
 
 script:
   - npm run lint
   ## - npm run test
-  -  printenv >> .env && echo .env
+  - printenv >> .env
+  - echo .env
   ## - npm run build --if-present
 branches:
   only:
