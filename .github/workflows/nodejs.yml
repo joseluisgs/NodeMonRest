@@ -23,7 +23,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: echo Hello world $FIRST_NAME $middle_name $Last_Name $FILES_URL!
+      - run: npm ci
+      - run: npm install
+      - run: npm run lint
+     # - run: echo Hello world $FIRST_NAME $middle_name $Last_Name $FILES_URL!
+     - run: npm test
         env:
           ENV: ${{ secrets.ENV }}
           DEBUG: ${{ secrets.DEBUG }}
@@ -45,13 +49,11 @@ jobs:
           FILE_SIZE: ${{ secrets.FILE_SIZE }}
           FILES_PATH: ${{ secrets.FILES_PATH }}
           FILES_URL: ${{ secrets.FILES_URL }}
-          FIRST_NAME: Mona
-          middle_name: The
-          Last_Name: Octocat
-
-      - run: echo Hello world $FIRST_NAME $middle_name $Last_Name $FILES_URL!
-      # - run: npm ci
-      # - run: npm install
-      # - run: npm run lint
+          #FIRST_NAME: Mona
+          #middle_name: The
+          #Last_Name: Octocat
+      #
+      #
+      #
       # - run: npm run build --if-present
-      # - run: npm test
+      #
