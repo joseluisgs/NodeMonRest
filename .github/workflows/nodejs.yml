@@ -44,10 +44,13 @@ jobs:
           FILE_SIZE: ${{ secrets.FILE_SIZE }}
           FILES_PATH: ${{ secrets.FILES_PATH }}
           FILES_URL: ${{ secrets.FILES_URL }}
+          FIRST_NAME: Mona
+          middle_name: The
+          Last_Name: Octocat
 
-      - run: echo $FILES_URL
-      - run: npm ci
-      - run: npm install
-      - run: npm run lint
-      - run: npm run build --if-present
-      - run: npm test
+      - run: echo Hello world $FIRST_NAME $middle_name $Last_Name!
+      # - run: npm ci
+      # - run: npm install
+      # - run: npm run lint
+      # - run: npm run build --if-present
+      # - run: npm test
