@@ -23,16 +23,15 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        
+
       - run: |
           npm ci
 
-     # - name: lint
      # - run: npm run lint
       - run: |
           printenv >> .env
           echo .env
-     # - run: npm test
+          npm test
         env:
           ENV: development
           DEBUG: true
