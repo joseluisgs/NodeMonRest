@@ -125,49 +125,49 @@ describe('Batería de tests de Ficheros', () => {
     });
   });
 
-  /**
-   * TEST: POST SUBIDA DE FICHEROS
-   */
-  // eslint-disable-next-line no-undef
-  describe('POST: Sube un fichero una lista de ficheros', () => {
-    // eslint-disable-next-line no-undef
-    it('Debería subir un(unos) fichero(s) al servidor', (done) => {
-      chai.request(instance)
-        .post('/files/upload')
-        .set({ Authorization: `Bearer ${token}` })
-        .attach('files', fs.readFileSync(`${__dirname}/test.png`), 'test.png')
-        .end((err, res) => {
-          // console.log(res.body);
-          expect(res).to.have.status(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('status');
-          res.body.should.have.property('message');
-          res.body.should.have.property('data');
-          idFichero = res.body.data[0].newFile.id;
-          done();
-        });
-    });
-  });
+  // /**
+  //  * TEST: POST SUBIDA DE FICHEROS
+  //  */
+  // // eslint-disable-next-line no-undef
+  // describe('POST: Sube un fichero una lista de ficheros', () => {
+  //   // eslint-disable-next-line no-undef
+  //   it('Debería subir un(unos) fichero(s) al servidor', (done) => {
+  //     chai.request(instance)
+  //       .post('/files/upload')
+  //       .set({ Authorization: `Bearer ${token}` })
+  //       .attach('files', fs.readFileSync(`${__dirname}/test.png`), 'test.png')
+  //       .end((err, res) => {
+  //         // console.log(res.body);
+  //         expect(res).to.have.status(200);
+  //         res.body.should.be.a('object');
+  //         res.body.should.have.property('status');
+  //         res.body.should.have.property('message');
+  //         res.body.should.have.property('data');
+  //         idFichero = res.body.data[0].newFile.id;
+  //         done();
+  //       });
+  //   });
+  // });
 
-  /**
-  * TEST DELETE Eliminar Fichero
-  */
-  // eslint-disable-next-line no-undef
-  describe('DELETE: Eliminar Fichero: ', () => {
-    // eslint-disable-next-line no-undef
-    it('Debería eliminar un fichero', (done) => {
-      chai.request(instance)
-        .delete(`/files/delete/${idFichero}`)
-        .set({ Authorization: `Bearer ${token}` })
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('status');
-          res.body.should.have.property('message');
-          res.body.should.have.property('data');
-          res.body.should.have.property('id').eql(idFichero);
-          done();
-        });
-    });
-  });
+  // /**
+  // * TEST DELETE Eliminar Fichero
+  // */
+  // // eslint-disable-next-line no-undef
+  // describe('DELETE: Eliminar Fichero: ', () => {
+  //   // eslint-disable-next-line no-undef
+  //   it('Debería eliminar un fichero', (done) => {
+  //     chai.request(instance)
+  //       .delete(`/files/delete/${idFichero}`)
+  //       .set({ Authorization: `Bearer ${token}` })
+  //       .end((err, res) => {
+  //         expect(res).to.have.status(200);
+  //         res.body.should.be.a('object');
+  //         res.body.should.have.property('status');
+  //         res.body.should.have.property('message');
+  //         res.body.should.have.property('data');
+  //         res.body.should.have.property('id').eql(idFichero);
+  //         done();
+  //       });
+  //   });
+  // });
 });
