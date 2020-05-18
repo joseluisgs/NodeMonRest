@@ -27,13 +27,12 @@ jobs:
 
       - run: |
           npm ci
-          
+
       - run:  |
           npm run lint
 
       - run: |
           printenv >> .env
-          echo .env
           npm test
         env:
           ENV: development
@@ -54,8 +53,5 @@ jobs:
           FILE_SIZE: 2
           FILES_PATH: files
           FILES_URL: filles
-      #
-      #
-      #
-      # - run: npm run build --if-present
-      #
+
+       - run: npm run build --if-present
