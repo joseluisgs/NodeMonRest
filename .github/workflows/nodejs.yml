@@ -31,7 +31,7 @@ jobs:
      # - run: npm run lint
       - run: |
         printenv >> .env
-        - run: echo .env
+        echo .env
      # - run: npm test
         env:
           ENV: development
