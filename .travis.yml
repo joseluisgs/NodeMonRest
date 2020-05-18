@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - 12.16.3
+services:
+  – mongodb
 install:
   - npm install
 script:
