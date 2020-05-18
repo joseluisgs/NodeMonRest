@@ -5,6 +5,28 @@ services:
   – mongodb
 install:
   - npm install
+env:
+  - ENV=development
+  - DEBUG=true
+  - HOST=localhost
+  - PORT=8000
+  - TIMEZONE=Europe/Madrid
+  - TOKEN_SECRET=Este_Caballo_Viene_de_Boanzarrrrr_/_Lorem_Fistrum_Pecador_Te_Va_A_Haser_Pupitaa_Diodenaaalll_2020
+  - TOKEN_LIFE=20
+  - TOKEN_REFRESH=60
+  - BC_SALT=10
+  - # DB_DEBUG=true
+  - DB_POOLSIZE=200
+  - DB_PROTOCOL=mongodb+srv
+  - DB_USER=mongo
+  - DB_PASS=5pbsdyXEwGVMIQKS
+  - DB_URL=cluster0-pgdqg.mongodb.net
+  - DB_PORT=27017
+  - DB_NAME=recipes
+  - FILE_SIZE=2
+  - FILES_PATH=files
+  - FILES_URL=files
+
 script:
   - npm run test
 branches:
