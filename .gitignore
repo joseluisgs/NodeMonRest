@@ -2,6 +2,7 @@
 .env
 dist
 src/public/files
+src/dist
 
 # Logs
 logs
