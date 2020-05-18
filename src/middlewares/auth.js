@@ -2,6 +2,7 @@
 
 // Librerías
 const jwt = require('jwt-simple');
+const env = require('../env');
 
 // Funciones de auttenticación mediante JWT
 // Cremos una función, esto es igual a function auth(req, res, next) {}
@@ -25,7 +26,7 @@ const auth = (req, res, next) => {
   // Si tiene cabecera de autenticación descodificamos los token y payload.
   const token = req.headers.authorization.split(' ')[1];
   try {
-    const payload = jwt.decode(token, req.app.locals.config.TOKEN_SECRET);
+    const payload = jwt.decode(token, env.TOKEN_SECRET);
     // Recuperamos el usuario del payload
     req.user = payload;
     // Vamos a la siguiente ruta o función

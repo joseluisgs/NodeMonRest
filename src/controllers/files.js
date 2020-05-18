@@ -8,7 +8,7 @@
 // Librerias
 const fs = require('fs');
 const File = require('../models/files').FileModel;
-const { config, storage } = require('../config'); // Cargamos la configuración del fichero .env
+const env = require('../env');
 
 class FilesController {
   /**
@@ -44,12 +44,12 @@ class FilesController {
               file: fileDest,
               mimetype: file.mimetype,
               size: file.size,
-              url: `${req.protocol}://${req.hostname}:${config.PORT}/${config.FILES_URL}/${fileDest}`,
+              url: `${req.protocol}://${req.hostname}:${env.PORT}/${env.FILES_URL}/${fileDest}`,
               username: req.user.username,
               type: 'document',
             });
             // usamos filename para moverla al sistema de almacenamiento
-            file.mv(storage + fileDest);
+            file.mv(env.STORAGE + fileDest);
             // Almacenamos los datos en la base de datos y los metemos en el array de salida
             data.push({ newFile });
             await newFile.save();
@@ -63,12 +63,12 @@ class FilesController {
             file: fileDest,
             mimetype: file.mimetype,
             size: file.size,
-            url: `${req.protocol}://${req.hostname}:${config.PORT}/${config.FILES_URL}/${fileDest}`,
+            url: `${req.protocol}://${req.hostname}:${env.PORT}/${env.FILES_URL}/${fileDest}`,
             username: req.user.username,
             type: 'document',
           });
           // usamos filename para moverla al sistema de almacenamiento
-          file.mv(storage + fileDest);
+          file.mv(env.STORAGE + fileDest);
           // Almacenamos los datos en la base de datos y los metemos en el array de salida
           data.push({ newFile });
           await newFile.save();
@@ -180,7 +180,7 @@ class FilesController {
     try {
       // Busco el fichero
       const fichero = await File().getById(req.params.id);
-      fs.unlink(storage + fichero.file, async (err) => {
+      fs.unlink(env.STORAGE + fichero.file, async (err) => {
         if (err) throw err;
         console.log('Fichero borrado');
         const data = await File().findByIdAndDelete({ _id: req.params.id });

@@ -4,23 +4,25 @@
  */
 
 // Librerías
-const conf = require('dotenv'); // Cogemos el objeto que necesitamos .env
-const config = conf.config(); // Toda la configuración parseada del fichero .env
+const conf = require('dotenv');
+// Cogemos el objeto que necesitamos .env
+conf.config(); // Toda la configuración parseada del fichero .env
 
 module.exports = {
+  NODE_ENV: process.env.NODE_ENV,
   ENV: process.env.ENV,
   DEBUG: process.env.DEBUG,
-  HODT: process.env.HOST,
+  HOST: process.env.HOST,
   PORT: process.env.PORT,
   TIMEZONE: process.env.TIMEZONE,
-  TOKEN: process.env.TOKEN_SECRET,
+  TOKEN_SECRET: process.env.TOKEN_SECRET,
   TOKEN_LIFE: process.env.TOKEN_LIFE,
-  TOKEN_REFESH: process.env.TOKEN_REFRESH,
+  TOKEN_REFRESH: process.env.TOKEN_REFRESH,
   BC_SALT: process.env.BC_SALT,
-  DB_DEBUG: process.envDB_DEBUG,
+  DB_DEBUG: process.env.DB_DEBUG,
   DB_POOOLSIZE: process.env.DB_POOLSIZE,
   DB_PROTOCOL: process.env.DB_PROTOCOL,
-  DB_SER: process.env.UDB_USER,
+  DB_USER: process.env.DB_USER,
   DB_PASS: process.env.DB_PASS,
   DB_URL: process.env.DB_URL,
   DB_PORT: process.env.DB_PORT,

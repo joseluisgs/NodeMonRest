@@ -5,7 +5,7 @@
 
 // Librerías
 const mongoose = require('mongoose');
-const { config } = require('./config');
+const env = require('./env');
 
 /**
  * configuración de conexión a la base de datos siguiendo un patrón singleton
@@ -30,11 +30,11 @@ class Database {
    */
   connect() {
     // Creamos una cadena de conexión según los parámetros de .env. Ojo que esta partida la línea
-    const host = `${config.DB_PROTOCOL}://${config.DB_USER}:${config.DB_PASS}@${config.DB_URL}/${config.DB_NAME}?retryWrites=true&w=majority`;
+    const host = `${env.DB_PROTOCOL}://${env.DB_USER}:${env.DB_PASS}@${env.DB_URL}/${env.DB_NAME}?retryWrites=true&w=majority`;
     // Definimos una promesa que se resollverá si nos conecatmos correctamente
     return new Promise((resolve) => {
       // Configuramos el la conexión del cliente Mongo
-      mongoose.set('debug', config.DB_DEBUG); // activamos  el modo depurador si así lo tenemos en nuestro fichero
+      mongoose.set('debug', env.DB_DEBUG); // activamos  el modo depurador si así lo tenemos en nuestro fichero
       mongoose.set('useNewUrlParser', true);
       mongoose.set('useUnifiedTopology', true);
       mongoose.set('useCreateIndex', true);
@@ -43,7 +43,7 @@ class Database {
 
       // Creamos la cenexión
       this.conn = mongoose.createConnection(host, {
-        poolSize: config.DB_POOLSIZE,
+        poolSize: env.DB_POOLSIZE,
       });
 
       // Si hay un error, salimos de la apliación

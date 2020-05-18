@@ -10,7 +10,7 @@
 const fs = require('fs');
 const User = require('../models/users').UserModel;
 const File = require('../models/files').FileModel;
-const { storage } = require('../config');
+const env = require('../env');
 
 class UsersController {
   /**
@@ -185,7 +185,7 @@ class UsersController {
         if (
           oldAvatar && oldAvatar._id.toString() !== newAvatar._id.toString()
         ) {
-          return fs.unlink(storage + oldAvatar.file, async (
+          return fs.unlink(env.STORAGE + oldAvatar.file, async (
             err,
           ) => {
             if (err) throw err;

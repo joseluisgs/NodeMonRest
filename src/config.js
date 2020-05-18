@@ -8,32 +8,28 @@
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const conf = require('dotenv'); // Cogemos el objeto que necesitamos
 const path = require('path');
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const handlebars = require('express-handlebars');
-
-// Cargamos la configuración del fichero .env
-const config = conf.config().parsed; // Toda la configuración parseada del fichero .env
-const storage = `${__dirname}/public/${config.FILES_PATH}/`; // Path de almacenamiento
+const env = require('./env');
 
 // Creamos el módulo de configurar. Es una función que recibe Up
-const setConfig = (app) => {
+exports.setConfig = (app) => {
   // Quitamos la cabecera que indica que esta hecho con express, por seguridad, así nod amos pistas
   app.disable('x-powered-by');
 
   // Cargamos la configuracion y se la asignamos al servidor.
-  app.set('env', config.ENV); // lee la etiqueta ENV
-  app.set('config', config); // le pasamos toda la configuracion
+  // app.set('env', config.ENV); // lee la etiqueta ENV
+  // app.set('config', config); // le pasamos toda la configuracion
   // eslint-disable-next-line no-param-reassign
-  app.locals.env = app.get('env'); // Creamos variables locales en app àra usarlas en otros lugares del código
+  // app.locals.env = app.get('env'); // Creamos variables locales en app àra usarlas en otros lugares del código
   // eslint-disable-next-line no-param-reassign
-  app.locals.config = app.get('config'); // Creamos y almacenamos la configuración para usarla en otra parte del código
+  // app.locals.config = app.get('config'); // Creamos y almacenamos la configuración para usarla en otra parte del código
 
   // Middleware Le indicamos el midlleware morgan a usar logger.
   // Nos dara información de las peticiones y de todo
-  if (process.env.NODE_ENV !== 'test') {
+  if (env.NODE_ENV !== 'test') {
     // Si no estamos en test sacamos los logs
     app.use(logger('dev'));
   }
@@ -51,19 +47,19 @@ const setConfig = (app) => {
   Cada vez que pongamos /files, nos llevara al directorio public/files.
   Es decir cda vez que ponga http://..../files/lo que sea, leera el fichero lo que sea que este en public/uploads */
   app.use(
-    `/${config.FILES_URL}`,
-    express.static(path.join(__dirname, `public/${config.FILES_URL}`)),
+    `/${env.FILES_URL}`,
+    express.static(path.join(__dirname, `public/${env.FILES_URL}`)),
   );
 
   // Configuramos el sistema de ficheros de subida
   app.use(fileUpload(
     {
       createParentPath: true,
-      limits: { fileSize: config.FILE_SIZE * 1024 * 1024 * 1024 }, // 2MB max en env
+      limits: { fileSize: env.FILE_SIZE * 1024 * 1024 * 1024 }, // 2MB max en env
       useTempFiles: true, // Uso de ficheros temporales
       tempFileDir: '/tmp/', // Usamos un directorio y ficheros temporal y no memoria para el proceso de subida.
       preserveExtension: true, // dejamos la extensión por defecto
-      debug: config.DEBUG, // Modo de depuración
+      debug: env.DEBUG, // Modo de depuración
     },
   ));
 
@@ -85,11 +81,4 @@ const setConfig = (app) => {
 
   // Ruta publica por defecto
   app.use(express.static('public'));
-};
-
-// Exportamos los módulos
-module.exports = {
-  setConfig,
-  config,
-  storage,
 };
