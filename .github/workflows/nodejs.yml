@@ -54,4 +54,5 @@ jobs:
           FILES_PATH: files
           FILES_URL: filles
 
-       - run: npm run build --if-present
+      - run: |
+          npm run build --if-present
