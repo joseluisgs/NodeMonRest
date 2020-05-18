@@ -29,9 +29,10 @@ jobs:
           npm ci
      # - name: lint
      # - run: npm run lint
+      - name: Env Vars
       - run: |
-        printenv >> .env
-        echo .env
+          printenv >> .env
+          echo .env
      # - run: npm test
         env:
           ENV: development
