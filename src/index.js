@@ -8,6 +8,7 @@ const express = require('express');
 const config = require('./config');
 const router = require('./router');
 const db = require('./database');
+const env = require('./env');
 
 let instancia; // instancia del servidor. Singleton
 
@@ -44,10 +45,10 @@ const server = {
       router.setRouter(app);
 
       // Nos ponemos a escuchar a un puerto definido en la configuracion
-      instancia = app.listen(app.locals.config.PORT, () => {
+      instancia = app.listen(env.PORT, () => {
         const address = instancia.address(); // obtenemos la dirección
         const host = address.address === '::' ? 'localhost' : address; // dependiendo de la dirección asi configuramos
-        const port = app.locals.config.PORT; // el puerto
+        const port = env.PORT; // el puerto
         const url = `http://${host}:${port}`;
         instancia.url = url;
 
