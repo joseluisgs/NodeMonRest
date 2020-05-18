@@ -9,7 +9,7 @@ const conf = require('dotenv');
 conf.config(); // Toda la configuración parseada del fichero .env
 
 module.exports = {
-  NODE_ENV: process.env.NODE_ENV || ,
+  NODE_ENV: process.env.NODE_ENV,
   ENV: process.env.ENV,
   DEBUG: process.env.DEBUG,
   HOST: process.env.HOST,
