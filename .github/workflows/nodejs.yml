@@ -24,9 +24,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: npm ci
-      - run: npm run lint
-      - name: create env file
+      #- run: npm ci
+      #- run: npm run lint
       - run: |
           touch .env
           echo ENGINE_API_KEY=${{ secrets.TOKEN_SECRET }} >> .env
