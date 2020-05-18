@@ -9,7 +9,7 @@ const config = require('./config');
 const router = require('./router');
 const db = require('./database');
 
-let instanceServer; // instancia del servidor
+let _server; // instancia del servidor
 
 /* const getHashedPassword = (password) => {
     const sha256 = crypto.createHash('sha256');
@@ -25,12 +25,16 @@ const server = {
   start() {
     // Cargamos express como servidor
     const app = express();
+    let mongoOK = false;
 
     // Precedemos de la siguiente manera, no arrancamos el servidor si no tenemos conexión
     // a la base de datos, es decir, cuando se resuleva la promesa
-    return db.connect().then(() => {
+    mongoOK = db.connect().then(() => {
       // Cuando se resuleve la promesa actuamos
-      // Aplicamos la configuracion a
+      return true;
+    });// Fin de la promesa
+
+    if (mongoOK) {
       config.setConfig(app);
 
       // Una ruta por defecto de presentación
@@ -43,12 +47,12 @@ const server = {
       router.setRouter(app);
 
       // Nos ponemos a escuchar a un puerto definido en la configuracion
-      instanceServer = app.listen(app.locals.config.PORT, () => {
-        const address = instanceServer.address(); // obtenemos la dirección
+      _server = app.listen(app.locals.config.PORT, () => {
+        const address = _server.address(); // obtenemos la dirección
         const host = address.address === '::' ? 'localhost' : address; // dependiendo de la dirección asi configuramos
         const port = app.locals.config.PORT; // el puerto
         const url = `http://${host}:${port}`;
-        instanceServer.url = url;
+        _server.url = url;
 
         if (process.env.NODE_ENV !== 'test') {
           console.log(`⚑ Servidor API REST escuchando ✓ -> ${url}`);
@@ -56,15 +60,14 @@ const server = {
       });
 
       // console.log('Password: '+ bcrypt.hashSync('admin123', 10));
-      return instanceServer;
-    });// Fin de la promesa
-    // return instanceServer;
+      return _server;
+    }
   },
 
   // Cierra el servidor
   close() {
     // Desconectamos el socket server
-    instanceServer.close();
+    _server.close();
     if (process.env.NODE_ENV !== 'test') {
       console.log('▣  Servidor parado');
     }

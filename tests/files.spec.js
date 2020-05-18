@@ -5,23 +5,37 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { expect } = require('chai');
 const fs = require('fs');
+const { server } = require('../src');
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
 chai.use(chaiHttp);
-const url = 'http://localhost:8000';
+// const url = 'http://localhost:8000';
 
 // Variables globales a utilizar entre las distintas pruebas
 let token;
 let idFichero;
-let nombreFichero;
 
 /**
  * TEST: FILES
  */
 // eslint-disable-next-line no-undef
 describe('Batería de tests de Ficheros', () => {
+  let instance;
+
+  // antes de comenzar, levantamos el servidor
+  // eslint-disable-next-line no-undef
+  beforeEach(() => {
+    instance = server.start();
+  });
+
+  // Al terminar lo cerramos
+  // eslint-disable-next-line no-undef
+  afterEach(() => {
+    instance.close();
+  });
+
   /**
    * TEST POST Login usuario admin
    */
@@ -34,7 +48,7 @@ describe('Batería de tests de Ficheros', () => {
         email: 'admin@admin.com',
         password: '$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG',
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/auth/login')
         .send(user)
         .end((err, res) => {
@@ -56,7 +70,7 @@ describe('Batería de tests de Ficheros', () => {
   describe('GET: Obtener todos los ficheros: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener todos los ficheros', (done) => {
-      chai.request(url)
+      chai.request(instance)
         .get('/files/all')
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
@@ -75,7 +89,7 @@ describe('Batería de tests de Ficheros', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener un fichero dado su id', (done) => {
       const id = '5eb689d323847c1afcff6daa';
-      chai.request(url)
+      chai.request(instance)
         .get(`/files/file/${id}`)
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
@@ -100,7 +114,7 @@ describe('Batería de tests de Ficheros', () => {
   describe('GET: Obtiene ls ficheros del usuario registrado', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener la lista del usuario identificado', (done) => {
-      chai.request(url)
+      chai.request(instance)
         .get('/files/me')
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
@@ -118,7 +132,7 @@ describe('Batería de tests de Ficheros', () => {
   describe('POST: Sube un fichero una lista de ficheros', () => {
     // eslint-disable-next-line no-undef
     it('Debería subir un(unos) fichero(s) al servidor', (done) => {
-      chai.request(url)
+      chai.request(instance)
         .post('/files/upload')
         .set({ Authorization: `Bearer ${token}` })
         .attach('files', fs.readFileSync(`${__dirname}/test.png`), 'test.png')
@@ -142,7 +156,7 @@ describe('Batería de tests de Ficheros', () => {
   describe('DELETE: Eliminar Fichero: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería eliminar un fichero', (done) => {
-      chai.request(url)
+      chai.request(instance)
         .delete(`/files/delete/${idFichero}`)
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {

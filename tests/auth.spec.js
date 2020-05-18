@@ -4,12 +4,12 @@ process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { expect } = require('chai');
-
+const { server } = require('../src');
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
 chai.use(chaiHttp);
-const url = 'http://localhost:8000';
+// const url = 'http://localhost:8000';
 
 // Variables globales para las pruebas
 let token;
@@ -21,6 +21,21 @@ let refresh;
  */
 // eslint-disable-next-line no-undef
 describe('Batería de tests de Auth', () => {
+  let instance;
+
+  // antes de comenzar, levantamos el servidor
+  // eslint-disable-next-line no-undef
+  beforeEach(() => {
+    instance = server.start();
+  });
+
+  // Al terminar lo cerramos
+  // eslint-disable-next-line no-undef
+  afterEach(() => {
+    instance.close();
+  });
+
+
   /**
    * TEST POST, Registrar usuario
    */
@@ -37,7 +52,7 @@ describe('Batería de tests de Auth', () => {
           url: 'https://api.adorable.io/avatars/200/prueba@prueba.png',
         },
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/auth/register')
         .send(user)
         .end((err, res) => {
@@ -64,7 +79,7 @@ describe('Batería de tests de Auth', () => {
         email: 'prueba2@prueba.com',
         password: '$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO',
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/auth/login')
         .send(user)
         .end((err, res) => {
@@ -87,7 +102,7 @@ describe('Batería de tests de Auth', () => {
   describe('GET: Ver datos de usuario: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería ver los datos del usuario', (done) => {
-      chai.request(url)
+      chai.request(instance)
         .get('/auth/me')
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
@@ -118,7 +133,7 @@ describe('Batería de tests de Auth', () => {
           url: 'https://api.adorable.io/avatars/200/prueba@prueba.png',
         },
       };
-      chai.request(url)
+      chai.request(instance)
         .put('/auth/update')
         .set({ Authorization: `Bearer ${token}` })
         .send(user)
@@ -141,7 +156,7 @@ describe('Batería de tests de Auth', () => {
   describe('DELETE: Eliminar mi usuario: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería eliminar este usuario', (done) => {
-      chai.request(url)
+      chai.request(instance)
         .delete('/auth/delete')
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
@@ -164,7 +179,7 @@ describe('Batería de tests de Auth', () => {
         email: 'prueba@prueba.com',
         password: '$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsi1',
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/auth/login')
         .send(userWrong)
         .end((err, res) => {
@@ -190,7 +205,7 @@ describe('Batería de tests de Auth', () => {
         email: 'ana@correo.com',
         password: '$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO',
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/auth/login')
         .send(user)
         .end((err, res) => {
@@ -220,7 +235,7 @@ describe('Batería de tests de Auth', () => {
         role: '[\'normal\']',
         refreshToken: refresh,
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/auth/token')
         .set({ Authorization: `Bearer ${token}` })
         .send(user)
@@ -249,7 +264,7 @@ describe('Batería de tests de Auth', () => {
         username: 'ana',
         refreshToken: refresh,
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/auth/logout')
         .set({ Authorization: `Bearer ${token}` })
         .send(user)

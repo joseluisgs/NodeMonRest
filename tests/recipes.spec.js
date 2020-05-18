@@ -4,12 +4,13 @@ process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { expect } = require('chai');
+const { server } = require('../src');
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
 chai.use(chaiHttp);
-const url = 'http://localhost:8000';
+// const url = 'http://localhost:8000';
 
 // Variables globales para todas las pruebas
 let token;
@@ -21,6 +22,21 @@ let idReceta;
  */
 // eslint-disable-next-line no-undef
 describe('Batería de tests de Recetas', () => {
+  let instance;
+
+  // antes de comenzar, levantamos el servidor
+  // eslint-disable-next-line no-undef
+  beforeEach(() => {
+    instance = server.start();
+  });
+
+  // Al terminar lo cerramos
+  // eslint-disable-next-line no-undef
+  afterEach(() => {
+    instance.close();
+  });
+
+
   /**
    * TEST: GET ALL
    */
@@ -28,7 +44,7 @@ describe('Batería de tests de Recetas', () => {
   describe('GET: Obtener todas las recetas: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener todas las recetas', (done) => {
-      chai.request(url)
+      chai.request(instance)
         .get('/recipes')
         .end((err, res) => {
           // console.log(res.body);
@@ -46,7 +62,7 @@ describe('Batería de tests de Recetas', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener una receta dado su id', (done) => {
       const id = '5eb5823faf05681681978e2d';
-      chai.request(url)
+      chai.request(instance)
         .get(`/recipes/${id}`)
         // .send(recipe)
         .end((err, res) => {
@@ -78,7 +94,7 @@ describe('Batería de tests de Recetas', () => {
         email: 'ana@correo.com',
         password: '$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO',
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/auth/login')
         .send(user)
         .end((err, res) => {
@@ -111,7 +127,7 @@ describe('Batería de tests de Recetas', () => {
         persons: 3,
         time: 33,
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/recipes')
         .set({ Authorization: `Bearer ${token}` })
         .send(recipe)
@@ -148,7 +164,7 @@ describe('Batería de tests de Recetas', () => {
         persons: 3,
         time: 33,
       };
-      chai.request(url)
+      chai.request(instance)
         .put(`/recipes/${idReceta}`)
         .set({ Authorization: `Bearer ${token}` })
         .send(recipe)
@@ -174,7 +190,7 @@ describe('Batería de tests de Recetas', () => {
   describe('DELETE: Eliminar una receta: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería eliminar una receta', (done) => {
-      chai.request(url)
+      chai.request(instance)
         .delete(`/recipes/${idReceta}`)
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {

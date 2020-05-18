@@ -4,12 +4,13 @@ process.env.NODE_ENV = 'test';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { expect } = require('chai');
+const { server } = require('../src');
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
 
 chai.use(chaiHttp);
-const url = 'http://localhost:8000';
+// const url = 'http://localhost:8000';
 
 // Variables globales a utilizar entre las distintas pruebas
 let token;
@@ -20,6 +21,21 @@ let idUsuario;
  */
 // eslint-disable-next-line no-undef
 describe('Batería de tests de Usuarios', () => {
+  let instance;
+
+  // antes de comenzar, levantamos el servidor
+  // eslint-disable-next-line no-undef
+  beforeEach(() => {
+    instance = server.start();
+  });
+
+  // Al terminar lo cerramos
+  // eslint-disable-next-line no-undef
+  afterEach(() => {
+    instance.close();
+  });
+
+
   /**
    * TEST POST Login usuario admin
    */
@@ -32,7 +48,7 @@ describe('Batería de tests de Usuarios', () => {
         email: 'admin@admin.com',
         password: '$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG',
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/auth/login')
         .send(user)
         .end((err, res) => {
@@ -54,7 +70,7 @@ describe('Batería de tests de Usuarios', () => {
   describe('GET: Obtener todos los usuarios: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener todas los usuarios', (done) => {
-      chai.request(url)
+      chai.request(instance)
         .get('/users')
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
@@ -73,7 +89,7 @@ describe('Batería de tests de Usuarios', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener una usuario dado su id', (done) => {
       const id = '5eb2c6f3ccdfc8286c2bfd23';
-      chai.request(url)
+      chai.request(instance)
         .get(`/users/${id}`)
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
@@ -105,7 +121,7 @@ describe('Batería de tests de Usuarios', () => {
           url: 'https://api.adorable.io/avatars/200/prueba@prueba.png',
         },
       };
-      chai.request(url)
+      chai.request(instance)
         .post('/users')
         .set({ Authorization: `Bearer ${token}` })
         .send(user)
@@ -138,7 +154,7 @@ describe('Batería de tests de Usuarios', () => {
           url: 'https://api.adorable.io/avatars/200/prueba@prueba.png',
         },
       };
-      chai.request(url)
+      chai.request(instance)
         .put(`/users/${idUsuario}`)
         .set({ Authorization: `Bearer ${token}` })
         .send(user)
@@ -162,7 +178,7 @@ describe('Batería de tests de Usuarios', () => {
   describe('DELETE: Eliminar Usuario: ', () => {
     // eslint-disable-next-line no-undef
     it('Debería eliminar un usuario', (done) => {
-      chai.request(url)
+      chai.request(instance)
         .delete(`/users/${idUsuario}`)
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
