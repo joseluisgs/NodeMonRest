@@ -45,8 +45,9 @@ jobs:
           FILES_PATH: ${{ secrets.FILES_PATH }}
           FILES_URL: ${{ secrets.FILES_URL }}
 
+      - run: echo $FILES_URL
       - run: npm ci
       - run: npm install
-    #  - run: npm run lint
+      - run: npm run lint
       - run: npm run build --if-present
       - run: npm test
