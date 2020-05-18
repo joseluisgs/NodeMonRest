@@ -24,6 +24,28 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+      env:
+        ENV: ${{ secrets.ENV }}
+        DEBUG:  ${{ secrets.DEBUG }}
+        HOST: ${{ secrets.ENV }}
+        PORT: ${{ secrets.PORT }}
+        TIMEZONE: ${{ secrets.TIMEZONE }}
+        TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
+        TOKEN_LIFE: ${{ secrets.TOKEN_LIFE }}
+        TOKEN_REFRESH: ${{ secrets.TOKEN_REFRESH }}
+        BC_SALT: ${{ secrets.BC_SALT }}
+        DB_DEBUG: ${{ secrets.DB_DEBUG }}
+        DB_POOLSIZE: ${{ secrets.DB_POOLSIZE }}
+        DB_PROTOCOL: ${{ secrets.DB_PROTOCOL }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASS: ${{ secrets.DB_PASS }}
+        DB_URL: ${{ secrets.DB_URL }}
+        DB_PORT: ${{ secrets.DB_PORT }}
+        DB_NAME: ${{ secrets.DB_NAME }}
+        FILE_SIZE: ${{ secrets.FILE_SIZE }}
+        FILES_PATH: ${{ secrets.FILES_PATH }}
+        FILES_URL: ${{ secrets.FILES_URL }}
+
     - run: npm ci
     - run: npm install
   #  - run: npm run lint
