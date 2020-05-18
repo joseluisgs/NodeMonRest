@@ -23,11 +23,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
       - run: npm ci
-      - run: npm install
       - run: npm run lint
      # - run: echo Hello world $FIRST_NAME $middle_name $Last_Name $FILES_URL!
-     - run: npm test
+     # - run: npm test
         env:
           ENV: ${{ secrets.ENV }}
           DEBUG: ${{ secrets.DEBUG }}
