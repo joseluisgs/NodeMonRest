@@ -42,8 +42,8 @@ jobs:
           FILES_PATH: files
           FILES_URL: filles
 
-      #- run: npm ci
-      #- run: npm run lint
+      - run: npm ci
+      - run: npm run lint
       - run: echo .env
       - run: npm test
         env:
