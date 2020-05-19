@@ -72,22 +72,13 @@ jobs:
         id: vars
         run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
       - name: Build del contenedor Docker con su etiqueta
-        # run: docker build -t ${{ secrets.DOCKER_USER }}/nodemonapirest .
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/nodemon-apirest:${{steps.vars.outputs.tag}}
-      - name: Hacemos push de la imagen Docker etiquetada
-        run: docker push  ${{ secrets.DOCKER_USER }}/nodemon-apirest:${{steps.vars.outputs.tag}}
-      - name: Construimos la última imagen Docker
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/nodemon-apirest:latest
-      - name: Push the latest Docker image
-        run: docker push ${{ secrets.DOCKER_USER }}/nodemon-apirest
-
       # Etiquetamos el contenedor
-      #- name: Tags del cotenedor Docker
-      #  run: |
-      #    docker tag nodemonapirest ${{ secrets.DOCKER_USER }}/nodemonapirest:${{ github.sha }}
-      #    docker tag nodemonapirest ${{ secrets.DOCKER_USER }}/nodemonapirest:latest
+      - name: Tags del cotenedor Docker
+        run: |
+          docker tag nodemonapirest ${{ secrets.DOCKER_USER }}/nodemonapirest:v1
+          docker tag nodemonapirest ${{ secrets.DOCKER_USER }}/nodemonapirest:latest
       # Lo subimos a DockerHub
-      # - name: Push
-      #  run: |
-      #    docker push ${{ secrets.DOCKER_USER }}/nodemonapirest:${{ github.sha }}
-      #    docker push ${{ secrets.DOCKER_USER }}/nodemonapirest:latest
+      - name: Push
+        run: |
+          docker push ${{ secrets.DOCKER_USER }}/nodemonapirest:v1
+          docker push ${{ secrets.DOCKER_USER }}/nodemonapirest:latest
