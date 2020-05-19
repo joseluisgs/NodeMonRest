@@ -71,6 +71,11 @@ jobs:
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: Build
         run: docker build -t nodemon-apirest .
-      - name: Hacemos el push
+      - name: Etiquetamos la imagen
         run: |
+          docker tag nodemon-apirest ${{ secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:${{ github.sha }}
+          docker tag nodemon-apirest ${{secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:latest
+      - name: Hacemos el pusha a DockerHub
+        run: |
+          docker push ${{ secrets.DOCKER_USER }}/nodemon-apirest:${{ github.sha }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:latest
