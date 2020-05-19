@@ -1,7 +1,7 @@
 # NodeMonREST
 Ejemplo de API REST en NodeJS, usando Mongo.
 
-![Node.js CI](https://github.com/joseluisgs/NodeMonRest/workflows/Node.js%20CI/badge.svg) [![Build Status](https://travis-ci.com/joseluisgs/NodeMonRest.svg?branch=master)](https://travis-ci.com/joseluisgs/NodeMonRest)
+[![Node.js CI](https://github.com/joseluisgs/NodeMonRest/workflows/Node.js%20CI/badge.svg)](https://github.com/joseluisgs/NodeMonRest/actions) [![Build Status](https://travis-ci.com/joseluisgs/NodeMonRest.svg?branch=master)](https://travis-ci.com/joseluisgs/NodeMonRest)
 
 ### Acerca de
 Este proyecto tiene nombre de Pokemon :). El objetivo prinicpal docente es aplicar distintas técnicas para construir un esqueleto de API REST usable en distntos proyectos. La idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el mámbito docente como poder realizarlo. Es una apliación púramente docente. Entre las distintas técnicas usadas:
