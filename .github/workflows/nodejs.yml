@@ -69,10 +69,10 @@ jobs:
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       # Construimos el docker en base del Dockerfile
       - name: Hacemos el Build
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/nodemon-apirest:${{steps.vars.outputs.tag}}
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/nodemon-apirest:v1
       # Hacemos push de la última etiqueta
       - name: Hacemos push de la imagen Docker etiquetada
-        run: docker push  ${{ secrets.DOCKER_USER }}/nodemon-apirest:${{steps.vars.outputs.tag}}
+        run: docker push  ${{ secrets.DOCKER_USER }}/nodemon-apirest:v1
       # Hacemos el build de la última imagen
       - name: Construimos la última imagen Docker
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/nodemon-apirest:latest
