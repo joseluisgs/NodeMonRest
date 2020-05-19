@@ -45,6 +45,7 @@
     "test-recipes": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/recipes.spec.js",
     "test-users": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/users.spec.js",
     "test-ci": "npm run test-recipes && npm run test-users",
+    "lint-ci": "eslint --fix --quiet 'src/**/*.js'",
     "build-travis": "npm run undist && babel src -d dist && cp -r 'src/views' 'dist/views' && cp -r 'src/public' 'dist/public' && cp .env_example dist/.env"
   },
   "devDependencies": {

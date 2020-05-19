@@ -14,10 +14,8 @@ install:
 
 # Ejecutamos los comandos
 script:
-  # Hacemos Lint al código
-  - npm run lint
-  # Corregimos posibles errores
-  - npm run fix
+  # Hacemos Lint al código y corregimos sus errores automaticamente si puede, si no error
+  - npm run lint-ci
   # - printenv >> .env
   # - npm test
   # Costruimos los ficheros ejecutables

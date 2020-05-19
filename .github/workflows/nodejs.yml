@@ -30,10 +30,9 @@ jobs:
       # Instalamos el programa y sus dependencias
       - run: |
           npm ci
-      # Pasamos en linter para ver si hay errores de sistáxis o no permitidos con nuestro estilo de programación, corrregimos sus errores
+      # Pasamos en linter para ver si hay errores de sistáxis o no permitidos con nuestro estilo de programación, corrregimos sus errores automaticamente.
       - run:  |
-          npm run lint
-          npm run fix
+          npm run lint-ci
       # Importante como trabajamos con un .env, todos los valores por defecto debemos recogerlo, lo creamos con los valores del sistema incluidos en GitHub secret dinamicamente
       # Realizamos los test, como hay algunos que pueden fallar debido a la taruleza del entorbno de pruebas CI por eso me he creado unos test especificos para este entorno
       - run: |
