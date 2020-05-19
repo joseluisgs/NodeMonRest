@@ -71,7 +71,11 @@ jobs:
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       - name: Tomamos la versión
         id: vars
-        run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
+        run: |
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          [ "$VERSION" == "master" ] && VERSION=latest
+          echo ::set-output name=tag::$(echo $VERSION)
       - name: Build
         run: docker build -t nodemon-apirest .
       - name: Etiquetamos la imagen
