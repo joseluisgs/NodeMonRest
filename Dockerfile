@@ -5,16 +5,17 @@ FROM node:12.16.3
 # Opcional Crear estos directorios garantizará que tengan los permisos deseados,
 # lo que será importante al crear módulos de nodo locales en el contenedor con npm install.
 # Además de crear estos directorios, estableceremos la propiedad sobre ellos a nuestro usuario node
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+# RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 
 # Creamos el directorio app
+# WORKDIR /usr/src/app
 WORKDIR /usr/node/app
 
 # Instalamos las dependencias
 COPY package*.json ./
 
 # Opcional. Para garantizar que todos los archivos de la aplicación sean propiedad del usuario node no root
-USER node
+# USER node
 
 # Instalamos las dependencias
 RUN npm install
@@ -22,8 +23,8 @@ RUN npm install
 # RUN npm ci --only=production
 
 # Bundle del código de la app, este es la parte opcional si no usar la línea posterior comentada
-COPY --chown=node:node . .
-# COPY . .
+# COPY --chown=node:node . .
+COPY . .
 
 # Si queremos hacer el build aquí, si no deberíamos copiar solo el directorio /dist
 RUN npm run build

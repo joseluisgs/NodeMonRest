@@ -60,7 +60,7 @@ jobs:
   # Construimos el Docker para mandarlo a DockerHub
   CD:
     runs-on: ubuntu-latest
-    # Necesitamos CI
+    # Necesitamos CI, por lo tanto no lo lanza en paralelo si no cuando acabe
     needs: CI
     steps:
       - uses: actions/checkout@v1
