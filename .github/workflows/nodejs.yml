@@ -73,4 +73,4 @@ jobs:
         run: docker build -t nodemon-apirest .
       - name: Hacemos el push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/nodemon-apirest:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:latest
