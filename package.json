@@ -39,7 +39,12 @@
     "rebuild": "npm run clean && npm install && npm run undist && npm run build --prod",
     "undist": "rm -rf dist",
     "prune": "npm prune --production",
-    "test": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/"
+    "test": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/",
+    "test-auth": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/auth.spec.js",
+    "test-files": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/files.spec.js",
+    "test-recipes": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/recipes.spec.js",
+    "test-users": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/users.spec.js",
+    "test-ci": "npm run test-recipes && npm run test-users"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

@@ -3,56 +3,53 @@
 
 name: Node.js CI
 
+# Se dispara el evento al hacer push en la rama indicada
 on:
   push:
     branches: [master]
   pull_request:
     branches: [master]
-
+# Trabajo a realizar
 jobs:
+  # Construimos el contenedor CI sobre Ubuntu, opción por defecto de Github para Node
   build:
     runs-on: ubuntu-latest
 
     strategy:
+      # En una matriz indicamos las versiones con las que queremos probar
       matrix:
-        # node-version: [10.x, 12.x]
-        node-version: [12.x]
-
+        node-version: [10.x, 12.x]
+        # node-version: [12.x]
+    # Pasos a realizar para cada versión del sistema a probar
     steps:
       - uses: actions/checkout@v2
       - name: Node.js CI GitHub ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-
+      # Instalamos el programa y sus dependencias
       - run: |
           npm ci
-
+      # Pasamos en linter para ver si hay errores de sistáxis o no permitidos con nuestro estilo de programación
       - run:  |
           npm run lint
-
+      # Importante como trabajamos con un .env, todos los valores por defecto debemos recogerlo, lo creamos con los valores del sistema incluidos en GitHub secret dinamicamente
+      # Realizamos los test, como hay algunos que pueden fallar debido a la taruleza del entorbno de pruebas CI por eso me he creado unos test especificos para este entorno
       - run: |
           printenv >> .env
-          npm test
+          npm run test-ci
+        # Cargamos a quí las variables de entorno que necesitemos su no tomamos otras por defecto en el código en la clase env, las genera dinamicamente en su .env
         env:
-          ENV: development
-          DEBUG: true
-          PORT: 8000
-          TIMEZONE: Europe/Madrid
           TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
           TOKEN_LIFE: 40
           TOKEN_REFRESH: 60
-          BC_SALT: 10
-          DB_POOLSIZE: 200
           DB_PROTOCOL: ${{ secrets.DB_PROTOCOL }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
           DB_URL: ${{ secrets.DB_URL }}
           DB_PORT: ${{ secrets.DB_PORT }}
           DB_NAME: ${{ secrets.DB_NAME }}
-          FILE_SIZE: 2
-          FILES_PATH: files
-          FILES_URL: filles
 
+      # Construyo la imagen completa
       - run: |
           npm run build --if-present
