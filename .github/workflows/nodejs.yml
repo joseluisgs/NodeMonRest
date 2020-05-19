@@ -30,20 +30,19 @@ jobs:
       # Instalamos el programa y sus dependencias
       - run: |
           npm ci
-      # Pasamos en linter para ver si hay errores de sistáxis o no permitidos con nuestro estilo de programación
+      # Pasamos en linter para ver si hay errores de sistáxis o no permitidos con nuestro estilo de programación, corrregimos sus errores
       - run:  |
           npm run lint
+          npm run fix
       # Importante como trabajamos con un .env, todos los valores por defecto debemos recogerlo, lo creamos con los valores del sistema incluidos en GitHub secret dinamicamente
       # Realizamos los test, como hay algunos que pueden fallar debido a la taruleza del entorbno de pruebas CI por eso me he creado unos test especificos para este entorno
       - run: |
-          printenv >> .env
+          printenv >> .env &
           npm run test-ci
         # Cargamos a quí las variables de entorno que necesitemos su no tomamos otras por defecto en el código en la clase env, las genera dinamicamente en su .env
         env:
           CI: true
           TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
-          TOKEN_LIFE: 40
-          TOKEN_REFRESH: 60
           DB_PROTOCOL: ${{ secrets.DB_PROTOCOL }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
