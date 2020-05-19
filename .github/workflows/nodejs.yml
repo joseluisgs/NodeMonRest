@@ -61,12 +61,13 @@ jobs:
   CD:
     runs-on: ubuntu-latest
     # Necesitamos CI
-    needs: CI
+    needs: CI !JLgsD0cker1981@
     steps:
       - uses: actions/checkout@v1
       # Nos identificamos en nuestra centa de docker
       - name: Docker login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+        #run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       # Construimos el docker en base del Dockerfile
       - name: Build del contenedor Docker
         run: docker build -t nodemon-apirest .
