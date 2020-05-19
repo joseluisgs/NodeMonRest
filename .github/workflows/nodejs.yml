@@ -69,13 +69,10 @@ jobs:
     needs: CI
     steps:
       - uses: actions/checkout@v1
-      - name: Construimos la imagen
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
       - name: Docker login
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-      - name: Push de la imagen a Docker Hub
+      - name: Push de la imagen en DockerHub
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
           # Pasa las mayúsculas a minúsculas
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           # Se queda con el prefijo de la versión que tenemos
@@ -85,6 +82,11 @@ jobs:
           # Ussamos Docker `latest` tag
           [ "$VERSION" == "master" ] && VERSION=latest
           echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+      - name: Construimos la imagen etiquetada
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:$VERSION
+      - name: Push the tagged Docker image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:${{steps.vars.outputs.tag}}
+      - name: Build the latest Docker image
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKERHUB_USERNAME }}$IMAGE_NAME:latest
+      - name: Push the latest Docker image
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/$IMAGE_NAME:latest
