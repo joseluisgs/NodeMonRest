@@ -1,16 +1,29 @@
+# Identificamos el lenguaje
 language: node_js
+
+# Indicamos la plataforma de destino
 node_js:
   - 12.16.3
+
+  # Decimos los servicios a usar desde tyravis al exterior
 services:
   – mongodb
+# Instalamos las dependencias de la app
 install:
   - npm ci
 
+# Ejecutamos los comandos
 script:
+  # Hacemos Lint al código
   - npm run lint
+  # Corregimos posibles errores
+  - npm run fix
   # - printenv >> .env
   # - npm test
+  # Costruimos los ficheros ejecutables
   - npm run build --if-present
+
+# Solo actuamos antes cambios en el master
 branches:
   only:
     - master
