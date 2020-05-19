@@ -35,7 +35,7 @@
     "fix": "eslint 'src/**/*.js'",
     "clean": "rm -rf node_modules && npm run undist",
     "reinstall": "npm run clean && npm run undist && npm install",
-    "build": "npm run undist && babel src -d dist && cp -r 'src/views' 'dist/views' && cp -r 'src/public' 'dist/public'",
+    "build": "npm run undist && babel src -d dist && cp -r 'src/views' 'dist/views' && cp -r 'src/public' 'dist/public' && cp .env dist/",
     "rebuild": "npm run clean && npm install && npm run undist && npm run build --prod",
     "undist": "rm -rf dist",
     "prune": "npm prune --production",
