@@ -38,7 +38,7 @@ jobs:
 
       # Importante como trabajamos con un .env, todos los valores por defecto debemos recogerlo, lo creamos con los valores del sistema incluidos en GitHub secret dinamicamente
       # Realizamos los test, como hay algunos que pueden fallar debido a la taruleza del entorbno de pruebas CI por eso me he creado unos test especificos para este entorno
-      - name: Test y pruebas en CI
+      #- name: Test y pruebas en CI
       - run: |
           printenv >> .env
           npm run test-ci
@@ -56,6 +56,6 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
 
       # Construyo la imagen completa
-      - name: Construcción, build del proyecto
+      #- name: Construcción, build del proyecto
       - run: |
           npm run build --if-present
