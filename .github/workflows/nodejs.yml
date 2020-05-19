@@ -15,7 +15,7 @@ on:
     # Trabajo a realizar
 jobs:
   # Construimos el contenedor CI sobre Ubuntu, opción por defecto de Github para Node
-  CI:
+  NODE-CI:
     runs-on: ubuntu-latest
 
     strategy:
@@ -61,14 +61,16 @@ jobs:
           npm run build --if-present
 
   # Construimos el Docker para mandarlo a DockerHub
-  CD:
+  DOCEKR-CD:
     runs-on: ubuntu-latest
     # Necesitamos CI, por lo tanto no lo lanza en paralelo si no cuando acabe
-    needs: CI
+    needs: NODE-CI
     steps:
       - uses: actions/checkout@v1
       - name: Docker login
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      # Esta parte de la versión no es obligatoria, pero i la quitamos debemos quitar todas las lineas que hacen referencias
+      # Y quedarnos solo con lo del Latest
       - name: Tomamos la versión
         id: vars
         run: |
@@ -84,5 +86,5 @@ jobs:
           docker tag nodemon-apirest ${{secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:latest
       - name: Hacemos el pusha a DockerHub
         run: |
-          docker tag nodemon-apirest ${{secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:${{steps.vars.outputs.tag}}
+          docker push ${{secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:${{steps.vars.outputs.tag}}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:latest
