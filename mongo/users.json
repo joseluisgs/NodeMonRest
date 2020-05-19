@@ -8,9 +8,7 @@
   "roles": [
     "normal"
   ],
-  "avatar": {
-    "url": "https://api.adorable.io/avatars/200/ana@ana.png"
-  }
+  "avatar": "https://api.adorable.io/avatars/200/ana@correo.com.png"
 },{
   "_id": {
     "$oid": "5eb2c655ccdfc8286c2bfd22"
@@ -23,19 +21,13 @@
     "normal"
   ],
   "avatar": {
-    "url": "https://api.adorable.io/avatars/200/admin@admin.png"
-  }
-},{
-  "_id": {
-    "$oid": "5eb65ccf5b0e8d040daf09da"
-  },
-  "roles": [
-    "normal"
-  ],
-  "username": "prueba",
-  "email": "prueba@prueba.com",
-  "password": "$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO",
-  "avatar": {
-    "url": "https://api.adorable.io/avatars/200/prueba@prueba.png"
+    "_id": "5eb689d323847c1afcff6daa",
+    "file": "d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg",
+    "mimetype": "image/jpeg",
+    "size": 30015,
+    "url": "http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg",
+    "username": "admin",
+    "type": "avatar",
+    "__v": 0
   }
 }]

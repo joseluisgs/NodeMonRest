@@ -17,8 +17,20 @@
   "difficulty": "easy",
   "persons": 4,
   "time": 30,
-  "images": [],
-  "id": "5a4e6ff6023d63160b44bca4"
+  "images": [
+    {
+      "_id": {
+        "$oid": "5eb68bb23ec4ed1c74530f6b"
+      },
+      "file": "c0fca67718220630aebc6047e3641c50.jpg",
+      "mimetype": "image/jpeg",
+      "size": 57099,
+      "url": "http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg",
+      "username": "admin",
+      "type": "recipe",
+      "__v": 0
+    }
+  ]
 },{
   "_id": {
     "$oid": "5eb5823faf05681681978e2e"
@@ -40,8 +52,7 @@
   "difficulty": "easy",
   "persons": 4,
   "time": 10,
-  "images": [],
-  "id": "5a4e711a023d63160b44bca6"
+  "images": []
 },{
   "_id": {
     "$oid": "5eb5823faf05681681978e2f"
@@ -60,8 +71,7 @@
   "difficulty": "difficult",
   "persons": 4,
   "time": 35,
-  "images": [],
-  "id": "5a4e70bb023d63160b44bca5"
+  "images": []
 },{
   "_id": {
     "$oid": "5eb5823faf05681681978e30"
@@ -78,12 +88,11 @@
   ],
   "username": "recipe",
   "title": "Guisantes con huevo escalfado",
-  "description": "null",
+  "description": "Muy Poca",
   "persons": 4,
   "time": 25,
   "difficulty": "difficult",
-  "images": [],
-  "id": "5a4e98c47a56aa2505d3d0ac"
+  "images": []
 },{
   "_id": {
     "$oid": "5eb5823faf05681681978e31"
@@ -113,8 +122,7 @@
   "difficulty": "medium",
   "persons": 4,
   "time": 25,
-  "images": [],
-  "id": "5a4e6f7b023d63160b44bca3"
+  "images": []
 },{
   "_id": {
     "$oid": "5eb5823faf05681681978e32"
@@ -138,6 +146,5 @@
   "persons": 4,
   "time": 15,
   "difficulty": "medium",
-  "images": [],
-  "id": "5a4e7266e6f07a6a7a480bda"
+  "images": []
 }]
