@@ -10,7 +10,7 @@ Este proyecto tiene nombre de Pokemon :). El objetivo prinicpal docente es aplic
 * Acceso a bases de datos NoSQL.
 * Autenticación y atorización usando [JWT](https://jwt.io/introduction/).
 * Autorización basada en permisos de usuario.
-* Maneo de [CORS](https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS)
+* Manejo de [CORS](https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS)
 * Algunos [patrones de diseño](https://sourcemaking.com/design_patterns) conocidos.
 
 Iré comentando los apsctos más releantes y las librerías usadas en cada parte.
