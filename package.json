@@ -35,7 +35,7 @@
     "fix": "eslint --fix 'src/**/*.js'",
     "clean": "rm -rf node_modules && npm run undist",
     "reinstall": "npm run clean && npm run undist && npm install",
-    "build": "npm run undist && babel src -d dist && cp -r 'src/views' 'dist/views' && cp -r 'src/public' 'dist/public' && cp '.env_example' dist/",
+    "build": "npm run undist && babel src -d dist && cp -r 'src/views' 'dist/views' && cp -r 'src/public' 'dist/public' && cp '.env_example' dist/.env",
     "rebuild": "npm run clean && npm install && npm run undist && npm run build --prod",
     "undist": "rm -rf dist",
     "prune": "npm prune --production",
@@ -45,8 +45,7 @@
     "test-recipes": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/recipes.spec.js",
     "test-users": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/users.spec.js",
     "test-ci": "npm run test-recipes && npm run test-users",
-    "lint-ci": "eslint --fix --quiet 'src/**/*.js'",
-    "build-travis": "npm run undist && babel src -d dist && cp -r 'src/views' 'dist/views' && cp -r 'src/public' 'dist/public' && cp '.env_example' dist/.env"
+    "lint-ci": "eslint --fix --quiet 'src/**/*.js'"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
