@@ -22,21 +22,24 @@ jobs:
         # node-version: [12.x]
     # Pasos a realizar para cada versión del sistema a probar
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v1
       - name: Node.js CI GitHub ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       # Instalamos el programa y sus dependencias
-      - run: |
+      - name: Instalamos dependencias y el entorno de ejecución
+        run: |
           npm ci
       # Pasamos en linter para ver si hay errores de sistáxis o no permitidos con nuestro estilo de programación, corrregimos sus errores automaticamente.
-      - run:  |
+      - name: Linter y Fix del código
+        run:  |
           npm run lint-ci
       # Importante como trabajamos con un .env, todos los valores por defecto debemos recogerlo, lo creamos con los valores del sistema incluidos en GitHub secret dinamicamente
       # Realizamos los test, como hay algunos que pueden fallar debido a la taruleza del entorbno de pruebas CI por eso me he creado unos test especificos para este entorno
-      - run: |
-          printenv >> .env &
+      - name: Tests del proyecto
+        run: |
+          printenv >> .env
           npm run test-ci
         # Cargamos a quí las variables de entorno que necesitemos su no tomamos otras por defecto en el código en la clase env, las genera dinamicamente en su .env
         env:
@@ -48,6 +51,32 @@ jobs:
           DB_URL: ${{ secrets.DB_URL }}
           DB_PORT: ${{ secrets.DB_PORT }}
           DB_NAME: ${{ secrets.DB_NAME }}
+
       # Construyo la imagen completa
-      - run: |
+      - name: Build del proyecto.
+        run: |
           npm run build --if-present
+
+  # Construimos el Docker para mandarlo a DockerHub
+  CD:
+    runs-on: ubuntu-latest
+    # Necesitamos CI
+    needs: CI
+    steps:
+      - uses: actions/checkout@v1
+      # Nos identificamos en nuestra centa de docker
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+      # Construimos el docker en base del Dockerfile
+      - name: Build del contenedor Docker
+        run: docker build -t nodemon-apirest .
+      # Etiquetamos el contenedor
+      - name: Tags del cotenedor Docker
+        run: |
+          docker tag nodemon-apirest ${{ secrets.DOCKER_USER }}/nodemon-apirest:${{ github.sha }}
+          docker tag nodemon-apirest ${{ secrets.DOCKER_USER }}/nodemon-apirest:latest
+      # Lo subimos a DockerHub
+      - name: Push
+        run: |
+          docker push ${{ secrets.DOCKER_USER }}/nodemon-apirest:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/nodemon-apirest:latest
