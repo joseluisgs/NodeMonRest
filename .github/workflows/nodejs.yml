@@ -73,9 +73,7 @@ jobs:
         run: docker build -t nodemon-apirest .
       - name: Etiquetamos la imagen
         run: |
-          docker tag nodemon-apirest ${{ secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:${{ github.sha }}
           docker tag nodemon-apirest ${{secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:latest
       - name: Hacemos el pusha a DockerHub
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/nodemon-apirest:${{ github.sha }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodemon-apirest:latest
