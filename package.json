@@ -32,7 +32,7 @@
     "start": "node --require @babel/register src/index.js",
     "watch": "nodemon",
     "lint": "eslint 'src/**/*.js'",
-    "fix": "eslint 'src/**/*.js'",
+    "fix": "eslint -- fix 'src/**/*.js'",
     "clean": "rm -rf node_modules && npm run undist",
     "reinstall": "npm run clean && npm run undist && npm install",
     "build": "npm run undist && babel src -d dist && cp -r 'src/views' 'dist/views' && cp -r 'src/public' 'dist/public' && cp .env dist/",

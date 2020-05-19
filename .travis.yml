@@ -21,7 +21,7 @@ script:
   # - printenv >> .env
   # - npm test
   # Costruimos los ficheros ejecutables
-  - npm run build --if-present
+  - npm run build-travis --if-present
 
 # Solo actuamos antes cambios en el master
 branches:
