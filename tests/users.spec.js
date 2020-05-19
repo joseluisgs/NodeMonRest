@@ -23,15 +23,16 @@ let idUsuario;
 describe('Batería de tests de Usuarios', () => {
   let instance;
 
-  // antes de comenzar, levantamos el servidor
+  // antes de comenzar, levantamos el servidor, cambo befereEach por before para que se ejecute una vez en todo el test y no por cada test (prueba).
+  // Es costoso arrancar y apagar el servidor
   // eslint-disable-next-line no-undef
-  beforeEach(() => {
+  before(() => {
     instance = server.start();
   });
 
-  // Al terminar lo cerramos
+  // Al terminar lo cerramos. Cambio afterEach por after
   // eslint-disable-next-line no-undef
-  afterEach(() => {
+  after(() => {
     instance.close();
   });
 
