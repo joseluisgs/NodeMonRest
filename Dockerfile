@@ -35,8 +35,8 @@ EXPOSE 8000
 # Ejecutamos el comando en dist, pero en el resto del contenedor tenemos el resto de código (ver COPY)
 CMD [ "node", "dist/index.js" ]
 
-# Luego, creamos a imagen: docker build -t joseluisgs/nodemonapirest .  (oye que lo del punto no está mal, es que es así :))
-# Luego: docker run -p 49160:8000 -d joseluisgs/nodemonapirest de esta manera exponemos los puertos. en nuestra maquina es el 49160, que se mapea al 8000 del docker
+# Luego, creamos a imagen: docker build -t joseluisgs/nodemon-apirest .  (oye que lo del punto no está mal, es que es así :))
+# Luego: docker run -p 49160:8000 -d joseluisgs/nodemon-apirest de esta manera exponemos los puertos. en nuestra maquina es el 49160, que se mapea al 8000 del docker
 # Luego: docker ps
 # Luego: docker logs <container_id>
 # Luego: Hacer una peticion a http://localhost:49160 o simplemente abrir el navegador a este puerto
