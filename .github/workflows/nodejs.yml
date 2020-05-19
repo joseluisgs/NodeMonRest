@@ -23,14 +23,13 @@ jobs:
     # Pasos a realizar para cada versión del sistema a probar
     steps:
       - uses: actions/checkout@v2
-      - name: Node.js CI GitHub Actions ${{ matrix.node-version }}
+      - name: Node.js CI GitHub ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       # Instalamos el programa y sus dependencias
-      - name: Instalación del entorno y dependencias
-        - run: |
-            npm ci
+      - run: |
+          npm ci
       # Pasamos en linter para ver si hay errores de sistáxis o no permitidos con nuestro estilo de programación
       - name: Aplicación de Linter
         - run:  |
