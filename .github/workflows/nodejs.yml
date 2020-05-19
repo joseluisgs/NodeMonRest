@@ -31,7 +31,7 @@ jobs:
       - run: |
           npm ci
       # Pasamos en linter para ver si hay errores de sistáxis o no permitidos con nuestro estilo de programación
-      3- name: Aplicación de Linter
+      #- name: Aplicación de Linter
       - run:  |
           npm run lint
       # Importante como trabajamos con un .env, todos los valores por defecto debemos recogerlo, lo creamos con los valores del sistema incluidos en GitHub secret dinamicamente
