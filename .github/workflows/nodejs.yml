@@ -61,7 +61,7 @@ jobs:
   CD:
     runs-on: ubuntu-latest
     # Necesitamos CI
-    needs: CI !JLgsD0cker1981@
+    needs: CI
     steps:
       - uses: actions/checkout@v1
       # Nos identificamos en nuestra centa de docker
