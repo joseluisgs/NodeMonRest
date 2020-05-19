@@ -8,13 +8,20 @@ const conf = require('dotenv');
 // Cogemos el objeto que necesitamos .env
 conf.config(); // Toda la configuración parseada del fichero .env
 
+// Filtramos que estos parámetros importantes para la ejecución estén
+const ready = process.env.DB_USER && process.env.DB_PASS && process.env.DB_URL && process.env.DB_PORT && process.env.DB_NAME;
+if (!ready) {
+  console.log('✕ Error: Faltán variables de entorno para ejecutarse correctamente. Por favor revise su fichero .env');
+  process.exit(22);
+}
+
 // Es importante que pongamos unos valores por defecto por si no están en el .env o defnidos en el sistema
 module.exports = {
   NODE_ENV: process.env.NODE_ENV,
   ENV: process.env.ENV || 'development',
   DEBUG: process.env.DEBUG || true,
   HOST: process.env.HOST || 'localhost',
-  PORT: process.env.PORT || 8080,
+  PORT: process.env.PORT || 8000,
   TIMEZONE: process.env.TIMEZONE || 'Europe/Madrid',
   TOKEN_SECRET: process.env.TOKEN_SECRET || 'Este_Caballo_Viene_de_Boanzarrrrr_/_Lorem_Fistrum_Pecador_Te_Va_A_Haser_Pupitaa_Diodenaaalll_2020',
   TOKEN_LIFE: process.env.TOKEN_LIFE || 20,
