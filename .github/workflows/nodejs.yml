@@ -7,8 +7,13 @@ name: NodeMon-APIRest CI/CD
 on:
   push:
     branches: [master]
+    tags:
+      - v*
   pull_request:
     branches: [master]
+env:
+# TODO: Change variable to your image's name.
+  IMAGE_NAME: nodemon-apirest
 # Trabajo a realizar
 jobs:
   # Construimos el contenedor CI sobre Ubuntu, opción por defecto de Github para Node
@@ -64,18 +69,22 @@ jobs:
     needs: CI
     steps:
       - uses: actions/checkout@v1
-      # Nos identificamos en nuestra centa de docker
+      - name: Construimos la imagen
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
       - name: Docker login
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-      # Construimos el docker en base del Dockerfile
-      - name: Hacemos el Build
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/nodemon-apirest:v1
-      # Hacemos push de la última etiqueta
-      - name: Hacemos push de la imagen Docker etiquetada
-        run: docker push  ${{ secrets.DOCKER_USER }}/nodemon-apirest:v1
-      # Hacemos el build de la última imagen
-      - name: Construimos la última imagen Docker
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USER }}/nodemon-apirest:latest
-      # Hacemos push de la última imagen
-      - name: Push the la ultima imagen docker
-        run: docker push ${{ secrets.DOCKER_USER }}/nodemon-apirest
+      - name: Push de la imagen a Docker Hub
+        run: |
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          # Pasa las mayúsculas a minúsculas
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          # Se queda con el prefijo de la versión que tenemos
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Quitamos la v del prefijo de la version
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Ussamos Docker `latest` tag
+          [ "$VERSION" == "master" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
