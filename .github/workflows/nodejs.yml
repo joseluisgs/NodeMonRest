@@ -61,7 +61,7 @@ jobs:
           npm run build --if-present
 
   # Construimos el Docker para mandarlo a DockerHub
-  DOCEKR-CD:
+  DOCKER-CD:
     runs-on: ubuntu-latest
     # Necesitamos CI, por lo tanto no lo lanza en paralelo si no cuando acabe
     needs: NODE-CI
