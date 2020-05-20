@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       # Instalamos el programa y sus dependencias
-      - name: Instalamos dependencias y el entorno de ejecución
+      - name: Instalación de dependencias y entorno
         run: |
           npm ci
       # Pasamos en linter para ver si hay errores de sistáxis o no permitidos con nuestro estilo de programación, corrregimos sus errores automaticamente.
@@ -58,7 +58,7 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
 
       # Construyo la imagen completa
-      - name: Build del proyecto.
+      - name: Build del proyecto Node.
         run: |
           npm run build --if-present
 
@@ -70,16 +70,17 @@ HEROKU-CD:
   steps:
     - uses: actions/checkout@v1
     # Nos identificamos en Heroku
-    - name: Login enn Heroku
+    - name: Heroku login
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:login
     # Construimos y la subimos
-    - name: Construimos y hacemos push
+    - name: Build y Push a Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:push -a nodemonrest web
-    - name: Hacemos el lanzamiento (Release)
+    # Hacemos el lanzamiento
+    - name: Lanzamiento en Heroku (Release)
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: heroku container:release -a nodemonrest web
@@ -95,7 +96,7 @@ HEROKU-CD:
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
       # Esta parte de la versión no es obligatoria, pero a quitamos debemos quitar todas las lineas que hacen referencias
       # Y quedarnos solo con lo del Latest
-      - name: Tomamos la versión
+      - name: Versión de imagen
         id: vars
         run: |
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
@@ -103,15 +104,15 @@ HEROKU-CD:
           [ "$VERSION" == "master" ] && VERSION=latest
           echo ::set-output name=tag::$(echo $VERSION)
       # Construimos la imagen podríamos hacerlo poniendo directamente docker build -t joseluisgs/nodemonrest .
-      - name: Construimos la imagen
+      - name: Build imagen Docker
         run: docker build -t nodemonrest .
       # Etiquetamos la imagen con la versión obtenida. Podríamos haberle puesto nosotros una o la que se nos devuelve a generarlo
-      - name: Etiquetamos la imagen
+      - name: Etiquetación imagen Docker
         run: |
           docker tag nodemonrest ${{secrets.DOCKERHUB_USERNAME }}/nodemonrest:${{steps.vars.outputs.tag}}
           docker tag nodemonrest ${{secrets.DOCKERHUB_USERNAME }}/nodemonrest:latest
       # Subimos la imagen, y nop, no la subimos dos veces, es decir, Docker, detecta que si es la misma solo sube la ultima y ajusta las etiquetas.
-      - name: Hacemos el pusha a DockerHub
+      - name: Push a DockerHub
         run: |
           docker push ${{secrets.DOCKERHUB_USERNAME }}/nodemonrest:${{steps.vars.outputs.tag}}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nodemonrest:latest
