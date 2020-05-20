@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * SERVIDOR
  * Servidor principal de nuestra API
@@ -18,10 +19,10 @@ let instancia; // instancia del servidor. Singleton
     return hash;
 }
  */
-// Configuramos el objeto servidor
-const server = {
-
-
+/**
+ * Clase siguiendo un patrón singleton, es decir, por muchas veces que se llamen, por ejemplo en las pruebas devolvemos el mismo.
+ */
+class Server {
   // iniciamos el servidor
   start() {
     // Cargamos express como servidor
@@ -61,7 +62,7 @@ const server = {
       return instancia;
     }
     return null;
-  },
+  }
 
   // Cierra el servidor
   close() {
@@ -70,8 +71,13 @@ const server = {
     if (process.env.NODE_ENV !== 'test') {
       console.log('▣  Servidor parado');
     }
-  },
-};
+  }
+}
+
+/**
+ * Devuelve la instancia de conexión siempre la misma, singleton
+ */
+const server = new Server();
 
 // Exportamos la variable
 module.exports.server = server;
