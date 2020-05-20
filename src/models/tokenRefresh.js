@@ -9,11 +9,8 @@
  * Esquema de Usuarios
  */
 const mongoose = require('mongoose');
-const conf = require('dotenv');
+const env = require('../env');
 const db = require('../database');
-
-// Cargamos la configuración del fichero .env
-const SETTINGS = conf.config();
 
 
 // Creación del esquema
@@ -23,7 +20,7 @@ const TokenRefreshSchema = new mongoose.Schema(
     expireAt: {
       type: Date,
       default: Date.now,
-      index: { expires: (SETTINGS.parsed.TOKEN_REFRESH * 1000 * 60) },
+      index: { expires: (env.TOKEN_REFRESH * 1000 * 60) },
     },
     username: { type: String, required: true },
     uuid: { type: String, required: true },
