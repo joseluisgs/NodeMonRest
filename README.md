@@ -4,22 +4,24 @@ Ejemplo de API REST en NodeJS, usando Mongo.
 
 [![Node.js CI](https://github.com/joseluisgs/NodeMonRest/workflows/Node.js%20CI/badge.svg)](https://github.com/joseluisgs/NodeMonRest/actions)
 [![Build Status](https://travis-ci.com/joseluisgs/NodeMonRest.svg?branch=master)](https://travis-ci.com/joseluisgs/NodeMonRest)
+[![Docker](https://img.shields.io/badge/Docker-passing-blue)](https://hub.docker.com/r/joseluisgs/nodemonrest)
+[![Heroku](https://img.shields.io/badge/Heroku-passing-blueviolet)](https://nodemonrest.herokuapp.com/)
 ![Release](https://img.shields.io/github/v/release/joseluisgs/NodeMonRest)
 ![Licence](https://img.shields.io/github/license/joseluisgs/NodeMonRest)
-![JS Code](https://img.shields.io/badge/JS%20Code-ECMAScript-yellow)
+![JS Code](https://img.shields.io/badge/JS%20Code-ES2019-yellow)
 ![JS Style](https://img.shields.io/badge/JS%20Style-AirBnB-ff69b4)
-[![Docker](https://img.shields.io/badge/Dcoker%20build-passing-blue)](https://hub.docker.com/r/joseluisgs/nodemonrest)
 
 
 ### Acerca de
 Este proyecto tiene nombre de Pokemon :). El objetivo principal docente es aplicar distintas técnicas para construir un esqueleto de API REST usable en distintos proyectos. La idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el ámbito docente como poder realizarlo. Es una aplicación puramente docente. Entre las distintas técnicas usadas:
 * Patrón [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador). La vista será cualquier cliente que consuma nuestra API.
 * [Asíncronía](https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono) y respuesta a Eventos. Uso de promesas e interacción basada en eventos que es uno de los aspectos más fuetes de NodeJS.
-* Acceso a bases de datos NoSQL.
+* Acceso a bases de datos NoSQL usando Mongo DB.
 * Autenticación y autorización usando [JWT](https://jwt.io/introduction/).
 * Autorización basada en permisos de usuario.
 * Manejo de [CORS](https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS)
 * Algunos [patrones de diseño](https://sourcemaking.com/design_patterns) conocidos.
+* JS Código [ECMA2019](https://www.ecma-international.org/ecma-262/). De esta manera nos aseguramos seguir los estándares marcados para este tipo de lenguaje, pero tratando los módulos como indica NodeJS, usando Babel para compatibilidad. Además se ha aplicado el stilo [AirBnB](https://airbnb.io/javascript/) uno de los más seguidos con el objetivo de mantener una flosofía de sintáxis y estilo de programación ampliamente seguida en la comunidad JS/Node.
 
 Iré comentando los aspectos más relevantes y las librerías usadas en cada parte.
 
@@ -42,10 +44,13 @@ Tareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el
 * npm run build: construye la versión de distribución (en el directorio dist)
 * npm start (npm run start): ejecuta la versión de distribución, antes has tenido que ejecutar npm build
 
+### Usando Heroku
+Heroku te permite crear tu propio contenedor dinámico y lanzar la apliación. Puedes acceder a él, tanto la web como la API en esta dirección: https://nodemonrest.herokuapp.com/
+
 ### Usando Docker
-También podemos usar Docker para su instalación como se indica y proceder como en apartado anterior
+También podemos usar Docker para su instalación como se indica y proceder como en apartado anterior. La imagen la tienes disponible en: https://hub.docker.com/r/joseluisgs/nodemonrest. Además puedes proceder:
 * Pull de la imagen: docker pull joseluisgs/nodemonrest
-* Ejecutando luego: docker run -p 49160:8000 -d joseluisgs/nodemonest (de esta manera exponemos los puertos en nuestra maquina es el 49160, que se mapea al 8000 del docker)
+* Ejecutando luego: docker run -p 49160:8000 -d joseluisgs/nodemonest (de esta manera exponemos los puertos en nuestra maquina es el 49160, que se mapea al 8000 del docker, puedes usar el puerto que quieras en vez del 4961)
 
 ### El fichero .ENV
 El servidor toma las constantes del fichero .env, te dejo un ejemplo de configuración en .env_example. Cámbialo y lo configuras a tu gusto y luego lo renombras. Es importante que conozcas las variables de entorno que necesitas, si algunas no las pones las cogerá por defecto de la clase env que se encarga de gestionarlas. Si no las tienes te dará un error.
@@ -69,9 +74,10 @@ En la carpeta mongo tienes un volcado de la base de datos y de cada una de las c
 * [Joi](https://www.npmjs.com/package/@hapi/joi). Nos sirve para validar los datos de entrada en base a un esquema de validación, por si no lo usamos en los propios esquemas de mongo la validación. Es importante que el back valide todos los datos por si se ha escapado algo del Front. No podemos dejar nada a la surte. ¡Luke, somos la última esperanza!
 * [Mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Nos sirve para validar los campos unique. Actúa como middleware.
 * [Underscore](https://www.npmjs.com/package/underscore). Nos permite extender las posibilidades de la programación funcional para algunos métodos.
-* [express-handlebars](https://www.npmjs.com/package/express-handlebars). Personalmente uno de los mejores motores de plantillas para NodeJS, basado en [Handlebars](https://handlebarsjs.com/). Lo he usado de ejemplo para hacer algunas páginas estáticas de presentación de la API.
+* [Express-handlebars](https://www.npmjs.com/package/express-handlebars). Personalmente uno de los mejores motores de plantillas para NodeJS, basado en [Handlebars](https://handlebarsjs.com/). Lo he usado de ejemplo para hacer algunas páginas estáticas de presentación de la API.
 * [Mocha](https://mochajs.org/) y [Chai](https://www.chaijs.com/). Se han utilizado estas librerías para los test por su funcionalidad y porque se adaptan perfectamente al proceso de integración continua que se ha marcado como objetivo.
-* [GitHub Actions](https://github.com/features/actions). Es una de las grandes herramientas que se ha usado para la integración/distribución continuas [CI/CD](https://www.redhat.com/es/topics/devops/what-is-ci-cd). Me he apoyado en otras herramientas como [Travis CI](https://travis-ci.com/). No son excluyentes y pueden ser complementarias. Es por eso que he dejado los ficheros para ambas. Para ello hemos integrado el entorno de ejecución con pruebas y el despliegue inicial en [DockerHub](https://hub.docker.com/r/joseluisgs/nodemonrest).
+* [Babel](https://babeljs.io/) y [ESLint](https://eslint.org/) con el objetivo de construir un código ampliamente compatible y estandarizado de JS.
+* [GitHub Actions](https://github.com/features/actions). Es una de las grandes herramientas que se ha usado para la integración/distribución continuas [CI/CD](https://www.redhat.com/es/topics/devops/what-is-ci-cd). Me he apoyado en otras herramientas como [Travis CI](https://travis-ci.com/). No son excluyentes y pueden ser complementarias. Es por eso que he dejado los ficheros para ambas. Para ello hemos integrado el entorno de ejecución con pruebas y el despliegue inicial en [DockerHub](https://hub.docker.com/r/joseluisgs/nodemonrest) y su despliegue para su uso en [Heroku](https://nodemonrest.herokuapp.com/).
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan) ![Twitter](https://img.shields.io/twitter/follow/joseluisgonsan?style=social)
