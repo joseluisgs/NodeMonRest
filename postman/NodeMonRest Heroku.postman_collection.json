@@ -1,0 +1,2835 @@
+{
+	"info": {
+		"_postman_id": "6cd78a11-836b-4a28-96d6-cfbfa998209c",
+		"name": "NodeMonRest",
+		"description": "Este proyecto tiene nombre de Pokemon :). \nEl objetivo principal docente es aplicar distintas técnicas para construir un esqueleto de API REST usable en distintos proyectos. \nLa idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el ámbito docente como poder realizarlo. \nEs una aplicación puramente docente.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Recetas",
+			"item": [
+				{
+					"name": "Listar Recetas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg4NTU3NzQsImV4cCI6MTU4ODg1Njk3NH0.YuOr11u--ZrC7_nNnudqUdKjfHk-lyL0t1M71vwCWsM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/recipes/",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"recipes",
+								""
+							]
+						},
+						"description": "Lista todas las recetas disponibles"
+					},
+					"response": [
+						{
+							"name": "Listar Recetas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/recipes/",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"recipes",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "5911"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"1717-hmHs7AHLkuFq4JQZPH2zulUs5Ao\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:04:15 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ingredients\": [\n            \"1 kg de calabacines\",\n            \"1 cebolla\",\n            \"2 patatas\",\n            \"4 rebanadas de pan seco\",\n            \"Aceite de oliva\",\n            \"Sal\",\n            \"Pimienta\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n                \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 57099,\n                \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"admin\",\n        \"title\": \"Crema de calabacín\",\n        \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n        \"difficulty\": \"easy\",\n        \"persons\": 4,\n        \"time\": 30,\n        \"id\": \"5eb5823faf05681681978e2d\"\n    },\n    {\n        \"ingredients\": [\n            \"150 g de ensalada de hojas variadas\",\n            \"100 g de garbanzos cocidos\",\n            \"100 g de queso de Burgos\",\n            \"50 g de nueces peladas\",\n            \"Aceite de oliva\",\n            \"Vinagre de Jerez\",\n            \"Mostaza\",\n            \"Pimienta\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"recipe\",\n        \"title\": \"Ensalada con garbanzos\",\n        \"description\": \"Lava y escurre las hojas de ensalada. Escurre el queso y córtalo en daditos. Pon los garbanzos en un colador, enjuágalos para eliminar el líquido y escúrrelos. Mezcla en un cuenco 5 cucharadas de aceite, 1 cucharada de vinagre y 1 cucharadita de mostaza. Salpimenta y bate hasta que obtengas una salsa emulsionada. Coloca las hojas de ensalada en una ensaladera y añade los dados de queso, los garbanzos y las nueces troceadas. Riega con la vinagreta, remueve y sirve.\",\n        \"difficulty\": \"easy\",\n        \"persons\": 4,\n        \"time\": 10,\n        \"id\": \"5eb5823faf05681681978e2e\"\n    },\n    {\n        \"ingredients\": [\n            \"4 patatas medianas\",\n            \"4 cucharadas de pesto del que venden preparado\",\n            \"4 cucharadas de leche\",\n            \"4 cucharadas de queso rallado\",\n            \"Mantequilla\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"ana\",\n        \"title\": \"Flanecitos de patata y pesto\",\n        \"description\": \"Precalentar el horno a 200 ºC. Lavar las patatas y cocerlas, con su piel, en una cacerola con abundante agua salada durante 35 minutos. Escurrirlas, dejar que se templen y cortarlas en rodajas gruesas. Engrasar cuatro flaneras individuales con un poco de mantequilla e ir colocando en su interior las rodajas de patata en capas, alternándolas con un poco de pesto y queso rallado. Presionar ligeramente con el dorso de una cuchara para que las patatas queden bien asentadas y verter al final una cucharada de leche en cada una. Colocar las flaneritas en la placa y hornearlas durante 10 minutos. Retirarlas, dejarla enfriar y reservarlas en la nevera.\",\n        \"difficulty\": \"difficult\",\n        \"persons\": 4,\n        \"time\": 35,\n        \"id\": \"5eb5823faf05681681978e2f\"\n    },\n    {\n        \"ingredients\": [\n            \"400 g de guisantes congelados\",\n            \"2 cebollas moradas\",\n            \"4 huevos\",\n            \"1 copa de vino blanco\",\n            \"Vinagre\",\n            \"Unos tallos de cebollino\",\n            \"Aceite de oliva\",\n            \"Sal y pimienta\"\n        ],\n        \"images\": [],\n        \"username\": \"recipe\",\n        \"title\": \"Guisantes con huevo escalfado\",\n        \"description\": \"Muy Poca\",\n        \"persons\": 4,\n        \"time\": 25,\n        \"difficulty\": \"difficult\",\n        \"id\": \"5eb5823faf05681681978e30\"\n    },\n    {\n        \"ingredients\": [\n            \"600 g de lomo de cerdo cortado en dados\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"admin\",\n        \"title\": \"Lomo al vino tinto\",\n        \"description\": \"Pon las ciruelas en un cazo, cúbrelas con el vino y déjalas macerar durante 1 hora. Pon el cazo al fuego y cuece las ciruelas con el vino, a fuego muy lento, durante 15 minutos. Salpimienta los dados de carne y enharínalos ligeramente. Calienta en una cazuela 1 cucharada de aceite y rehoga los dados de carne hasta que estén dorados. Añade las ciruelas con el líquido de cocción, sube la intensidad del fuego y deja cocer durante 4 minutos, para que se reduzca un poco el vino. Agrega la mermelada y la nata a la cazuela, remueve con una cuchara de madera y deja cocer a fuego muy lento durante 10 minutos más. Rectifica la sazón y sirve enseguida.\",\n        \"difficulty\": \"medium\",\n        \"persons\": 4,\n        \"time\": 25,\n        \"id\": \"5eb5823faf05681681978e31\"\n    },\n    {\n        \"ingredients\": [\n            \"400 g de lomo de salmón limpio de piel y espinas\",\n            \"1 pepino\",\n            \"1 cebolla pequeña\",\n            \"2 cucharadas de alcaparras\",\n            \"4 cucharadas de vodka\",\n            \"1/2 limón (su zumo)\",\n            \"Pimienta\",\n            \"Unas bayas de pimienta rosa\",\n            \"Cebollino (picado y unos tallos enteros)\",\n            \"1 cucharada de aceite de oliva\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"admin\",\n        \"title\": \"Tartar de salmón con pepinos y alcaparras\",\n        \"description\": \"Lava y seca el salmón. Congélalo 24 horas y descongélalo. Pela el pepino y elimina las semillas. Corta unas rodajas y el resto, en daditos. Pela y pica la cebolla. Pica el salmón y mézclalo con los ingredientes anteriores, las alcaparras escurridas, el aceite, el zumo, el vodka, las bayas, la sal y la pimienta. Cubre con film y deja reposar en la nevera 20 minutos. Rellena unos aros de repostería con el tartar y retíralos. Decora con el cebollino picado, tallos enteros, y las rodajas de pepino y sirve.\",\n        \"persons\": 4,\n        \"time\": 15,\n        \"difficulty\": \"medium\",\n        \"id\": \"5eb5823faf05681681978e32\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Listar Receta por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/recipes/5eb5823faf05681681978e2d",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"recipes",
+								"5eb5823faf05681681978e2d"
+							]
+						},
+						"description": "Lista una receta dado su ID"
+					},
+					"response": [
+						{
+							"name": "Listar Receta por ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/recipes/5eb5823faf05681681978e2d",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"recipes",
+										"5eb5823faf05681681978e2d"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1538"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"602-d1HM12NhWuddAnRWm0OD2VXRV/g\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:05:17 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"5eb5823faf05681681978e2d\",\n    \"ingredients\": [\n        \"1 kg de calabacines\",\n        \"1 cebolla\",\n        \"2 patatas\",\n        \"4 rebanadas de pan seco\",\n        \"Aceite de oliva\",\n        \"Sal\",\n        \"Pimienta\"\n    ],\n    \"username\": \"admin\",\n    \"title\": \"Crema de calabacín\",\n    \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n    \"difficulty\": \"easy\",\n    \"persons\": 4,\n    \"time\": 30,\n    \"images\": [\n        {\n            \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n            \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 57099,\n            \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Añadir Receta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ingredients\": [\n        \"600 g de lomo de cerdo cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"title\": \"Patatas Bravas\",\n    \"description\": \"Paatatas Bravas\",\n    \"difficulty\": \"medium\",\n    \"persons\": 99,\n    \"time\": 55\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/recipes/",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"recipes",
+								""
+							]
+						},
+						"description": "Añade una receta de cocina"
+					},
+					"response": [
+						{
+							"name": "Añadir Receta",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ingredients\": [\n        \"600 g de lomo de cerdo cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"title\": \"Patatas Bravas\",\n    \"description\": \"Paatatas Bravas\",\n    \"difficulty\": \"medium\",\n    \"persons\": 99,\n    \"time\": 55\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/recipes/",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"recipes",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "304"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"130-83k8IqSR0mYtcPalOmSwoilA+tQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:08:05 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ingredients\": [\n        \"600 g de lomo de cerdo cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"images\": [],\n    \"username\": \"admin\",\n    \"title\": \"Patatas Bravas\",\n    \"description\": \"Paatatas Bravas\",\n    \"persons\": 99,\n    \"time\": 55,\n    \"difficulty\": \"medium\",\n    \"id\": \"5ec555e59421e300038c1fe9\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Modificar Receta por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ingredients\": [\n        \"600 g de lomo de cerdo cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"title\": \"Patatas Bravas Mod\",\n    \"description\": \"Paatatas Bravas\",\n    \"difficulty\": \"medium\",\n    \"persons\": 99,\n    \"time\": 55\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/recipes/5ec555baffaa6a27de43bc0e",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"recipes",
+								"5ec555baffaa6a27de43bc0e"
+							]
+						},
+						"description": "Modifica los datos de una receta dado su ID"
+					},
+					"response": [
+						{
+							"name": "Modificar Receta por ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ingredients\": [\n        \"600 g de lomo de cerdo cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"title\": \"Patatas Bravas Mod\",\n    \"description\": \"Paatatas Bravas\",\n    \"difficulty\": \"medium\",\n    \"persons\": 99,\n    \"time\": 55\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/recipes/5ec555baffaa6a27de43bc0e",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"recipes",
+										"5ec555baffaa6a27de43bc0e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "304"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"130-JsfGBTtUnLzwBorF1AwtzMg6yDg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:09:28 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ingredients\": [\n        \"600 g de lomo de cerdo cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"images\": [],\n    \"username\": \"admin\",\n    \"title\": \"Patatas Bravas\",\n    \"description\": \"Paatatas Bravas\",\n    \"persons\": 99,\n    \"time\": 55,\n    \"difficulty\": \"medium\",\n    \"id\": \"5ec555baffaa6a27de43bc0e\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Eliminar Receta por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/recipes/5ec555baffaa6a27de43bc0e",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"recipes",
+								"5ec555baffaa6a27de43bc0e"
+							]
+						},
+						"description": "Elimina los datos de una receta dado su ID."
+					},
+					"response": [
+						{
+							"name": "Eliminar Receta por ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/recipes/5ec555baffaa6a27de43bc0e",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"recipes",
+										"5ec555baffaa6a27de43bc0e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "308"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"134-2kiFgGKf8JTLQVAoSphZirW8IFA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:10:44 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ingredients\": [\n        \"600 g de lomo de cerdo cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"images\": [],\n    \"username\": \"admin\",\n    \"title\": \"Patatas Bravas Mod\",\n    \"description\": \"Paatatas Bravas\",\n    \"persons\": 99,\n    \"time\": 55,\n    \"difficulty\": \"medium\",\n    \"id\": \"5ec555baffaa6a27de43bc0e\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Listar Recetas Busqueda y/o paginado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/recipes?page=0&limit=10&search_field=description&search_content=durante&search_order=desc",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"recipes"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "search_field",
+									"value": "description"
+								},
+								{
+									"key": "search_content",
+									"value": "durante"
+								},
+								{
+									"key": "search_order",
+									"value": "desc"
+								}
+							]
+						},
+						"description": "Lista una receta y se muestra opción para paginación o para acotar la búsqueda"
+					},
+					"response": [
+						{
+							"name": "Listar Recetas Busqueda y/o paginado",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/recipes?page=0&limit=10&search_field=description&search_content=durante&search_order=desc",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"recipes"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "search_field",
+											"value": "description"
+										},
+										{
+											"key": "search_content",
+											"value": "durante"
+										},
+										{
+											"key": "search_order",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3735"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"e97-3sVOMHYgrV5KVPtO29wv+WrkY1E\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:11:29 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ingredients\": [\n            \"600 g de lomo de cerdo cortado en dados\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"admin\",\n        \"title\": \"Lomo al vino tinto\",\n        \"description\": \"Pon las ciruelas en un cazo, cúbrelas con el vino y déjalas macerar durante 1 hora. Pon el cazo al fuego y cuece las ciruelas con el vino, a fuego muy lento, durante 15 minutos. Salpimienta los dados de carne y enharínalos ligeramente. Calienta en una cazuela 1 cucharada de aceite y rehoga los dados de carne hasta que estén dorados. Añade las ciruelas con el líquido de cocción, sube la intensidad del fuego y deja cocer durante 4 minutos, para que se reduzca un poco el vino. Agrega la mermelada y la nata a la cazuela, remueve con una cuchara de madera y deja cocer a fuego muy lento durante 10 minutos más. Rectifica la sazón y sirve enseguida.\",\n        \"difficulty\": \"medium\",\n        \"persons\": 4,\n        \"time\": 25,\n        \"id\": \"5eb5823faf05681681978e31\"\n    },\n    {\n        \"ingredients\": [\n            \"4 patatas medianas\",\n            \"4 cucharadas de pesto del que venden preparado\",\n            \"4 cucharadas de leche\",\n            \"4 cucharadas de queso rallado\",\n            \"Mantequilla\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"ana\",\n        \"title\": \"Flanecitos de patata y pesto\",\n        \"description\": \"Precalentar el horno a 200 ºC. Lavar las patatas y cocerlas, con su piel, en una cacerola con abundante agua salada durante 35 minutos. Escurrirlas, dejar que se templen y cortarlas en rodajas gruesas. Engrasar cuatro flaneras individuales con un poco de mantequilla e ir colocando en su interior las rodajas de patata en capas, alternándolas con un poco de pesto y queso rallado. Presionar ligeramente con el dorso de una cuchara para que las patatas queden bien asentadas y verter al final una cucharada de leche en cada una. Colocar las flaneritas en la placa y hornearlas durante 10 minutos. Retirarlas, dejarla enfriar y reservarlas en la nevera.\",\n        \"difficulty\": \"difficult\",\n        \"persons\": 4,\n        \"time\": 35,\n        \"id\": \"5eb5823faf05681681978e2f\"\n    },\n    {\n        \"ingredients\": [\n            \"1 kg de calabacines\",\n            \"1 cebolla\",\n            \"2 patatas\",\n            \"4 rebanadas de pan seco\",\n            \"Aceite de oliva\",\n            \"Sal\",\n            \"Pimienta\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n                \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 57099,\n                \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"admin\",\n        \"title\": \"Crema de calabacín\",\n        \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n        \"difficulty\": \"easy\",\n        \"persons\": 4,\n        \"time\": 30,\n        \"id\": \"5eb5823faf05681681978e2d\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Listar Recetas del Usuario Registrado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/recipes/me/list",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"recipes",
+								"me",
+								"list"
+							]
+						},
+						"description": "Listas las recetas que pertenecen al usuario actualmente registrado por JWT"
+					},
+					"response": [
+						{
+							"name": "Listar Recetas del Usuario Registrado",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/recipes/me/list",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"recipes",
+										"me",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4051"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"fd3-sJ3LbCg5kO6CqaoXbHVMyFuTaBg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:12:20 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ingredients\": [\n            \"1 kg de calabacines\",\n            \"1 cebolla\",\n            \"2 patatas\",\n            \"4 rebanadas de pan seco\",\n            \"Aceite de oliva\",\n            \"Sal\",\n            \"Pimienta\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n                \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 57099,\n                \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"admin\",\n        \"title\": \"Crema de calabacín\",\n        \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n        \"difficulty\": \"easy\",\n        \"persons\": 4,\n        \"time\": 30,\n        \"id\": \"5eb5823faf05681681978e2d\"\n    },\n    {\n        \"ingredients\": [\n            \"600 g de lomo de cerdo cortado en dados\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"admin\",\n        \"title\": \"Lomo al vino tinto\",\n        \"description\": \"Pon las ciruelas en un cazo, cúbrelas con el vino y déjalas macerar durante 1 hora. Pon el cazo al fuego y cuece las ciruelas con el vino, a fuego muy lento, durante 15 minutos. Salpimienta los dados de carne y enharínalos ligeramente. Calienta en una cazuela 1 cucharada de aceite y rehoga los dados de carne hasta que estén dorados. Añade las ciruelas con el líquido de cocción, sube la intensidad del fuego y deja cocer durante 4 minutos, para que se reduzca un poco el vino. Agrega la mermelada y la nata a la cazuela, remueve con una cuchara de madera y deja cocer a fuego muy lento durante 10 minutos más. Rectifica la sazón y sirve enseguida.\",\n        \"difficulty\": \"medium\",\n        \"persons\": 4,\n        \"time\": 25,\n        \"id\": \"5eb5823faf05681681978e31\"\n    },\n    {\n        \"ingredients\": [\n            \"600 g de lomo de cerdo cortado en dados\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\"\n        ],\n        \"images\": [],\n        \"username\": \"admin\",\n        \"title\": \"Patatas Bravas\",\n        \"description\": \"Paatatas Bravas\",\n        \"persons\": 99,\n        \"time\": 55,\n        \"difficulty\": \"medium\",\n        \"id\": \"5ec555e59421e300038c1fe9\"\n    },\n    {\n        \"ingredients\": [\n            \"400 g de lomo de salmón limpio de piel y espinas\",\n            \"1 pepino\",\n            \"1 cebolla pequeña\",\n            \"2 cucharadas de alcaparras\",\n            \"4 cucharadas de vodka\",\n            \"1/2 limón (su zumo)\",\n            \"Pimienta\",\n            \"Unas bayas de pimienta rosa\",\n            \"Cebollino (picado y unos tallos enteros)\",\n            \"1 cucharada de aceite de oliva\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"admin\",\n        \"title\": \"Tartar de salmón con pepinos y alcaparras\",\n        \"description\": \"Lava y seca el salmón. Congélalo 24 horas y descongélalo. Pela el pepino y elimina las semillas. Corta unas rodajas y el resto, en daditos. Pela y pica la cebolla. Pica el salmón y mézclalo con los ingredientes anteriores, las alcaparras escurridas, el aceite, el zumo, el vodka, las bayas, la sal y la pimienta. Cubre con film y deja reposar en la nevera 20 minutos. Rellena unos aros de repostería con el tartar y retíralos. Decora con el cebollino picado, tallos enteros, y las rodajas de pepino y sirve.\",\n        \"persons\": 4,\n        \"time\": 15,\n        \"difficulty\": \"medium\",\n        \"id\": \"5eb5823faf05681681978e32\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Insertar Imagen a Receta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTIwMjgsImV4cCI6MTU4OTk5MzIyOH0.JMkBf1-BBdkKbv8ZOVlqNMTzcplxxCZVc0ltPdbo6QQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imageID\":\"5ec559469421e300038c1feb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/recipes/images/5eb5823faf05681681978e2d/insert",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"recipes",
+								"images",
+								"5eb5823faf05681681978e2d",
+								"insert"
+							]
+						},
+						"description": "Inserta una imagen (o un conjunto de imágenes) que hay disponible y se tiene su ID en una receta dado el ID de la receta"
+					},
+					"response": [
+						{
+							"name": "Insertar Imagen a Receta",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"imageID\":\"5ec559469421e300038c1feb\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/recipes/images/5eb5823faf05681681978e2d/insert",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"recipes",
+										"images",
+										"5eb5823faf05681681978e2d",
+										"insert"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1790"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"6fe-E3A+17iIhHBssDOtgHO+qX3I8WM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:30:36 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"5eb5823faf05681681978e2d\",\n    \"ingredients\": [\n        \"1 kg de calabacines\",\n        \"1 cebolla\",\n        \"2 patatas\",\n        \"4 rebanadas de pan seco\",\n        \"Aceite de oliva\",\n        \"Sal\",\n        \"Pimienta\"\n    ],\n    \"username\": \"admin\",\n    \"title\": \"Crema de calabacín\",\n    \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n    \"difficulty\": \"easy\",\n    \"persons\": 4,\n    \"time\": 30,\n    \"images\": [\n        {\n            \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n            \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 57099,\n            \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"5ec559469421e300038c1feb\",\n            \"file\": \"7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 357920,\n            \"url\": \"http://nodemonrest.herokuapp.com:31566/files/7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Eliminar Imagen de Receta",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTIwMjgsImV4cCI6MTU4OTk5MzIyOH0.JMkBf1-BBdkKbv8ZOVlqNMTzcplxxCZVc0ltPdbo6QQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"imageID\":\"5ec559469421e300038c1feb\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/recipes/images/5eb5823faf05681681978e2d/delete",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"recipes",
+								"images",
+								"5eb5823faf05681681978e2d",
+								"delete"
+							]
+						},
+						"description": "Elimina una imagen de una receta dado el ID de la imágen y el ID de la receta"
+					},
+					"response": [
+						{
+							"name": "Eliminar Imagen de Receta",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"imageID\":\"5ec559469421e300038c1feb\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/recipes/images/5eb5823faf05681681978e2d/delete",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"recipes",
+										"images",
+										"5eb5823faf05681681978e2d",
+										"delete"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1538"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"602-d1HM12NhWuddAnRWm0OD2VXRV/g\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:32:05 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"5eb5823faf05681681978e2d\",\n    \"ingredients\": [\n        \"1 kg de calabacines\",\n        \"1 cebolla\",\n        \"2 patatas\",\n        \"4 rebanadas de pan seco\",\n        \"Aceite de oliva\",\n        \"Sal\",\n        \"Pimienta\"\n    ],\n    \"username\": \"admin\",\n    \"title\": \"Crema de calabacín\",\n    \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n    \"difficulty\": \"easy\",\n    \"persons\": 4,\n    \"time\": 30,\n    \"images\": [\n        {\n            \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n            \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 57099,\n            \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "CRUD de ejemplo para la API con las operaciones principales de las recetas y mejoras de las mismas",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3b159c31-a7b0-4c48-b0ee-c0352864c4b8",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "a1bcf4ef-b9fe-4667-a598-dfabd80d16e5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Autenticacion",
+			"item": [
+				{
+					"name": "Autenticar usuario (Login)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/auth/login",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "corre@correo.com",
+									"description": "Correo del usuario",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "{\"_id\":{\"$oid\":\"5eb2c655ccdfc8286c2bfd22\"},\"username\":\"admin\",\"email\":\"admin@admin.com\",\"password\":\"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\"roles\":[\"admin\",\"member\"],\"avatar\":\"https://api.adorable.io/avatars/200/admin@admin.com.png\"}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Hace el Login en el sistema recibiendo un token y un token de refresco"
+					},
+					"response": [
+						{
+							"name": "Autenticar usuario (Login)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/auth/login",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"auth",
+										"login"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "corre@correo.com",
+											"description": "Correo del usuario",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "{\"_id\":{\"$oid\":\"5eb2c655ccdfc8286c2bfd22\"},\"username\":\"admin\",\"email\":\"admin@admin.com\",\"password\":\"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\"roles\":[\"admin\",\"member\"],\"avatar\":\"https://api.adorable.io/avatars/200/admin@admin.com.png\"}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "290"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"122-8+JhFjlvPYJnTRlO71BOjpe0RxE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:06:51 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w\",\n    \"refreshToken\": \"80625730-f2fc-4c57-a37d-22ddb732e82d\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refrescar token (Token)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTI0NjYsImV4cCI6MTU4OTk5MzY2Nn0.MrewJ8ot6LGgg6kJDVGEjrew5k47rWSBkXZYBdkMkaw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"role\": \"['admin', 'normal']\",\n    \"refreshToken\": \"d3d638e1-6d1d-4cbf-8d79-c4dd06471f16\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/auth/token",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"token"
+							]
+						},
+						"description": "Obtiene un nuevo token de refresco del sistema"
+					},
+					"response": [
+						{
+							"name": "Refrescar token (Token)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\t\"username\": \"admin\",\n\t\t\"email\": \"admin@admin.com\",\n\t\t\"role\": \"['admin', 'normal']\",\n\t\t\"refreshToken\": \"d3d638e1-6d1d-4cbf-8d79-c4dd06471f16\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/auth/token",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"token"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "254"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"fe-S1UaSAl2fQ2nZg8TSXt0Xgr/LbI\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:36:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE1ODk5OTI2MTAsImV4cCI6MTU4OTk5MzgxMH0.o1lI7-XKBi1MGtpiQxTGpoHeXYDZqegtV_VrodpvaHk\",\n    \"refreshToken\": \"d3d638e1-6d1d-4cbf-8d79-c4dd06471f16\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Salir usuario (Logout)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTI0NjYsImV4cCI6MTU4OTk5MzY2Nn0.MrewJ8ot6LGgg6kJDVGEjrew5k47rWSBkXZYBdkMkaw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\"username\": \"admin\",\n\t\t\"refreshToken\": \"d3d638e1-6d1d-4cbf-8d79-c4dd06471f16\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/auth/logout",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						},
+						"description": "El usuario sale de la sesión actual que tiene iniciada"
+					},
+					"response": [
+						{
+							"name": "Salir usuario (Logout)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\t\"username\": \"admin\",\n\t\t\"refreshToken\": \"d3d638e1-6d1d-4cbf-8d79-c4dd06471f16\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/auth/logout",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"22-5XjDyWDLI5SdZBo9DROQzkSziE8\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:38:55 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Ver mis datos de usuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTI0NjYsImV4cCI6MTU4OTk5MzY2Nn0.MrewJ8ot6LGgg6kJDVGEjrew5k47rWSBkXZYBdkMkaw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/auth/me/",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"me",
+								""
+							]
+						},
+						"description": "Muestra los datos del usuario actualmente identificado"
+					},
+					"response": [
+						{
+							"name": "Ver mis datos de usuario",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/auth/me/",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"auth",
+										"me",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "423"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"1a7-GQ5AuEXUV7wQxCfCKvnaig2Y7ko\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:39:55 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"5eb2c655ccdfc8286c2bfd22\",\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"roles\": [\n        \"admin\",\n        \"normal\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5eb689d323847c1afcff6daa\",\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Registrar Usuario",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"prueba\",\n\t\"email\":\"prueba@prueba.com\",\n\t\"password\":\"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n\t\"roles\":[\"normal\"],\n\t\"avatar\": {\n\t\t\"url\":\"https://api.adorable.io/avatars/200/prueba@prueba.png\"\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/auth/register",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Registra un nuevo usuario en el sistema"
+					},
+					"response": [
+						{
+							"name": "Registrar Usuario",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\":\"prueba\",\n\t\"email\":\"prueba@prueba.com\",\n\t\"password\":\"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n\t\"roles\":[\"normal\"],\n\t\"avatar\": {\n\t\t\"url\":\"https://api.adorable.io/avatars/200/prueba@prueba.png\"\n\t}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/auth/register",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "247"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"f7-8dBWWWBvpFSnlqs5PfuSZi/bRqo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:41:00 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"prueba\",\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": {\n        \"url\": \"https://api.adorable.io/avatars/200/prueba@prueba.png\"\n    },\n    \"id\": \"5ec55d9c9421e300038c1fee\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar Mis Datos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTI0NjYsImV4cCI6MTU4OTk5MzY2Nn0.MrewJ8ot6LGgg6kJDVGEjrew5k47rWSBkXZYBdkMkaw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"5eb2c655ccdfc8286c2bfd22\",\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"roles\": [\n        \"admin\",\n        \"normal\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5eb689d323847c1afcff6daa\",\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/auth/update",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"update"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Actualizar Mis Datos",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"_id\": \"5eb2c655ccdfc8286c2bfd22\",\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"roles\": [\n        \"admin\",\n        \"normal\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5eb689d323847c1afcff6daa\",\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/auth/update",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"auth",
+										"update"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "422"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a6-O22wtBm1dg3bSuLtTnlEi3BuwoU\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:42:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"roles\": [\n        \"admin\",\n        \"normal\"\n    ],\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"avatar\": {\n        \"_id\": \"5eb689d323847c1afcff6daa\",\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    },\n    \"id\": \"5eb2c655ccdfc8286c2bfd22\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Borrar mi Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InBydWViYSIsImVtYWlsIjoicHJ1ZWJhQHBydWViYS5jb20iLCJyb2xlcyI6WyJub3JtYWwiXSwiaWF0IjoxNTg5OTkzMDAyLCJleHAiOjE1ODk5OTQyMDJ9.e8MSLLrWb83oREMvu8tgsMWYkBiyfu-Uo3q_Pe1ctE8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/auth/delete",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"delete"
+							]
+						},
+						"description": "Elimina la información del usuario actualmente registrado"
+					},
+					"response": [
+						{
+							"name": "Borrar mi Usuario",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/auth/delete",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"auth",
+										"delete"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "247"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"f7-8dBWWWBvpFSnlqs5PfuSZi/bRqo\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:44:44 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"prueba\",\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": {\n        \"url\": \"https://api.adorable.io/avatars/200/prueba@prueba.png\"\n    },\n    \"id\": \"5ec55d9c9421e300038c1fee\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Parte del Api encargada de la autenticación, refresco de tokes, registro, moficación de los datos del usuario actual o darlo de baja",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "91e4beb1-335c-475a-a508-8c023087d2ea",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c1b5ea72-c2cc-4077-a897-6e163415bc2e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Listar Usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/users",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Lista los usuarios que hay dispnibles en el sistema"
+					},
+					"response": [
+						{
+							"name": "Listar Usuarios",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/users",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "659"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"293-p0RRRRjFMm7PW5Gpb8IW5lxvJmA\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:48:05 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"roles\": [\n            \"normal\"\n        ],\n        \"username\": \"ana\",\n        \"email\": \"ana@correo.com\",\n        \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n        \"avatar\": \"https://api.adorable.io/avatars/200/ana@correo.com.png\",\n        \"id\": \"5eb2c6f3ccdfc8286c2bfd23\"\n    },\n    {\n        \"roles\": [\n            \"admin\",\n            \"normal\"\n        ],\n        \"username\": \"admin\",\n        \"email\": \"admin@admin.com\",\n        \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n        \"avatar\": {\n            \"_id\": \"5eb689d323847c1afcff6daa\",\n            \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 30015,\n            \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n            \"username\": \"admin\",\n            \"type\": \"avatar\",\n            \"__v\": 0\n        },\n        \"id\": \"5eb2c655ccdfc8286c2bfd22\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Listar Usuario por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/users/5eb2c6f3ccdfc8286c2bfd23",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"5eb2c6f3ccdfc8286c2bfd23"
+							]
+						},
+						"description": "Lista los datos de un usuario dado su ID"
+					},
+					"response": [
+						{
+							"name": "Listar Usuario por ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/users/5eb2c6f3ccdfc8286c2bfd23",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"5eb2c6f3ccdfc8286c2bfd23"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "235"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"eb-GNI4JV0HguzFN9j04Z0cciDdCVc\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:49:07 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"5eb2c6f3ccdfc8286c2bfd23\",\n    \"username\": \"ana\",\n    \"email\": \"ana@correo.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"roles\": [\n        \"normal\"\n    ],\n    \"avatar\": \"https://api.adorable.io/avatars/200/ana@correo.com.png\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Añadir Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"prueba\",\n\t\"email\":\"prueba@prueba.com\",\n\t\"password\":\"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n\t\"roles\":[\"normal\"],\n\t\"avatar\":\"https://api.adorable.io/avatars/200/prueba@prueba.com.png\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/users",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Añade un usuario nuevo en el sistema"
+					},
+					"response": [
+						{
+							"name": "Añadir Usuario",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\":\"prueba\",\n\t\"email\":\"prueba@prueba.com\",\n\t\"password\":\"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n\t\"roles\":[\"normal\"],\n\t\"avatar\":\"https://api.adorable.io/avatars/200/prueba@prueba.com.png\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/users",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "243"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"f3-Y+8/LNWJ4N8l4Xzx7dDEpboUkvs\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:49:58 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"prueba\",\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": \"https://api.adorable.io/avatars/200/prueba@prueba.com.png\",\n    \"id\": \"5ec55fb69421e300038c1ff1\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Modificar Usuario por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\t{\n        \"roles\": [\n            \"normal\"\n        ],\n        \"avatar\": \"https://api.adorable.io/avatars/200/prueba@prueba.com.png\",\n        \"username\": \"pruebaMod\",\n        \"email\": \"pruebaMod@prueba.com\",\n        \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/users/5ec55fb69421e300038c1ff1",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"5ec55fb69421e300038c1ff1"
+							]
+						},
+						"description": "Modifica los datos de un usuario dado su ID"
+					},
+					"response": [
+						{
+							"name": "Modificar Usuario por ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\t{\n        \"roles\": [\n            \"normal\"\n        ],\n        \"avatar\": \"https://api.adorable.io/avatars/200/prueba@prueba.com.png\",\n        \"username\": \"pruebaMod\",\n        \"email\": \"pruebaMod@prueba.com\",\n        \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\"\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/users/5ec55fb69421e300038c1ff1",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"5ec55fb69421e300038c1ff1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "243"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"f3-Y+8/LNWJ4N8l4Xzx7dDEpboUkvs\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:51:06 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"prueba\",\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": \"https://api.adorable.io/avatars/200/prueba@prueba.com.png\",\n    \"id\": \"5ec55fb69421e300038c1ff1\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Eliminar Usuario por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/users/5ec55fb69421e300038c1ff1",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"5ec55fb69421e300038c1ff1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Eliminar Usuario por ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/users/5ec55fb69421e300038c1ff1",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"5ec55fb69421e300038c1ff1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "249"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"f9-gDuWlQ4Za57ZiqlZLqnwvfArBfI\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:53:50 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"pruebaMod\",\n    \"email\": \"pruebaMod@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": \"https://api.adorable.io/avatars/200/prueba@prueba.com.png\",\n    \"id\": \"5ec55fb69421e300038c1ff1\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Asignar Avatar Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"avatarID\" : \"5eb689d323847c1afcff6daa\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/users/admin/avatar",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"users",
+								"admin",
+								"avatar"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Asignar Avatar Usuario",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"avatarID\" : \"5eb689d323847c1afcff6daa\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8000/users/admin/avatar",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"users",
+										"admin",
+										"avatar"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3d-xHg3rKC5n3jkISNAFYaClkIi1Dg\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:52:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"mensaje\": \"Imagen actualizada con éxito al usuario: admin\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Parte del API responsabilizada en el CRUD de usuarios y tratada por el admin del sistema",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a15ab9f3-5d43-48ac-a2c6-9352bb5cc7db",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "2946a0a7-a48c-4469-9a4b-009059231e75",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ficheros",
+			"item": [
+				{
+					"name": "Ficheros Subida",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "files",
+									"type": "file",
+									"src": "/Users/link/Desktop/Patatas_bravas_madrid.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/files/upload",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"files",
+								"upload"
+							]
+						},
+						"description": "Sube un fichero en el servidor y obtienes los datos del fichero y su enlace público"
+					},
+					"response": [
+						{
+							"name": "Ficheros Subida",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "files",
+											"type": "file",
+											"src": "/Users/link/Desktop/Patatas_bravas_madrid.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/files/upload",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"files",
+										"upload"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "325"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"145-gioDoucG89nwmQzykTk0/exwUSM\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:22:30 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Fichero(s) subido(s) con éxito\",\n    \"data\": [\n        {\n            \"newFile\": {\n                \"file\": \"7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 357920,\n                \"url\": \"http://nodemonrest.herokuapp.com:31566/files/7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n                \"username\": \"admin\",\n                \"type\": \"document\",\n                \"id\": \"5ec559469421e300038c1feb\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Listar Ficheros",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/files/all",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"files",
+								"all"
+							]
+						},
+						"description": "Lista los ficheros que hay disponibles"
+					},
+					"response": [
+						{
+							"name": "Listar Ficheros",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/files/all",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"files",
+										"all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "451"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"1c3-0rzE9ISHwGTIFGFUzbcQ9gTL4/o\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:19:50 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"id\": \"5eb689d323847c1afcff6daa\"\n    },\n    {\n        \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 57099,\n        \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5eb68bb23ec4ed1c74530f6b\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Listar Fichero por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTIwMjgsImV4cCI6MTU4OTk5MzIyOH0.JMkBf1-BBdkKbv8ZOVlqNMTzcplxxCZVc0ltPdbo6QQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/files/file/5ec559469421e300038c1feb",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"files",
+								"file",
+								"5ec559469421e300038c1feb"
+							]
+						},
+						"description": "Obtiene la información de un fichero dado su ID"
+					},
+					"response": [
+						{
+							"name": "Listar Fichero por ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/files/file/5ec559469421e300038c1feb",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"files",
+										"file",
+										"5ec559469421e300038c1feb"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "253"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"fd-VEsyPBfYCP0KbwtRQDfZv8q/kmw\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:27:19 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"5ec559469421e300038c1feb\",\n    \"file\": \"7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n    \"mimetype\": \"image/jpeg\",\n    \"size\": 357920,\n    \"url\": \"http://nodemonrest.herokuapp.com:31566/files/7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n    \"username\": \"admin\",\n    \"type\": \"document\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Llistar Ficheros del Usuario Registrado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MzM5MzAsImV4cCI6MTU4OTczNzUzMH0.XsE9hrFC9ihvSuOapx7BowjvSDFgO-FFgc1BgztL0uI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8000/files/me",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"files",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Fichero por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTI0NjYsImV4cCI6MTU4OTk5MzY2Nn0.MrewJ8ot6LGgg6kJDVGEjrew5k47rWSBkXZYBdkMkaw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/files/delete/5ec559469421e300038c1feb",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"files",
+								"delete",
+								"5ec559469421e300038c1feb"
+							]
+						},
+						"description": "Elimina un fichero del sistema dado su ID"
+					},
+					"response": [
+						{
+							"name": "Eliminar Fichero por ID",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/files/delete/5ec559469421e300038c1feb",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"files",
+										"delete",
+										"5ec559469421e300038c1feb"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "244"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"f4-HQKPlZmdA9zDsobEM+vmWQ2GqEE\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 20 May 2020 16:34:39 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"file\": \"7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n    \"mimetype\": \"image/jpeg\",\n    \"size\": 357920,\n    \"url\": \"http://nodemonrest.herokuapp.com:31566/files/7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n    \"username\": \"admin\",\n    \"type\": \"document\",\n    \"id\": \"5ec559469421e300038c1feb\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Parte del api encargada de la gestión de ficheros",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "aa82df80-2867-4ce7-a21e-814d472000ea",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b6f9223-5c42-43c6-bc81-0c34f735e5e0",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "94761925-6aa2-4752-a84f-b78bae2002b5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "4466b913-fb12-45fe-8256-15c36199dbee",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "6cd78a11-836b-4a28-96d6-cfbfa998209c",
-		"name": "NodeMon API",
-		"description": "Proyecto de Node.JS, Express y Vue",
+		"_postman_id": "c73a39f9-54df-4cd9-9411-958f4ea60fbc",
+		"name": "NodeMonRest LocalHost",
+		"description": "Este proyecto tiene nombre de Pokemon :). \nEl objetivo principal docente es aplicar distintas técnicas para construir un esqueleto de API REST usable en distintos proyectos. \nLa idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el ámbito docente como poder realizarlo. \nEs una aplicación puramente docente.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -36,7 +36,30 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Listar Recetas",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8000/recipes/",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"recipes",
+										""
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"ingredients\": [\n            \"1 kg de calabacines\",\n            \"1 cebolla\",\n            \"2 patatas\",\n            \"4 rebanadas de pan seco\",\n            \"Aceite de oliva\",\n            \"Sal\",\n            \"Pimienta\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n                \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 57099,\n                \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"admin\",\n        \"title\": \"Crema de calabacín\",\n        \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n        \"difficulty\": \"easy\",\n        \"persons\": 4,\n        \"time\": 30,\n        \"id\": \"5eb5823faf05681681978e2d\"\n    },\n    {\n        \"ingredients\": [\n            \"150 g de ensalada de hojas variadas\",\n            \"100 g de garbanzos cocidos\",\n            \"100 g de queso de Burgos\",\n            \"50 g de nueces peladas\",\n            \"Aceite de oliva\",\n            \"Vinagre de Jerez\",\n            \"Mostaza\",\n            \"Pimienta\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"recipe\",\n        \"title\": \"Ensalada con garbanzos\",\n        \"description\": \"Lava y escurre las hojas de ensalada. Escurre el queso y córtalo en daditos. Pon los garbanzos en un colador, enjuágalos para eliminar el líquido y escúrrelos. Mezcla en un cuenco 5 cucharadas de aceite, 1 cucharada de vinagre y 1 cucharadita de mostaza. Salpimenta y bate hasta que obtengas una salsa emulsionada. Coloca las hojas de ensalada en una ensaladera y añade los dados de queso, los garbanzos y las nueces troceadas. Riega con la vinagreta, remueve y sirve.\",\n        \"difficulty\": \"easy\",\n        \"persons\": 4,\n        \"time\": 10,\n        \"id\": \"5eb5823faf05681681978e2e\"\n    },\n    {\n        \"ingredients\": [\n            \"4 patatas medianas\",\n            \"4 cucharadas de pesto del que venden preparado\",\n            \"4 cucharadas de leche\",\n            \"4 cucharadas de queso rallado\",\n            \"Mantequilla\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"ana\",\n        \"title\": \"Flanecitos de patata y pesto\",\n        \"description\": \"Precalentar el horno a 200 ºC. Lavar las patatas y cocerlas, con su piel, en una cacerola con abundante agua salada durante 35 minutos. Escurrirlas, dejar que se templen y cortarlas en rodajas gruesas. Engrasar cuatro flaneras individuales con un poco de mantequilla e ir colocando en su interior las rodajas de patata en capas, alternándolas con un poco de pesto y queso rallado. Presionar ligeramente con el dorso de una cuchara para que las patatas queden bien asentadas y verter al final una cucharada de leche en cada una. Colocar las flaneritas en la placa y hornearlas durante 10 minutos. Retirarlas, dejarla enfriar y reservarlas en la nevera.\",\n        \"difficulty\": \"difficult\",\n        \"persons\": 4,\n        \"time\": 35,\n        \"id\": \"5eb5823faf05681681978e2f\"\n    },\n    {\n        \"ingredients\": [\n            \"400 g de guisantes congelados\",\n            \"2 cebollas moradas\",\n            \"4 huevos\",\n            \"1 copa de vino blanco\",\n            \"Vinagre\",\n            \"Unos tallos de cebollino\",\n            \"Aceite de oliva\",\n            \"Sal y pimienta\"\n        ],\n        \"images\": [],\n        \"username\": \"recipe\",\n        \"title\": \"Guisantes con huevo escalfado\",\n        \"description\": \"Muy Poca\",\n        \"persons\": 4,\n        \"time\": 25,\n        \"difficulty\": \"difficult\",\n        \"id\": \"5eb5823faf05681681978e30\"\n    },\n    {\n        \"ingredients\": [\n            \"600 g de lomo de cerdo cortado en dados\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"admin\",\n        \"title\": \"Lomo al vino tinto\",\n        \"description\": \"Pon las ciruelas en un cazo, cúbrelas con el vino y déjalas macerar durante 1 hora. Pon el cazo al fuego y cuece las ciruelas con el vino, a fuego muy lento, durante 15 minutos. Salpimienta los dados de carne y enharínalos ligeramente. Calienta en una cazuela 1 cucharada de aceite y rehoga los dados de carne hasta que estén dorados. Añade las ciruelas con el líquido de cocción, sube la intensidad del fuego y deja cocer durante 4 minutos, para que se reduzca un poco el vino. Agrega la mermelada y la nata a la cazuela, remueve con una cuchara de madera y deja cocer a fuego muy lento durante 10 minutos más. Rectifica la sazón y sirve enseguida.\",\n        \"difficulty\": \"medium\",\n        \"persons\": 4,\n        \"time\": 25,\n        \"id\": \"5eb5823faf05681681978e31\"\n    },\n    {\n        \"ingredients\": [\n            \"400 g de lomo de salmón limpio de piel y espinas\",\n            \"1 pepino\",\n            \"1 cebolla pequeña\",\n            \"2 cucharadas de alcaparras\",\n            \"4 cucharadas de vodka\",\n            \"1/2 limón (su zumo)\",\n            \"Pimienta\",\n            \"Unas bayas de pimienta rosa\",\n            \"Cebollino (picado y unos tallos enteros)\",\n            \"1 cucharada de aceite de oliva\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"admin\",\n        \"title\": \"Tartar de salmón con pepinos y alcaparras\",\n        \"description\": \"Lava y seca el salmón. Congélalo 24 horas y descongélalo. Pela el pepino y elimina las semillas. Corta unas rodajas y el resto, en daditos. Pela y pica la cebolla. Pica el salmón y mézclalo con los ingredientes anteriores, las alcaparras escurridas, el aceite, el zumo, el vodka, las bayas, la sal y la pimienta. Cubre con film y deja reposar en la nevera 20 minutos. Rellena unos aros de repostería con el tartar y retíralos. Decora con el cebollino picado, tallos enteros, y las rodajas de pepino y sirve.\",\n        \"persons\": 4,\n        \"time\": 15,\n        \"difficulty\": \"medium\",\n        \"id\": \"5eb5823faf05681681978e32\"\n    }\n]"
+						}
+					]
 				},
 				{
 					"name": "Listar Receta por ID",
@@ -946,6 +969,28 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "20fbf0dc-2497-4086-9784-39214c081e88",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "2df3efea-2a6d-43d0-a5fc-2bc3cb0c5261",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}
