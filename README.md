@@ -58,6 +58,9 @@ El servidor toma las constantes del fichero .env, te dejo un ejemplo de configur
 ### Carpeta Mongo
 En la carpeta mongo tienes un volcado de la base de datos y de cada una de las colecciones con datos de ejemplo. el resto de tablas se crea sobre la marcha. Te recomiendo usar Mongo Atlas y en ella crear la base de datos recipes, o como tu quieras que se llame, recuerda que debes cambiarlo en .env. Posteriormente crea las colecciones si quieres tener estos datos que se llamen igual, si no se irán creando sobre la marca vacías.
 
+### Usando Postman
+Puedes usar [Postman](https://www.postman.com) para testear la API. Puedes consultar en la web (dependiendo como entres si localmente o usando la dirección disponible) las opciones existentes o simplemente carga en este programa el fichero con las operaciones disponibles.
+
 ## Tecnologías y librerías usadas: Un poquito de su desarrollo
 * [NodeJS](https://nodejs.org/es/). JS en Servidor.
 * [Mongo DB](https://www.mongodb.com/es). He usado su versión en la nube [Atlas](https://www.mongodb.com/cloud/atlas)
