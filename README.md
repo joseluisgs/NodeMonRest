@@ -5,11 +5,11 @@ Ejemplo de API REST en NodeJS, usando Mongo.
 [![Node.js CI](https://github.com/joseluisgs/NodeMonRest/workflows/Node.js%20CI/badge.svg)](https://github.com/joseluisgs/NodeMonRest/actions)
 [![Build Status](https://travis-ci.com/joseluisgs/NodeMonRest.svg?branch=master)](https://travis-ci.com/joseluisgs/NodeMonRest)
 [![Docker](https://img.shields.io/badge/Docker-passing-blue)](https://hub.docker.com/r/joseluisgs/nodemonrest)
-[![Heroku](https://img.shields.io/badge/Heroku-passing-blueviolet)](https://nodemonrest.herokuapp.com/)
-![Release](https://img.shields.io/github/v/release/joseluisgs/NodeMonRest)
-![Licence](https://img.shields.io/github/license/joseluisgs/NodeMonRest)
-![JS Code](https://img.shields.io/badge/JS%20Code-ES2019-yellow)
-![JS Style](https://img.shields.io/badge/JS%20Style-AirBnB-ff69b4)
+[![Heroku](https://img.shields.io/badge/Heroku-passing-blueviolet)](https://nodemonrest.herokuapp.com)
+[![Release](https://img.shields.io/github/v/release/joseluisgs/NodeMonRest)](https://github.com/joseluisgs/NodeMonRest/releases)
+[![Licence](https://img.shields.io/github/license/joseluisgs/NodeMonRest)](https://github.com/joseluisgs/NodeMonRest/blob/master/LICENSE)
+[![JS Code](https://img.shields.io/badge/JS%20Code-ES2019-yellow)](https://www.ecma-international.org/ecma-262)
+[![JS Style](https://img.shields.io/badge/JS%20Style-AirBnB-ff69b4)](https://airbnb.io/javascript)
 
 
 ### Acerca de
