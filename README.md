@@ -8,6 +8,7 @@ Ejemplo de API REST en NodeJS, usando Mongo.
 ![Licence](https://img.shields.io/github/license/joseluisgs/NodeMonRest)
 ![JS Code](https://img.shields.io/badge/JS%20Code-ECMAScript-yellow)
 ![JS Style](https://img.shields.io/badge/JS%20Style-AirBnB-ff69b4)
+[![Docker](https://img.shields.io/badge/Dcoker%20build-passing-blue)](https://hub.docker.com/r/joseluisgs/nodemonrest)
 
 
 ### Acerca de
@@ -39,6 +40,10 @@ Tareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el
 * npm run start - Ejecuta el entorno de desarrollo
 * npm run watch - ejecuta nodemon para ver los cambios del código sobre la marcha
 
+También podemos usar Docker para su instalación de la siguiente manera
+* Pull de la imagen: docker pull joseluisgs/nodemonrest
+* Ejecutando luego: docker run -p 49160:8000 -d joseluisgs/nodemonest (de esta manera exponemos los puertos en nuestra maquina es el 49160, que se mapea al 8000 del docker)
+
 ### El fichero .ENV
 El servidor toma las constantes del fichero .env, te dejo un ejemplo de configuración en .env_example. Cámbialo y lo configuras a tu gusto y luego lo renombras. Es importante que conozcas las variables de entorno que necesitas, si algunas no las pones las cogerá por defecto de la clase env que se encarga de gestionarlas.
 
@@ -63,7 +68,7 @@ En la carpeta mongo tienes un volcado de la base de datos y de cada una de las c
 * [Underscore](https://www.npmjs.com/package/underscore). Nos permite extender las posibilidades de la programación funcional para algunos métodos.
 * [express-handlebars](https://www.npmjs.com/package/express-handlebars). Personalmente uno de los mejores motores de plantillas para NodeJS, basado en [Handlebars](https://handlebarsjs.com/). Lo he usado de ejemplo para hacer algunas páginas estáticas de presentación de la API.
 * [Mocha](https://mochajs.org/) y [Chai](https://www.chaijs.com/). Se han utilizado estas librerías para los test por su funcionalidad y porque se adaptan perfectamente al proceso de integración continua que se ha marcado como objetivo.
-* [GitHub Actions](https://github.com/features/actions). Es una de las grandes herramientas que se ha usado para la integración/distribución continuas [CI/CD](https://www.redhat.com/es/topics/devops/what-is-ci-cd). Me he apoyado en otras herramientas como [Travis CI](https://travis-ci.com/). No son excluyentes y pueden ser complementarias. Es por eso que he dejado los ficheros para ambas.
+* [GitHub Actions](https://github.com/features/actions). Es una de las grandes herramientas que se ha usado para la integración/distribución continuas [CI/CD](https://www.redhat.com/es/topics/devops/what-is-ci-cd). Me he apoyado en otras herramientas como [Travis CI](https://travis-ci.com/). No son excluyentes y pueden ser complementarias. Es por eso que he dejado los ficheros para ambas. Para ello hemos integrado el entorno de ejecución con pruebas y el despliegue inicial en [DockerHub](https://hub.docker.com/r/joseluisgs/nodemonrest).
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan) ![Twitter](https://img.shields.io/twitter/follow/joseluisgonsan?style=social)
