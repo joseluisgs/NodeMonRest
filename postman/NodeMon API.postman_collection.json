@@ -25,13 +25,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/recipes",
+							"raw": "localhost:8000/recipes/",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
-								"recipes"
+								"recipes",
+								""
 							]
 						}
 					},
@@ -43,14 +44,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/recipes/5a4e6f7b023d63160b44bca3",
+							"raw": "localhost:8000/recipes/5eb5823faf05681681978e2d",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"recipes",
-								"5a4e6f7b023d63160b44bca3"
+								"5eb5823faf05681681978e2d"
 							]
 						}
 					},
@@ -59,6 +60,16 @@
 				{
 					"name": "Añadir Receta",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MjQ0MDYsImV4cCI6MTU4OTcyODAwNn0.3dUaussI_bjDWyamrimr4_Zm7i2EsyCGwnhaFd9JF4w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -87,11 +98,21 @@
 				{
 					"name": "Modificar Receta por ID",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MjQ0MDYsImV4cCI6MTU4OTcyODAwNn0.3dUaussI_bjDWyamrimr4_Zm7i2EsyCGwnhaFd9JF4w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ingredients\": [\n        \"600 g de Patatas cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"title\": \"Patatas Bravas\",\n    \"description\": \"Paatatas Bravas\",\n    \"difficulty\": \"medium\",\n    \"persons\": 99,\n    \"time\": 55\n}",
+							"raw": "{\n    \"ingredients\": [\n        \"600 g de lomo de cerdo cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"title\": \"Patatas Bravas Mod\",\n    \"description\": \"Paatatas Bravas\",\n    \"difficulty\": \"medium\",\n    \"persons\": 99,\n    \"time\": 55\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -99,14 +120,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/recipes/5eb1b72a674b7c26912697a8",
+							"raw": "localhost:8000/recipes/5ec145f2c4eb5428170efaa6",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"recipes",
-								"5eb1b72a674b7c26912697a8"
+								"5ec145f2c4eb5428170efaa6"
 							]
 						}
 					},
@@ -115,17 +136,27 @@
 				{
 					"name": "Eliminar Receta por ID",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MjQ0MDYsImV4cCI6MTU4OTcyODAwNn0.3dUaussI_bjDWyamrimr4_Zm7i2EsyCGwnhaFd9JF4w",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/recipes/5eb1b72a674b7c26912697a8",
+							"raw": "localhost:8000/recipes/5ec145f2c4eb5428170efaa6",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"recipes",
-								"5eb1b72a674b7c26912697a8"
+								"5ec145f2c4eb5428170efaa6"
 							]
 						}
 					},
@@ -294,7 +325,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\": \"admin\",\n\t\"email\": \"admin@admin.com\",\n\t\"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\"\n}",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"email\": \"admin@admin.com\",\n\t\"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -336,7 +367,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg4NjcwNzcsImV4cCI6MTU4ODg2ODI3N30.73m1EbkLDD8nIzwaJOxZKdIotZOdtJU0AkyPpWDrx8A",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MTMxODYsImV4cCI6MTU4OTcxNjc4Nn0.mDK0IJF9A2IAvjZHHgbbhwHrXtBtwO0y9v2urwFf1aw",
 									"type": "string"
 								}
 							]
@@ -345,7 +376,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\t\"username\": \"admin\",\n\t\t\"email\": \"admin@admin.com\",\n\t\t\"role\": \"['admin', 'normal']\",\n\t\t\"refreshToken\": \"8a93e0de-7781-4800-a277-5e1f0d55d30f\"\n}",
+							"raw": "{\n\t\t\"username\": \"admin\",\n\t\t\"email\": \"admin@admin.com\",\n\t\t\"role\": \"['admin', 'normal']\",\n\t\t\"refreshToken\": \"069cfdb2-28ca-45ff-9db8-e88baf0984c4\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -369,11 +400,21 @@
 				{
 					"name": "Salir usuario (Logout)",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MTY0MjIsImV4cCI6MTU4OTcyMDAyMn0.MyEGsT6CNDULqOwMxLgmEhN7Von60Fcqh1Gnl-5E2kQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\t\"username\": \"admin\",\n\t\t\"refreshToken\": \"40ad2cc6-bc8f-4345-b062-87764a08afd3\"\n}",
+							"raw": "{\n\t\t\"username\": \"admin\",\n\t\t\"refreshToken\": \"24960323-ee88-4bd0-81ad-1fdea2d99ef8\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -396,19 +437,31 @@
 				},
 				{
 					"name": "Ver mis datos de usuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg4NjU0MDAsImV4cCI6MTU4ODg2NjYwMH0.Kc3g7h_T0S-8boiXX_1j03eiq5itVm7YTkkoV9glBio",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MTQyNzUsImV4cCI6MTU4OTcxNzg3NX0.JDN8ewnP0lZWiuJ6XIb5yNezM4CkOOU-tmTOXQMTxbA",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8000/auth/me/",
 							"host": [
@@ -463,7 +516,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg4Njg2NzIsImV4cCI6MTU4ODg2OTg3Mn0.35X58n1RugDI6jQKBZkgmbJkszPgwk4V9kr6Metq0q4",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MTY0MjIsImV4cCI6MTU4OTcyMDAyMn0.MyEGsT6CNDULqOwMxLgmEhN7Von60Fcqh1Gnl-5E2kQ",
 									"type": "string"
 								}
 							]
@@ -472,7 +525,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "\t{\n        \"avatar\": \"https://api.adorable.io/avatars/200/prueba@prueba.com.png\",\n        \"email\": \"adminMod@prueba.com\",\n        \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\"\n    }",
+							"raw": "{\n    \"_id\": \"5eb2c655ccdfc8286c2bfd22\",\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"roles\": [\n        \"admin\",\n        \"normal\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5eb689d323847c1afcff6daa\",\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -536,7 +589,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTgzMzcsImV4cCI6MTU4ODk1OTUzN30.STbTgwVL1WagJQp3lv4gGDTtZveAgGGLWJzTpAG0Zjc",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MjQ0MDYsImV4cCI6MTU4OTcyODAwNn0.3dUaussI_bjDWyamrimr4_Zm7i2EsyCGwnhaFd9JF4w",
 									"type": "string"
 								}
 							]
@@ -564,7 +617,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg4NjU0MDAsImV4cCI6MTU4ODg2NjYwMH0.Kc3g7h_T0S-8boiXX_1j03eiq5itVm7YTkkoV9glBio",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MjQ0MDYsImV4cCI6MTU4OTcyODAwNn0.3dUaussI_bjDWyamrimr4_Zm7i2EsyCGwnhaFd9JF4w",
 									"type": "string"
 								}
 							]
@@ -593,7 +646,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg4NjcyOTMsImV4cCI6MTU4ODg2ODQ5M30.yw_BaApyhUpr6MEjefpcofgr_qnUFSjhaRmMAg0Pb_M",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MjQ0MDYsImV4cCI6MTU4OTcyODAwNn0.3dUaussI_bjDWyamrimr4_Zm7i2EsyCGwnhaFd9JF4w",
 									"type": "string"
 								}
 							]
@@ -668,7 +721,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg4NjcyOTMsImV4cCI6MTU4ODg2ODQ5M30.yw_BaApyhUpr6MEjefpcofgr_qnUFSjhaRmMAg0Pb_M",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MjQ0MDYsImV4cCI6MTU4OTcyODAwNn0.3dUaussI_bjDWyamrimr4_Zm7i2EsyCGwnhaFd9JF4w",
 									"type": "string"
 								}
 							]
@@ -676,14 +729,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/users/5eb4312e08dbef53839575bc",
+							"raw": "localhost:8000/users/5ec150bf8baaa92bb5cb1fd1",
 							"host": [
 								"localhost"
 							],
 							"port": "8000",
 							"path": [
 								"users",
-								"5eb4312e08dbef53839575bc"
+								"5ec150bf8baaa92bb5cb1fd1"
 							]
 						}
 					},
@@ -742,7 +795,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODkwMjQ3MzQsImV4cCI6MTU4OTAyODMzNH0.J56YmmuKBWcuKpOQD0sIUsLic-tIOPPArZYQ45ODlW4",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk4MjA5NjMsImV4cCI6MTU4OTgyMjE2M30.GdaKRVQiNZ6Fyc_UFuOUE8OgP-1xBtBs4mkrva6mdrY",
 									"type": "string"
 								}
 							]
@@ -755,7 +808,7 @@
 								{
 									"key": "files",
 									"type": "file",
-									"src": "/Users/link/Desktop/crema02.jpg"
+									"src": "/Users/link/Desktop/test.png"
 								}
 							]
 						},
@@ -781,7 +834,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTIxMTIsImV4cCI6MTU4ODk1MzMxMn0.ZxQRD65NmpmprFs-i3ZRQUSrWpc6yRaO6Tozrk6eWgo",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MjkzODcsImV4cCI6MTU4OTczMjk4N30.2_oKaHMgqwRzWLsJkO7rg0NJtiok1J0yHTTUAURmZ6U",
 									"type": "string"
 								}
 							]
@@ -810,7 +863,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTA1NDUsImV4cCI6MTU4ODk1MTc0NX0.DWdf2P77SeKyrURCnbCV8rKgwaBWRpFu_YNWmvt6L4M",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MjkzODcsImV4cCI6MTU4OTczMjk4N30.2_oKaHMgqwRzWLsJkO7rg0NJtiok1J0yHTTUAURmZ6U",
 									"type": "string"
 								}
 							]
@@ -818,7 +871,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/files/file/5eb575780d98f14a46107e80",
+							"raw": "localhost:8000/files/file/5eb689d323847c1afcff6daa",
 							"host": [
 								"localhost"
 							],
@@ -826,7 +879,7 @@
 							"path": [
 								"files",
 								"file",
-								"5eb575780d98f14a46107e80"
+								"5eb689d323847c1afcff6daa"
 							]
 						}
 					},
@@ -840,7 +893,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTE3ODYsImV4cCI6MTU4ODk1Mjk4Nn0.5d-_ZDD7LEwAXSbkiT_xdrIG-aKVnVTI3amKxNGj04s",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MzM5MzAsImV4cCI6MTU4OTczNzUzMH0.XsE9hrFC9ihvSuOapx7BowjvSDFgO-FFgc1BgztL0uI",
 									"type": "string"
 								}
 							]
@@ -869,7 +922,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg5NTMzMjksImV4cCI6MTU4ODk1NDUyOX0.IUl6EZSZ1BurTsWMCiczMsDgp4vpnricRH7FB31gMpQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3Nzk5NjIsImV4cCI6MTU4OTc4MzU2Mn0.tln-0c3n4s7cuE_KKlftfm9c_daiEZjsmPv5At4hcBg",
 									"type": "string"
 								}
 							]
@@ -877,7 +930,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/files/delete/5eb575780d98f14a46107e7f",
+							"raw": "localhost:8000/files/delete/5ec221f81a289404bfb8a51a",
 							"host": [
 								"localhost"
 							],
@@ -885,7 +938,7 @@
 							"path": [
 								"files",
 								"delete",
-								"5eb575780d98f14a46107e7f"
+								"5ec221f81a289404bfb8a51a"
 							]
 						}
 					},

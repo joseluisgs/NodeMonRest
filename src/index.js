@@ -39,7 +39,7 @@ class Server {
       // Una ruta por defecto de presentación
       app.get('/', (req, res) => {
         // Inyecta el fichero main.hbl" dentro de layout index, en su etiqueta Body
-        res.render('main', { layout: 'index', titulo: 'NodeMonRest - API RESTFull en NodeJS' });
+        res.render('main', { layout: 'index', titulo: 'NodeMonRest' });
       });
 
       // Enrutamiento que hemos creado
