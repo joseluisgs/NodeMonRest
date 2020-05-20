@@ -16,7 +16,7 @@ on:
     # Trabajo a realizar
 jobs:
 
-  # Construimos el contenedor CI sobre Ubuntu, opción por defecto de Github para Node
+  # Despliegue Node en GitHub
   NODE-CI:
     runs-on: ubuntu-latest
 
@@ -62,30 +62,30 @@ jobs:
         run: |
           npm run build --if-present
 
-# Publicamos en Heroku
-HEROKU-CD:
-  runs-on: ubuntu-latest
-  # Necesitamos CI, por lo tanto no lo lanza en paralelo si no cuando acabe
-  needs: NODE-CI
-  steps:
-    - uses: actions/checkout@v1
-    # Nos identificamos en Heroku
-    - name: Heroku login
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:login
-    # Construimos y la subimos
-    - name: Build y Push a Heroku
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:push -a nodemonrest web
-    # Hacemos el lanzamiento
-    - name: Lanzamiento en Heroku (Release)
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release -a nodemonrest web
+  # Despliegue y Lanzamiento en Heroku
+  HEROKU-CD:
+    runs-on: ubuntu-latest
+    # Necesitamos CI, por lo tanto no lo lanza en paralelo si no cuando acabe
+    needs: NODE-CI
+    steps:
+      - uses: actions/checkout@v1
+      # Nos identificamos en Heroku
+      - name: Heroku login
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+      # Construimos y la subimos
+      - name: Build y Push a Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push -a nodemonrest web
+      # Hacemos el lanzamiento
+      - name: Lanzamiento en Heroku (Release)
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release -a nodemonrest web
 
-  # Construimos el Docker para mandarlo a DockerHub
+  # Despliegue en Docker/DockerHub
   DOCKER-CD:
     runs-on: ubuntu-latest
     # Necesitamos CI, por lo tanto no lo lanza en paralelo si no cuando acabe
