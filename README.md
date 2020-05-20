@@ -2,7 +2,13 @@
 
 Ejemplo de API REST en NodeJS, usando Mongo.
 
-[![Node.js CI](https://github.com/joseluisgs/NodeMonRest/workflows/Node.js%20CI/badge.svg)](https://github.com/joseluisgs/NodeMonRest/actions) [![Build Status](https://travis-ci.com/joseluisgs/NodeMonRest.svg?branch=master)](https://travis-ci.com/joseluisgs/NodeMonRest)
+[![Node.js CI](https://github.com/joseluisgs/NodeMonRest/workflows/Node.js%20CI/badge.svg)](https://github.com/joseluisgs/NodeMonRest/actions)
+[![Build Status](https://travis-ci.com/joseluisgs/NodeMonRest.svg?branch=master)](https://travis-ci.com/joseluisgs/NodeMonRest)
+![Release](https://img.shields.io/github/v/release/joseluisgs/NodeMonRest)
+![Licence](https://img.shields.io/github/license/joseluisgs/NodeMonRest)
+![JS Code](https://img.shields.io/badge/JS%20Code-ECMAScript-yellow)
+![JS Style](https://img.shields.io/badge/JS%20Style-AirBnB-ff69b4)
+
 
 ### Acerca de
 Este proyecto tiene nombre de Pokemon :). El objetivo principal docente es aplicar distintas técnicas para construir un esqueleto de API REST usable en distintos proyectos. La idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el ámbito docente como poder realizarlo. Es una aplicación puramente docente. Entre las distintas técnicas usadas:
@@ -60,8 +66,12 @@ En la carpeta mongo tienes un volcado de la base de datos y de cada una de las c
 * [GitHub Actions](https://github.com/features/actions). Es una de las grandes herramientas que se ha usado para la integración/distribución continuas [CI/CD](https://www.redhat.com/es/topics/devops/what-is-ci-cd). Me he apoyado en otras herramientas como [Travis CI](https://travis-ci.com/). No son excluyentes y pueden ser complementarias. Es por eso que he dejado los ficheros para ambas.
 
 ## Author
-* [José Luis González Sánchez](https://twitter.com/joseluisgonsan)
-* [GitHub](https://github.com/joseluisgs)
+* [José Luis González Sánchez](https://twitter.com/joseluisgonsan) ![Twitter](https://img.shields.io/twitter/follow/joseluisgonsan?style=social)
+
+
+* [GitHub](https://github.com/joseluisgs) ![GitHub](https://img.shields.io/github/followers/joseluisgs?style=social)
+
+![GitHub](https://img.shields.io/github/last-commit/joseluisgs/NodeMonRest)
 
 ## License
 Este proyecto esta licenciado bajo licencia __MIT__, si desea saber más, visite el fichero [LICENSE](https://github.com/joseluisgs/NodeMonRest/blob/master/LICENSE)
