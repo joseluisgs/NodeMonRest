@@ -36,16 +36,19 @@ Iré comentando los aspectos más relevantes y las librerías usadas en cada par
 
 ## Instalación y uso
 Tareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el fichero package.json:
-* npm install para instalar las dependencias
-* npm run start - Ejecuta el entorno de desarrollo
-* npm run watch - ejecuta nodemon para ver los cambios del código sobre la marcha
+* npm install:  para instalar las dependencias
+* npm run start-dev: ejecuta el entorno de desarrollo, el codigo en src
+* npm run watch: ejecuta nodemon para ver los cambios del código sobre la marcha
+* npm run build: construye la versión de distribución (en el directorio dist)
+* npm start (npm run start): ejecuta la versión de distribución, antes has tenido que ejecutar npm build
 
-También podemos usar Docker para su instalación de la siguiente manera
+### Usando Docker
+También podemos usar Docker para su instalación como se indica y proceder como en apartado anterior
 * Pull de la imagen: docker pull joseluisgs/nodemonrest
 * Ejecutando luego: docker run -p 49160:8000 -d joseluisgs/nodemonest (de esta manera exponemos los puertos en nuestra maquina es el 49160, que se mapea al 8000 del docker)
 
 ### El fichero .ENV
-El servidor toma las constantes del fichero .env, te dejo un ejemplo de configuración en .env_example. Cámbialo y lo configuras a tu gusto y luego lo renombras. Es importante que conozcas las variables de entorno que necesitas, si algunas no las pones las cogerá por defecto de la clase env que se encarga de gestionarlas.
+El servidor toma las constantes del fichero .env, te dejo un ejemplo de configuración en .env_example. Cámbialo y lo configuras a tu gusto y luego lo renombras. Es importante que conozcas las variables de entorno que necesitas, si algunas no las pones las cogerá por defecto de la clase env que se encarga de gestionarlas. Si no las tienes te dará un error.
 
 ### Carpeta Mongo
 En la carpeta mongo tienes un volcado de la base de datos y de cada una de las colecciones con datos de ejemplo. el resto de tablas se crea sobre la marcha. Te recomiendo usar Mongo Atlas y en ella crear la base de datos recipes, o como tu quieras que se llame, recuerda que debes cambiarlo en .env. Posteriormente crea las colecciones si quieres tener estos datos que se llamen igual, si no se irán creando sobre la marca vacías.

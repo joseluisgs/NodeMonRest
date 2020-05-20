@@ -29,8 +29,8 @@
     "yarn": ">=1.22.2"
   },
   "scripts": {
-    "start-babel": "node --require @babel/register src/index.js",
-    "start": "node src/index.js",
+    "start-dev": "node --require @babel/register src/index.js",
+    "start": "node dist/index.js",
     "watch": "nodemon",
     "lint": "eslint 'src/**/*.js'",
     "fix": "eslint --fix 'src/**/*.js'",
