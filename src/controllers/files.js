@@ -100,7 +100,6 @@ class FilesController {
           for (const file of files) {
             // eslint-disable-next-line no-await-in-loop
             const newFile = await subirFichero(file, 'file', req.user.username);
-            console.log(newFile);
             data.push(newFile);
           }
         // Solo tenemos un fichero

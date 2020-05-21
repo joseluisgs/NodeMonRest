@@ -7,10 +7,20 @@
 
 
 // Librerias
+const AWS = require('aws-sdk'); // Amazon AWS para almacenar en S3
 const fs = require('fs');
 const User = require('../models/users').UserModel;
 const File = require('../models/files').FileModel;
 const env = require('../env');
+
+// Configuramos la conexión a AWS
+AWS.config.update({
+  accessKeyId: env.AWS_ACCESS_KEY,
+  secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+  region: env.AWS_REGION,
+});
+// Creamos el objeto S3
+const s3 = new AWS.S3();
 
 class UsersController {
   /**
@@ -151,7 +161,7 @@ class UsersController {
   /**
    * PATCH por username. Modifica la imagen del usuario. Si no tiene la inserta, si tiene la borra y pone la nueva. Deveuleve el usuario actualizado
    * La imagen recoge su ide del body, antes la hemos tenido que subir al servidor o elegir una que exista
-   * Códigos de estado: 200, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
+   * Códigos de estado: 201, OK, o 204, si no devolvemos nada 400 Bad request. 500 no permitido
    * Asincrono para no usar promesas asyn/await
    * @param {*} req Request
    * @param {*} res Response
@@ -185,20 +195,22 @@ class UsersController {
         if (
           oldAvatar && oldAvatar._id.toString() !== newAvatar._id.toString()
         ) {
-          return fs.unlink(env.STORAGE + oldAvatar.file, async (
-            err,
-          ) => {
-            if (err) throw err;
-            console.log('Fichero borrado');
-            data = await File().findByIdAndDelete({ _id: oldAvatar._id });
-            if (data) {
-              res.status(200).json(newAvatar);
-            } else {
-              res.status(404).json({
-                error: 404,
-                mensaje: `No se ha encontrado un item con ese ID: ${oldAvatar.file}`,
-              });
+          // Primero la borro de Amazon y luego de Mongo, como en Files
+          const getParams = {
+            Bucket: env.AWS_BUCKET,
+            Key: oldAvatar.file,
+          };
+          s3.deleteObject(getParams, async (err, file) => {
+            if (err) {
+              return res.status(400).send({ success: false, err });
             }
+            data = await File().findByIdAndDelete({ _id: req.params.id });
+            return res.status(200).send(newAvatar);
+          });
+        } else {
+          res.status(404).json({
+            error: 404,
+            mensaje: `No se ha encontrado un item con ese ID: ${req.params.id}`,
           });
         }
       } else {
