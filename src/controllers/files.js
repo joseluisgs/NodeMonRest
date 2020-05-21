@@ -6,9 +6,69 @@
 
 
 // Librerias
+const AWS = require('aws-sdk'); // Amazon AWS para almacenar en S3
 const fs = require('fs');
 const File = require('../models/files').FileModel;
 const env = require('../env');
+
+// Configuramos la conexión a AWS
+AWS.config.update({
+  accessKeyId: env.AWS_ACCESS_KEY,
+  secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+  region: env.AWS_REGION,
+});
+// Creamos el objeto S3
+const s3 = new AWS.S3();
+
+/**
+ * Sube un fichero al servidor, lo hago así porque lo vamos a repetir mucho esta función dependiendo si noos entran
+ * Uno o varios ficheros
+ */
+const subirFichero = (file, req) => {
+  let fileName = file.name.replace(/\s/g, ''); // Si tienes espacios en blanco se los quitamos
+  const fileExt = fileName.split('.').pop(); // Nos quedamos con su extension
+  fileName = `${file.md5}.${fileExt}`; // this.getStorageName(file);
+  // Creamos el objeto con los metadatos que quiero almacenar
+  const newFile = File()({
+    file: fileName,
+    mimetype: file.mimetype,
+    size: file.size,
+    url: `${req.protocol}://${req.hostname}:${env.PORT}/${env.FILES_URL}/${fileName}`,
+    username: req.user.username,
+    type: 'file',
+  });
+  // Comprobamos que no existe. Primero consultamos
+  const exists = File().getByFileName(fileName);
+  if (!exists) {
+    // Lo movemos, esto es porque estamos usando el espacio temporal, si no nos podríamos ahorrar otros pasos.
+    file.mv(env.STORAGE + fileName); // Lo movemos  mi directorio file. Porque uso espacio temporal
+    // Lo leemos, esto es por el espacio tempral, si no no es necesario
+    fs.readFile(env.STORAGE + fileName, async (err, fileData) => {
+      // Creamos el objeto de subida S3
+      const putParams = {
+        Bucket: env.AWS_BUCKET, // Bucket de destino
+        Key: fileName, // Nombre y clave del fichero
+        Body: fileData, // Datos del fichero
+        // ACL: 'public-read', // No queremos que sea público. El enlace lo generaré o para encapsular las cosas.
+      };
+      // Subimos
+      s3.putObject(putParams, async (error) => {
+        if (error) {
+          return -99;
+        }
+        console.log(`Fichero subido con éxito a AWS `);
+        // Almacenamos los datos en la base de datos y los metemos en el array de salida
+        await newFile.save();
+        // Borramos nuestro fichero del directorio files
+        fs.unlinkSync(env.STORAGE + fileName);
+        // Mandamos la respuesta
+        return newFile;
+      });
+    });
+  } else {
+    return -98;
+  }
+};
 
 class FilesController {
   /**
@@ -30,56 +90,32 @@ class FilesController {
         // debemos usar el mismo nombre que lleva en el formulario
         const data = [];
         const { files } = req.files;
-
         // Miramos si son varios ficheros
         const isFiles = Array.isArray(req.files.files);
-        console.log(isFiles);
-
         if (isFiles) {
           files.forEach(async (file) => {
-            const fileName = file.name.replace(/\s/g, ''); // Si tienes espacios en blanco se los quitamos
-            const fileExt = fileName.split('.').pop(); // Nos quedamos con su extension
-            const fileDest = `${file.md5}.${fileExt}`; // this.getStorageName(file);
-            const newFile = File()({
-              file: fileDest,
-              mimetype: file.mimetype,
-              size: file.size,
-              url: `${req.protocol}://${req.hostname}:${env.PORT}/${env.FILES_URL}/${fileDest}`,
-              username: req.user.username,
-              type: 'document',
-            });
-            // usamos filename para moverla al sistema de almacenamiento
-            file.mv(env.STORAGE + fileDest);
-            // Almacenamos los datos en la base de datos y los metemos en el array de salida
-            data.push({ newFile });
-            await newFile.save();
+            console.log('Muchos');
           });
+        // Solo tenemos un fichero
         } else {
           const file = req.files.files;
-          const fileName = file.name.replace(/\s/g, ''); // Si tienes espacios en blanco se los quitamos
-          const fileExt = fileName.split('.').pop(); // Nos quedamos con su extension
-          const fileDest = `${file.md5}.${fileExt}`; // this.getStorageName(file);
-          const newFile = File()({
-            file: fileDest,
-            mimetype: file.mimetype,
-            size: file.size,
-            url: `${req.protocol}://${req.hostname}:${env.PORT}/${env.FILES_URL}/${fileDest}`,
-            username: req.user.username,
-            type: 'document',
-          });
-          // usamos filename para moverla al sistema de almacenamiento
-          file.mv(env.STORAGE + fileDest);
-          // Almacenamos los datos en la base de datos y los metemos en el array de salida
-          data.push({ newFile });
-          await newFile.save();
+          const up = subirFichero(file, req);
+          console.log(up);
+          if (up) {
+            data.push(up);
+            // Devolvemos las cosas
+            res.send({
+              status: true,
+              message: 'Fichero(s) subido(s) con éxito',
+              data,
+            });
+          } else {
+            res.status(404).json({
+              error: 404,
+              mensaje: `Ya existe este fichero en el servidor`,
+            });
+          }
         }
-
-        // Mandamos la respuesta
-        res.send({
-          status: true,
-          message: 'Fichero(s) subido(s) con éxito',
-          data,
-        });
       }
     } catch (err) {
       console.error(err);
@@ -197,6 +233,79 @@ class FilesController {
     } catch (err) {
       res.status(500).send(err);
     }
+  }
+
+  async uploadFile(req, res) {
+    console.log('preparing to upload...');
+    const file = req.files.files;
+    const fileName = file.name.replace(/\s/g, ''); // Si tienes espacios en blanco se los quitamos
+    const fileExt = fileName.split('.').pop(); // Nos quedamos con su extension
+    const fileDest = `${file.md5}.${fileExt}`; // this.getStorageName(file);
+    file.mv(env.STORAGE + fileDest);
+
+    const fileData = fs.readFileSync(env.STORAGE + fileDest);
+
+    console.log(fileData);
+
+    const putParams = {
+      Bucket: 'nodemonrest',
+      Key: fileDest,
+      Body: fileData,
+      // ACL: 'public-read',
+    };
+
+
+    s3.putObject(putParams, (err, data) => {
+      if (err) {
+        console.log('Could nor upload the file. Error :', err);
+        return res.send({ success: false });
+      }
+      console.log(`File uploaded successfully at ${JSON.stringify(data)}`);
+      // fs.unlink(file);// Deleting the file from uploads folder(Optional).Do Whatever you prefer.
+      // console.log('Successfully uploaded the file');
+      return res.send({ success: true });
+    });
+
+
+    fs.unlink(env.STORAGE + fileDest, async (err) => {
+      if (err) throw err;
+      console.log('Fichero borrado');
+    });
+  }
+
+  // The retrieveFile function
+  async retrieveFile(req, res) {
+    console.log(req.params.file);
+    const getParams = {
+      Bucket: 'nodemonrest',
+      Key: req.params.file,
+    };
+
+    s3.getObject(getParams, (err, data) => {
+      if (err) {
+        return res.status(400).send({ success: false, err });
+      }
+
+      return res.send(data.Body);
+    });
+  }
+
+
+  // The retrieveFile function
+  async removingFile(req, res) {
+    console.log(req.params.file);
+    const getParams = {
+      Bucket: 'nodemonrest',
+      Key: req.params.file,
+    };
+
+    s3.deleteObject(getParams, (err, data) => {
+      if (err) {
+        return res.status(400).send({ success: false, err });
+      }
+
+      return res.send(data.Body);
+    });
   }
 }
 

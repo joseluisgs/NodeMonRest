@@ -11,6 +11,7 @@ const router = require('./router');
 const db = require('./database');
 const env = require('./env');
 
+
 let instancia; // instancia del servidor. Singleton
 
 /* const getHashedPassword = (password) => {
@@ -57,6 +58,8 @@ class Server {
           console.log(`⚑ Servidor API REST escuchando ✓ -> ${url}`);
         }
       });
+
+      // Amazon a ver si sale
 
       // console.log('Password: '+ bcrypt.hashSync('admin123', 10));
       return instancia;

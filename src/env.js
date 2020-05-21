@@ -9,9 +9,14 @@ const conf = require('dotenv');
 conf.config(); // Toda la configuración parseada del fichero .env
 
 // Filtramos que estos parámetros importantes para la ejecución estén
-const ready = process.env.DB_USER && process.env.DB_PASS && process.env.DB_URL && process.env.DB_PORT && process.env.DB_NAME;
-if (!ready) {
-  console.log('✕ Error: Faltán variables de entorno para ejecutarse correctamente. Por favor revise su fichero .env');
+const paramsBD = process.env.DB_USER && process.env.DB_PASS && process.env.DB_URL && process.env.DB_PORT && process.env.DB_NAME;
+if (!paramsBD) {
+  console.log('✕ Error: Faltán variables de entorno para la ejecución en MongoDB. Por favor revise su fichero .env');
+  process.exit(22);
+}
+const paramsAWS = process.env.AWS_ACCESS_KEY && process.env.AWS_SECRET_ACCESS_KEY && process.env.AWS_REGION && process.env.AWS_BUCKET;
+if (!paramsAWS) {
+  console.log('✕ Error: Faltán variables de entorno para la ejecución en Amazon AWS S3. Por favor revise su fichero .env');
   process.exit(22);
 }
 
@@ -39,4 +44,8 @@ module.exports = {
   FILES_PATH: process.env.FILES_PATH || 'files',
   FILES_URL: process.env.FILES_URL || 'files',
   STORAGE: `${__dirname}/public/${process.env.FILES_PATH}/`,
+  AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+  AWS_REGION: process.env.AWS_REGION,
+  AWS_BUCKET: process.env.AWS_BUCKET,
 };

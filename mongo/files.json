@@ -1,0 +1,23 @@
+[{
+  "_id": {
+    "$oid": "5eb689d323847c1afcff6daa"
+  },
+  "file": "d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg",
+  "mimetype": "image/jpeg",
+  "size": 30015,
+  "url": "http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg",
+  "username": "admin",
+  "type": "avatar",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5eb68bb23ec4ed1c74530f6b"
+  },
+  "file": "c0fca67718220630aebc6047e3641c50.jpg",
+  "mimetype": "image/jpeg",
+  "size": 57099,
+  "url": "http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg",
+  "username": "admin",
+  "type": "recipe",
+  "__v": 0
+}]

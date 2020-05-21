@@ -30,6 +30,10 @@ router.post('/delete/:id', auth, filesController.deleteFileById);
 
 // De la misma manera podríamos hacer un CRUD completo, pero no es el caso
 
+router.post('/amazon', filesController.uploadFile);
+router.get('/amazon/:file', filesController.retrieveFile);
+router.delete('/amazon/:file', filesController.removingFile);
+
 
 // Exprotamos el módulo
 module.exports = router;
