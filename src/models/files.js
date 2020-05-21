@@ -20,7 +20,7 @@ const FileSchema = new mongoose.Schema(
     },
     mimetype: { type: String, required: true },
     size: { type: Number, required: true },
-    url: { type: String, required: true, Default: 'https://picsum.photos/300/300' },
+    // url: { type: String, required: true, Default: 'https://picsum.photos/300/300' },
     username: { type: String, required: true },
     type: { type: String, required: true, Defaul: 'document' },
   },

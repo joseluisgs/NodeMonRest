@@ -19,21 +19,20 @@ router.post('/upload', auth, filesController.addFiles);
 // ruta GET File, lista todos los ficheros. Solo admin
 router.get('/all', auth, permit(['admin']), filesController.files);
 
-// GET Obtiene un elemento por por ID
-router.get('/file/:id', auth, filesController.fileById);
+// GET Obtiene la información un elemento por por ID
+router.get('/id/:id', auth, filesController.fileById);
+
+// GET Obtiene la información elemento por por ID
+router.get('/name/:file', auth, filesController.fileByName);
 
 // GET Obtiene los ficheros del usuario actual
 router.get('/me', auth, filesController.myFiles);
 
+// GET Obtiene el fichero, es decir el binario del fichero, para descargarlo o mostrarlo en la web, no sus metadatos. No va protegida por ahora
+router.get('/:file', filesController.getFile);
+
 // DELETE Elimina el fichero
-router.post('/delete/:id', auth, filesController.deleteFileById);
-
-// De la misma manera podríamos hacer un CRUD completo, pero no es el caso
-
-router.post('/amazon', filesController.uploadFile);
-router.get('/amazon/:file', filesController.retrieveFile);
-router.delete('/amazon/:file', filesController.removingFile);
-
+router.delete('/delete/:id', auth, filesController.deleteFileById);
 
 // Exprotamos el módulo
 module.exports = router;
