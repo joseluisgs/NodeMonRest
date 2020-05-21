@@ -24,7 +24,7 @@ const s3 = new AWS.S3();
  * Sube un fichero al servidor, lo hago así porque lo vamos a repetir mucho esta función dependiendo si noos entran
  * Uno o varios ficheros
  */
-const subirFichero = (file, req) => {
+const subirFichero = async (file, req) => {
   let fileName = file.name.replace(/\s/g, ''); // Si tienes espacios en blanco se los quitamos
   const fileExt = fileName.split('.').pop(); // Nos quedamos con su extension
   fileName = `${file.md5}.${fileExt}`; // this.getStorageName(file);
@@ -38,7 +38,7 @@ const subirFichero = (file, req) => {
     type: 'file',
   });
   // Comprobamos que no existe. Primero consultamos
-  const exists = File().getByFileName(fileName);
+  const exists = await File().getByFileName(fileName);
   if (!exists) {
     // Lo movemos, esto es porque estamos usando el espacio temporal, si no nos podríamos ahorrar otros pasos.
     file.mv(env.STORAGE + fileName); // Lo movemos  mi directorio file. Porque uso espacio temporal
@@ -54,7 +54,7 @@ const subirFichero = (file, req) => {
       // Subimos
       s3.putObject(putParams, async (error) => {
         if (error) {
-          return -99;
+          throw Error(`Error de subioda a AWS: ${error}`);
         }
         console.log(`Fichero subido con éxito a AWS `);
         // Almacenamos los datos en la base de datos y los metemos en el array de salida
@@ -62,12 +62,12 @@ const subirFichero = (file, req) => {
         // Borramos nuestro fichero del directorio files
         fs.unlinkSync(env.STORAGE + fileName);
         // Mandamos la respuesta
-        return newFile;
+        console.log(newFile);
       });
     });
-  } else {
-    return -98;
   }
+  // Si esta repetido o no, como ya está se lo mandamos pero nos ahorramos el proceso
+  return newFile;
 };
 
 class FilesController {
@@ -98,25 +98,18 @@ class FilesController {
           });
         // Solo tenemos un fichero
         } else {
-          const file = req.files.files;
-          const up = subirFichero(file, req);
-          console.log(up);
-          if (up) {
-            data.push(up);
-            // Devolvemos las cosas
-            res.send({
-              status: true,
-              message: 'Fichero(s) subido(s) con éxito',
-              data,
-            });
-          } else {
-            res.status(404).json({
-              error: 404,
-              mensaje: `Ya existe este fichero en el servidor`,
-            });
-          }
+          let file = req.files.files;
+          file = await subirFichero(file, req);
+          data.push(file);
+          // Devolvemos las cosas
+          res.send({
+            status: true,
+            message: 'Fichero(s) subido(s) con éxito',
+            data,
+          });
         }
       }
+
     } catch (err) {
       console.error(err);
       res.status(500).send(err);
