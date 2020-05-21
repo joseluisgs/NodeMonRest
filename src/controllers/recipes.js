@@ -241,11 +241,12 @@ class RecipesController {
         // Si esta en el vector
         const index = recipe.images.findIndex((element) => element._id.toString() === image._id.toString());
         if (index >= 0) {
-          // Le asignamos este nuevo avatar al usuario
+          // La borramos
           recipe.images.splice(index, 1);
           let data = await Recipe().findOneAndUpdate({ _id: recipe._id }, recipe);
+          // Esto no lo voy a hacer porque no quiero borrarlas del fichero aquí. Será el cliente quien deba usar la api de ficheros y borrarla
           // Ahora la eliminamos de la BD y del fichero
-          fs.unlink(env.STORAGE + image.file, async (err) => {
+          /* fs.unlink(env.STORAGE + image.file, async (err) => {
             if (err) throw err;
             console.log('Fichero borrado');
             data = await File().findByIdAndDelete({ _id: image._id });
@@ -259,7 +260,7 @@ class RecipesController {
               });
             }
           });
-          // res.status(200).json(recipe);
+          // res.status(200).json(recipe); */
         } else {
           res.status(404).json(recipe);
         }
