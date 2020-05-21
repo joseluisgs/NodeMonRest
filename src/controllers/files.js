@@ -23,8 +23,9 @@ const s3 = new AWS.S3();
 /**
  * Sube un fichero al servidor, lo hago así porque lo vamos a repetir mucho esta función dependiendo si noos entran
  * Uno o varios ficheros
+ * No necesitamos la URL si hago un método GET, porque nop van a ser accesibles desde AWS
  */
-const subirFichero = async (file, req) => {
+const subirFichero = async (file, type, req) => {
   let fileName = file.name.replace(/\s/g, ''); // Si tienes espacios en blanco se los quitamos
   const fileExt = fileName.split('.').pop(); // Nos quedamos con su extension
   fileName = `${file.md5}.${fileExt}`; // this.getStorageName(file);
@@ -33,9 +34,9 @@ const subirFichero = async (file, req) => {
     file: fileName,
     mimetype: file.mimetype,
     size: file.size,
-    url: `${req.protocol}://${req.hostname}:${env.PORT}/${env.FILES_URL}/${fileName}`,
+    // url: `${req.protocol}://${req.hostname}:${env.PORT}/${env.FILES_URL}/${fileName}`,
     username: req.user.username,
-    type: 'file',
+    type,
   });
   // Comprobamos que no existe. Primero consultamos
   const exists = await File().getByFileName(fileName);
@@ -99,7 +100,7 @@ class FilesController {
         // Solo tenemos un fichero
         } else {
           let file = req.files.files;
-          file = await subirFichero(file, req);
+          file = await subirFichero(file, 'fichero', req);
           data.push(file);
           // Devolvemos las cosas
           res.send({
