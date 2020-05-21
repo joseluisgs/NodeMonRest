@@ -181,7 +181,7 @@ class UsersController {
                     type: 'avatar'
                 }; */
         newAvatar.type = 'avatar';
-        let data = await File().findOneAndUpdate(
+        await File().findOneAndUpdate(
           { _id: req.body.avatarID },
           newAvatar,
         );
@@ -190,7 +190,7 @@ class UsersController {
                     avatar: newAvatar
                 }; */
         user.avatar = newAvatar;
-        data = await User().findOneAndUpdate({ _id: user._id }, user);
+        await User().findOneAndUpdate({ _id: user._id }, user);
         // Borro la imagen antigua del fichero y de la Bd solo si existe y no son la misma
         // Esto es opcional, porque también podíamos hacer que el cliente borrara la imagen llamando a la llamada de la API de files
         // Posiblemente en versiones futuras desaparezca
@@ -224,7 +224,6 @@ class UsersController {
     } catch (err) {
       res.status(500).send(err);
     }
-
   }
 }
 
