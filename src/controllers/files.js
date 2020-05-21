@@ -91,7 +91,7 @@ class FilesController {
         });
       } else {
         // debemos usar el mismo nombre que lleva en el formulario
-        let data = [];
+        const data = [];
         const { files } = req.files;
         // Miramos si son varios ficheros
         const isFiles = Array.isArray(req.files.files);
@@ -248,7 +248,7 @@ class FilesController {
           if (err) {
             return res.status(400).send({ success: false, err });
           }
-          data =  await File().findByIdAndDelete({ _id: req.params.id });
+          data = await File().findByIdAndDelete({ _id: req.params.id });
           return res.status(200).send(file.Body);
         });
       } else {
