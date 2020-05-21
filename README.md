@@ -14,6 +14,7 @@ Ejemplo de API REST en NodeJS, usando Mongo.
 
 ### Acerca de
 Este proyecto tiene nombre de Pokemon :). El objetivo principal docente es aplicar distintas técnicas para construir un esqueleto de API REST usable en distintos proyectos. La idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el ámbito docente como poder realizarlo. Es una aplicación puramente docente. Entre las distintas técnicas usadas:
+* Distribución de los elementos del sistema. Tenemos distribuídos en distintos nodos cada uno de los elemtnos cruciales del sistema: codigo, información y almacenamiento de ficheros.
 * Patrón [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador). La vista será cualquier cliente que consuma nuestra API.
 * [Asíncronía](https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono) y respuesta a Eventos. Uso de promesas e interacción basada en eventos que es uno de los aspectos más fuetes de NodeJS.
 * Acceso a bases de datos NoSQL usando Mongo DB.
@@ -22,6 +23,7 @@ Este proyecto tiene nombre de Pokemon :). El objetivo principal docente es aplic
 * Manejo de [CORS](https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS)
 * Algunos [patrones de diseño](https://sourcemaking.com/design_patterns) conocidos.
 * JS Código [ECMA2019](https://www.ecma-international.org/ecma-262/). De esta manera nos aseguramos seguir los estándares marcados para este tipo de lenguaje, pero tratando los módulos como indica NodeJS, usando Babel para compatibilidad. Además se ha aplicado el stilo [AirBnB](https://airbnb.io/javascript/) uno de los más seguidos con el objetivo de mantener una flosofía de sintáxis y estilo de programación ampliamente seguida en la comunidad JS/Node.
+* Almacenamiento en la nube usando [AWS](https://aws.amazon.com/es/).
 
 Iré comentando los aspectos más relevantes y las librerías usadas en cada parte.
 
@@ -74,6 +76,7 @@ Puedes usar [Postman](https://www.postman.com) para testear la API. Puedes consu
 * [Morgan](https://www.npmjs.com/package/morgan). Middleware Request logger el cual nos permitirá sacar logs de nuestras peticiones HTTP.
 * [UUID](https://www.npmjs.com/package/uuid). Implementa el RFC4122 UUIDs para los tokens de refresco.
 * [Express-fileupload](https://www.npmjs.com/package/express-fileupload). Es un middleware para Express el cual nos ayuda a procesar peticiones multipart o subida de imágenes. Se ha puesto que el tamaño máximo por umagen sea 2MB aunque se puede cambiar el el fichero .env. Los directorios para almacenar imágenes o ficheros están en .env, puedes poner el mismo o lo que quieras, pues se crean dinámicamente dentro de public/uploads (FILES_PATH) y accesible directamente por la ruta url/files (FILES_URL). Puedes ponerle el mismo si quieres.
+* [AWS](https://aws.amazon.com/es/) Se ha implementado el sistema de almacenamiento en a nube para no depender localmente del servidor. Si quieres la versión en el servidor revisa [esta rama](https://github.com/joseluisgs/NodeMonRest/tree/Ficheros_Locales). La idea de usar este tipo de tecnologías es aprender a usar almacenamiento en la nube siguiendo la folosofía de distribución de cada uno de los elementos del sistema: código, bases de datos y ficheros.
 * [Joi](https://www.npmjs.com/package/@hapi/joi). Nos sirve para validar los datos de entrada en base a un esquema de validación, por si no lo usamos en los propios esquemas de mongo la validación. Es importante que el back valide todos los datos por si se ha escapado algo del Front. No podemos dejar nada a la surte. ¡Luke, somos la última esperanza!
 * [Mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Nos sirve para validar los campos unique. Actúa como middleware.
 * [Underscore](https://www.npmjs.com/package/underscore). Nos permite extender las posibilidades de la programación funcional para algunos métodos.
