@@ -204,20 +204,15 @@ class UsersController {
             if (err) {
               return res.status(400).send({ success: false, err });
             }
-            data = await File().findByIdAndDelete({ _id: req.params.id });
+            data = await File().findByIdAndDelete({ _id: req.body.avatarID });
             return res.status(200).send(newAvatar);
           });
         } else {
           res.status(404).json({
             error: 404,
-            mensaje: `No se ha encontrado un item con ese ID: ${req.params.id}`,
+            mensaje: `No se ha encontrado un item con ese ID: ${req.body.avatarID}`,
           });
         }
-      } else {
-        return res.status(404).json({
-          error: 404,
-          mensaje: `No existe el usuario o el avatar nuevo`,
-        });
       }
     } catch (err) {
       res.status(500).send(err);
