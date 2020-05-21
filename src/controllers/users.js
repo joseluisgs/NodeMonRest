@@ -7,20 +7,20 @@
 
 
 // Librerias
-const AWS = require('aws-sdk'); // Amazon AWS para almacenar en S3
-const fs = require('fs');
+// const AWS = require('aws-sdk'); // Amazon AWS para almacenar en S3
+// const fs = require('fs');
 const User = require('../models/users').UserModel;
 const File = require('../models/files').FileModel;
-const env = require('../env');
+// const env = require('../env');
 
 // Configuramos la conexión a AWS
-AWS.config.update({
+/* AWS.config.update({
   accessKeyId: env.AWS_ACCESS_KEY,
   secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
   region: env.AWS_REGION,
 });
 // Creamos el objeto S3
-const s3 = new AWS.S3();
+const s3 = new AWS.S3(); */
 
 class UsersController {
   /**
@@ -172,7 +172,7 @@ class UsersController {
       // Me traigo los datos de mi usuario
       const user = await User().getByUserName(req.params.username);
       // Me traigo los datos del antiguo avatar
-      const oldAvatar = await File().getById(user.avatar._id);
+      // const oldAvatar = await File().getById(user.avatar._id);
       // Me traigo el nuevo fichero si lo he suubido
       const newAvatar = await File().getById(req.body.avatarID);
       if (user && newAvatar) {
@@ -192,7 +192,9 @@ class UsersController {
         user.avatar = newAvatar;
         data = await User().findOneAndUpdate({ _id: user._id }, user);
         // Borro la imagen antigua del fichero y de la Bd solo si existe y no son la misma
-        if (
+        // Esto es opcional, porque también podíamos hacer que el cliente borrara la imagen llamando a la llamada de la API de files
+        // Posiblemente en versiones futuras desaparezca
+        /* if (
           oldAvatar && oldAvatar._id.toString() !== newAvatar._id.toString()
         ) {
           // Primero la borro de Amazon y luego de Mongo, como en Files
@@ -212,16 +214,17 @@ class UsersController {
             error: 404,
             mensaje: `No se ha encontrado un item con ese ID: ${req.body.avatarID}`,
           });
-        }
+        } */
       }
+      return res
+        .status(200)
+        .json({
+          avatar: newAvatar,
+        });
     } catch (err) {
       res.status(500).send(err);
     }
-    return res
-      .status(200)
-      .json({
-        mensaje: `Imagen actualizada con éxito al usuario: ${req.params.username}`,
-      });
+
   }
 }
 
