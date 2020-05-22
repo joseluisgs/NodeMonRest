@@ -45,6 +45,7 @@ Tareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el
 * npm run watch: ejecuta nodemon para ver los cambios del código sobre la marcha
 * npm run build: construye la versión de distribución (en el directorio dist)
 * npm start (npm run start): ejecuta la versión de distribución, antes has tenido que ejecutar npm build
+* npm run test (o test-x) Ejecuta todos los test o el test x(auth, recipes, users) que quieras.
 
 ### Usando Heroku
 Heroku te permite crear tu propio contenedor dinámico y lanzar la apliación. Puedes acceder a él, tanto la web como la API en esta dirección: https://nodemonrest.herokuapp.com/
