@@ -15,6 +15,7 @@ chai.use(chaiHttp);
 // Variables globales a utilizar entre las distintas pruebas
 let token;
 let idFichero;
+const fileName = '228cce517130b8be277101776c5a88d8.png';
 
 /**
  * TEST: FILES
@@ -135,11 +136,29 @@ describe('Batería de tests de Ficheros', () => {
    * TEST: GET FICHEROS POR USUARIO IDENTIFICADO
    */
   // eslint-disable-next-line no-undef
-  describe('GET: Obtiene ls ficheros del usuario registrado', () => {
+  describe('GET: Obtiene los ficheros del usuario registrado', () => {
     // eslint-disable-next-line no-undef
     it('Debería obtener la lista del usuario identificado', (done) => {
       chai.request(instance)
         .get('/files/me')
+        .set({ Authorization: `Bearer ${token}` })
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res).to.have.status(200);
+          done();
+        });
+    });
+  });
+
+  /**
+   * TEST: GET FICHERO DEL SERVIDOR
+   */
+  // eslint-disable-next-line no-undef
+  describe('GET: Obtiene el fichero del servidor', () => {
+    // eslint-disable-next-line no-undef
+    it('Debería obtener obtener el fichero del servidor dado su nombre', (done) => {
+      chai.request(instance)
+        .get(`/files/${fileName}`)
         .set({ Authorization: `Bearer ${token}` })
         .end((err, res) => {
           // console.log(res.body);
@@ -163,7 +182,7 @@ describe('Batería de tests de Ficheros', () => {
         .post('/files/upload')
         .set({ Authorization: `Bearer ${token}` })
         .attach('files', fs.readFileSync(`${__dirname}/test.png`), 'test.png')
-        // .set(file)
+        .set(file)
         .end((err, res) => {
           // console.log(res.body);
           expect(res).to.have.status(200);
