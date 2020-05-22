@@ -58,7 +58,7 @@ const subirFichero = async (file, type, username) => {
       // Subimos
       s3.putObject(putParams, async (error) => {
         if (error) {
-          throw Error(`Error de subioda a AWS: ${error}`);
+          throw Error(`Error de subida a AWS: ${error}`);
         }
         console.log(`Fichero subido con éxito a AWS `);
         // Almacenamos los datos en la base de datos y los metemos en el array de salida

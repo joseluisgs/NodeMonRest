@@ -23,7 +23,7 @@ router.get('/all', auth, role(['admin']), filesController.files);
 router.get('/id/:id', auth, filesController.fileById);
 
 // GET Obtiene la información elemento por por ID
-router.get('/name/:file', auth, filesController.fileByName);
+router.get('/file/:file', auth, filesController.fileByName);
 
 // GET Obtiene los ficheros del usuario actual
 router.get('/me', auth, filesController.myFiles);
