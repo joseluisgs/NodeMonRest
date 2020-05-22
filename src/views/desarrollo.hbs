@@ -1,0 +1,129 @@
+<!-- Begin page content -->
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+
+
+
+<main role="main" class="container">
+  <div class="d-flex align-items-center p-3 my-3 bg-blue rounded shadow-sm">
+    <img class="mr-3" src="/res/api.png" alt="" width="48" height="48">
+    <div class="lh-100">
+      <h4 class="mb-0 text-secondary lh-100">Desarrollo</h4>
+      <small>API RESTfull 2020</small>
+    </div>
+  </div>
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <p class='text-justify'>Este proyecto tiene nombre de Pokemon :). El objetivo principal docente es aplicar distintas técnicas para construir un
+    esqueleto de API REST usable en distintos proyectos. La idea es hacer un esqueleto lo suficientemente genérico,
+    adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos
+    pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el ámbito docente como poder
+    realizarlo. Es una aplicación puramente docente.</p>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Técnicas</h6>
+    <div class="media text-muted pt-3">
+      {{!-- <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+        <title>Técnicas</title>
+        <rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
+      </svg> --}}
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">Diseño distribuido</strong>
+        Distribución de los elementos del sistema. Tenemos distribuídos en distintos nodos cada uno de los componentes cruciales
+        del sistema: codigo, información y almacenamiento de ficheros
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+      {{!-- <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+        <title>MVC</title>
+        <rect width="100%" height="100%" fill="#e83e8c" /><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text>
+      </svg> --}}
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">Patrón MVC</strong>
+        Patrón <a href="https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador" rel="nofollow">MVC</a>. La vista
+        será cualquier cliente que consuma nuestra API.
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+      {{!-- <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+        <title>Asíncronia</title>
+        <rect width="100%" height="100%" fill="#6f42c1" /><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text>
+      </svg> --}}
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">Diseño asíncrono</strong>
+        Uso de <a href="https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono" rel="nofollow"></a>Asíncronía</a> y respuesta a Eventos. Uso de promesas e interacción basada en eventos que es uno de los aspectos más
+        fuetes de <a href="https://nodejs.org/es/" rel="nofollow">NodeJS</a> en backend.
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+      {{!-- <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+        <title>BB.DD NoSQL</title>
+        <rect width="100%" height="100%" fill="#6f42c1" /><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text>
+      </svg> --}}
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">Almacenamiento NoSQL</strong>
+        Acceso a bases de datos NoSQL usando <a href="https://www.mongodb.com/es" rel="nofollow">Mongo DB</a>.
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+      {{!-- <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+            <title>BB.DD NoSQL</title>
+            <rect width="100%" height="100%" fill="#6f42c1" /><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text>
+          </svg> --}}
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">Autenticación y autorización</strong>
+        Autenticación y autorización usando <a href="https://jwt.io/introduction/" rel="nofollow">JWT</a>, uso de permisos de usuario. Manejo de <a href="https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS" rel="nofollow">CORS</a>.
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+      {{!-- <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
+                <title>BB.DD NoSQL</title>
+                <rect width="100%" height="100%" fill="#6f42c1" /><text x="50%" y="50%" fill="#6f42c1" dy=".3em">32x32</text>
+              </svg> --}}
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">JS Estándar y con estilo</strong>
+      JS Código <a href="https://www.ecma-international.org/ecma-262/" rel="nofollow">ECMA2019</a>. De esta manera nos
+      aseguramos seguir los estándares marcados para este tipo de lenguaje, pero tratando los módulos como indica NodeJS,
+      usando Babel para compatibilidad. Además se ha aplicado el stilo <a href="https://airbnb.io/javascript/"
+        rel="nofollow">AirBnB</a> uno de los más seguidos con el objetivo de mantener una flosofía de sintáxis y estilo de
+      programación ampliamente seguida en la comunidad JS/Node.
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+      <strong class="d-block text-gray-dark">Almacenamiento en a nube</strong>
+      Almacenamiento en la nube usando <a href="https://aws.amazon.com/es/" rel="nofollow">AWS</a>.
+    </p>
+    </div>
+    <div class="media text-muted pt-3">
+    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+      <strong class="d-block text-gray-dark">DEsarrollo CI/CD</strong>
+      Desarrollo <a href="https://www.redhat.com/es/topics/devops/what-is-ci-cd" rel="nofollow">CI/CD</a> usando <a
+        href="https://github.com/features/actions">GitHub Actions</a>.
+    </p>
+    </div>
+    <small class="d-block text-right mt-3">
+      <a href="#">Arriba</a>
+    </small>
+  </div>
+
+
+</main>

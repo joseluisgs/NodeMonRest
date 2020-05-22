@@ -13,7 +13,7 @@ Ejemplo de API REST en NodeJS, usando Mongo, JWT y AWS S3 con CI/CD bajo GitHub 
 
 ### Acerca de
 Este proyecto tiene nombre de Pokemon :). El objetivo principal docente es aplicar distintas técnicas para construir un esqueleto de API REST usable en distintos proyectos. La idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el ámbito docente como poder realizarlo. Es una aplicación puramente docente. Entre las distintas técnicas usadas:
-* Distribución de los elementos del sistema. Tenemos distribuídos en distintos nodos cada uno de los elemtnos cruciales del sistema: codigo, información y almacenamiento de ficheros.
+* Distribución de los elementos del sistema. Tenemos distribuídos en distintos nodos cada uno de los componentes cruciales del sistema: codigo, información y almacenamiento de ficheros.
 * Patrón [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador). La vista será cualquier cliente que consuma nuestra API.
 * [Asíncronía](https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono) y respuesta a Eventos. Uso de promesas e interacción basada en eventos que es uno de los aspectos más fuetes de NodeJS.
 * Acceso a bases de datos NoSQL usando Mongo DB.
