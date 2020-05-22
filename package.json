@@ -1,18 +1,19 @@
 {
-  "name": "express-vue",
-  "version": "1.0.0",
-  "description": "Proyecto en Node JS y Express",
+  "name": "nodemonrest",
+  "version": "1.1",
+  "description": "API RESTfull en NodeJS, MongoDB, JWT, AWS para fines didácticos",
   "main": "src/index.js",
   "keywords": [
-    "Proyecto",
-    "en",
-    "Node.JS",
-    "Vue"
+    "API REST",
+    "Node",
+    "MongoDB",
+    "JWT",
+    "Amazon AWS S3"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:joseluisgs"
+    "url": "https://github.com/joseluisgs/NodeMonRest"
   },
   "homepage": "",
   "author": {
@@ -20,7 +21,7 @@
     "twitter": "@joseluisgonsan"
   },
   "bugs": {
-    "url": "https://github.com/joseluisgs/proyecto/issues",
+    "url": "https://github.com/joseluisgs/NodeMonRest/issues",
     "twitter": "@joseluisgonsan"
   },
   "engines": {
