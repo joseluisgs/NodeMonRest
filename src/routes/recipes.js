@@ -15,7 +15,7 @@ const router = express.Router();
 
 // Para securizar ponemos auth en la ruta que queramos.
 const { auth } = require('../middlewares/auth'); // es equivalente a poner const auth = requiere ('...').auth;
-const { permit } = require('../middlewares/auth');
+const { role } = require('../middlewares/auth');
 
 /* Analizamos según la ruta y podemos poner las opciones. También podríamos hacerlo uno anu,
 por ejemplo: router.get('/:id', recipesController.recipeById);
@@ -23,28 +23,28 @@ Pero considero que así visualmente queda mejor o mas claro las acciones que se 
 Al gusto del consumidor :) */
 
 /* Si queremos que la ruta esté atenticada, ponemos auth
-Si queremos que la ruta este autorizada por roles y permisos, ponemos permit y la lista de roles
-Ejemplo: router.get('/', auth, permit(['admin', 'normal']), recipesController.recipes);
+Si queremos que la ruta este autorizada por roles y permisos, ponemos role y la lista de roles
+Ejemplo: router.get('/', auth, role(['admin', 'normal']), recipesController.recipes);
 ruta para admin o normal. Esta claro que si uno es asmin es normal, o no? dependerá del problema
 y si quremoes que puedan haber rutas de normal que no acceda admin
 o viceversa. Si no se pone es normal */
 
-// GET Listar todos los elementos, podemos hacerlo todos. Si no se pone permit es que esta implícito permit(['normal])
+// GET Listar todos los elementos, podemos hacerlo todos. Si no se pone role es que esta implícito role(['normal])
 router.get('/', recipesController.recipes);
 
 // GET Obtiene un elemento por por ID, podemos hacerlo todos
 router.get('/:id', recipesController.recipeById);
 
 // POST Añadir Elemento. Solo autenticados y del nivel admin, por eso no se pone nada (es por defecto)
-router.post('/', auth, permit(['normal']), recipesController.addRecipe);
+router.post('/', auth, role(['normal']), recipesController.addRecipe);
 
 // PUT Modifica un elemento por ID. Solo autenticados y del nivel admin, por eso no se pone nada (es por defecto)
-router.put('/:id', auth, permit(['normal']), recipesController.editRecipeById);
+router.put('/:id', auth, role(['normal']), recipesController.editRecipeById);
 
 // DELETE Elimina un elemento por ID. Solo autenticados y del nivel admin podrán, por eso no se pone nada (es por defecto)
-router.delete('/:id', auth, permit(['normal']), recipesController.deleteRecipeById);
+router.delete('/:id', auth, role(['normal']), recipesController.deleteRecipeById);
 
-// GET Obtiene las recetas del usuario actual. autenticados, por eso nos e puede poner nada en permit, es otra forma a parte de la otra
+// GET Obtiene las recetas del usuario actual. autenticados, por eso nos e puede poner nada en role, es otra forma a parte de la otra
 router.get('/me/list', auth, recipesController.myRecipes);
 
 // PATCH Inserta la imagen en la receta

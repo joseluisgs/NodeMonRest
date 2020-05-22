@@ -23,7 +23,7 @@ const UserSchema = new mongoose.Schema(
     },
     password: { type: String, required: true },
     roles: {
-      type: Array, trim: true, required: true, default: ['normal'],
+      type: Array, trim: true, required: true, default: ['user'],
     },
   },
   // El método estriccto nos dice si aceptamos o no un documento incpleto. Lo ponemos así porque no vamos a meter el id y da un poco de flexibilidad

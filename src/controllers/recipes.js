@@ -207,6 +207,8 @@ class RecipesController {
         if (!exists) {
           // Le asignamos este nuevo avatar al usuario
           recipe.images.push(newImage);
+          // Actualizamos la receta
+          await Recipe().findOneAndUpdate({ _id: req.params.id }, recipe);
           res.status(200).json(recipe);
         } else {
           res.status(200).json(recipe);

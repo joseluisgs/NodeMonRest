@@ -31,7 +31,7 @@ class Server {
     let mongoOK = false;
 
     // Precedemos de la siguiente manera, no arrancamos el servidor si no tenemos conexión
-    // a la base de datos, es decir, cuando se resuleva la promesa
+    // a la base de datos, es decir, cuando se resuleva la promesa en database.
     mongoOK = db.connect().then(() => true);// Fin de la promesa
 
     if (mongoOK) {

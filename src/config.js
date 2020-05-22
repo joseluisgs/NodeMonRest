@@ -19,14 +19,6 @@ exports.setConfig = (app) => {
   // Quitamos la cabecera que indica que esta hecho con express, por seguridad, así nod amos pistas
   app.disable('x-powered-by');
 
-  // Cargamos la configuracion y se la asignamos al servidor.
-  // app.set('env', config.ENV); // lee la etiqueta ENV
-  // app.set('config', config); // le pasamos toda la configuracion
-  // eslint-disable-next-line no-param-reassign
-  // app.locals.env = app.get('env'); // Creamos variables locales en app àra usarlas en otros lugares del código
-  // eslint-disable-next-line no-param-reassign
-  // app.locals.config = app.get('config'); // Creamos y almacenamos la configuración para usarla en otra parte del código
-
   // Middleware Le indicamos el midlleware morgan a usar logger.
   // Nos dara información de las peticiones y de todo
   if (env.NODE_ENV !== 'test') {

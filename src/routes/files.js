@@ -8,7 +8,7 @@
 const express = require('express');
 const filesController = require('../controllers/files');
 const { auth } = require('../middlewares/auth');
-const { permit } = require('../middlewares/auth');
+const { role } = require('../middlewares/auth');
 
 // Cargamos el enrutador
 const router = express.Router();
@@ -17,7 +17,7 @@ const router = express.Router();
 router.post('/upload', auth, filesController.addFiles);
 
 // ruta GET File, lista todos los ficheros. Solo admin
-router.get('/all', auth, permit(['admin']), filesController.files);
+router.get('/all', auth, role(['admin']), filesController.files);
 
 // GET Obtiene la información un elemento por por ID
 router.get('/id/:id', auth, filesController.fileById);

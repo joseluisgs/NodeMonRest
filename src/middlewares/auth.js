@@ -41,14 +41,14 @@ const auth = (req, res, next) => {
 };
 
 /**
- * Autorizacion. Permitimos que pueda acceder
+ * Autorizacion. Permitimos que pueda acceder dependiendo de na lista de roles. Por defecto tenemos el rol normal o user
  * @param {*} role. Es una rray con los permisos, por si queremos tener varios y no mirar el menor de ellos
  */
 // eslint-disable-next-line consistent-return
-const permit = (roles = ['normal']) => (req, res, next) => {
+const role = (roles = ['user']) => (req, res, next) => {
   // Devolvemos el middleware
   // Comprobamos que el rol del usuario existe en la lista de roles permitidos de una manera elegante :)
-  const valid = req.user.roles.some((role) => roles.includes(role));
+  const valid = req.user.roles.some((rol) => roles.includes(rol));
   if (valid) {
     next(); // role is allowed, so continue on the next middleware
   } else {
@@ -64,6 +64,6 @@ const permit = (roles = ['normal']) => (req, res, next) => {
  * EXPORTACIÓN DE MODULOS, por que sigo el ecosistema de NODE
  */
 module.exports = {
-  auth,
-  permit,
+  auth, // indica su está autenticado
+  role, // lista de roles permitidos para pasar
 };

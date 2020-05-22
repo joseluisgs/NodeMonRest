@@ -26,7 +26,7 @@ class Database {
   }
 
   /**
-   * Se conecta a la conexión indicada
+   * Se conecta a la conexión indicada. Se realiza por promesas, es decir, hasta que no se cumpla la promesa, espera el proceso del servidor
    */
   connect() {
     // Creamos una cadena de conexión según los parámetros de .env. Ojo que esta partida la línea

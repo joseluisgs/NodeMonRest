@@ -99,13 +99,13 @@ class FilesController {
           // eslint-disable-next-line no-restricted-syntax
           for (const file of files) {
             // eslint-disable-next-line no-await-in-loop
-            const newFile = await subirFichero(file, 'file', req.user.username);
+            const newFile = await subirFichero(file, req.body.type, req.user.username);
             data.push(newFile);
           }
         // Solo tenemos un fichero
         } else {
           let file = req.files.files;
-          file = await subirFichero(file, 'file', req.user.username);
+          file = await subirFichero(file, req.body.type, req.user.username);
           data.push(file);
         }
         res.send({

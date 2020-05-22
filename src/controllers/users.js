@@ -170,7 +170,7 @@ class UsersController {
   async avatarToUser(req, res) {
     try {
       // Me traigo los datos de mi usuario
-      const user = await User().getByUserName(req.params.username);
+      const user = await User().getByUserName(req.body.user);
       // Me traigo los datos del antiguo avatar
       // const oldAvatar = await File().getById(user.avatar._id);
       // Me traigo el nuevo fichero si lo he suubido
