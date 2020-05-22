@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "6cd78a11-836b-4a28-96d6-cfbfa998209c",
 		"name": "NodeMonRest",
-		"description": "Este proyecto tiene nombre de Pokemon :). \nEl objetivo principal docente es aplicar distintas técnicas para construir un esqueleto de API REST usable en distintos proyectos. \nLa idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el ámbito docente como poder realizarlo. \nEs una aplicación puramente docente.",
+		"description": "Ejemplo de API REST en NodeJS, usando Mongo, JWT y AWS S3 con CI/CD bajo GitHub Actions para fines docentes.\n\n[![Node.js CI](https://github.com/joseluisgs/NodeMonRest/workflows/Node.js%20CI/badge.svg)](https://github.com/joseluisgs/NodeMonRest/actions)\n[![Build Status](https://travis-ci.com/joseluisgs/NodeMonRest.svg?branch=master)](https://travis-ci.com/joseluisgs/NodeMonRest)\n[![Docker](https://img.shields.io/badge/Docker-passing-blue)](https://hub.docker.com/r/joseluisgs/nodemonrest)\n[![Heroku](https://img.shields.io/badge/Heroku-passing-blueviolet)](https://nodemonrest.herokuapp.com)\n[![Release](https://img.shields.io/github/v/release/joseluisgs/NodeMonRest)](https://github.com/joseluisgs/NodeMonRest/releases)\n[![Licence](https://img.shields.io/github/license/joseluisgs/NodeMonRest)](https://github.com/joseluisgs/NodeMonRest/blob/master/LICENSE)\n[![JS Code](https://img.shields.io/badge/JS%20Code-ES2019-yellow)](https://www.ecma-international.org/ecma-262)\n[![JS Style](https://img.shields.io/badge/JS%20Style-AirBnB-ff69b4)](https://airbnb.io/javascript)\n\n\n### Acerca de\nEste proyecto tiene nombre de Pokemon :). El objetivo principal docente es aplicar distintas técnicas para construir un esqueleto de API REST usable en distintos proyectos. La idea es hacer un esqueleto lo suficientemente genérico, adaptable y extensible en módulos para ser aplicado en distintos problemas y con él resolver cuestiones que se nos pueden presentar genéricas en cada uno de ellos, con el objetivo de mostrar para el ámbito docente como poder realizarlo. Es una aplicación puramente docente. Entre las distintas técnicas usadas:\n* Distribución de los elementos del sistema. Tenemos distribuídos en distintos nodos cada uno de los elemtnos cruciales del sistema: codigo, información y almacenamiento de ficheros.\n* Patrón [MVC](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador). La vista será cualquier cliente que consuma nuestra API.\n* [Asíncronía](https://lemoncode.net/lemoncode-blog/2018/1/29/javascript-asincrono) y respuesta a Eventos. Uso de promesas e interacción basada en eventos que es uno de los aspectos más fuetes de NodeJS.\n* Acceso a bases de datos NoSQL usando Mongo DB.\n* Autenticación y autorización usando [JWT](https://jwt.io/introduction/).\n* Autorización basada en permisos de usuario.\n* Manejo de [CORS](https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS)\n* Algunos [patrones de diseño](https://sourcemaking.com/design_patterns) conocidos.\n* JS Código [ECMA2019](https://www.ecma-international.org/ecma-262/). De esta manera nos aseguramos seguir los estándares marcados para este tipo de lenguaje, pero tratando los módulos como indica NodeJS, usando Babel para compatibilidad. Además se ha aplicado el stilo [AirBnB](https://airbnb.io/javascript/) uno de los más seguidos con el objetivo de mantener una flosofía de sintáxis y estilo de programación ampliamente seguida en la comunidad JS/Node.\n* Almacenamiento en la nube usando [AWS](https://aws.amazon.com/es/).\n* Desarrollo [CI/CD](https://www.redhat.com/es/topics/devops/what-is-ci-cd) usando [GitHub Actions](https://github.com/features/actions).\n\nIré comentando los aspectos más relevantes y las librerías usadas en cada parte.\n\n## Requisitos del sistema\n* [NodeJS](https://nodejs.org/es/) en su [última version](https://nodejs.org/es/download/)\n* [NPM](https://www.npmjs.com/)\n* [Mongo DB](https://www.mongodb.com/es)\n\n| Dependencias | Versión   |\n|:-------------|:----------|\n| __node__     | >= 10.0.0 |\n| __npm__      | >= 6.4.0  |\n| __yarn__     | >= 1.22.0 |\n\n## Instalación y uso\nTareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el fichero package.json:\n* npm install:  para instalar las dependencias\n* npm run start-dev: ejecuta el entorno de desarrollo, el codigo en src\n* npm run watch: ejecuta nodemon para ver los cambios del código sobre la marcha\n* npm run build: construye la versión de distribución (en el directorio dist)\n* npm start (npm run start): ejecuta la versión de distribución, antes has tenido que ejecutar npm build\n\n### Usando Heroku\nHeroku te permite crear tu propio contenedor dinámico y lanzar la apliación. Puedes acceder a él, tanto la web como la API en esta dirección: https://nodemonrest.herokuapp.com/\n\n### Usando Docker\nTambién podemos usar Docker para su instalación como se indica y proceder como en apartado anterior. La imagen la tienes disponible en: https://hub.docker.com/r/joseluisgs/nodemonrest. Además puedes proceder:\n* Pull de la imagen: docker pull joseluisgs/nodemonrest\n* Ejecutando luego: docker run -p 49160:8000 -d joseluisgs/nodemonest (de esta manera exponemos los puertos en nuestra maquina es el 49160, que se mapea al 8000 del docker, puedes usar el puerto que quieras en vez del 4961)\n\n### El fichero .ENV\nEl servidor toma las constantes del fichero .env, te dejo un ejemplo de configuración en .env_example. Cámbialo y lo configuras a tu gusto y luego lo renombras. Es importante que conozcas las variables de entorno que necesitas, si algunas no las pones las cogerá por defecto de la clase env que se encarga de gestionarlas. Si no las tienes te dará un error.\n\n### Carpeta Mongo\nEn la carpeta mongo tienes un volcado de la base de datos y de cada una de las colecciones con datos de ejemplo. el resto de tablas se crea sobre la marcha. Te recomiendo usar Mongo Atlas y en ella crear la base de datos recipes, o como tu quieras que se llame, recuerda que debes cambiarlo en .env. Posteriormente crea las colecciones si quieres tener estos datos que se llamen igual, si no se irán creando sobre la marca vacías.\n\n### Usando Postman\nPuedes usar [Postman](https://www.postman.com) para testear la API. Puedes consultar en la web (dependiendo como entres si localmente o usando la dirección disponible) las opciones existentes o simplemente carga en este programa el fichero con las operaciones disponibles.\n\n## Author\n* [José Luis González Sánchez](https://twitter.com/joseluisgonsan) ![Twitter](https://img.shields.io/twitter/follow/joseluisgonsan?style=social)\n\n\n* [GitHub](https://github.com/joseluisgs) ![GitHub](https://img.shields.io/github/followers/joseluisgs?style=social)\n\n![GitHub](https://img.shields.io/github/last-commit/joseluisgs/NodeMonRest)\n\n## License\nEste proyecto esta licenciado bajo licencia __MIT__, si desea saber más, visite el fichero [LICENSE](https://github.com/joseluisgs/NodeMonRest/blob/master/LICENSE)\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -12,16 +12,6 @@
 				{
 					"name": "Listar Recetas",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODg4NTU3NzQsImV4cCI6MTU4ODg1Njk3NH0.YuOr11u--ZrC7_nNnudqUdKjfHk-lyL0t1M71vwCWsM",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -81,15 +71,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "5911"
+									"value": "6801"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"1717-hmHs7AHLkuFq4JQZPH2zulUs5Ao\""
+									"value": "W/\"1a91-TkXUfJ7bI9uE6hM+jaGNxigvB/g\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:04:15 GMT"
+									"value": "Fri, 22 May 2020 11:22:28 GMT"
 								},
 								{
 									"key": "Via",
@@ -97,7 +87,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"ingredients\": [\n            \"1 kg de calabacines\",\n            \"1 cebolla\",\n            \"2 patatas\",\n            \"4 rebanadas de pan seco\",\n            \"Aceite de oliva\",\n            \"Sal\",\n            \"Pimienta\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n                \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 57099,\n                \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"admin\",\n        \"title\": \"Crema de calabacín\",\n        \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n        \"difficulty\": \"easy\",\n        \"persons\": 4,\n        \"time\": 30,\n        \"id\": \"5eb5823faf05681681978e2d\"\n    },\n    {\n        \"ingredients\": [\n            \"150 g de ensalada de hojas variadas\",\n            \"100 g de garbanzos cocidos\",\n            \"100 g de queso de Burgos\",\n            \"50 g de nueces peladas\",\n            \"Aceite de oliva\",\n            \"Vinagre de Jerez\",\n            \"Mostaza\",\n            \"Pimienta\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"recipe\",\n        \"title\": \"Ensalada con garbanzos\",\n        \"description\": \"Lava y escurre las hojas de ensalada. Escurre el queso y córtalo en daditos. Pon los garbanzos en un colador, enjuágalos para eliminar el líquido y escúrrelos. Mezcla en un cuenco 5 cucharadas de aceite, 1 cucharada de vinagre y 1 cucharadita de mostaza. Salpimenta y bate hasta que obtengas una salsa emulsionada. Coloca las hojas de ensalada en una ensaladera y añade los dados de queso, los garbanzos y las nueces troceadas. Riega con la vinagreta, remueve y sirve.\",\n        \"difficulty\": \"easy\",\n        \"persons\": 4,\n        \"time\": 10,\n        \"id\": \"5eb5823faf05681681978e2e\"\n    },\n    {\n        \"ingredients\": [\n            \"4 patatas medianas\",\n            \"4 cucharadas de pesto del que venden preparado\",\n            \"4 cucharadas de leche\",\n            \"4 cucharadas de queso rallado\",\n            \"Mantequilla\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"ana\",\n        \"title\": \"Flanecitos de patata y pesto\",\n        \"description\": \"Precalentar el horno a 200 ºC. Lavar las patatas y cocerlas, con su piel, en una cacerola con abundante agua salada durante 35 minutos. Escurrirlas, dejar que se templen y cortarlas en rodajas gruesas. Engrasar cuatro flaneras individuales con un poco de mantequilla e ir colocando en su interior las rodajas de patata en capas, alternándolas con un poco de pesto y queso rallado. Presionar ligeramente con el dorso de una cuchara para que las patatas queden bien asentadas y verter al final una cucharada de leche en cada una. Colocar las flaneritas en la placa y hornearlas durante 10 minutos. Retirarlas, dejarla enfriar y reservarlas en la nevera.\",\n        \"difficulty\": \"difficult\",\n        \"persons\": 4,\n        \"time\": 35,\n        \"id\": \"5eb5823faf05681681978e2f\"\n    },\n    {\n        \"ingredients\": [\n            \"400 g de guisantes congelados\",\n            \"2 cebollas moradas\",\n            \"4 huevos\",\n            \"1 copa de vino blanco\",\n            \"Vinagre\",\n            \"Unos tallos de cebollino\",\n            \"Aceite de oliva\",\n            \"Sal y pimienta\"\n        ],\n        \"images\": [],\n        \"username\": \"recipe\",\n        \"title\": \"Guisantes con huevo escalfado\",\n        \"description\": \"Muy Poca\",\n        \"persons\": 4,\n        \"time\": 25,\n        \"difficulty\": \"difficult\",\n        \"id\": \"5eb5823faf05681681978e30\"\n    },\n    {\n        \"ingredients\": [\n            \"600 g de lomo de cerdo cortado en dados\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"admin\",\n        \"title\": \"Lomo al vino tinto\",\n        \"description\": \"Pon las ciruelas en un cazo, cúbrelas con el vino y déjalas macerar durante 1 hora. Pon el cazo al fuego y cuece las ciruelas con el vino, a fuego muy lento, durante 15 minutos. Salpimienta los dados de carne y enharínalos ligeramente. Calienta en una cazuela 1 cucharada de aceite y rehoga los dados de carne hasta que estén dorados. Añade las ciruelas con el líquido de cocción, sube la intensidad del fuego y deja cocer durante 4 minutos, para que se reduzca un poco el vino. Agrega la mermelada y la nata a la cazuela, remueve con una cuchara de madera y deja cocer a fuego muy lento durante 10 minutos más. Rectifica la sazón y sirve enseguida.\",\n        \"difficulty\": \"medium\",\n        \"persons\": 4,\n        \"time\": 25,\n        \"id\": \"5eb5823faf05681681978e31\"\n    },\n    {\n        \"ingredients\": [\n            \"400 g de lomo de salmón limpio de piel y espinas\",\n            \"1 pepino\",\n            \"1 cebolla pequeña\",\n            \"2 cucharadas de alcaparras\",\n            \"4 cucharadas de vodka\",\n            \"1/2 limón (su zumo)\",\n            \"Pimienta\",\n            \"Unas bayas de pimienta rosa\",\n            \"Cebollino (picado y unos tallos enteros)\",\n            \"1 cucharada de aceite de oliva\",\n            \"Sal\"\n        ],\n        \"images\": [],\n        \"username\": \"admin\",\n        \"title\": \"Tartar de salmón con pepinos y alcaparras\",\n        \"description\": \"Lava y seca el salmón. Congélalo 24 horas y descongélalo. Pela el pepino y elimina las semillas. Corta unas rodajas y el resto, en daditos. Pela y pica la cebolla. Pica el salmón y mézclalo con los ingredientes anteriores, las alcaparras escurridas, el aceite, el zumo, el vodka, las bayas, la sal y la pimienta. Cubre con film y deja reposar en la nevera 20 minutos. Rellena unos aros de repostería con el tartar y retíralos. Decora con el cebollino picado, tallos enteros, y las rodajas de pepino y sirve.\",\n        \"persons\": 4,\n        \"time\": 15,\n        \"difficulty\": \"medium\",\n        \"id\": \"5eb5823faf05681681978e32\"\n    }\n]"
+							"body": "[\n    {\n        \"ingredients\": [\n            \"1 kg de calabacines\",\n            \"1 cebolla\",\n            \"2 patatas\",\n            \"4 rebanadas de pan seco\",\n            \"Aceite de oliva\",\n            \"Sal\",\n            \"Pimienta\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5ec78720e22a230989c26f0c\",\n                \"file\": \"e6cad1c2a775dcda9b25d171f9f3de5c.jpeg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 4563,\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            },\n            {\n                \"_id\": \"5ec78720e22a230989c26f0b\",\n                \"file\": \"f979e2a349233e05b70fa84b6479b663.jpeg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 7594,\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"admin\",\n        \"title\": \"Crema de calabacín\",\n        \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n        \"difficulty\": \"easy\",\n        \"persons\": 4,\n        \"time\": 30,\n        \"id\": \"5eb5823faf05681681978e2d\"\n    },\n    {\n        \"ingredients\": [\n            \"150 g de ensalada de hojas variadas\",\n            \"100 g de garbanzos cocidos\",\n            \"100 g de queso de Burgos\",\n            \"50 g de nueces peladas\",\n            \"Aceite de oliva\",\n            \"Vinagre de Jerez\",\n            \"Mostaza\",\n            \"Pimienta\",\n            \"Sal\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5ec788c2892eae0a6a7ec3d1\",\n                \"file\": \"ea16d707207a536223d80523e8891a56.jpeg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 11151,\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"recipe\",\n        \"title\": \"Ensalada con garbanzos\",\n        \"description\": \"Lava y escurre las hojas de ensalada. Escurre el queso y córtalo en daditos. Pon los garbanzos en un colador, enjuágalos para eliminar el líquido y escúrrelos. Mezcla en un cuenco 5 cucharadas de aceite, 1 cucharada de vinagre y 1 cucharadita de mostaza. Salpimenta y bate hasta que obtengas una salsa emulsionada. Coloca las hojas de ensalada en una ensaladera y añade los dados de queso, los garbanzos y las nueces troceadas. Riega con la vinagreta, remueve y sirve.\",\n        \"difficulty\": \"easy\",\n        \"persons\": 4,\n        \"time\": 10,\n        \"id\": \"5eb5823faf05681681978e2e\"\n    },\n    {\n        \"ingredients\": [\n            \"4 patatas medianas\",\n            \"4 cucharadas de pesto del que venden preparado\",\n            \"4 cucharadas de leche\",\n            \"4 cucharadas de queso rallado\",\n            \"Mantequilla\",\n            \"Sal\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5ec78931892eae0a6a7ec3d2\",\n                \"file\": \"127a876e6e832e4efaa75c1e791c3393.jpeg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 9042,\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"ana\",\n        \"title\": \"Flanecitos de patata y pesto\",\n        \"description\": \"Precalentar el horno a 200 ºC. Lavar las patatas y cocerlas, con su piel, en una cacerola con abundante agua salada durante 35 minutos. Escurrirlas, dejar que se templen y cortarlas en rodajas gruesas. Engrasar cuatro flaneras individuales con un poco de mantequilla e ir colocando en su interior las rodajas de patata en capas, alternándolas con un poco de pesto y queso rallado. Presionar ligeramente con el dorso de una cuchara para que las patatas queden bien asentadas y verter al final una cucharada de leche en cada una. Colocar las flaneritas en la placa y hornearlas durante 10 minutos. Retirarlas, dejarla enfriar y reservarlas en la nevera.\",\n        \"difficulty\": \"difficult\",\n        \"persons\": 4,\n        \"time\": 35,\n        \"id\": \"5eb5823faf05681681978e2f\"\n    },\n    {\n        \"ingredients\": [\n            \"400 g de guisantes congelados\",\n            \"2 cebollas moradas\",\n            \"4 huevos\",\n            \"1 copa de vino blanco\",\n            \"Vinagre\",\n            \"Unos tallos de cebollino\",\n            \"Aceite de oliva\",\n            \"Sal y pimienta\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5ec789c5892eae0a6a7ec3d3\",\n                \"file\": \"c8c6e0ef8167734935ccf232e1772fc0.jpg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 531240,\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"recipe\",\n        \"title\": \"Guisantes con huevo escalfado\",\n        \"description\": \"Muy Poca\",\n        \"persons\": 4,\n        \"time\": 25,\n        \"difficulty\": \"difficult\",\n        \"id\": \"5eb5823faf05681681978e30\"\n    },\n    {\n        \"ingredients\": [\n            \"600 g de lomo de cerdo cortado en dados\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\",\n            \"1 vaso grande de vino tinto\",\n            \"100 g de ciruelas pasas\",\n            \"1 dl de nata líquida\",\n            \"2 cucharadas de mermelada de fresa o grosella\",\n            \"Harina\",\n            \"Aceite de oliva\",\n            \"Pimienta\",\n            \"Sal\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5ec78a12892eae0a6a7ec3d4\",\n                \"file\": \"4b0e3c46f59534a04bea483dd4331c35.jpeg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 8351,\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"admin\",\n        \"title\": \"Lomo al vino tinto\",\n        \"description\": \"Pon las ciruelas en un cazo, cúbrelas con el vino y déjalas macerar durante 1 hora. Pon el cazo al fuego y cuece las ciruelas con el vino, a fuego muy lento, durante 15 minutos. Salpimienta los dados de carne y enharínalos ligeramente. Calienta en una cazuela 1 cucharada de aceite y rehoga los dados de carne hasta que estén dorados. Añade las ciruelas con el líquido de cocción, sube la intensidad del fuego y deja cocer durante 4 minutos, para que se reduzca un poco el vino. Agrega la mermelada y la nata a la cazuela, remueve con una cuchara de madera y deja cocer a fuego muy lento durante 10 minutos más. Rectifica la sazón y sirve enseguida.\",\n        \"difficulty\": \"medium\",\n        \"persons\": 4,\n        \"time\": 25,\n        \"id\": \"5eb5823faf05681681978e31\"\n    },\n    {\n        \"ingredients\": [\n            \"400 g de lomo de salmón limpio de piel y espinas\",\n            \"1 pepino\",\n            \"1 cebolla pequeña\",\n            \"2 cucharadas de alcaparras\",\n            \"4 cucharadas de vodka\",\n            \"1/2 limón (su zumo)\",\n            \"Pimienta\",\n            \"Unas bayas de pimienta rosa\",\n            \"Cebollino (picado y unos tallos enteros)\",\n            \"1 cucharada de aceite de oliva\",\n            \"Sal\"\n        ],\n        \"images\": [\n            {\n                \"_id\": \"5ec78a6f892eae0a6a7ec3d5\",\n                \"file\": \"bb8ebae9f3d294b1d4a940a48f79fb22.jpeg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 7788,\n                \"username\": \"admin\",\n                \"type\": \"recipe\",\n                \"__v\": 0\n            }\n        ],\n        \"username\": \"admin\",\n        \"title\": \"Tartar de salmón con pepinos y alcaparras\",\n        \"description\": \"Lava y seca el salmón. Congélalo 24 horas y descongélalo. Pela el pepino y elimina las semillas. Corta unas rodajas y el resto, en daditos. Pela y pica la cebolla. Pica el salmón y mézclalo con los ingredientes anteriores, las alcaparras escurridas, el aceite, el zumo, el vodka, las bayas, la sal y la pimienta. Cubre con film y deja reposar en la nevera 20 minutos. Rellena unos aros de repostería con el tartar y retíralos. Decora con el cebollino picado, tallos enteros, y las rodajas de pepino y sirve.\",\n        \"persons\": 4,\n        \"time\": 15,\n        \"difficulty\": \"medium\",\n        \"id\": \"5eb5823faf05681681978e32\"\n    }\n]"
 						}
 					]
 				},
@@ -107,7 +97,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://nodemonrest.herokuapp.com/recipes/5eb5823faf05681681978e2d",
+							"raw": "https://nodemonrest.herokuapp.com/recipes/5ec7b6b1f31fa00003f1e2f0",
 							"protocol": "https",
 							"host": [
 								"nodemonrest",
@@ -116,7 +106,7 @@
 							],
 							"path": [
 								"recipes",
-								"5eb5823faf05681681978e2d"
+								"5ec7b6b1f31fa00003f1e2f0"
 							]
 						},
 						"description": "Lista una receta dado su ID"
@@ -163,15 +153,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "1538"
+									"value": "1626"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"602-d1HM12NhWuddAnRWm0OD2VXRV/g\""
+									"value": "W/\"65a-quKZzy6NH9wuTrbPzwbpgkMjGwY\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:05:17 GMT"
+									"value": "Fri, 22 May 2020 11:22:57 GMT"
 								},
 								{
 									"key": "Via",
@@ -179,7 +169,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"_id\": \"5eb5823faf05681681978e2d\",\n    \"ingredients\": [\n        \"1 kg de calabacines\",\n        \"1 cebolla\",\n        \"2 patatas\",\n        \"4 rebanadas de pan seco\",\n        \"Aceite de oliva\",\n        \"Sal\",\n        \"Pimienta\"\n    ],\n    \"username\": \"admin\",\n    \"title\": \"Crema de calabacín\",\n    \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n    \"difficulty\": \"easy\",\n    \"persons\": 4,\n    \"time\": 30,\n    \"images\": [\n        {\n            \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n            \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 57099,\n            \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        }\n    ]\n}"
+							"body": "{\n    \"_id\": \"5eb5823faf05681681978e2d\",\n    \"ingredients\": [\n        \"1 kg de calabacines\",\n        \"1 cebolla\",\n        \"2 patatas\",\n        \"4 rebanadas de pan seco\",\n        \"Aceite de oliva\",\n        \"Sal\",\n        \"Pimienta\"\n    ],\n    \"username\": \"admin\",\n    \"title\": \"Crema de calabacín\",\n    \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n    \"difficulty\": \"easy\",\n    \"persons\": 4,\n    \"time\": 30,\n    \"images\": [\n        {\n            \"_id\": \"5ec78720e22a230989c26f0c\",\n            \"file\": \"e6cad1c2a775dcda9b25d171f9f3de5c.jpeg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 4563,\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"5ec78720e22a230989c26f0b\",\n            \"file\": \"f979e2a349233e05b70fa84b6479b663.jpeg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 7594,\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -191,7 +181,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2NTE3LCJleHAiOjE1OTAxNDc3MTd9.2TNsGA4DPTdKQcHV8lyg29mWTE7RqgC7KxPtJuRy9Yo",
 									"type": "string"
 								}
 							]
@@ -220,7 +210,7 @@
 								""
 							]
 						},
-						"description": "Añade una receta de cocina"
+						"description": "Añade una receta de cocina, debes estar autenticado y psarle los datos en su body"
 					},
 					"response": [
 						{
@@ -301,7 +291,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2NTE3LCJleHAiOjE1OTAxNDc3MTd9.2TNsGA4DPTdKQcHV8lyg29mWTE7RqgC7KxPtJuRy9Yo",
 									"type": "string"
 								}
 							]
@@ -318,7 +308,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://nodemonrest.herokuapp.com/recipes/5ec555baffaa6a27de43bc0e",
+							"raw": "https://nodemonrest.herokuapp.com/recipes/5ec7b6b1f31fa00003f1e2f0",
 							"protocol": "https",
 							"host": [
 								"nodemonrest",
@@ -327,10 +317,10 @@
 							],
 							"path": [
 								"recipes",
-								"5ec555baffaa6a27de43bc0e"
+								"5ec7b6b1f31fa00003f1e2f0"
 							]
 						},
-						"description": "Modifica los datos de una receta dado su ID"
+						"description": "Modifica los datos de una receta dado su ID, debes estar autenticado y pasarle sus datos"
 					},
 					"response": [
 						{
@@ -721,7 +711,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTIwMjgsImV4cCI6MTU4OTk5MzIyOH0.JMkBf1-BBdkKbv8ZOVlqNMTzcplxxCZVc0ltPdbo6QQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2NTE3LCJleHAiOjE1OTAxNDc3MTd9.2TNsGA4DPTdKQcHV8lyg29mWTE7RqgC7KxPtJuRy9Yo",
 									"type": "string"
 								}
 							]
@@ -730,7 +720,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"imageID\":\"5ec559469421e300038c1feb\"\n}",
+							"raw": "{\n\t\"imageID\":\"5ec78d108e01e20bb2c59841\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -738,7 +728,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://nodemonrest.herokuapp.com/recipes/images/5eb5823faf05681681978e2d/insert",
+							"raw": "https://nodemonrest.herokuapp.com/recipes/images/5ec7b6b1f31fa00003f1e2f0/insert",
 							"protocol": "https",
 							"host": [
 								"nodemonrest",
@@ -748,7 +738,7 @@
 							"path": [
 								"recipes",
 								"images",
-								"5eb5823faf05681681978e2d",
+								"5ec7b6b1f31fa00003f1e2f0",
 								"insert"
 							]
 						},
@@ -762,7 +752,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"imageID\":\"5ec559469421e300038c1feb\"\n}",
+									"raw": "{\n\t\"imageID\":\"5ec78d108e01e20bb2c59841\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -770,7 +760,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://nodemonrest.herokuapp.com/recipes/images/5eb5823faf05681681978e2d/insert",
+									"raw": "https://nodemonrest.herokuapp.com/recipes/images/5ec7b6b1f31fa00003f1e2f0/insert",
 									"protocol": "https",
 									"host": [
 										"nodemonrest",
@@ -780,7 +770,7 @@
 									"path": [
 										"recipes",
 										"images",
-										"5eb5823faf05681681978e2d",
+										"5ec7b6b1f31fa00003f1e2f0",
 										"insert"
 									]
 								}
@@ -807,15 +797,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "1790"
+									"value": "477"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"6fe-E3A+17iIhHBssDOtgHO+qX3I8WM\""
+									"value": "W/\"1dd-982U4HKiilXKs1YfnWakfUEiudY\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:30:36 GMT"
+									"value": "Fri, 22 May 2020 11:27:48 GMT"
 								},
 								{
 									"key": "Via",
@@ -823,7 +813,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"_id\": \"5eb5823faf05681681978e2d\",\n    \"ingredients\": [\n        \"1 kg de calabacines\",\n        \"1 cebolla\",\n        \"2 patatas\",\n        \"4 rebanadas de pan seco\",\n        \"Aceite de oliva\",\n        \"Sal\",\n        \"Pimienta\"\n    ],\n    \"username\": \"admin\",\n    \"title\": \"Crema de calabacín\",\n    \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n    \"difficulty\": \"easy\",\n    \"persons\": 4,\n    \"time\": 30,\n    \"images\": [\n        {\n            \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n            \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 57099,\n            \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"5ec559469421e300038c1feb\",\n            \"file\": \"7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 357920,\n            \"url\": \"http://nodemonrest.herokuapp.com:31566/files/7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        }\n    ]\n}"
+							"body": "{\n    \"_id\": \"5ec7b6b1f31fa00003f1e2f0\",\n    \"ingredients\": [\n        \"600 g de lomo de cerdo cortado en dados\",\n        \"1 vaso grande de vino tinto\",\n        \"100 g de ciruelas pasas\",\n        \"1 dl de nata líquida\"\n    ],\n    \"images\": [\n        {\n            \"_id\": \"5ec78d108e01e20bb2c59841\",\n            \"file\": \"228cce517130b8be277101776c5a88d8.png\",\n            \"mimetype\": \"image/png\",\n            \"size\": 108419,\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        }\n    ],\n    \"username\": \"admin\",\n    \"title\": \"Patatas Bravas Mod\",\n    \"description\": \"Paatatas Bravas\",\n    \"persons\": 99,\n    \"time\": 55,\n    \"difficulty\": \"medium\",\n    \"__v\": 0\n}"
 						}
 					]
 				},
@@ -835,7 +825,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTIwMjgsImV4cCI6MTU4OTk5MzIyOH0.JMkBf1-BBdkKbv8ZOVlqNMTzcplxxCZVc0ltPdbo6QQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2NTE3LCJleHAiOjE1OTAxNDc3MTd9.2TNsGA4DPTdKQcHV8lyg29mWTE7RqgC7KxPtJuRy9Yo",
 									"type": "string"
 								}
 							]
@@ -844,7 +834,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"imageID\":\"5ec559469421e300038c1feb\"\n}\n",
+							"raw": "{\n\t\"imageID\":\"5ec78d108e01e20bb2c59841\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -876,7 +866,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"imageID\":\"5ec559469421e300038c1feb\"\n}\n",
+									"raw": "{\n\t\"imageID\":\"5ec78d108e01e20bb2c59841\"\n}\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -921,15 +911,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "1538"
+									"value": "1626"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"602-d1HM12NhWuddAnRWm0OD2VXRV/g\""
+									"value": "W/\"65a-quKZzy6NH9wuTrbPzwbpgkMjGwY\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:32:05 GMT"
+									"value": "Fri, 22 May 2020 11:28:48 GMT"
 								},
 								{
 									"key": "Via",
@@ -937,7 +927,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"_id\": \"5eb5823faf05681681978e2d\",\n    \"ingredients\": [\n        \"1 kg de calabacines\",\n        \"1 cebolla\",\n        \"2 patatas\",\n        \"4 rebanadas de pan seco\",\n        \"Aceite de oliva\",\n        \"Sal\",\n        \"Pimienta\"\n    ],\n    \"username\": \"admin\",\n    \"title\": \"Crema de calabacín\",\n    \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n    \"difficulty\": \"easy\",\n    \"persons\": 4,\n    \"time\": 30,\n    \"images\": [\n        {\n            \"_id\": \"5eb68bb23ec4ed1c74530f6b\",\n            \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 57099,\n            \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        }\n    ]\n}"
+							"body": "{\n    \"_id\": \"5eb5823faf05681681978e2d\",\n    \"ingredients\": [\n        \"1 kg de calabacines\",\n        \"1 cebolla\",\n        \"2 patatas\",\n        \"4 rebanadas de pan seco\",\n        \"Aceite de oliva\",\n        \"Sal\",\n        \"Pimienta\"\n    ],\n    \"username\": \"admin\",\n    \"title\": \"Crema de calabacín\",\n    \"description\": \"Lava bien los calabacines, trocéalos y reserva. Pela y trocea la cebolla y las patatas. Calienta una olla con agua. Mientras tanto, añade dos cucharadas de aceite en una cazuela y agrega la cebolla troceada. Saltea durante unos 3 o 4 minutos y añade la patata y el calabacín. Vierte el agua que has calentado en la olla hasta que cubra el calabacín. Cuécelo todo durante 20 minutos aproximadamente. Corta las rebanadas de pan a cuadraditos de un centímetro más menos. Calienta una sartén pequeña con un dedo de aceite. Cuando empiece a tomar temperatura, agrega el pan en varias tandas y sofríe 3 minutos a fuego medio. Escurre con una espumadera y deja reposar sobre un plato con papel absorbente. Una vez que las verduras estén hervidas, apaga el fuego y tritúralas bien. Salpimienta al gusto. Cuando sirvas la crema en el plato, añade por encima una cucharada de aceite de oliva virgen crudo para dar más sabor a la crema y decorar el plato. Antes de servir, reparte por encima algunos picatostes de pan frito.\",\n    \"difficulty\": \"easy\",\n    \"persons\": 4,\n    \"time\": 30,\n    \"images\": [\n        {\n            \"_id\": \"5ec78720e22a230989c26f0c\",\n            \"file\": \"e6cad1c2a775dcda9b25d171f9f3de5c.jpeg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 4563,\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"5ec78720e22a230989c26f0b\",\n            \"file\": \"f979e2a349233e05b70fa84b6479b663.jpeg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 7594,\n            \"username\": \"admin\",\n            \"type\": \"recipe\",\n            \"__v\": 0\n        }\n    ]\n}"
 						}
 					]
 				}
@@ -995,22 +985,9 @@
 							"path": [
 								"auth",
 								"login"
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "corre@correo.com",
-									"description": "Correo del usuario",
-									"disabled": true
-								},
-								{
-									"key": "password",
-									"value": "{\"_id\":{\"$oid\":\"5eb2c655ccdfc8286c2bfd22\"},\"username\":\"admin\",\"email\":\"admin@admin.com\",\"password\":\"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\"roles\":[\"admin\",\"member\"],\"avatar\":\"https://api.adorable.io/avatars/200/admin@admin.com.png\"}",
-									"disabled": true
-								}
 							]
 						},
-						"description": "Hace el Login en el sistema recibiendo un token y un token de refresco"
+						"description": "Hace el Login en el sistema recibiendo un token y un token de refresco.\nNecesita el nombre de usuario, password y contraseña"
 					},
 					"response": [
 						{
@@ -1038,19 +1015,6 @@
 									"path": [
 										"auth",
 										"login"
-									],
-									"query": [
-										{
-											"key": "email",
-											"value": "corre@correo.com",
-											"description": "Correo del usuario",
-											"disabled": true
-										},
-										{
-											"key": "password",
-											"value": "{\"_id\":{\"$oid\":\"5eb2c655ccdfc8286c2bfd22\"},\"username\":\"admin\",\"email\":\"admin@admin.com\",\"password\":\"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\"roles\":[\"admin\",\"member\"],\"avatar\":\"https://api.adorable.io/avatars/200/admin@admin.com.png\"}",
-											"disabled": true
-										}
 									]
 								}
 							},
@@ -1076,15 +1040,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "290"
+									"value": "287"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"122-8+JhFjlvPYJnTRlO71BOjpe0RxE\""
+									"value": "W/\"11f-AVu44xqlFcQ2ojoPy3i768TwS2c\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:06:51 GMT"
+									"value": "Fri, 22 May 2020 11:11:19 GMT"
 								},
 								{
 									"key": "Via",
@@ -1092,7 +1056,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w\",\n    \"refreshToken\": \"80625730-f2fc-4c57-a37d-22ddb732e82d\"\n}"
+							"body": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ1ODc5LCJleHAiOjE1OTAxNDcwNzl9.2qXOWDj7RbLkIUc3Ea9OgwX3YQOQUkcDFXHT-uxjYwE\",\n    \"refreshToken\": \"38ac2f5b-6d0d-4beb-9003-1478a96ad535\"\n}"
 						}
 					]
 				},
@@ -1104,7 +1068,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTI0NjYsImV4cCI6MTU4OTk5MzY2Nn0.MrewJ8ot6LGgg6kJDVGEjrew5k47rWSBkXZYBdkMkaw",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ1ODc5LCJleHAiOjE1OTAxNDcwNzl9.2qXOWDj7RbLkIUc3Ea9OgwX3YQOQUkcDFXHT-uxjYwE",
 									"type": "string"
 								}
 							]
@@ -1113,7 +1077,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"role\": \"['admin', 'normal']\",\n    \"refreshToken\": \"d3d638e1-6d1d-4cbf-8d79-c4dd06471f16\"\n}",
+							"raw": "{\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"role\": \"['admin', 'normal']\",\n    \"refreshToken\": \"38ac2f5b-6d0d-4beb-9003-1478a96ad535\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1133,7 +1097,7 @@
 								"token"
 							]
 						},
-						"description": "Obtiene un nuevo token de refresco del sistema"
+						"description": "Obtiene un nuevo token de refresco del sistema.\nNecesita el nombre de usuario, email, rol, y el token de refresco.\nSe debe estar identificado"
 					},
 					"response": [
 						{
@@ -1143,7 +1107,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\t\"username\": \"admin\",\n\t\t\"email\": \"admin@admin.com\",\n\t\t\"role\": \"['admin', 'normal']\",\n\t\t\"refreshToken\": \"d3d638e1-6d1d-4cbf-8d79-c4dd06471f16\"\n}",
+									"raw": "{\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"role\": \"['admin', 'normal']\",\n    \"refreshToken\": \"38ac2f5b-6d0d-4beb-9003-1478a96ad535\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1151,11 +1115,13 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8000/auth/token",
+									"raw": "https://nodemonrest.herokuapp.com/auth/token",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"nodemonrest",
+										"herokuapp",
+										"com"
 									],
-									"port": "8000",
 									"path": [
 										"auth",
 										"token"
@@ -1166,6 +1132,14 @@
 							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
 								{
 									"key": "Access-Control-Allow-Origin",
 									"value": "*"
@@ -1179,20 +1153,20 @@
 									"value": "254"
 								},
 								{
-									"key": "ETag",
-									"value": "W/\"fe-S1UaSAl2fQ2nZg8TSXt0Xgr/LbI\""
+									"key": "Etag",
+									"value": "W/\"fe-0sobSarDDr4S5gpc95xYkQTa6lY\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:36:50 GMT"
+									"value": "Fri, 22 May 2020 11:12:40 GMT"
 								},
 								{
-									"key": "Connection",
-									"value": "keep-alive"
+									"key": "Via",
+									"value": "1.1 vegur"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE1ODk5OTI2MTAsImV4cCI6MTU4OTk5MzgxMH0.o1lI7-XKBi1MGtpiQxTGpoHeXYDZqegtV_VrodpvaHk\",\n    \"refreshToken\": \"d3d638e1-6d1d-4cbf-8d79-c4dd06471f16\"\n}"
+							"body": "{\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE1OTAxNDU5NjAsImV4cCI6MTU5MDE0NzE2MH0.VsioLL0u-r82Hy_EAazDxV51y5xRXeK2qieeZVBNsIw\",\n    \"refreshToken\": \"38ac2f5b-6d0d-4beb-9003-1478a96ad535\"\n}"
 						}
 					]
 				},
@@ -1204,7 +1178,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTI0NjYsImV4cCI6MTU4OTk5MzY2Nn0.MrewJ8ot6LGgg6kJDVGEjrew5k47rWSBkXZYBdkMkaw",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ1ODc5LCJleHAiOjE1OTAxNDcwNzl9.2qXOWDj7RbLkIUc3Ea9OgwX3YQOQUkcDFXHT-uxjYwE",
 									"type": "string"
 								}
 							]
@@ -1213,7 +1187,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\t\"username\": \"admin\",\n\t\t\"refreshToken\": \"d3d638e1-6d1d-4cbf-8d79-c4dd06471f16\"\n}",
+							"raw": "{\n\t\t\"username\": \"admin\",\n\t\t\"refreshToken\": \"38ac2f5b-6d0d-4beb-9003-1478a96ad535\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1233,7 +1207,7 @@
 								"logout"
 							]
 						},
-						"description": "El usuario sale de la sesión actual que tiene iniciada"
+						"description": "El usuario sale de la sesión actual que tiene iniciada.\nNecesita el nombre de usuario y el token de refresco"
 					},
 					"response": [
 						{
@@ -1313,7 +1287,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTI0NjYsImV4cCI6MTU4OTk5MzY2Nn0.MrewJ8ot6LGgg6kJDVGEjrew5k47rWSBkXZYBdkMkaw",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ1ODc5LCJleHAiOjE1OTAxNDcwNzl9.2qXOWDj7RbLkIUc3Ea9OgwX3YQOQUkcDFXHT-uxjYwE",
 									"type": "string"
 								}
 							]
@@ -1397,15 +1371,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "423"
+									"value": "346"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"1a7-GQ5AuEXUV7wQxCfCKvnaig2Y7ko\""
+									"value": "W/\"15a-5+y6ZUDTsVYEv21EiHY3Nz/HOyM\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:39:55 GMT"
+									"value": "Fri, 22 May 2020 11:13:44 GMT"
 								},
 								{
 									"key": "Via",
@@ -1413,7 +1387,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"_id\": \"5eb2c655ccdfc8286c2bfd22\",\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"roles\": [\n        \"admin\",\n        \"normal\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5eb689d323847c1afcff6daa\",\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}"
+							"body": "{\n    \"_id\": \"5eb2c655ccdfc8286c2bfd22\",\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"roles\": [\n        \"admin\",\n        \"user\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5ec782ed09de3008656cb0d5\",\n        \"file\": \"4307b710b1bf5f7e3318cf6ff0d8fec8.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 7817,\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}"
 						}
 					]
 				},
@@ -1447,7 +1421,7 @@
 								"register"
 							]
 						},
-						"description": "Registra un nuevo usuario en el sistema"
+						"description": "Registra un nuevo usuario en el sistema. En body debes pasarles los campos del usuario como username, email, password y rol"
 					},
 					"response": [
 						{
@@ -1504,11 +1478,11 @@
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"f7-8dBWWWBvpFSnlqs5PfuSZi/bRqo\""
+									"value": "W/\"f7-XY8Yn9HBi2jDvWlqF1+IGuFWAb0\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:41:00 GMT"
+									"value": "Fri, 22 May 2020 11:18:33 GMT"
 								},
 								{
 									"key": "Via",
@@ -1516,7 +1490,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"prueba\",\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": {\n        \"url\": \"https://api.adorable.io/avatars/200/prueba@prueba.png\"\n    },\n    \"id\": \"5ec55d9c9421e300038c1fee\"\n}"
+							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"prueba\",\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": {\n        \"url\": \"https://api.adorable.io/avatars/200/prueba@prueba.png\"\n    },\n    \"id\": \"5ec7b509f31fa00003f1e2ee\"\n}"
 						}
 					]
 				},
@@ -1528,7 +1502,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTI0NjYsImV4cCI6MTU4OTk5MzY2Nn0.MrewJ8ot6LGgg6kJDVGEjrew5k47rWSBkXZYBdkMkaw",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2MjUxLCJleHAiOjE1OTAxNDc0NTF9.VfdChg3usLwwUMUi90Jg3zrr45UyNe_gvLSyi8yowis",
 									"type": "string"
 								}
 							]
@@ -1537,7 +1511,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"_id\": \"5eb2c655ccdfc8286c2bfd22\",\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"roles\": [\n        \"admin\",\n        \"normal\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5eb689d323847c1afcff6daa\",\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}",
+							"raw": "{\n    \"_id\": \"5eb2c655ccdfc8286c2bfd22\",\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"roles\": [\n        \"admin\",\n        \"user\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5ec782ed09de3008656cb0d5\",\n        \"file\": \"4307b710b1bf5f7e3318cf6ff0d8fec8.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 7817,\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1556,7 +1530,8 @@
 								"auth",
 								"update"
 							]
-						}
+						},
+						"description": "Actualiza los datos del usuario identificado en base a los datos que se le pasa en el cuerpo de la petición"
 					},
 					"response": [
 						{
@@ -1566,7 +1541,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"_id\": \"5eb2c655ccdfc8286c2bfd22\",\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"roles\": [\n        \"admin\",\n        \"normal\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5eb689d323847c1afcff6daa\",\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}",
+									"raw": "{\n    \"_id\": \"5eb2c655ccdfc8286c2bfd22\",\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"roles\": [\n        \"admin\",\n        \"user\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5ec782ed09de3008656cb0d5\",\n        \"file\": \"4307b710b1bf5f7e3318cf6ff0d8fec8.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 7817,\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1574,11 +1549,13 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8000/auth/update",
+									"raw": "https://nodemonrest.herokuapp.com/auth/update",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"nodemonrest",
+										"herokuapp",
+										"com"
 									],
-									"port": "8000",
 									"path": [
 										"auth",
 										"update"
@@ -1590,6 +1567,14 @@
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
 									"key": "Access-Control-Allow-Origin",
 									"value": "*"
 								},
@@ -1599,23 +1584,23 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "422"
+									"value": "345"
 								},
 								{
-									"key": "ETag",
-									"value": "W/\"1a6-O22wtBm1dg3bSuLtTnlEi3BuwoU\""
+									"key": "Etag",
+									"value": "W/\"159-c39tkrPYLlGgn02yh5xTt+CQoEc\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:42:31 GMT"
+									"value": "Fri, 22 May 2020 11:20:56 GMT"
 								},
 								{
-									"key": "Connection",
-									"value": "keep-alive"
+									"key": "Via",
+									"value": "1.1 vegur"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"roles\": [\n        \"admin\",\n        \"normal\"\n    ],\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"avatar\": {\n        \"_id\": \"5eb689d323847c1afcff6daa\",\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    },\n    \"id\": \"5eb2c655ccdfc8286c2bfd22\"\n}"
+							"body": "{\n    \"roles\": [\n        \"admin\",\n        \"user\"\n    ],\n    \"username\": \"admin\",\n    \"email\": \"admin@admin.com\",\n    \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n    \"avatar\": {\n        \"_id\": \"5ec782ed09de3008656cb0d5\",\n        \"file\": \"4307b710b1bf5f7e3318cf6ff0d8fec8.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 7817,\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    },\n    \"id\": \"5eb2c655ccdfc8286c2bfd22\"\n}"
 						}
 					]
 				},
@@ -1748,7 +1733,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2NTE3LCJleHAiOjE1OTAxNDc3MTd9.2TNsGA4DPTdKQcHV8lyg29mWTE7RqgC7KxPtJuRy9Yo",
 									"type": "string"
 								}
 							]
@@ -1767,7 +1752,7 @@
 								"users"
 							]
 						},
-						"description": "Lista los usuarios que hay dispnibles en el sistema"
+						"description": "Lista los usuarios que hay dispnibles en el sistema. Para acceder debes ser admin"
 					},
 					"response": [
 						{
@@ -1810,15 +1795,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "659"
+									"value": "681"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"293-p0RRRRjFMm7PW5Gpb8IW5lxvJmA\""
+									"value": "W/\"2a9-QDA6Z+RqYPAG8xvOG7Yj+HvXa0w\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:48:05 GMT"
+									"value": "Fri, 22 May 2020 11:32:46 GMT"
 								},
 								{
 									"key": "Via",
@@ -1826,7 +1811,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"roles\": [\n            \"normal\"\n        ],\n        \"username\": \"ana\",\n        \"email\": \"ana@correo.com\",\n        \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n        \"avatar\": \"https://api.adorable.io/avatars/200/ana@correo.com.png\",\n        \"id\": \"5eb2c6f3ccdfc8286c2bfd23\"\n    },\n    {\n        \"roles\": [\n            \"admin\",\n            \"normal\"\n        ],\n        \"username\": \"admin\",\n        \"email\": \"admin@admin.com\",\n        \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n        \"avatar\": {\n            \"_id\": \"5eb689d323847c1afcff6daa\",\n            \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 30015,\n            \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n            \"username\": \"admin\",\n            \"type\": \"avatar\",\n            \"__v\": 0\n        },\n        \"id\": \"5eb2c655ccdfc8286c2bfd22\"\n    }\n]"
+							"body": "[\n    {\n        \"roles\": [\n            \"user\"\n        ],\n        \"username\": \"ana\",\n        \"email\": \"ana@correo.com\",\n        \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n        \"avatar\": {\n            \"_id\": \"5ec7838a09de3008656cb0d7\",\n            \"file\": \"17fa28f8721eef8dc405b833058c89ee.png\",\n            \"mimetype\": \"image/png\",\n            \"size\": 20844,\n            \"username\": \"ana\",\n            \"type\": \"avatar\",\n            \"__v\": 0\n        },\n        \"id\": \"5eb2c6f3ccdfc8286c2bfd23\"\n    },\n    {\n        \"roles\": [\n            \"admin\",\n            \"user\"\n        ],\n        \"username\": \"admin\",\n        \"email\": \"admin@admin.com\",\n        \"password\": \"$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG\",\n        \"avatar\": {\n            \"_id\": \"5ec782ed09de3008656cb0d5\",\n            \"file\": \"4307b710b1bf5f7e3318cf6ff0d8fec8.png\",\n            \"mimetype\": \"image/png\",\n            \"size\": 7817,\n            \"username\": \"admin\",\n            \"type\": \"avatar\",\n            \"__v\": 0\n        },\n        \"id\": \"5eb2c655ccdfc8286c2bfd22\"\n    }\n]"
 						}
 					]
 				},
@@ -1838,7 +1823,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2NTE3LCJleHAiOjE1OTAxNDc3MTd9.2TNsGA4DPTdKQcHV8lyg29mWTE7RqgC7KxPtJuRy9Yo",
 									"type": "string"
 								}
 							]
@@ -1858,7 +1843,7 @@
 								"5eb2c6f3ccdfc8286c2bfd23"
 							]
 						},
-						"description": "Lista los datos de un usuario dado su ID"
+						"description": "Lista los datos de un usuario dado su ID. Para acceder debes ser admin"
 					},
 					"response": [
 						{
@@ -1902,15 +1887,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "235"
+									"value": "334"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"eb-GNI4JV0HguzFN9j04Z0cciDdCVc\""
+									"value": "W/\"14e-NfQ/KuhFj36AU3n0/x3lsoP1GbM\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:49:07 GMT"
+									"value": "Fri, 22 May 2020 11:33:36 GMT"
 								},
 								{
 									"key": "Via",
@@ -1918,7 +1903,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"_id\": \"5eb2c6f3ccdfc8286c2bfd23\",\n    \"username\": \"ana\",\n    \"email\": \"ana@correo.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"roles\": [\n        \"normal\"\n    ],\n    \"avatar\": \"https://api.adorable.io/avatars/200/ana@correo.com.png\"\n}"
+							"body": "{\n    \"_id\": \"5eb2c6f3ccdfc8286c2bfd23\",\n    \"username\": \"ana\",\n    \"email\": \"ana@correo.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"roles\": [\n        \"user\"\n    ],\n    \"avatar\": {\n        \"_id\": \"5ec7838a09de3008656cb0d7\",\n        \"file\": \"17fa28f8721eef8dc405b833058c89ee.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 20844,\n        \"username\": \"ana\",\n        \"type\": \"avatar\",\n        \"__v\": 0\n    }\n}"
 						}
 					]
 				},
@@ -1930,7 +1915,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2NTE3LCJleHAiOjE1OTAxNDc3MTd9.2TNsGA4DPTdKQcHV8lyg29mWTE7RqgC7KxPtJuRy9Yo",
 									"type": "string"
 								}
 							]
@@ -1958,7 +1943,7 @@
 								"users"
 							]
 						},
-						"description": "Añade un usuario nuevo en el sistema"
+						"description": "Añade un usuario nuevo en el sistema. Para acceder debes ser admin"
 					},
 					"response": [
 						{
@@ -2014,11 +1999,11 @@
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"f3-Y+8/LNWJ4N8l4Xzx7dDEpboUkvs\""
+									"value": "W/\"f3-F7sAyaVQkzU8OmV8Nr0lzAZvyjA\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:49:58 GMT"
+									"value": "Fri, 22 May 2020 11:34:21 GMT"
 								},
 								{
 									"key": "Via",
@@ -2026,7 +2011,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"prueba\",\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": \"https://api.adorable.io/avatars/200/prueba@prueba.com.png\",\n    \"id\": \"5ec55fb69421e300038c1ff1\"\n}"
+							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"prueba\",\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": \"https://api.adorable.io/avatars/200/prueba@prueba.com.png\",\n    \"id\": \"5ec7b8bdf31fa00003f1e2f1\"\n}"
 						}
 					]
 				},
@@ -2038,7 +2023,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2NTE3LCJleHAiOjE1OTAxNDc3MTd9.2TNsGA4DPTdKQcHV8lyg29mWTE7RqgC7KxPtJuRy9Yo",
 									"type": "string"
 								}
 							]
@@ -2055,7 +2040,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://nodemonrest.herokuapp.com/users/5ec55fb69421e300038c1ff1",
+							"raw": "https://nodemonrest.herokuapp.com/users/5ec7b8bdf31fa00003f1e2f1",
 							"protocol": "https",
 							"host": [
 								"nodemonrest",
@@ -2064,10 +2049,10 @@
 							],
 							"path": [
 								"users",
-								"5ec55fb69421e300038c1ff1"
+								"5ec7b8bdf31fa00003f1e2f1"
 							]
 						},
-						"description": "Modifica los datos de un usuario dado su ID"
+						"description": "Modifica los datos de un usuario dado su ID. Para acceder debes ser admin"
 					},
 					"response": [
 						{
@@ -2085,7 +2070,7 @@
 									}
 								},
 								"url": {
-									"raw": "https://nodemonrest.herokuapp.com/users/5ec55fb69421e300038c1ff1",
+									"raw": "https://nodemonrest.herokuapp.com/users/5ec7b8bdf31fa00003f1e2f1",
 									"protocol": "https",
 									"host": [
 										"nodemonrest",
@@ -2094,7 +2079,7 @@
 									],
 									"path": [
 										"users",
-										"5ec55fb69421e300038c1ff1"
+										"5ec7b8bdf31fa00003f1e2f1"
 									]
 								}
 							},
@@ -2124,11 +2109,11 @@
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"f3-Y+8/LNWJ4N8l4Xzx7dDEpboUkvs\""
+									"value": "W/\"f3-F7sAyaVQkzU8OmV8Nr0lzAZvyjA\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:51:06 GMT"
+									"value": "Fri, 22 May 2020 11:35:09 GMT"
 								},
 								{
 									"key": "Via",
@@ -2136,7 +2121,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"prueba\",\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": \"https://api.adorable.io/avatars/200/prueba@prueba.com.png\",\n    \"id\": \"5ec55fb69421e300038c1ff1\"\n}"
+							"body": "{\n    \"roles\": [\n        \"normal\"\n    ],\n    \"username\": \"prueba\",\n    \"email\": \"prueba@prueba.com\",\n    \"password\": \"$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO\",\n    \"avatar\": \"https://api.adorable.io/avatars/200/prueba@prueba.com.png\",\n    \"id\": \"5ec7b8bdf31fa00003f1e2f1\"\n}"
 						}
 					]
 				},
@@ -2148,7 +2133,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2NTE3LCJleHAiOjE1OTAxNDc3MTd9.2TNsGA4DPTdKQcHV8lyg29mWTE7RqgC7KxPtJuRy9Yo",
 									"type": "string"
 								}
 							]
@@ -2156,7 +2141,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "https://nodemonrest.herokuapp.com/users/5ec55fb69421e300038c1ff1",
+							"raw": "https://nodemonrest.herokuapp.com/users/5ec7b8bdf31fa00003f1e2f1",
 							"protocol": "https",
 							"host": [
 								"nodemonrest",
@@ -2165,9 +2150,10 @@
 							],
 							"path": [
 								"users",
-								"5ec55fb69421e300038c1ff1"
+								"5ec7b8bdf31fa00003f1e2f1"
 							]
-						}
+						},
+						"description": "Elimina un usuario del sistema dado su ID. Para acceder debes ser admin"
 					},
 					"response": [
 						{
@@ -2239,7 +2225,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTMyMzUsImV4cCI6MTU4OTk5NDQzNX0.ExlUSueOmjjOHQVR2lFdQCmMY-ybvpvWQv-6Azsn0qk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ2NTE3LCJleHAiOjE1OTAxNDc3MTd9.2TNsGA4DPTdKQcHV8lyg29mWTE7RqgC7KxPtJuRy9Yo",
 									"type": "string"
 								}
 							]
@@ -2248,7 +2234,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"avatarID\" : \"5eb689d323847c1afcff6daa\"\n}",
+							"raw": "{\n\t\"avatarID\" : \"5ec78d108e01e20bb2c59841\",\n\t\"user\": \"prueba\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2256,7 +2242,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://nodemonrest.herokuapp.com/users/admin/avatar",
+							"raw": "https://nodemonrest.herokuapp.com/users/avatar",
 							"protocol": "https",
 							"host": [
 								"nodemonrest",
@@ -2265,10 +2251,10 @@
 							],
 							"path": [
 								"users",
-								"admin",
 								"avatar"
 							]
-						}
+						},
+						"description": "Asiga un nuevo avatar al usuario. Para ello necesita el usuario y el id del avatar id en su body. Para acceder debes ser admin"
 					},
 					"response": [
 						{
@@ -2278,7 +2264,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"avatarID\" : \"5eb689d323847c1afcff6daa\"\n}",
+									"raw": "{\n\t\"avatarID\" : \"5ec78d108e01e20bb2c59841\",\n\t\"user\": \"prueba\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2286,14 +2272,15 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:8000/users/admin/avatar",
+									"raw": "https://nodemonrest.herokuapp.com/users/avatar",
+									"protocol": "https",
 									"host": [
-										"localhost"
+										"nodemonrest",
+										"herokuapp",
+										"com"
 									],
-									"port": "8000",
 									"path": [
 										"users",
-										"admin",
 										"avatar"
 									]
 								}
@@ -2302,6 +2289,14 @@
 							"code": 200,
 							"_postman_previewlanguage": "json",
 							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
 								{
 									"key": "Access-Control-Allow-Origin",
 									"value": "*"
@@ -2312,28 +2307,28 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "61"
+									"value": "169"
 								},
 								{
-									"key": "ETag",
-									"value": "W/\"3d-xHg3rKC5n3jkISNAFYaClkIi1Dg\""
+									"key": "Etag",
+									"value": "W/\"a9-qnHS6yodW8ebsrimwzONTrLFeuQ\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:52:08 GMT"
+									"value": "Fri, 22 May 2020 11:36:41 GMT"
 								},
 								{
-									"key": "Connection",
-									"value": "keep-alive"
+									"key": "Via",
+									"value": "1.1 vegur"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"mensaje\": \"Imagen actualizada con éxito al usuario: admin\"\n}"
+							"body": "{\n    \"avatar\": {\n        \"_id\": \"5ec78d108e01e20bb2c59841\",\n        \"file\": \"228cce517130b8be277101776c5a88d8.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 108419,\n        \"username\": \"admin\",\n        \"type\": \"test\",\n        \"__v\": 0\n    }\n}"
 						}
 					]
 				}
 			],
-			"description": "Parte del API responsabilizada en el CRUD de usuarios y tratada por el admin del sistema",
+			"description": "Parte del API responsabilizada en el CRUD de usuarios y tratada por el admin del sistema. Para acceder debes ser admin",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -2369,7 +2364,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ3OTgxLCJleHAiOjE1OTAxNDkxODF9.DSOyLTbemBQdvykxn5qPJZd8ntwhSv30t7xlUygJEb4",
 									"type": "string"
 								}
 							]
@@ -2383,6 +2378,11 @@
 									"key": "files",
 									"type": "file",
 									"src": "/Users/link/Desktop/Patatas_bravas_madrid.jpg"
+								},
+								{
+									"key": "type",
+									"value": "prueba",
+									"type": "text"
 								}
 							]
 						},
@@ -2414,6 +2414,11 @@
 											"key": "files",
 											"type": "file",
 											"src": "/Users/link/Desktop/Patatas_bravas_madrid.jpg"
+										},
+										{
+											"key": "type",
+											"value": "prueba",
+											"type": "text"
 										}
 									]
 								},
@@ -2453,15 +2458,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "325"
+									"value": "222"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"145-gioDoucG89nwmQzykTk0/exwUSM\""
+									"value": "W/\"de-UIH8nlZP5Sy0yKwOuy+HAHh9nXc\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:22:30 GMT"
+									"value": "Fri, 22 May 2020 11:53:22 GMT"
 								},
 								{
 									"key": "Via",
@@ -2469,7 +2474,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": true,\n    \"message\": \"Fichero(s) subido(s) con éxito\",\n    \"data\": [\n        {\n            \"newFile\": {\n                \"file\": \"7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n                \"mimetype\": \"image/jpeg\",\n                \"size\": 357920,\n                \"url\": \"http://nodemonrest.herokuapp.com:31566/files/7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n                \"username\": \"admin\",\n                \"type\": \"document\",\n                \"id\": \"5ec559469421e300038c1feb\"\n            }\n        }\n    ]\n}"
+							"body": "{\n    \"status\": true,\n    \"message\": \"Fichero(s) subido(s) con éxito\",\n    \"files\": [\n        {\n            \"file\": \"7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n            \"mimetype\": \"image/jpeg\",\n            \"size\": 357920,\n            \"username\": \"admin\",\n            \"type\": \"prueba\",\n            \"id\": \"5ec7bd32f31fa00003f1e2f4\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -2481,7 +2486,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTA4MTEsImV4cCI6MTU4OTk5MjAxMX0.aytqzOYX37-_nFUna7o3fUE4AcaILPr8a6ZMa0ldZ9w",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ3NjI1LCJleHAiOjE1OTAxNDg4MjV9.YNyokjZb874OcHhM1x3B0334WM1MknDoaWYPxPAtSis",
 									"type": "string"
 								}
 							]
@@ -2501,7 +2506,7 @@
 								"all"
 							]
 						},
-						"description": "Lista los ficheros que hay disponibles"
+						"description": "Lista los ficheros que hay disponibles. solo puede usaurios tipo admin"
 					},
 					"response": [
 						{
@@ -2545,15 +2550,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "451"
+									"value": "1516"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"1c3-0rzE9ISHwGTIFGFUzbcQ9gTL4/o\""
+									"value": "W/\"5ec-JMdtpbt1NBaJgueCzL8U8iz7E+k\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:19:50 GMT"
+									"value": "Fri, 22 May 2020 11:42:29 GMT"
 								},
 								{
 									"key": "Via",
@@ -2561,7 +2566,143 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"file\": \"d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 30015,\n        \"url\": \"http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"id\": \"5eb689d323847c1afcff6daa\"\n    },\n    {\n        \"file\": \"c0fca67718220630aebc6047e3641c50.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 57099,\n        \"url\": \"http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg\",\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5eb68bb23ec4ed1c74530f6b\"\n    }\n]"
+							"body": "[\n    {\n        \"file\": \"4307b710b1bf5f7e3318cf6ff0d8fec8.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 7817,\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"id\": \"5ec782ed09de3008656cb0d5\"\n    },\n    {\n        \"file\": \"17fa28f8721eef8dc405b833058c89ee.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 20844,\n        \"username\": \"ana\",\n        \"type\": \"avatar\",\n        \"id\": \"5ec7838a09de3008656cb0d7\"\n    },\n    {\n        \"file\": \"e6cad1c2a775dcda9b25d171f9f3de5c.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 4563,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec78720e22a230989c26f0c\"\n    },\n    {\n        \"file\": \"f979e2a349233e05b70fa84b6479b663.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 7594,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec78720e22a230989c26f0b\"\n    },\n    {\n        \"file\": \"ea16d707207a536223d80523e8891a56.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 11151,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec788c2892eae0a6a7ec3d1\"\n    },\n    {\n        \"file\": \"127a876e6e832e4efaa75c1e791c3393.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 9042,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec78931892eae0a6a7ec3d2\"\n    },\n    {\n        \"file\": \"c8c6e0ef8167734935ccf232e1772fc0.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 531240,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec789c5892eae0a6a7ec3d3\"\n    },\n    {\n        \"file\": \"4b0e3c46f59534a04bea483dd4331c35.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 8351,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec78a12892eae0a6a7ec3d4\"\n    },\n    {\n        \"file\": \"bb8ebae9f3d294b1d4a940a48f79fb22.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 7788,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec78a6f892eae0a6a7ec3d5\"\n    },\n    {\n        \"file\": \"228cce517130b8be277101776c5a88d8.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 108419,\n        \"username\": \"admin\",\n        \"type\": \"test\",\n        \"id\": \"5ec78d108e01e20bb2c59841\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Listar Ficheros Búsqueda y Paginación",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ4ODUzLCJleHAiOjE1OTAxNTAwNTN9.-7Pq7ouWCs6dLrA1niMPUcRCZiYl3xbqBZOp1TN8uY8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/files/all?page=0&limit=10&search_field=username&search_content=ana&search_order=desc",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"files",
+								"all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "search_field",
+									"value": "username"
+								},
+								{
+									"key": "search_content",
+									"value": "ana"
+								},
+								{
+									"key": "search_order",
+									"value": "desc"
+								}
+							]
+						},
+						"description": "Lista los ficheros que hay disponibles. solo puede usaurios tipo admin. se puede meter cualquier capo de criterio de b´suqueda o páginas. No es obligatorio. Si no se mete el usuario busca por todos"
+					},
+					"response": [
+						{
+							"name": "Listar Ficheros dado criterio de búsqueda y paginado",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/files/all?page=0&limit=10&search_field=username&search_content=ana&search_order=desc",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"files",
+										"all"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "search_field",
+											"value": "username"
+										},
+										{
+											"key": "search_content",
+											"value": "ana"
+										},
+										{
+											"key": "search_order",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "150"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"96-vPFqmEIYROnpwdvooClpZsHbxJw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 22 May 2020 12:01:09 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"file\": \"17fa28f8721eef8dc405b833058c89ee.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 20844,\n        \"username\": \"ana\",\n        \"type\": \"avatar\",\n        \"id\": \"5ec7838a09de3008656cb0d7\"\n    }\n]"
 						}
 					]
 				},
@@ -2573,7 +2714,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTIwMjgsImV4cCI6MTU4OTk5MzIyOH0.JMkBf1-BBdkKbv8ZOVlqNMTzcplxxCZVc0ltPdbo6QQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ3NjI1LCJleHAiOjE1OTAxNDg4MjV9.YNyokjZb874OcHhM1x3B0334WM1MknDoaWYPxPAtSis",
 									"type": "string"
 								}
 							]
@@ -2581,7 +2722,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://nodemonrest.herokuapp.com/files/file/5ec559469421e300038c1feb",
+							"raw": "https://nodemonrest.herokuapp.com/files/id/5ec78d108e01e20bb2c59841",
 							"protocol": "https",
 							"host": [
 								"nodemonrest",
@@ -2590,11 +2731,11 @@
 							],
 							"path": [
 								"files",
-								"file",
-								"5ec559469421e300038c1feb"
+								"id",
+								"5ec78d108e01e20bb2c59841"
 							]
 						},
-						"description": "Obtiene la información de un fichero dado su ID"
+						"description": "Obtiene la información de un fichero dado su ID. Debes estar identificado"
 					},
 					"response": [
 						{
@@ -2603,7 +2744,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://nodemonrest.herokuapp.com/files/file/5ec559469421e300038c1feb",
+									"raw": "https://nodemonrest.herokuapp.com/files/id/5ec78d108e01e20bb2c59841",
 									"protocol": "https",
 									"host": [
 										"nodemonrest",
@@ -2612,8 +2753,8 @@
 									],
 									"path": [
 										"files",
-										"file",
-										"5ec559469421e300038c1feb"
+										"id",
+										"5ec78d108e01e20bb2c59841"
 									]
 								}
 							},
@@ -2639,15 +2780,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "253"
+									"value": "158"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"fd-VEsyPBfYCP0KbwtRQDfZv8q/kmw\""
+									"value": "W/\"9e-wK9rWsZoDPjbnu3SqMkm/Sn3IMg\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:27:19 GMT"
+									"value": "Fri, 22 May 2020 11:43:44 GMT"
 								},
 								{
 									"key": "Via",
@@ -2655,7 +2796,101 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"_id\": \"5ec559469421e300038c1feb\",\n    \"file\": \"7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n    \"mimetype\": \"image/jpeg\",\n    \"size\": 357920,\n    \"url\": \"http://nodemonrest.herokuapp.com:31566/files/7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n    \"username\": \"admin\",\n    \"type\": \"document\",\n    \"__v\": 0\n}"
+							"body": "{\n    \"_id\": \"5ec78d108e01e20bb2c59841\",\n    \"file\": \"228cce517130b8be277101776c5a88d8.png\",\n    \"mimetype\": \"image/png\",\n    \"size\": 108419,\n    \"username\": \"admin\",\n    \"type\": \"test\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "Lista ficheros dado su nombre",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ3NjI1LCJleHAiOjE1OTAxNDg4MjV9.YNyokjZb874OcHhM1x3B0334WM1MknDoaWYPxPAtSis",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/files/file/228cce517130b8be277101776c5a88d8.png",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"files",
+								"file",
+								"228cce517130b8be277101776c5a88d8.png"
+							]
+						},
+						"description": "Obtiene la informaciín del fichewro dado su nombre"
+					},
+					"response": [
+						{
+							"name": "Listra ficheros dado su nombre",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/files/file/228cce517130b8be277101776c5a88d8.png",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"files",
+										"file",
+										"228cce517130b8be277101776c5a88d8.png"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "158"
+								},
+								{
+									"key": "Etag",
+									"value": "W/\"9e-wK9rWsZoDPjbnu3SqMkm/Sn3IMg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 22 May 2020 11:46:55 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"5ec78d108e01e20bb2c59841\",\n    \"file\": \"228cce517130b8be277101776c5a88d8.png\",\n    \"mimetype\": \"image/png\",\n    \"size\": 108419,\n    \"username\": \"admin\",\n    \"type\": \"test\",\n    \"__v\": 0\n}"
 						}
 					]
 				},
@@ -2667,7 +2902,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk3MzM5MzAsImV4cCI6MTU4OTczNzUzMH0.XsE9hrFC9ihvSuOapx7BowjvSDFgO-FFgc1BgztL0uI",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ3OTgxLCJleHAiOjE1OTAxNDkxODF9.DSOyLTbemBQdvykxn5qPJZd8ntwhSv30t7xlUygJEb4",
 									"type": "string"
 								}
 							]
@@ -2675,36 +2910,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/files/me",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"files",
-								"me"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Eliminar Fichero por ID",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsIm5vcm1hbCJdLCJpYXQiOjE1ODk5OTI0NjYsImV4cCI6MTU4OTk5MzY2Nn0.MrewJ8ot6LGgg6kJDVGEjrew5k47rWSBkXZYBdkMkaw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "https://nodemonrest.herokuapp.com/files/delete/5ec559469421e300038c1feb",
+							"raw": "https://nodemonrest.herokuapp.com/files/me",
 							"protocol": "https",
 							"host": [
 								"nodemonrest",
@@ -2713,20 +2919,19 @@
 							],
 							"path": [
 								"files",
-								"delete",
-								"5ec559469421e300038c1feb"
+								"me"
 							]
 						},
-						"description": "Elimina un fichero del sistema dado su ID"
+						"description": "Obtiene todos los ficheros que pertenecen al usuario registrado"
 					},
 					"response": [
 						{
-							"name": "Eliminar Fichero por ID",
+							"name": "Llistar Ficheros del Usuario Registrado",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://nodemonrest.herokuapp.com/files/delete/5ec559469421e300038c1feb",
+									"raw": "https://nodemonrest.herokuapp.com/files/me",
 									"protocol": "https",
 									"host": [
 										"nodemonrest",
@@ -2735,8 +2940,7 @@
 									],
 									"path": [
 										"files",
-										"delete",
-										"5ec559469421e300038c1feb"
+										"me"
 									]
 								}
 							},
@@ -2762,15 +2966,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "244"
+									"value": "1367"
 								},
 								{
 									"key": "Etag",
-									"value": "W/\"f4-HQKPlZmdA9zDsobEM+vmWQ2GqEE\""
+									"value": "W/\"557-F3y7vwailbOuWZv3BNrCCF33kQ0\""
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 20 May 2020 16:34:39 GMT"
+									"value": "Fri, 22 May 2020 11:50:49 GMT"
 								},
 								{
 									"key": "Via",
@@ -2778,7 +2982,115 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"file\": \"7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n    \"mimetype\": \"image/jpeg\",\n    \"size\": 357920,\n    \"url\": \"http://nodemonrest.herokuapp.com:31566/files/7cac9f2d3a0a2edfaac973e6e1a09e1b.jpg\",\n    \"username\": \"admin\",\n    \"type\": \"document\",\n    \"id\": \"5ec559469421e300038c1feb\"\n}"
+							"body": "[\n    {\n        \"file\": \"4307b710b1bf5f7e3318cf6ff0d8fec8.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 7817,\n        \"username\": \"admin\",\n        \"type\": \"avatar\",\n        \"id\": \"5ec782ed09de3008656cb0d5\"\n    },\n    {\n        \"file\": \"e6cad1c2a775dcda9b25d171f9f3de5c.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 4563,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec78720e22a230989c26f0c\"\n    },\n    {\n        \"file\": \"f979e2a349233e05b70fa84b6479b663.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 7594,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec78720e22a230989c26f0b\"\n    },\n    {\n        \"file\": \"ea16d707207a536223d80523e8891a56.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 11151,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec788c2892eae0a6a7ec3d1\"\n    },\n    {\n        \"file\": \"127a876e6e832e4efaa75c1e791c3393.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 9042,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec78931892eae0a6a7ec3d2\"\n    },\n    {\n        \"file\": \"c8c6e0ef8167734935ccf232e1772fc0.jpg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 531240,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec789c5892eae0a6a7ec3d3\"\n    },\n    {\n        \"file\": \"4b0e3c46f59534a04bea483dd4331c35.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 8351,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec78a12892eae0a6a7ec3d4\"\n    },\n    {\n        \"file\": \"bb8ebae9f3d294b1d4a940a48f79fb22.jpeg\",\n        \"mimetype\": \"image/jpeg\",\n        \"size\": 7788,\n        \"username\": \"admin\",\n        \"type\": \"recipe\",\n        \"id\": \"5ec78a6f892eae0a6a7ec3d5\"\n    },\n    {\n        \"file\": \"228cce517130b8be277101776c5a88d8.png\",\n        \"mimetype\": \"image/png\",\n        \"size\": 108419,\n        \"username\": \"admin\",\n        \"type\": \"test\",\n        \"id\": \"5ec78d108e01e20bb2c59841\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Obtiene y descarga un fichero daod su nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/files/bb8ebae9f3d294b1d4a940a48f79fb22.jpeg",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"files",
+								"bb8ebae9f3d294b1d4a940a48f79fb22.jpeg"
+							]
+						},
+						"description": "Descarga un fichero que exista dado su nombre"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Fichero por ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlcyI6WyJhZG1pbiIsInVzZXIiXSwiaWF0IjoxNTkwMTQ3OTgxLCJleHAiOjE1OTAxNDkxODF9.DSOyLTbemBQdvykxn5qPJZd8ntwhSv30t7xlUygJEb4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://nodemonrest.herokuapp.com/files/delete/5ec7bd32f31fa00003f1e2f4",
+							"protocol": "https",
+							"host": [
+								"nodemonrest",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"files",
+								"delete",
+								"5ec7bd32f31fa00003f1e2f4"
+							]
+						},
+						"description": "Elimina un fichero del sistema dado su ID"
+					},
+					"response": [
+						{
+							"name": "Eliminar Fichero por ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://nodemonrest.herokuapp.com/files/delete/5ec7bd32f31fa00003f1e2f4",
+									"protocol": "https",
+									"host": [
+										"nodemonrest",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"files",
+										"delete",
+										"5ec7bd32f31fa00003f1e2f4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 22 May 2020 11:55:05 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": null
 						}
 					]
 				}

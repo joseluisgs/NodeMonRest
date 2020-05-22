@@ -6,9 +6,19 @@
   "email": "ana@correo.com",
   "password": "$2b$10$/50h.TN1N9Wn.fJURZopHeVl4pNPfK33HGy3ejO.mFwt22BoWDsiO",
   "roles": [
-    "normal"
+    "user"
   ],
-  "avatar": "https://api.adorable.io/avatars/200/ana@correo.com.png"
+  "avatar": {
+    "_id": {
+      "$oid": "5ec7838a09de3008656cb0d7"
+    },
+    "file": "17fa28f8721eef8dc405b833058c89ee.png",
+    "mimetype": "image/png",
+    "size": 20844,
+    "username": "ana",
+    "type": "avatar",
+    "__v": 0
+  }
 },{
   "_id": {
     "$oid": "5eb2c655ccdfc8286c2bfd22"
@@ -18,14 +28,13 @@
   "password": "$2b$10$oN1K03f5kjqa23HGei5vZ.1OjB5frIw7vw8F0KuvT1LUobUMVLLIG",
   "roles": [
     "admin",
-    "normal"
+    "user"
   ],
   "avatar": {
-    "_id": "5eb689d323847c1afcff6daa",
-    "file": "d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg",
-    "mimetype": "image/jpeg",
-    "size": 30015,
-    "url": "http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg",
+    "_id": "5ec782ed09de3008656cb0d5",
+    "file": "4307b710b1bf5f7e3318cf6ff0d8fec8.png",
+    "mimetype": "image/png",
+    "size": 7817,
     "username": "admin",
     "type": "avatar",
     "__v": 0

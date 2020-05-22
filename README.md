@@ -1,9 +1,8 @@
 # NodeMonREST
 
-Ejemplo de API REST en NodeJS, usando Mongo.
+Ejemplo de API REST en NodeJS, usando Mongo, JWT y AWS S3 con CI/CD bajo GitHub Actions para fines docentes.
 
 [![Node.js CI](https://github.com/joseluisgs/NodeMonRest/workflows/Node.js%20CI/badge.svg)](https://github.com/joseluisgs/NodeMonRest/actions)
-[![Build Status](https://travis-ci.com/joseluisgs/NodeMonRest.svg?branch=master)](https://travis-ci.com/joseluisgs/NodeMonRest)
 [![Docker](https://img.shields.io/badge/Docker-passing-blue)](https://hub.docker.com/r/joseluisgs/nodemonrest)
 [![Heroku](https://img.shields.io/badge/Heroku-passing-blueviolet)](https://nodemonrest.herokuapp.com)
 [![Release](https://img.shields.io/github/v/release/joseluisgs/NodeMonRest)](https://github.com/joseluisgs/NodeMonRest/releases)
@@ -24,6 +23,7 @@ Este proyecto tiene nombre de Pokemon :). El objetivo principal docente es aplic
 * Algunos [patrones de diseño](https://sourcemaking.com/design_patterns) conocidos.
 * JS Código [ECMA2019](https://www.ecma-international.org/ecma-262/). De esta manera nos aseguramos seguir los estándares marcados para este tipo de lenguaje, pero tratando los módulos como indica NodeJS, usando Babel para compatibilidad. Además se ha aplicado el stilo [AirBnB](https://airbnb.io/javascript/) uno de los más seguidos con el objetivo de mantener una flosofía de sintáxis y estilo de programación ampliamente seguida en la comunidad JS/Node.
 * Almacenamiento en la nube usando [AWS](https://aws.amazon.com/es/).
+* Desarrollo [CI/CD](https://www.redhat.com/es/topics/devops/what-is-ci-cd) usando [GitHub Actions](https://github.com/features/actions).
 
 Iré comentando los aspectos más relevantes y las librerías usadas en cada parte.
 
@@ -83,7 +83,7 @@ Puedes usar [Postman](https://www.postman.com) para testear la API. Puedes consu
 * [Express-handlebars](https://www.npmjs.com/package/express-handlebars). Personalmente uno de los mejores motores de plantillas para NodeJS, basado en [Handlebars](https://handlebarsjs.com/). Lo he usado de ejemplo para hacer algunas páginas estáticas de presentación de la API.
 * [Mocha](https://mochajs.org/) y [Chai](https://www.chaijs.com/). Se han utilizado estas librerías para los test por su funcionalidad y porque se adaptan perfectamente al proceso de integración continua que se ha marcado como objetivo.
 * [Babel](https://babeljs.io/) y [ESLint](https://eslint.org/) con el objetivo de construir un código ampliamente compatible y estandarizado de JS.
-* [GitHub Actions](https://github.com/features/actions). Es una de las grandes herramientas que se ha usado para la integración/distribución continuas [CI/CD](https://www.redhat.com/es/topics/devops/what-is-ci-cd). Me he apoyado en otras herramientas como [Travis CI](https://travis-ci.com/). No son excluyentes y pueden ser complementarias. Es por eso que he dejado los ficheros para ambas. Para ello hemos integrado el entorno de ejecución con pruebas y el despliegue inicial en [DockerHub](https://hub.docker.com/r/joseluisgs/nodemonrest) y su despliegue para su uso en [Heroku](https://nodemonrest.herokuapp.com/).
+* [GitHub Actions](https://github.com/features/actions). Es una de las grandes herramientas que se ha usado para la integración/distribución continuas [CI/CD](https://www.redhat.com/es/topics/devops/what-is-ci-cd). Para ello hemos integrado el entorno de ejecución con pruebas y el despliegue como docker en [DockerHub](https://hub.docker.com/r/joseluisgs/nodemonrest) y su despliegue para su uso en [Heroku](https://nodemonrest.herokuapp.com/).
 
 ## Author
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan) ![Twitter](https://img.shields.io/twitter/follow/joseluisgonsan?style=social)

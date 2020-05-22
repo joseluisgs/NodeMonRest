@@ -45,6 +45,7 @@ html {
 
 .Header-item {
   margin-right: 16px;
+  margin-top: 5px;
 }
 
   @media (min-width: 768px) {

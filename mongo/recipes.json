@@ -20,12 +20,22 @@
   "images": [
     {
       "_id": {
-        "$oid": "5eb68bb23ec4ed1c74530f6b"
+        "$oid": "5ec78720e22a230989c26f0c"
       },
-      "file": "c0fca67718220630aebc6047e3641c50.jpg",
+      "file": "e6cad1c2a775dcda9b25d171f9f3de5c.jpeg",
       "mimetype": "image/jpeg",
-      "size": 57099,
-      "url": "http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg",
+      "size": 4563,
+      "username": "admin",
+      "type": "recipe",
+      "__v": 0
+    },
+    {
+      "_id": {
+        "$oid": "5ec78720e22a230989c26f0b"
+      },
+      "file": "f979e2a349233e05b70fa84b6479b663.jpeg",
+      "mimetype": "image/jpeg",
+      "size": 7594,
       "username": "admin",
       "type": "recipe",
       "__v": 0
@@ -52,7 +62,19 @@
   "difficulty": "easy",
   "persons": 4,
   "time": 10,
-  "images": []
+  "images": [
+    {
+      "_id": {
+        "$oid": "5ec788c2892eae0a6a7ec3d1"
+      },
+      "file": "ea16d707207a536223d80523e8891a56.jpeg",
+      "mimetype": "image/jpeg",
+      "size": 11151,
+      "username": "admin",
+      "type": "recipe",
+      "__v": 0
+    }
+  ]
 },{
   "_id": {
     "$oid": "5eb5823faf05681681978e2f"
@@ -71,7 +93,19 @@
   "difficulty": "difficult",
   "persons": 4,
   "time": 35,
-  "images": []
+  "images": [
+    {
+      "_id": {
+        "$oid": "5ec78931892eae0a6a7ec3d2"
+      },
+      "file": "127a876e6e832e4efaa75c1e791c3393.jpeg",
+      "mimetype": "image/jpeg",
+      "size": 9042,
+      "username": "admin",
+      "type": "recipe",
+      "__v": 0
+    }
+  ]
 },{
   "_id": {
     "$oid": "5eb5823faf05681681978e30"
@@ -92,7 +126,19 @@
   "persons": 4,
   "time": 25,
   "difficulty": "difficult",
-  "images": []
+  "images": [
+    {
+      "_id": {
+        "$oid": "5ec789c5892eae0a6a7ec3d3"
+      },
+      "file": "c8c6e0ef8167734935ccf232e1772fc0.jpg",
+      "mimetype": "image/jpeg",
+      "size": 531240,
+      "username": "admin",
+      "type": "recipe",
+      "__v": 0
+    }
+  ]
 },{
   "_id": {
     "$oid": "5eb5823faf05681681978e31"
@@ -122,7 +168,19 @@
   "difficulty": "medium",
   "persons": 4,
   "time": 25,
-  "images": []
+  "images": [
+    {
+      "_id": {
+        "$oid": "5ec78a12892eae0a6a7ec3d4"
+      },
+      "file": "4b0e3c46f59534a04bea483dd4331c35.jpeg",
+      "mimetype": "image/jpeg",
+      "size": 8351,
+      "username": "admin",
+      "type": "recipe",
+      "__v": 0
+    }
+  ]
 },{
   "_id": {
     "$oid": "5eb5823faf05681681978e32"
@@ -146,5 +204,46 @@
   "persons": 4,
   "time": 15,
   "difficulty": "medium",
-  "images": []
+  "images": [
+    {
+      "_id": {
+        "$oid": "5ec78a6f892eae0a6a7ec3d5"
+      },
+      "file": "bb8ebae9f3d294b1d4a940a48f79fb22.jpeg",
+      "mimetype": "image/jpeg",
+      "size": 7788,
+      "username": "admin",
+      "type": "recipe",
+      "__v": 0
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "5ec7b6b1f31fa00003f1e2f0"
+  },
+  "ingredients": [
+    "600 g de lomo de cerdo cortado en dados",
+    "1 vaso grande de vino tinto",
+    "100 g de ciruelas pasas",
+    "1 dl de nata líquida"
+  ],
+  "images": [
+    {
+      "_id": {
+        "$oid": "5ec78d108e01e20bb2c59841"
+      },
+      "file": "228cce517130b8be277101776c5a88d8.png",
+      "mimetype": "image/png",
+      "size": 108419,
+      "username": "admin",
+      "type": "recipe",
+      "__v": 0
+    }
+  ],
+  "username": "admin",
+  "title": "Patatas Bravas Mod",
+  "description": "Paatatas Bravas",
+  "persons": 99,
+  "time": 55,
+  "difficulty": "medium"
 }]

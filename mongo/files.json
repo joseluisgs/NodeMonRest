@@ -1,23 +1,101 @@
 [{
   "_id": {
-    "$oid": "5eb689d323847c1afcff6daa"
+    "$oid": "5ec782ed09de3008656cb0d5"
   },
-  "file": "d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg",
-  "mimetype": "image/jpeg",
-  "size": 30015,
-  "url": "http://localhost:8000/files/d3bff14fc6ebcbe169c31aa2ce94e1c6.jpg",
+  "file": "4307b710b1bf5f7e3318cf6ff0d8fec8.png",
+  "mimetype": "image/png",
+  "size": 7817,
   "username": "admin",
   "type": "avatar",
   "__v": 0
 },{
   "_id": {
-    "$oid": "5eb68bb23ec4ed1c74530f6b"
+    "$oid": "5ec7838a09de3008656cb0d7"
   },
-  "file": "c0fca67718220630aebc6047e3641c50.jpg",
+  "file": "17fa28f8721eef8dc405b833058c89ee.png",
+  "mimetype": "image/png",
+  "size": 20844,
+  "username": "ana",
+  "type": "avatar",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ec78720e22a230989c26f0c"
+  },
+  "file": "e6cad1c2a775dcda9b25d171f9f3de5c.jpeg",
   "mimetype": "image/jpeg",
-  "size": 57099,
-  "url": "http://localhost:8000/files/c0fca67718220630aebc6047e3641c50.jpg",
+  "size": 4563,
   "username": "admin",
   "type": "recipe",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ec78720e22a230989c26f0b"
+  },
+  "file": "f979e2a349233e05b70fa84b6479b663.jpeg",
+  "mimetype": "image/jpeg",
+  "size": 7594,
+  "username": "admin",
+  "type": "recipe",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ec788c2892eae0a6a7ec3d1"
+  },
+  "file": "ea16d707207a536223d80523e8891a56.jpeg",
+  "mimetype": "image/jpeg",
+  "size": 11151,
+  "username": "admin",
+  "type": "recipe",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ec78931892eae0a6a7ec3d2"
+  },
+  "file": "127a876e6e832e4efaa75c1e791c3393.jpeg",
+  "mimetype": "image/jpeg",
+  "size": 9042,
+  "username": "admin",
+  "type": "recipe",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ec789c5892eae0a6a7ec3d3"
+  },
+  "file": "c8c6e0ef8167734935ccf232e1772fc0.jpg",
+  "mimetype": "image/jpeg",
+  "size": 531240,
+  "username": "admin",
+  "type": "recipe",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ec78a12892eae0a6a7ec3d4"
+  },
+  "file": "4b0e3c46f59534a04bea483dd4331c35.jpeg",
+  "mimetype": "image/jpeg",
+  "size": 8351,
+  "username": "admin",
+  "type": "recipe",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ec78a6f892eae0a6a7ec3d5"
+  },
+  "file": "bb8ebae9f3d294b1d4a940a48f79fb22.jpeg",
+  "mimetype": "image/jpeg",
+  "size": 7788,
+  "username": "admin",
+  "type": "recipe",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5ec78d108e01e20bb2c59841"
+  },
+  "file": "228cce517130b8be277101776c5a88d8.png",
+  "mimetype": "image/png",
+  "size": 108419,
+  "username": "admin",
+  "type": "test",
   "__v": 0
 }]

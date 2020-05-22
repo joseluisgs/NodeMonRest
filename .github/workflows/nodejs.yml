@@ -23,8 +23,8 @@ jobs:
     strategy:
       # En una matriz indicamos las versiones con las que queremos probar
       matrix:
-        # node-version: [10.x, 12.x]
-        node-version: [12.x]
+        node-version: [10.x, 12.x]
+        # node-version: [12.x]
     # Pasos a realizar para cada versión del sistema a probar
     steps:
       - uses: actions/checkout@v1
