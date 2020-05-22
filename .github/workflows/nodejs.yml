@@ -45,7 +45,7 @@ jobs:
       - name: Tests del proyecto
         run: |
           printenv >> .env
-          npm run test-recipes
+          npm run test-auth
         # Cargamos a quí las variables de entorno (GitHub Secrets) que necesitemos su no tomamos otras por defecto en el código en la clase env,
         # las genera dinamicamente en su .env
         env:
