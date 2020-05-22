@@ -45,7 +45,7 @@
     "test-files": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/files.spec.js",
     "test-recipes": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/recipes.spec.js",
     "test-users": "NODE_ENV=test mocha --exit --require @babel/register --timeout 10000 tests/users.spec.js",
-    "test-ci": "npm run test-recipes && npm run test-users",
+    "test-ci": "npm run test-auth && npm run test-users",
     "lint-ci": "eslint --fix --quiet 'src/**/*.js'"
   },
   "devDependencies": {
