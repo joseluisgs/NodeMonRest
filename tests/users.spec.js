@@ -15,6 +15,7 @@ chai.use(chaiHttp);
 // Variables globales a utilizar entre las distintas pruebas
 let token;
 let idUsuario;
+let username;
 
 /**
  * TEST: USERS
@@ -134,6 +135,7 @@ describe('Batería de tests de Usuarios', () => {
           res.body.should.have.property('email');
           res.body.should.have.property('id');
           idUsuario = res.body.id;
+          username = res.body.username;
           done();
         });
     });
@@ -167,6 +169,34 @@ describe('Batería de tests de Usuarios', () => {
           res.body.should.have.property('email');
           res.body.should.have.property('id');
           res.body.should.have.property('id').eql(idUsuario);
+          done();
+        });
+    });
+  });
+
+  /**
+  * TEST PATCH Actualiza la imagen del usuario
+  */
+  // eslint-disable-next-line no-undef
+  describe('PATCH: Actualizar imagen del usuario: ', () => {
+    // eslint-disable-next-line no-undef
+    const avatar = {
+      user: username,
+      avatarID: '5ec78d108e01e20bb2c59841',
+
+    };
+    // eslint-disable-next-line no-undef
+    it('Debería actualizar la imagen del usuario', (done) => {
+      chai.request(instance)
+        .patch('/users/avatar/')
+        .set({ Authorization: `Bearer ${token}` })
+        .send(avatar)
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res).to.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('avatar');
+          // res.body.should.have.property('id').eql(idUsuario);
           done();
         });
     });

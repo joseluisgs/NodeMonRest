@@ -36,7 +36,7 @@ router.delete('/:id', auth, role(['admin']), usersController.deleteUserById);
 
 // PATCH Inserta o actualiza la imagen del un usuario obtenida por un formulario.
 // Antes la hemos tenido que subir con subir con files.upload. Se la pasamos en el body
-router.patch('/:username/avatar', auth, usersController.avatarToUser);
+router.patch('/avatar', auth, usersController.avatarToUser);
 
 // Exprotamos el módulo
 module.exports = router;
