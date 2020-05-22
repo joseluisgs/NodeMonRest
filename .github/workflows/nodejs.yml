@@ -23,8 +23,8 @@ jobs:
     strategy:
       # En una matriz indicamos las versiones con las que queremos probar
       matrix:
-        node-version: [10.x, 12.x]
-        # node-version: [12.x]
+        # node-version: [10.x, 12.x]
+        node-version: [12.x]
     # Pasos a realizar para cada versión del sistema a probar
     steps:
       - uses: actions/checkout@v1
@@ -45,8 +45,9 @@ jobs:
       - name: Tests del proyecto
         run: |
           printenv >> .env
-          npm run test-ci
-        # Cargamos a quí las variables de entorno que necesitemos su no tomamos otras por defecto en el código en la clase env, las genera dinamicamente en su .env
+          npm run test-auth
+        # Cargamos a quí las variables de entorno (GitHub Secrets) que necesitemos su no tomamos otras por defecto en el código en la clase env,
+        # las genera dinamicamente en su .env
         env:
           CI: true
           TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
@@ -56,6 +57,10 @@ jobs:
           DB_URL: ${{ secrets.DB_URL }}
           DB_PORT: ${{ secrets.DB_PORT }}
           DB_NAME: ${{ secrets.DB_NAME }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_BUCKET: ${{ secrets.AWS_BUCKET }}
 
       # Construyo la imagen completa
       - name: Build del proyecto Node.
