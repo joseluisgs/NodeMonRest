@@ -246,6 +246,7 @@ class RecipesController {
           // La borramos
           recipe.images.splice(index, 1);
           await Recipe().findOneAndUpdate({ _id: recipe._id }, recipe);
+          res.status(200).json(recipe);
           // Esto no lo voy a hacer porque no quiero borrarlas del fichero aquí. Será el cliente quien deba usar la api de ficheros y borrarla
           // Ahora la eliminamos de la BD y del fichero
           /* fs.unlink(env.STORAGE + image.file, async (err) => {

@@ -24,25 +24,25 @@ Al gusto del consumidor :) */
 
 /* Si queremos que la ruta esté atenticada, ponemos auth
 Si queremos que la ruta este autorizada por roles y permisos, ponemos role y la lista de roles
-Ejemplo: router.get('/', auth, role(['admin', 'normal']), recipesController.recipes);
-ruta para admin o normal. Esta claro que si uno es asmin es normal, o no? dependerá del problema
-y si quremoes que puedan haber rutas de normal que no acceda admin
-o viceversa. Si no se pone es normal */
+Ejemplo: router.get('/', auth, role(['admin', 'user']), recipesController.recipes);
+ruta para admin o user. Esta claro que si uno es admin es user, o no? dependerá del problema
+y si quremoes que puedan haber rutas de user que no acceda admin
+o viceversa. Si no se pone es user(omitir poner middleware role) */
 
-// GET Listar todos los elementos, podemos hacerlo todos. Si no se pone role es que esta implícito role(['normal])
+// GET Listar todos los elementos, podemos hacerlo todos. Si no se pone role es que esta implícito role(['user'])
 router.get('/', recipesController.recipes);
 
 // GET Obtiene un elemento por por ID, podemos hacerlo todos
 router.get('/:id', recipesController.recipeById);
 
 // POST Añadir Elemento. Solo autenticados y del nivel admin, por eso no se pone nada (es por defecto)
-router.post('/', auth, role(['normal']), recipesController.addRecipe);
+router.post('/', auth, role(['user']), recipesController.addRecipe);
 
 // PUT Modifica un elemento por ID. Solo autenticados y del nivel admin, por eso no se pone nada (es por defecto)
-router.put('/:id', auth, role(['normal']), recipesController.editRecipeById);
+router.put('/:id', auth, role(['user']), recipesController.editRecipeById);
 
 // DELETE Elimina un elemento por ID. Solo autenticados y del nivel admin podrán, por eso no se pone nada (es por defecto)
-router.delete('/:id', auth, role(['normal']), recipesController.deleteRecipeById);
+router.delete('/:id', auth, role(['user']), recipesController.deleteRecipeById);
 
 // GET Obtiene las recetas del usuario actual. autenticados, por eso nos e puede poner nada en role, es otra forma a parte de la otra
 router.get('/me/list', auth, recipesController.myRecipes);

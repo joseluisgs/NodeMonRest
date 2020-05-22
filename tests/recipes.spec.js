@@ -8,14 +8,12 @@ const { server } = require('../src');
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
-
 chai.use(chaiHttp);
-// const url = 'http://localhost:8000';
 
 // Variables globales para todas las pruebas
 let token;
 let idReceta;
-
+const imageID = '5ec78d108e01e20bb2c59841'; // ID de La imagen que vamos a usar de prueba
 
 /**
  * TEST: RECIPES
@@ -179,6 +177,64 @@ describe('Batería de tests de Recetas', () => {
           res.body.should.have.property('description');
           res.body.should.have.property('difficulty');
           res.body.should.have.property('id').eql(idReceta);
+          done();
+        });
+    });
+  });
+
+  /**
+   * TEST PATCH, inserta una imagen en una receta
+   */
+  // eslint-disable-next-line no-undef
+  describe('PATCH: Inserta una imagen en una receta: ', () => {
+    // eslint-disable-next-line no-undef
+    it('Debería debería insertar una imagen en una receta', (done) => {
+      const image = {
+        imageID,
+      };
+      chai.request(instance)
+        .patch(`/recipes/images/${idReceta}/insert`)
+        .set({ Authorization: `Bearer ${token}` })
+        .send(image)
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res).to.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('ingredients');
+          res.body.should.have.property('username');
+          res.body.should.have.property('title');
+          res.body.should.have.property('description');
+          res.body.should.have.property('images');
+          // res.body.should.have.property('_id').eql(idReceta);
+          done();
+        });
+    });
+  });
+
+  /**
+   * TEST PATCH, elimina una imagen en una receta
+   */
+  // eslint-disable-next-line no-undef
+  describe('PATCH: Elimina una imagen en una receta: ', () => {
+    // eslint-disable-next-line no-undef
+    it('Debería debería eliminar una imagen en una receta', (done) => {
+      const image = {
+        imageID,
+      };
+      chai.request(instance)
+        .patch(`/recipes/images/${idReceta}/delete`)
+        .set({ Authorization: `Bearer ${token}` })
+        .send(image)
+        .end((err, res) => {
+          // console.log(res.body);
+          expect(res).to.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('ingredients');
+          res.body.should.have.property('username');
+          res.body.should.have.property('title');
+          res.body.should.have.property('description');
+          res.body.should.have.property('images');
+          // res.body.should.have.property('_id').eql(idReceta);
           done();
         });
     });

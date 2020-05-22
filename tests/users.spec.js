@@ -8,14 +8,13 @@ const { server } = require('../src');
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
-
 chai.use(chaiHttp);
-// const url = 'http://localhost:8000';
 
 // Variables globales a utilizar entre las distintas pruebas
 let token;
 let idUsuario;
 let username;
+const imageID = '5ec78d108e01e20bb2c59841'; // ID de La imagen que vamos a usar de prueba
 
 /**
  * TEST: USERS
@@ -182,7 +181,7 @@ describe('Batería de tests de Usuarios', () => {
     // eslint-disable-next-line no-undef
     const avatar = {
       user: username,
-      avatarID: '5ec78d108e01e20bb2c59841',
+      avatarID: imageID,
 
     };
     // eslint-disable-next-line no-undef
