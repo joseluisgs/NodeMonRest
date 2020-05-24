@@ -6,52 +6,27 @@ name: NodeMonRest Package
 on:
   release:
     types: [created]
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      # Instalamos el entorno
-      - name: Instalación de dependencias y entorno
-        run: npm ci
-      # Ejecutamos el lint y test
-      - name: Test
-        run:  |
-          npm test
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-      # Instalamos el entorno y NPM
-      - name: Instalación de dependencias y entorno
-        run: npm ci
-      - name: Publicación en NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-      - name: Instalación de dependencias y entorno
-        run: npm ci
-      - name: Publicación en GitHub Package
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - uses: actions/checkout@v2
+    # Configura el archivo .npmrc para publicar en npm
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+        registry-url: 'https://registry.npmjs.org'
+    - run: npm install
+    # Publica en npm
+    - run: npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    # Configura el archivo .npmrc para publicar en GitHub Packages
+    - uses: actions/setup-node@v1
+      with:
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@octocat' # Defaults to the user or organization that owns the workflow file
+    # Publica en GitHub Packages
+    - run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
