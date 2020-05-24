@@ -85,7 +85,7 @@ Puedes usar [Postman](https://www.postman.com) para testear la API. Puedes consu
 * [Babel](https://babeljs.io/) y [ESLint](https://eslint.org/) con el objetivo de construir un código ampliamente compatible y estandarizado de JS.
 * [GitHub Actions](https://github.com/features/actions). Es una de las grandes herramientas que se ha usado para la integración/distribución continuas [CI/CD](https://www.redhat.com/es/topics/devops/what-is-ci-cd). Para ello hemos integrado el entorno de ejecución con pruebas y el despliegue como docker en [DockerHub](https://hub.docker.com/r/joseluisgs/nodemonrest) y su despliegue para su uso en [Heroku](https://nodemonrest.herokuapp.com/).
 
-## Author
+## Autor
 * [José Luis González Sánchez](https://twitter.com/joseluisgonsan) ![Twitter](https://img.shields.io/twitter/follow/joseluisgonsan?style=social)
 
 
@@ -93,6 +93,6 @@ Puedes usar [Postman](https://www.postman.com) para testear la API. Puedes consu
 
 ![GitHub](https://img.shields.io/github/last-commit/joseluisgs/NodeMonRest)
 
-## License
+## Licencia
 Este proyecto esta licenciado bajo licencia __MIT__, si desea saber más, visite el fichero [LICENSE](https://github.com/joseluisgs/NodeMonRest/blob/master/LICENSE)
 
