@@ -293,4 +293,133 @@
     </small>
   </div>
 
+  <a name="implementacion"></a>
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Implementación</h6>
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">Seguimiento</strong>
+        Para seguir este proyecto lo mejor que puedes hacer es comenzar desde el directorio raiz, despues a src, siguiendo por rutas. A partir de aquí cada uno de los controladores para acabar en los modelos. <br>
+        De esa manera irás profundizando en el proyecto de más alto nivel a más bajo nivel.
+      </p>
+    </div>
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">Librerías y código generado</strong>
+        A continuación copmento algunas de las librerías más importantes usadas y el por qué de su código: <br>
+        - <a href="https://expressjs.com/es/" rel="nofollow">Express</a>. Framework de aplicaciones web para la API. Con
+            ellos creo y gestiono las rutas. Además nos permite fácilmente crear middlewares, con lo cual podremos aplicar logs
+            específicos, filtrar para autorizaciones y autenticaciones y ampliar mediante middleware. Es lo que más me gusta de
+            esta librería. Te recomiendo mirar el código de los ficheros route y middleware para ver como realizo estas
+            acciones. Una de las cosas importantes es como he creado el servidor para que pueda ser levantado como instancia en
+            cada una de las pruebas. <br>
+        - <a href="https://mongoosejs.com/" rel="nofollow">Mongoose</a>. Conjunto de librerías para operar con bases de dato
+            MongoDB. He implementado el acceso usando singletón.<br>
+        - <a href="https://www.npmjs.com/package/jwt-simple" rel="nofollow">JWT-Simple</a>. Para implementar la atenticación
+            basada en JWT. Esta librería actúa en base a middleware con Express. Los propios tokens que caducan dependiendo del
+            valor de .env TOKEN_LIFE en minutos. Para la parte de autorización, también los hemos encapsulado en ellos los
+            permisos de usuario que tengan. También hemos usado el <a
+              href="https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/" rel="nofollow">refresco de
+              tokens</a>, en base a UUID almacenando los tokens de refresco en MongoDB con un índice TTL de la colección en base
+            al valor de .env TOKEN_REFRESH en minutos. De esta manera se autodestruyen pasado ese tiempo y libera el tokens de
+            refresco asociado al token de usuario, dando un poco de seguridad extra. El objetivo de implementar este tipo de
+            token de refresco es que si el access token tiene fecha de expiración, una vez que caduca, el usuario tendría que
+            autenticarse de nuevo para obtener un access token. Con el refresh token, este paso se puede saltar y con una
+            petición al API obtener un nuevo access token que permita al usuario seguir accediendo a los recursos de la
+            aplicación, hasta que el refresh token caduque. Se debe tener en cuenta que el TTL del Token de autentificación debe
+            ser menor que el de refresco.<br>
+        - <a href="https://www.npmjs.com/package/body-parser" rel="nofollow">Body Parser</a>. Middleware que parsea los body
+            como objetos.<br>
+        - <a href="https://www.npmjs.com/package/cors" rel="nofollow">Cors</a>. Middleware para manejo de <a
+              href="https://developer.mozilla.org/es/docs/Web/HTTP/Access_control_CORS" rel="nofollow">CORS</a>.<br>
+        - <a href="https://www.npmjs.com/package/dotenv" rel="nofollow">Dotenv</a>. Para leer las variables de entorno del
+            fichero .env<br>
+        - <a href="https://www.npmjs.com/package/morgan" rel="nofollow">Morgan</a>. Middleware Request logger el cual nos
+            permitirá sacar logs de nuestras peticiones HTTP.<br>
+        - <a href="https://www.npmjs.com/package/uuid" rel="nofollow">UUID</a>. Implementa el RFC4122 UUIDs para los tokens
+            de refresco.<br>
+        - <a href="https://www.npmjs.com/package/express-fileupload" rel="nofollow">Express-fileupload</a>. Es un middleware
+            para Express el cual nos ayuda a procesar peticiones multipart o subida de imágenes. Se ha puesto que el tamaño
+            máximo por umagen sea 2MB aunque se puede cambiar el el fichero .env. Los directorios para almacenar imágenes o
+            ficheros están en .env, puedes poner el mismo o lo que quieras, pues se crean dinámicamente dentro de public/uploads
+            (FILES_PATH) y accesible directamente por la ruta url/files (FILES_URL). Puedes ponerle el mismo si quieres.<br>
+        - <a href="https://aws.amazon.com/es/" rel="nofollow">AWS</a> Se ha implementado el sistema de almacenamiento en a
+            nube para no depender localmente del servidor. Si quieres la versión en el servidor revisa <a
+              href="https://github.com/joseluisgs/NodeMonRest/tree/Ficheros_Locales">esta rama</a>. La idea de usar este tipo de
+            tecnologías es aprender a usar almacenamiento en la nube siguiendo la folosofía de distribución de cada uno de los
+            elementos del sistema: código, bases de datos y ficheros.<br>
+        - <a href="https://www.npmjs.com/package/express-handlebars" rel="nofollow">Express-handlebars</a>. Personalmente
+            uno de los mejores motores de plantillas para NodeJS, basado en <a href="https://handlebarsjs.com/"
+              rel="nofollow">Handlebars</a>. Lo he usado de ejemplo para hacer algunas páginas estáticas de presentación de la
+            API.
+      </p>
+    </div>
+    <small class="d-block text-right mt-3">
+      <a href="#">Arriba</a>
+    </small>
+    </div>
+
+    <a name="pruebas"></a>
+    <div class="my-3 p-3 bg-white rounded shadow-sm">
+      <h6 class="border-bottom border-gray pb-2 mb-0">Pruebas</h6>
+      <div class="media text-muted pt-3">
+        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+          <strong class="d-block text-gray-dark">Test automatizados</strong>
+          Para mejorar los test de nuestro código se ha usado las siguientes librerías:<br>
+          - <a href="https://mochajs.org/" rel="nofollow">Mocha</a>. Framework para correr las pruebas<br>
+          - <a href="https://www.chaijs.com/" rel="nofollow">Chai</a>. Librerá de asercciones que nos permite ejecutar pruebas y analizar sus resultados. <br>
+          Se han utilizado estas librerías para los test por su funcionalidad y porque se adaptan
+          perfectamente al proceso de integración continua que se ha marcado como objetivo.<br>
+          De esta manera automatizamos unos test donde arrancamos y paramos el servidor en cada uno de ellos, Probando cada una de las llamadas con datos de ejemplo y pudiendo detectar falsos positivos. Creoq ue son librerías de rereferencia en JS. <br>
+          Por otro lado se han programado en el fichero package.json distintos script para realizar los test. Uno por recurso y varios específicos:
+          - test: Ejecuta todos los test uno detrás de otro como un solo conjunto (informe global). <br>
+          - test-auth: realiza test sobre el recurso auth. <br>
+          - test-files: realiza test sobre el recurso ficheros. <br>
+          - test-recipes: realiza test sobre el recurso recetas. <br>
+          - test-users: realiza test sobre el recurso usuarios. <br>
+          - test-ci: realiza test sobre los recursos indicados y de esta manera al haora de hacer el CI obrtengo informes detallados paso por paso. <br>
+        </p>
+      </div>
+      <div class="media text-muted pt-3">
+        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+          <strong class="d-block text-gray-dark">Compatibilidad</strong>
+          Para mejorar los test de nuestro código se ha usado las siguientes librerías: <br>
+          - <a href="https://babeljs.io/" rel="nofollow">Babel</a>. Con ello nos aseguramos que el código sea compatible en distintas versiones de entornos JS y que han sido indicadas en el fichero .babelrc. De esta manera cuando consruimos nuestro sistema (build) el código generado es el indicado para las plataformas de destino. <br>
+          - <a href="https://eslint.org/" rel="nofollow">ESLint</a>. Gracias a ella cumplimos con una sitáxis estandarizada y además apliacamos una guía de estilo con el objetivo que nuestro código sea uniforme, como se puede ver en el fichero .eslintrc.json
+        </p>
+      </div>
+      <div class="media text-muted pt-3">
+        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+          <strong class="d-block text-gray-dark">Postman</strong>
+          Se ha utilizado <a href="https://www.postman.com/" target="_blank">Postman</a> como cliente para probar y consumir la API y con ello analizar su funcionalidad a alto nivel con casos de uso determinados.<br>
+          Además se ha <a href="https://documenter.getpostman.com/view/11271351/Szt78VKQ?version=latest" target="_blank" rel="noopener noreferrer">documentado la API</a>  con este sistema donde se puede ver como consumirla con distintos lenguajes y librerías.
+        </p>
+      </div>
+      <small class="d-block text-right mt-3">
+        <a href="#">Arriba</a>
+      </small>
+      </div>
+
+      <a name="despliegue"></a>
+      <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0">Despliegue</h6>
+        <div class="media text-muted pt-3">
+          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark">CI/CD: GitHub Actions</strong>
+            Se ha seguido un proceso de intergración, despliegue y distribución continua en base a <a href="https://github.com/features/actions">GitHub Actions</a>. Es una de las grandes herramientas que se ha
+            usado para la integración/distribución continuas <a href="https://www.redhat.com/es/topics/devops/what-is-ci-cd"
+              rel="nofollow">CI/CD</a>. Para ello hemos integrado el entorno de ejecución con pruebas y el despliegue en distintos sistemas y plataformas. Te recomiendo mires los códigos disponibles en la carpeta .github/workflows. Además dischos depegues en fases o pasos solo se realiza si los pasos anteriores o condicionales se han completado de manera correcta.<br>
+              A partir de aquí hemos realizado los siguientes despliegues automatizados ala hora de publicar en la rama principal: <br>
+            - Docker en <a href="https://hub.docker.com/r/joseluisgs/nodemonrest" rel="nofollow">DockerHub</a>. <br>
+            - Y para su uso en <a href="https://nodemonrest.herokuapp.com/" rel="nofollow">Heroku</a>.<br>
+            Por otro lado hemos creado una nueva acción que se activa cada vez que lanzamos una nueva release o tag de código que crea el paquete y lo sube a plataformas:<br>
+            - NPM <br>
+            - GitHub Package.
+          </p>
+        </div>
+        <small class="d-block text-right mt-3">
+          <a href="#">Arriba</a>
+        </small>
+        </div>
+
 </main>
