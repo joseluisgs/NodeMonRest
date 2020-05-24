@@ -49,6 +49,9 @@ Tareas que podemos ejecutar dentro de nuestra aplicación. Te recomiendo leer el
 ### Usando Heroku
 Heroku te permite crear tu propio contenedor dinámico y lanzar la apliación. Puedes acceder a él, tanto la web como la API en esta dirección: https://nodemonrest.herokuapp.com/
 
+### Usando NPM
+Puedes usar NPM para instalar el proyecto: npm i nodemonrest
+
 ### Usando Docker
 También podemos usar Docker para su instalación como se indica y proceder como en apartado anterior. La imagen la tienes disponible en: https://hub.docker.com/r/joseluisgs/nodemonrest. Además puedes proceder:
 * Pull de la imagen: docker pull joseluisgs/nodemonrest

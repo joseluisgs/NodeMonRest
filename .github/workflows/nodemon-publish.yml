@@ -21,12 +21,3 @@ jobs:
     - run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-    # Configura el archivo .npmrc para publicar en GitHub Packages
-    - uses: actions/setup-node@v1
-      with:
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@octocat' # Defaults to the user or organization that owns the workflow file
-    # Publica en GitHub Packages
-    - run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
