@@ -17,10 +17,10 @@ jobs:
           node-version: 12
       # Instalamos el entorno
       - name: Instalación de dependencias y entorno
-        - run: npm ci
+        run: npm ci
       # Ejecutamos el lint y test
       - name: Lister y Test
-      - run:  |
+        run:  |
         npm run lint-ci
         npm test-ci
 
@@ -35,11 +35,11 @@ jobs:
           registry-url: https://registry.npmjs.org/
       # Instalamos el entorno y NPM
       - name: Instalación de dependencias y entorno
-        - run: npm ci
+        run: npm ci
       - name: Publicación en NPM
-        - run: npm publish
-          env:
-            NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   publish-gpr:
     needs: build
@@ -51,8 +51,8 @@ jobs:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
       - name: Instalación de dependencias y entorno
-        - run: npm ci
+        run: npm ci
       - name: Publicación en GitHub Package
-        - run: npm publish
-          env:
-            NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
