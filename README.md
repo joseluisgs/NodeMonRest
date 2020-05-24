@@ -3,6 +3,7 @@
 Ejemplo de API REST en NodeJS, usando Mongo, JWT y AWS S3 con CI/CD bajo GitHub Actions para fines docentes.
 
 ![NodeMonRest CI/CD](https://github.com/joseluisgs/NodeMonRest/workflows/NodeMonRest%20CI/CD/badge.svg)
+[![Docker](https://img.shields.io/badge/Docker-passing-blue)](https://hub.docker.com/r/joseluisgs/nodemonrest)
 [![Heroku](https://img.shields.io/badge/Heroku-passing-blueviolet)](https://nodemonrest.herokuapp.com)
 [![Release](https://img.shields.io/github/v/release/joseluisgs/NodeMonRest)](https://github.com/joseluisgs/NodeMonRest/releases)
 [![Licence](https://img.shields.io/github/license/joseluisgs/NodeMonRest)](https://github.com/joseluisgs/NodeMonRest/blob/master/LICENSE)
