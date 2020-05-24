@@ -19,10 +19,9 @@ jobs:
       - name: Instalación de dependencias y entorno
         run: npm ci
       # Ejecutamos el lint y test
-      - name: Lister y Test
+      - name: Test
         run:  |
-          npm run lint-ci
-          npm test-ci
+          npm test
 
   publish-npm:
     needs: build
