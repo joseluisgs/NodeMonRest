@@ -21,8 +21,8 @@ jobs:
       # Ejecutamos el lint y test
       - name: Lister y Test
         run:  |
-        npm run lint-ci
-        npm test-ci
+          npm run lint-ci
+          npm test-ci
 
   publish-npm:
     needs: build
